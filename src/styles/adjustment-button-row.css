@@ -1,0 +1,25 @@
+.fw-adjustment-button-row {
+  display: flex;
+  gap: 2px;
+}
+.fw-adjustment-button {
+  cursor: pointer;
+  padding: 2px 4px;
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius-s);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: #fff;
+}
+
+.fw-adjustment-button p {
+  color: #fff;
+  font-size: 10px;
+}
+
+.fw-adjustment-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

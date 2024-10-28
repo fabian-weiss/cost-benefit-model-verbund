@@ -1,0 +1,123 @@
+.fw-button {
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 2;
+  box-shadow: none;
+  border: none;
+  outline: none;
+  color: #fff;
+}
+
+.fw-button p {
+  color: #fff;
+}
+
+.fw-button:disabled {
+  color: #666 !important;
+  opacity: 0.5;
+  background: #ccc !important;
+  cursor: not-allowed;
+}
+
+.fw-button__tiny {
+  font-size: 10px;
+  color: var(--secondary-text-color);
+}
+.fw-button__small {
+  font-size: 14px;
+}
+
+.fw-button__medium {
+  font-size: 18px !important;
+  /* font-family: var(--font-playfair-display); */
+  text-transform: uppercase;
+}
+
+.fw-button__large {
+  font-size: 34px;
+}
+
+.fw-button__huge {
+  font-size: 56px;
+}
+
+.fw-link-button {
+  font-size: 16px;
+  width: max-content;
+}
+
+.fw-link-button:hover {
+  text-decoration: underline;
+}
+
+.fw-button__outlined {
+  border: 1px solid var(--text-color-secondary);
+  background: transparent;
+  color: var(--primary-text-color);
+}
+
+.fw-button__filled {
+  padding: 18px 32px;
+  display: inline-flex;
+  /* flex-shrink: 0; */
+  cursor: pointer;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* font-size: 0.875rem; */
+  line-height: 1em;
+  min-height: 3rem;
+  height: auto;
+  /* gap: 0.5rem; */
+  font-weight: 600;
+  text-decoration-line: none;
+  border-radius: var(--border-radius-m);
+  text-decoration: none !important;
+  /* background-color: var(--secondary-color); */
+  /* background-image: none; */
+  transition: all 0.3s ease;
+}
+
+.fw-button__solid {
+  background-color: var(--primary-color);
+}
+
+.fw-button__ghost {
+  background-color: transparent;
+  color: var(--primary-text-color);
+}
+
+.fw-button__filled:hover {
+  transform: translateY(-2px);
+}
+
+.fw-button-loader {
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fw-button__full-width {
+  width: 100%;
+}
+
+button:disabled {
+  color: #666 !important;
+  /* opacity: 0.5; */
+  background: #ccc !important;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .fw-button__large {
+    font-size: 28px;
+  }
+  .fw-button__huge {
+    font-size: 48px;
+  }
+}

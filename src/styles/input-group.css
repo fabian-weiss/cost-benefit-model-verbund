@@ -1,0 +1,13 @@
+.fw-input-group-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px;
+  background-color: var(--secondary-background-color);
+  border-radius: var(--border-radius-m);
+}
+
+.fw-input-group-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}

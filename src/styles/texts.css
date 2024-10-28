@@ -1,0 +1,139 @@
+/* TEXT STYLES */
+.fw-product-name {
+  font-size: 22px;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+.fw-label {
+  font-size: 16px;
+  font-weight: 300;
+}
+.fw-accent-text {
+  color: var(--accent-color);
+}
+.fw-secondary-text {
+  color: var(--text-color-secondary);
+}
+.fw-primary-text {
+  color: var(--text-color);
+}
+.fw-text-error {
+  font-style: italic;
+  color: var(--error-color);
+}
+.fw-text-disabled {
+  opacity: 0.5;
+}
+.fw-body-text {
+  color: var(--text-color-secondary);
+}
+.fw-text-line-through {
+  text-decoration: line-through;
+}
+
+/** LINK STYLES */
+.fw-nav__s,
+.fw-nav__l,
+.fw-nav__xl {
+  text-transform: uppercase;
+  font-weight: 300;
+  cursor: pointer;
+}
+.fw-nav__s {
+  font-size: 12px;
+  padding: 1px 0px;
+  border-bottom: 1px solid transparent;
+}
+.fw-nav__l {
+  font-size: 14px;
+}
+.fw-nav__xl {
+  font-size: 18px;
+}
+.fw-nav__s:hover {
+  text-decoration: underline;
+}
+
+/* FONT SIZES */
+.fw-fs12 {
+  font-size: 12px;
+}
+.fw-fs14 {
+  font-size: 14px;
+}
+.fw-fs15 {
+  font-size: 15px;
+}
+.fw-fs16 {
+  font-size: 16px;
+}
+.fw-fs20 {
+  font-size: 20px;
+}
+
+/* TEXT DECORATIONS */
+.fw-underline {
+  text-decoration: underline;
+}
+.fw-italic {
+  font-style: italic;
+}
+.fw-uppercase {
+  text-transform: uppercase;
+}
+.fw-text-bold {
+  font-weight: 600;
+}
+
+/* TEXT ALIGNMENT */
+.fw-text-center {
+  text-align: center;
+}
+
+/* HEADERS */
+h1 {
+  font-size: 62px;
+  /* font-family: var(--font-playfair-display); */
+}
+.fw-title {
+  font-size: 45px;
+}
+
+/* GLOBAL */
+a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 300;
+}
+
+p,
+span,
+li {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 300;
+}
+label {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.5;
+}
+li {
+  display: list-item;
+  list-style-position: inside;
+}
+
+/** MEDIA QUERIES */
+@media (max-width: 768px) {
+  .fw-title {
+    font-size: 28px;
+  }
+  .fw-product-name {
+    font-size: 16px;
+  }
+}
+@media (max-width: 480px) {
+  h1 {
+    font-size: 36px;
+  }
+}
