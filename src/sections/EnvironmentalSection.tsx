@@ -3,12 +3,14 @@
 import InputGrid from "@/components/InputGrid";
 import ModelHeader from "@/components/ModelHeader";
 import SectionContainer from "@/components/SectionContainer";
+import { DialogType } from "@/enums/DialogType";
 import { EnvironmentalInputEnum } from "@/enums/EnvironmentalInputEnum";
 import { Impact } from "@/enums/Impact";
 import { SocietalInputEnum } from "@/enums/SocietalInputEnum";
 import { impactEntries } from "@/lib/impact-categories";
 import { environmentalModel } from "@/models/environmental-model/environmental-model";
 import { useEnvironmentalModel } from "@/providers/environmental-model-provider";
+import { useResultDialog } from "@/providers/model-result-provider";
 import { useSocietalModel } from "@/providers/societal-model-provider";
 import { DropdownEntryType } from "@/types/dropdown-entry-type";
 import { EnvironmentalResults } from "@/types/environmental/environmental-results";
@@ -20,9 +22,7 @@ import { useState } from "react";
 
 function EnvironmentalSection() {
   const environmetalModelContext = useEnvironmentalModel();
-  const [modelResults, setModelResults] = useState<
-    EnvironmentalResults | undefined
-  >();
+  const resultsDialogContext = useResultDialog();
   // const [societalInputs, setSocietalInputs] = useState<SocietalInputs>(societalModelContext.societalInputs);
 
   const inputGroups: InputGroupType[] = [
@@ -321,7 +321,8 @@ function EnvironmentalSection() {
     const result: EnvironmentalResults = environmentalModel(
       environmetalModelContext.environmentalInputs
     );
-    setModelResults(result);
+    environmetalModelContext.setModelResults(result);
+    resultsDialogContext.handleShowDialog(true, DialogType.ENVIRONMENTAL_MODEL);
     return result;
   };
   return (
@@ -332,7 +333,7 @@ function EnvironmentalSection() {
         buttonCallback={() => handleModelResult()}
       />
       <InputGrid inputGroups={inputGroups} id={"environmental-model"} />
-      {modelResults && <p>{JSON.stringify(modelResults)}</p>}
+      {/* {modelResults && <p>{JSON.stringify(modelResults)}</p>} */}
     </SectionContainer>
   );
 }

@@ -1,4 +1,5 @@
 export type FinancialFactors = {
+  //[x: string]: any;
   totalCashflow: number;
   discountedCashflow: number;
   paybackPeriod: number;
@@ -6,5 +7,5 @@ export type FinancialFactors = {
   NPV: number;
   EVA: number;
   IRR: number | undefined;
-  WACCToIRR: number;
+  IRRToWACC: number;
 };

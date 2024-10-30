@@ -2,7 +2,8 @@ import { FinancialInputRanges } from "@/types/financials/financial-input-ranges"
 import { FinancialResults } from "@/types/financials/financial-results";
 import { generateCombinations } from "@/utils/financial-utils/generate-financial-combinations";
 import { financialModel } from "./financial-model";
-import { mean, std } from "mathjs";
+import { MathNumericType, mean, std } from "mathjs";
+import { FinancialFactors } from "@/types/financials/financial-factors";
 
 export const financialResults = (
   inputRanges: FinancialInputRanges
@@ -11,39 +12,57 @@ export const financialResults = (
 
   // Run the model for each combination and store results
   const results = inputCombinations.map((inputs) => financialModel(inputs));
-  console.log(`results are ${JSON.stringify(results)}`);
+  //console.log(`results are ${JSON.stringify(results)}`);
 
-  const overallScores = results.map((result) => result.overallScore);
-  const factorsScores = results.map((result) => result.singleFactors);
+  const overallScores: number[] = results.map((result) => result.overallScore);
+  const factorsScores: FinancialFactors[] = results.map(
+    (result) => result.singleFactors
+  );
 
   // Perform sensitivity analysis
-  const avgResult = mean(overallScores);
-  const stdDevResult = std(overallScores);
-  const avgCashflow = mean(
+  const avgResult: number = mean(overallScores);
+  const stdDevResult: MathNumericType[] = std(overallScores);
+  const avgCashflow: number = mean(
     results.map((result) => result.singleFactors.totalCashflow)
   );
-  const avgPaybackPeriod = mean(
+  const avgPaybackPeriod: number = mean(
     results.map((result) => result.singleFactors.paybackPeriod)
   );
-  const avgROI = mean(results.map((result) => result.singleFactors.ROI));
-  const avgNPV = mean(results.map((result) => result.singleFactors.NPV));
-  const avgEVA = mean(results.map((result) => result.singleFactors.EVA));
+  const avgROI: number = mean(
+    results.map((result) => result.singleFactors.ROI)
+  );
+  const avgNPV: number = mean(
+    results.map((result) => result.singleFactors.NPV)
+  );
+  const avgEVA: number = mean(
+    results.map((result) => result.singleFactors.EVA)
+  );
+  const avgDiscountedCashflow: number = mean(
+    results.map((result) => result.singleFactors.discountedCashflow)
+  );
+  const avgIRR = mean(results.map((result) => result.singleFactors.IRR ?? 0));
+  const avgIRRToWACC: number = mean(
+    results.map((result) => result.singleFactors.IRRToWACC)
+  );
 
-  const modelOutput = {
+  const modelOutput: FinancialResults = {
     results: overallScores,
     factorScores: factorsScores,
     overallScore: avgResult,
     stdDev: Number(stdDevResult),
     averages: {
-      cashflow: avgCashflow,
+      totalCashflow: avgCashflow,
+      discountedCashflow: avgDiscountedCashflow,
       paybackPeriod: avgPaybackPeriod,
       ROI: avgROI,
       NPV: avgNPV,
-      economicValueAdded: avgEVA,
+      EVA: avgEVA,
+      IRR: avgIRR,
+      IRRToWACC: avgIRRToWACC,
     },
   };
 
-  console.log(`financial model output is ${JSON.stringify(modelOutput)}`);
+  //console.log(`financial model output is ${JSON.stringify(modelOutput)}`);
 
   return modelOutput;
 };

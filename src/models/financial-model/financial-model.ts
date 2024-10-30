@@ -60,9 +60,9 @@ export const financialModel = (
     initialInvestment + trainingCosts
   );
 
-  let WACCToIRR: number = 0;
+  let IRRToWACC: number = 0;
   if (IRR) {
-    WACCToIRR = discountRate / IRR;
+    IRRToWACC = IRR / discountRate;
   }
 
   return {
@@ -74,7 +74,7 @@ export const financialModel = (
       NPV: round(NPV, 2),
       EVA: round(EVA, 2),
       IRR: IRR,
-      WACCToIRR: WACCToIRR,
+      IRRToWACC: IRRToWACC,
     },
     overallScore: mean([totalCashflow, paybackPeriod, ROI, NPV, EVA]),
   };

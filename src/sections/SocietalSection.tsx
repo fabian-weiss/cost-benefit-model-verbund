@@ -3,25 +3,22 @@
 import InputGrid from "@/components/InputGrid";
 import ModelHeader from "@/components/ModelHeader";
 import SectionContainer from "@/components/SectionContainer";
+import { DialogType } from "@/enums/DialogType";
 import { Impact } from "@/enums/Impact";
 import { SocietalInputEnum } from "@/enums/SocietalInputEnum";
 import { impactEntries } from "@/lib/impact-categories";
 import { societalModel } from "@/models/societal-model/societal-model";
+import { useResultDialog } from "@/providers/model-result-provider";
 import { useSocietalModel } from "@/providers/societal-model-provider";
 import { DropdownEntryType } from "@/types/dropdown-entry-type";
 import { InputGroupType } from "@/types/input-group-type";
-import { SocietalInputs } from "@/types/societal/societal-inputs";
 import { SocietalResults } from "@/types/societal/societal-results";
 import { impactToNumber } from "@/utils/impact-to-number";
 import { numberToImpact } from "@/utils/number-to-impact";
-import { useState } from "react";
 
 function SocietalSection() {
   const societalModelContext = useSocietalModel();
-  const [modelResults, setModelResults] = useState<
-    SocietalResults | undefined
-  >();
-  // const [societalInputs, setSocietalInputs] = useState<SocietalInputs>(societalModelContext.societalInputs);
+  const resultsDialogContext = useResultDialog();
 
   const inputGroups: InputGroupType[] = [
     {
@@ -242,12 +239,17 @@ function SocietalSection() {
     },
   ];
 
-  const handleModelResult = (): SocietalResults => {
+  const handleModelResult = () => {
     const result: SocietalResults = societalModel(
       societalModelContext.societalInputs
     );
-    setModelResults(result);
-    return result;
+    // const r = financialResults(financialModelContext.financialInputRanges);
+    //   financialModelContext.setModelResults(r);
+    //   resultsDialogContext.handleShowDialog(true, DialogType.FINANCIAL_MODEL);
+    societalModelContext.setModelResults(result);
+    resultsDialogContext.handleShowDialog(true, DialogType.SOCIETAL_MODEL);
+    console.log("Societal model results: ", result);
+    //return result;
   };
   return (
     <SectionContainer contentClasses="fw-model-container">
@@ -257,7 +259,9 @@ function SocietalSection() {
         buttonCallback={() => handleModelResult()}
       />
       <InputGrid inputGroups={inputGroups} id={"societal-model"} />
-      {modelResults && <p>{JSON.stringify(modelResults)}</p>}
+      {/* {societalModelContext.modelResults && (
+        <p>{JSON.stringify(societalModelContext.modelResults)}</p>
+      )} */}
     </SectionContainer>
   );
 }

@@ -2,12 +2,15 @@
 import InputGrid from "@/components/InputGrid";
 import ModelHeader from "@/components/ModelHeader";
 import SectionContainer from "@/components/SectionContainer";
+import { DialogType } from "@/enums/DialogType";
 import { FinancialCategory } from "@/enums/FinancialCategory";
 import { FinancialInputRangesEnum } from "@/enums/FinancialInputRangesEnum";
 import { ValueType } from "@/enums/ValueType";
 import { financialResults } from "@/models/financial-model/financial-results";
 import { useFinancialModel } from "@/providers/financial-model-provider";
+import { useResultDialog } from "@/providers/model-result-provider";
 import "@/styles/model-section.css";
+import { FinancialResults } from "@/types/financials/financial-results";
 import { InputGroupType } from "@/types/input-group-type";
 import { isBetweenOneAndHundred } from "@/utils/is-between-one-and-hundred";
 import { round } from "mathjs";
@@ -16,6 +19,7 @@ import { useState } from "react";
 
 function FinancialSection() {
   const financialModelContext = useFinancialModel();
+  const resultsDialogContext = useResultDialog();
   const [budget, setBudget] = useState<number>();
   const [initialInvestment, setInitialInvestment] = useState<number>();
   const [annualOperatingCosts, setAnnualOperatingCosts] = useState<number>();
@@ -58,8 +62,6 @@ function FinancialSection() {
     riskFactor: "",
     discountRate: "",
   });
-
-  const [modelResults, setModelResults] = useState<any>();
 
   const clearErrors = () => {
     setErrors({
@@ -1198,9 +1200,10 @@ function FinancialSection() {
       );
       //return;
       const r = financialResults(financialModelContext.financialInputRanges);
-      setModelResults(r);
-    } else if (modelResults != undefined) {
-      setModelResults(undefined);
+      financialModelContext.setModelResults(r);
+      resultsDialogContext.handleShowDialog(true, DialogType.FINANCIAL_MODEL);
+    } else if (financialModelContext.modelResults != undefined) {
+      financialModelContext.setModelResults(undefined);
     }
   };
 
@@ -1256,7 +1259,9 @@ function FinancialSection() {
         id={"financial-revenue"}
         header="Revenue"
       />
-      {modelResults && <p>{JSON.stringify(modelResults)}</p>}
+      {/* {financialModelContext.modelResults && (
+        <p>{JSON.stringify(financialModelContext.modelResults)}</p>
+      )} */}
     </SectionContainer>
   );
 }

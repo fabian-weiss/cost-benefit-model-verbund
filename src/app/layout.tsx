@@ -7,6 +7,7 @@ import "@/styles/layout.css";
 import FinancialModelProvider from "@/providers/financial-model-provider";
 import SocietalModelProvider from "@/providers/societal-model-provider";
 import EnvironmentalModelProvider from "@/providers/environmental-model-provider";
+import ModelResultProvider from "@/providers/model-result-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,7 +38,9 @@ export default function RootLayout({
       >
         <EnvironmentalModelProvider>
           <SocietalModelProvider>
-            <FinancialModelProvider>{children}</FinancialModelProvider>
+            <FinancialModelProvider>
+              <ModelResultProvider>{children}</ModelResultProvider>
+            </FinancialModelProvider>
           </SocietalModelProvider>
         </EnvironmentalModelProvider>
       </body>

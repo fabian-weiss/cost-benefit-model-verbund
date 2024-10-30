@@ -1,6 +1,7 @@
 "use client";
 import { FinancialInputRangesEnum } from "@/enums/FinancialInputRangesEnum";
 import { FinancialInputRanges } from "@/types/financials/financial-input-ranges";
+import { FinancialResults } from "@/types/financials/financial-results";
 import { createContext, useContext, useMemo, useState } from "react";
 
 interface FinancialModelProviderContextType {
@@ -13,6 +14,8 @@ interface FinancialModelProviderContextType {
     inputRange: FinancialInputRangesEnum,
     input: number
   ) => void;
+  modelResults: FinancialResults | undefined;
+  setModelResults: (results?: FinancialResults) => void;
 }
 
 const FinancialModelProviderContext = createContext<
@@ -20,6 +23,9 @@ const FinancialModelProviderContext = createContext<
 >(undefined);
 
 function FinancialModelProvider({ children }: { children: React.ReactNode }) {
+  const [modelResults, setModelResults] = useState<
+    FinancialResults | undefined
+  >();
   const [financialInputRanges, setFinancialInputRanges] =
     useState<FinancialInputRanges>({
       budget: [],
@@ -342,8 +348,10 @@ function FinancialModelProvider({ children }: { children: React.ReactNode }) {
       financialInputRanges,
       addFinancialInput,
       removeFinancialInput,
+      modelResults,
+      setModelResults,
     }),
-    [financialInputRanges] // Only re-compute the memoized value when financialInputRanges changes
+    [financialInputRanges, modelResults] // Only re-compute the memoized value when financialInputRanges changes
   );
 
   return (

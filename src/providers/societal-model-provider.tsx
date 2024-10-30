@@ -2,11 +2,14 @@
 import { SocietalInputEnum } from "@/enums/SocietalInputEnum";
 
 import { SocietalInputs } from "@/types/societal/societal-inputs";
+import { SocietalResults } from "@/types/societal/societal-results";
 import { createContext, useContext, useMemo, useState } from "react";
 
 interface SocietalModelProviderContextType {
   societalInputs: SocietalInputs;
   setSocietalInput: (inputType: SocietalInputEnum, input: number) => void;
+  modelResults?: SocietalResults;
+  setModelResults: (results?: SocietalResults) => void;
 }
 
 const SocietalModelProviderContext = createContext<
@@ -14,6 +17,9 @@ const SocietalModelProviderContext = createContext<
 >(undefined);
 
 function SocietalModelProvider({ children }: { children: React.ReactNode }) {
+  const [modelResults, setModelResults] = useState<
+    SocietalResults | undefined
+  >();
   const [societalInputs, setSocietalInputs] = useState<SocietalInputs>({
     jobCreation: 0,
     jobEquity: 0,
@@ -63,8 +69,10 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
     () => ({
       societalInputs,
       setSocietalInput,
+      modelResults,
+      setModelResults,
     }),
-    [societalInputs] // Only re-compute the memoized value when financialInputRanges changes
+    [societalInputs, modelResults] // Only re-compute the memoized value when financialInputRanges changes
   );
 
   return (

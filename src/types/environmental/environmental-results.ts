@@ -1,8 +1,11 @@
 import { Score } from "../score";
+import { EnvironmentalInputs } from "./environmental-inputs";
+import { EnvironmentalWeights } from "./environmental-weights";
 
 export type EnvironmentalResults = {
-  singleScores: Score[];
+  weightedSingleFactors: EnvironmentalInputs;
   avgScore: number;
   totalScore: number;
   scaledTotalScore: number;
+  weights: EnvironmentalWeights;
 };

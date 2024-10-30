@@ -1,6 +1,7 @@
 "use client";
 import { EnvironmentalInputEnum } from "@/enums/EnvironmentalInputEnum";
 import { EnvironmentalInputs } from "@/types/environmental/environmental-inputs";
+import { EnvironmentalResults } from "@/types/environmental/environmental-results";
 import { createContext, useContext, useMemo, useState } from "react";
 
 interface EnvironmentalModelProviderContextType {
@@ -9,6 +10,8 @@ interface EnvironmentalModelProviderContextType {
     inputType: EnvironmentalInputEnum,
     input: number
   ) => void;
+  modelResults?: EnvironmentalResults;
+  setModelResults: (results?: EnvironmentalResults) => void;
 }
 
 const EnvironmentalModelProviderContext = createContext<
@@ -20,6 +23,9 @@ function EnvironmentalModelProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const [modelResults, setModelResults] = useState<
+    EnvironmentalResults | undefined
+  >();
   const [environmentalInputs, setEnvironmentalInputs] =
     useState<EnvironmentalInputs>({
       carbonFootprint: 0,
@@ -97,8 +103,10 @@ function EnvironmentalModelProvider({
     () => ({
       environmentalInputs,
       setEnvironmentalInput,
+      modelResults,
+      setModelResults,
     }),
-    [environmentalInputs] // Only re-compute the memoized value when financialInputRanges changes
+    [environmentalInputs, modelResults] // Only re-compute the memoized value when financialInputRanges changes
   );
 
   return (
