@@ -3,26 +3,28 @@ import React from "react";
 import InputField from "./InputField";
 import "@/styles/input-group.css";
 import InputValueList from "./InputValueList";
+import InputHeader from "./InputHeader";
+import Dropdown from "./Dropdown";
+import { DropdownEntryType } from "@/types/dropdown-entry-type";
 
 function InputGroup(props: {
   inputGroup: InputGroupType;
-  removeCallback: (value: number) => void;
+  //removeCallback: (value: number) => void;
 }) {
   return (
     <div className="fw-input-group-container">
-      {/* <label className="fw-label">{props.inputGroup.label}</label> */}
-      <div className="fw-input-group-wrapper">
-        <InputField
-          key={props.inputGroup.inputField.id}
-          {...props.inputGroup.inputField}
-        />
-        <InputValueList
-          values={props.inputGroup.values}
-          removeCallback={(value: number) => props.removeCallback(value)}
-          isCurrency={props.inputGroup.isCurrency}
-          suffix={props.inputGroup.suffix}
-        />
-      </div>
+      <InputHeader {...props.inputGroup.inputHeader} />
+      {props.inputGroup.inputFields?.map((inputField) => (
+        <div key={inputField.id} className="fw-input-group-wrapper">
+          <InputField
+            // key={props.inputGroup.inputField.id}
+            inputField={{ ...inputField }}
+          />
+        </div>
+      ))}
+      {props.inputGroup.dropdownFields?.map((dropdownField) => (
+        <Dropdown key={dropdownField.id} {...dropdownField} />
+      ))}
     </div>
   );
 }

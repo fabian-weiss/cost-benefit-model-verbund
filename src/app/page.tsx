@@ -1,5 +1,7 @@
+import EnvironmentalSection from "@/sections/EnvironmentalSection";
 import FinancialSection from "@/sections/FinancialSection";
 import HeaderSection from "@/sections/HeaderSection";
+import SocietalSection from "@/sections/SocietalSection";
 import React from "react";
 
 function Home() {
@@ -12,6 +14,8 @@ function Home() {
         }
       />
       <FinancialSection />
+      <SocietalSection />
+      <EnvironmentalSection />
     </>
   );
 }

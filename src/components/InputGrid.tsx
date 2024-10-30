@@ -3,22 +3,27 @@ import { InputGroupType } from "@/types/input-group-type";
 import React from "react";
 import InputGroup from "./InputGroup";
 import "@/styles/input-grid.css";
+import InputField from "./InputField";
 
 /** @ param id is "financial" | "societal" | "environmental"  */
 
 function InputGrid(props: {
   inputGroups: InputGroupType[];
-  id: "financial" | "societal" | "environmental";
+  id: string;
+  header?: string;
 }) {
   return (
-    <div className="fw-input-grid">
-      {props.inputGroups.map((inputGroup, index) => (
-        <InputGroup
-          key={`${props.id}-${index}`}
-          inputGroup={inputGroup}
-          removeCallback={inputGroup.removeCallback}
-        />
-      ))}
+    <div>
+      {props.header && <h4 className="fw-input-grid-header">{props.header}</h4>}
+      <div className="fw-input-grid">
+        {props.inputGroups.map((inputGroup, index) => (
+          <InputGroup
+            inputGroup={{ ...inputGroup }}
+            key={`${props.id}-${index}`}
+            // removeCallback={inputGroup.removeCallback}
+          />
+        ))}
+      </div>
     </div>
   );
 }

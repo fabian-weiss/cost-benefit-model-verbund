@@ -1,8 +1,14 @@
 import { FinancialFactors } from "@/types/financials/financial-factors";
 import { FinancialInputs } from "@/types/financials/financial-inputs";
 import { adjustForRisk } from "@/utils/adjust-for-risk";
+import { calculateCashflow } from "@/utils/financial-utils/calculate-cashflow";
+import { calculateDiscountedCashflow } from "@/utils/financial-utils/calculate-discounted-cashflow";
+import { calculateEVA } from "@/utils/financial-utils/calculate-eva";
+import { calculateIRR } from "@/utils/financial-utils/calculate-irr";
+import { calculateNPV } from "@/utils/financial-utils/calculate-npv";
+import { calculateROI } from "@/utils/financial-utils/calculate-roi";
 import { scaleNumber } from "@/utils/scale-number";
-import { mean } from "mathjs";
+import { mean, round } from "mathjs";
 
 export const financialModel = (
   inputs: FinancialInputs
@@ -11,82 +17,81 @@ export const financialModel = (
     budget,
     initialInvestment,
     annualOperatingCosts,
+    annualOperatingCostsGrowthRate,
     annualMaintenanceCosts,
-    annualTrainingCosts,
+    annualMaintenanceCostsGrowthRate,
+    trainingCosts,
     projectDuration,
     annualRevenue,
+    annualRevenueGrowthRate,
+    firstRevenueGeneratingYear,
+    annualCostSavings,
+    annualCostSavingsGrowthRate,
+    firstCostSavingYear,
     riskFactor,
+    discountRate,
   } = inputs;
 
-  const annualCashflow =
-    annualRevenue -
-    (annualOperatingCosts + annualMaintenanceCosts + annualTrainingCosts);
-  const totalCashflow = -initialInvestment + annualCashflow * projectDuration;
-  const adjustedCashflow = adjustForRisk(totalCashflow, riskFactor);
-  const scaledCashflow = scaleNumber(adjustedCashflow, -100000, 500000);
+  const { totalCashflow, cashflows, paybackPeriod } = calculateCashflow(inputs);
 
-  const paybackPeriod =
-    annualCashflow > 0 ? initialInvestment / annualCashflow : Infinity;
-  const adjustedPaybackPeriod = adjustForRisk(paybackPeriod, riskFactor);
-  const scaledPaybackPeriod = scaleNumber(
-    adjustedPaybackPeriod,
-    1,
+  const discountedCashflow: number = calculateDiscountedCashflow(
+    totalCashflow,
+    discountRate,
     projectDuration
   );
 
-  const ROI = (totalCashflow - initialInvestment) / initialInvestment;
-  const adjustedROI = adjustForRisk(ROI, riskFactor);
-  const scaledROI = scaleNumber(adjustedROI, -1, 2);
-
-  const discountRate = 0.05;
-  const NPV = Array.from({ length: projectDuration }).reduce(
-    (acc: number, _, year) => {
-      return acc + annualCashflow / Math.pow(1 + discountRate, year + 1);
-    },
-    -initialInvestment
+  const ROI: number = calculateROI(
+    totalCashflow,
+    initialInvestment,
+    riskFactor
   );
-  const adjustedNPV = adjustForRisk(NPV, riskFactor);
-  const scaledNPV = scaleNumber(adjustedNPV, -100000, 500000);
 
-  const capital =
-    initialInvestment +
-    (annualOperatingCosts + annualMaintenanceCosts) * projectDuration;
-  const costOfCapital = 0.1;
-  const NOPAT = annualCashflow * (1 - costOfCapital);
-  const EVA = NOPAT - capital * costOfCapital;
-  const adjustedEVA = adjustForRisk(EVA, riskFactor);
-  const scaledEVA = scaleNumber(adjustedEVA, -100000, 500000);
+  const NPV: number = calculateNPV(initialInvestment, discountedCashflow);
+
+  const EVA: number = calculateEVA(
+    totalCashflow,
+    discountRate,
+    initialInvestment
+  );
+
+  const IRR: number | undefined = calculateIRR(
+    cashflows,
+    0.05,
+    initialInvestment + trainingCosts
+  );
+
+  let WACCToIRR: number = 0;
+  if (IRR) {
+    WACCToIRR = discountRate / IRR;
+  }
 
   return {
     singleFactors: {
-      cashflow: adjustedCashflow,
-      paybackPeriod: adjustedPaybackPeriod,
-      ROI: adjustedROI,
-      NPV: adjustedNPV,
-      economicValueAdded: adjustedEVA,
+      totalCashflow: round(totalCashflow, 2),
+      discountedCashflow: round(discountedCashflow, 2),
+      paybackPeriod: paybackPeriod,
+      ROI: round(ROI, 2),
+      NPV: round(NPV, 2),
+      EVA: round(EVA, 2),
+      IRR: IRR,
+      WACCToIRR: WACCToIRR,
     },
-    overallScore: mean([
-      adjustedCashflow,
-      adjustedPaybackPeriod,
-      adjustedROI,
-      adjustedNPV,
-      adjustedEVA,
-    ]),
+    overallScore: mean([totalCashflow, paybackPeriod, ROI, NPV, EVA]),
   };
-  return {
-    singleFactors: {
-      cashflow: scaledCashflow,
-      paybackPeriod: scaledPaybackPeriod,
-      ROI: scaledROI,
-      NPV: scaledNPV,
-      economicValueAdded: scaledEVA,
-    },
-    overallScore: mean([
-      scaledCashflow,
-      scaledPaybackPeriod,
-      scaledROI,
-      scaledNPV,
-      scaledEVA,
-    ]),
-  };
+  // return {
+  //   singleFactors: {
+  //     cashflow: scaledCashflow,
+  //     paybackPeriod: scaledPaybackPeriod,
+  //     ROI: scaledROI,
+  //     NPV: scaledNPV,
+  //     economicValueAdded: scaledEVA,
+  //   },
+  //   overallScore: mean([
+  //     scaledCashflow,
+  //     scaledPaybackPeriod,
+  //     scaledROI,
+  //     scaledNPV,
+  //     scaledEVA,
+  //   ]),
+  // };
 };

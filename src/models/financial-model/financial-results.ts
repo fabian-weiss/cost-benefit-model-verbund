@@ -11,6 +11,7 @@ export const financialResults = (
 
   // Run the model for each combination and store results
   const results = inputCombinations.map((inputs) => financialModel(inputs));
+  console.log(`results are ${JSON.stringify(results)}`);
 
   const overallScores = results.map((result) => result.overallScore);
   const factorsScores = results.map((result) => result.singleFactors);
@@ -19,16 +20,14 @@ export const financialResults = (
   const avgResult = mean(overallScores);
   const stdDevResult = std(overallScores);
   const avgCashflow = mean(
-    results.map((result) => result.singleFactors.cashflow)
+    results.map((result) => result.singleFactors.totalCashflow)
   );
   const avgPaybackPeriod = mean(
     results.map((result) => result.singleFactors.paybackPeriod)
   );
   const avgROI = mean(results.map((result) => result.singleFactors.ROI));
   const avgNPV = mean(results.map((result) => result.singleFactors.NPV));
-  const avgEVA = mean(
-    results.map((result) => result.singleFactors.economicValueAdded)
-  );
+  const avgEVA = mean(results.map((result) => result.singleFactors.EVA));
 
   const modelOutput = {
     results: overallScores,

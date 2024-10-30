@@ -1,3 +1,4 @@
+import { ValueType } from "@/enums/ValueType";
 import { ChangeEvent, KeyboardEventHandler } from "react";
 
 type InputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => void;
@@ -13,6 +14,12 @@ export type InputFieldType = {
   onChange?: InputChangeHandler;
   onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
   prefix?: string;
-  suffix?: string;
   actionWidget?: React.ReactNode;
+  values?: number[];
+  removeCallback: (value: number) => void;
+  valueType: ValueType;
+  suffix?: string;
+  rangeAdjustments?: number[];
+  valueLabelSuffix?: string;
+  valueLabelPrefix?: string;
 };

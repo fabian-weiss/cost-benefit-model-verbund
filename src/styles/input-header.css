@@ -1,0 +1,11 @@
+.fw-input-header-container {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.fw-input-header-info-wrapper {
+  display: flex;
+  flex-direction: column;
+}

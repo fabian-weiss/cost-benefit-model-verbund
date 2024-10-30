@@ -1,7 +1,10 @@
 export type FinancialFactors = {
-  cashflow: number;
+  totalCashflow: number;
+  discountedCashflow: number;
   paybackPeriod: number;
   ROI: number;
   NPV: number;
-  economicValueAdded: number;
+  EVA: number;
+  IRR: number | undefined;
+  WACCToIRR: number;
 };

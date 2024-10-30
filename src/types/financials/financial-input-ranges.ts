@@ -2,9 +2,17 @@ export type FinancialInputRanges = {
   budget: number[];
   initialInvestment: number[];
   annualOperatingCosts: number[];
+  annualOperatingCostsGrowthRate: number[];
   annualMaintenanceCosts: number[];
-  annualTrainingCosts: number[];
+  annualMaintenanceCostsGrowthRate: number[];
+  trainingCosts: number[];
   annualRevenue: number[];
+  annualRevenueGrowthRate: number[];
+  annualCostSavings: number[];
+  annualCostSavingsGrowthRate: number[];
+  firstCostSavingYear: number[];
+  firstRevenueGeneratingYear: number[];
   projectDuration: number[]; // in years
-  riskFactor: number[]; // 0 is low, 5 is high - this is a subjective value and displays the innovation aspect of the project
+  riskFactor: number[]; // in percent
+  discountRate: number[]; // in percent
 };

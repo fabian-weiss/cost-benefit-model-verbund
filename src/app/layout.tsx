@@ -5,6 +5,8 @@ import "@/styles/texts.css";
 import "@/styles/buttons.css";
 import "@/styles/layout.css";
 import FinancialModelProvider from "@/providers/financial-model-provider";
+import SocietalModelProvider from "@/providers/societal-model-provider";
+import EnvironmentalModelProvider from "@/providers/environmental-model-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,8 +31,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <FinancialModelProvider>{children}</FinancialModelProvider>
+      <body
+        suppressHydrationWarning
+        className={`${geistSans.variable} ${geistMono.variable}`}
+      >
+        <EnvironmentalModelProvider>
+          <SocietalModelProvider>
+            <FinancialModelProvider>{children}</FinancialModelProvider>
+          </SocietalModelProvider>
+        </EnvironmentalModelProvider>
       </body>
     </html>
   );

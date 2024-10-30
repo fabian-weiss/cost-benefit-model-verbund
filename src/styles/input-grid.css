@@ -1,5 +1,11 @@
 .fw-input-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 25px;
+  gap: 20px;
+}
+
+.fw-input-grid-header {
+  margin-bottom: 10px;
+  font-weight: 300;
+  font-size: 18px;
 }

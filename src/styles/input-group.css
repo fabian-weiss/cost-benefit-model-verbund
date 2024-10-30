@@ -4,10 +4,12 @@
   padding: 20px 16px;
   background-color: var(--secondary-background-color);
   border-radius: var(--border-radius-m);
+  height: min-content;
 }
 
-.fw-input-group-wrapper {
+.fw-input-group-wrapper:not(:last-child) {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  margin-bottom: 20px;
 }

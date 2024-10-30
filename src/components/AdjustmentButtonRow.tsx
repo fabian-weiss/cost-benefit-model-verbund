@@ -1,14 +1,14 @@
 import "@/styles/adjustment-button-row.css";
+import { AdjustmentButtonRowType } from "@/types/adjustment-button-row-type";
 import { PiPlusMinus } from "react-icons/pi";
 
-function AdjustmentButtonRow(props: {
-  adjustments: number[];
-  callback: (adjustment: number) => void;
-  id: string;
-  disabled?: boolean;
-}) {
+function AdjustmentButtonRow(props: AdjustmentButtonRowType) {
   return (
     <div className="fw-adjustment-button-row">
+      <PiPlusMinus
+        className={`${props.disabled ? "disabled" : ""}`}
+        size={12}
+      />
       {props.adjustments.map((adjustment, index) => (
         <div
           key={`adjustment-button-row-${props.id}-${index}`}
