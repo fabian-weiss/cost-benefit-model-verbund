@@ -7,9 +7,11 @@ import { EnvironmentalInputEnum } from "@/enums/EnvironmentalInputEnum";
 import { Impact } from "@/enums/Impact";
 import { SocietalInputEnum } from "@/enums/SocietalInputEnum";
 import { impactEntries } from "@/lib/impact-categories";
+import { environmentalModel } from "@/models/environmental-model/environmental-model";
 import { useEnvironmentalModel } from "@/providers/environmental-model-provider";
 import { useSocietalModel } from "@/providers/societal-model-provider";
 import { DropdownEntryType } from "@/types/dropdown-entry-type";
+import { EnvironmentalResults } from "@/types/environmental/environmental-results";
 import { InputGroupType } from "@/types/input-group-type";
 import { SocietalInputs } from "@/types/societal/societal-inputs";
 import { impactToNumber } from "@/utils/impact-to-number";
@@ -18,6 +20,9 @@ import { useState } from "react";
 
 function EnvironmentalSection() {
   const environmetalModelContext = useEnvironmentalModel();
+  const [modelResults, setModelResults] = useState<
+    EnvironmentalResults | undefined
+  >();
   // const [societalInputs, setSocietalInputs] = useState<SocietalInputs>(societalModelContext.societalInputs);
 
   const inputGroups: InputGroupType[] = [
@@ -311,14 +316,23 @@ function EnvironmentalSection() {
       ],
     },
   ];
+
+  const handleModelResult = (): EnvironmentalResults => {
+    const result: EnvironmentalResults = environmentalModel(
+      environmetalModelContext.environmentalInputs
+    );
+    setModelResults(result);
+    return result;
+  };
   return (
     <SectionContainer contentClasses="fw-model-container">
       <ModelHeader
         title="Environmental"
         buttonLabel="Run Submodel"
-        buttonCallback={() => console.log("Run Submodel")}
+        buttonCallback={() => handleModelResult()}
       />
       <InputGrid inputGroups={inputGroups} id={"environmental-model"} />
+      {modelResults && <p>{JSON.stringify(modelResults)}</p>}
     </SectionContainer>
   );
 }

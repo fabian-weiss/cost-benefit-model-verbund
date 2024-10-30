@@ -7,7 +7,10 @@ export const impactToColor = (
     case Impact.VERY_NEGATIVE:
       return { textColor: "white", backgroundColor: "#ff002f" };
     case Impact.NEGATIVE:
-      return { textColor: "white", backgroundColor: "#FF6347" };
+      return {
+        textColor: "var(--primary-text-color)",
+        backgroundColor: "#ffc2cd",
+      };
     case Impact.NEUTRAL:
       return {
         textColor: "var(--primary-text-color)",
@@ -16,7 +19,7 @@ export const impactToColor = (
     case Impact.POSITIVE:
       return {
         textColor: "var(--primary-text-color)",
-        backgroundColor: "#6EEB83",
+        backgroundColor: "#c6f5d1",
       };
     case Impact.VERY_POSITIVE:
       return { textColor: "white", backgroundColor: "#20be45" };

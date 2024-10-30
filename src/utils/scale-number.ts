@@ -4,5 +4,5 @@ export const scaleNumber = (
   min: number,
   max: number
 ): number => {
-  return ((value - min) / (max - min)) * 2 - 1;
+  return (2 * (value - min)) / (max - min) - 1;
 };

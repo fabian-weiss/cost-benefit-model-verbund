@@ -20,9 +20,9 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
     healthAndSafety: 0,
     culturalImpact: 0,
     publicPerception: 0,
-    edcuationalImpact: 0,
+    educationalImpact: 0,
     qualityOfLife: 0,
-    customerSatifaction: 0,
+    customerSatisfaction: 0,
     employeeSatisfaction: 0,
   });
 

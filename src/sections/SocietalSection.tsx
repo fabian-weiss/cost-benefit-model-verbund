@@ -6,16 +6,21 @@ import SectionContainer from "@/components/SectionContainer";
 import { Impact } from "@/enums/Impact";
 import { SocietalInputEnum } from "@/enums/SocietalInputEnum";
 import { impactEntries } from "@/lib/impact-categories";
+import { societalModel } from "@/models/societal-model/societal-model";
 import { useSocietalModel } from "@/providers/societal-model-provider";
 import { DropdownEntryType } from "@/types/dropdown-entry-type";
 import { InputGroupType } from "@/types/input-group-type";
 import { SocietalInputs } from "@/types/societal/societal-inputs";
+import { SocietalResults } from "@/types/societal/societal-results";
 import { impactToNumber } from "@/utils/impact-to-number";
 import { numberToImpact } from "@/utils/number-to-impact";
 import { useState } from "react";
 
 function SocietalSection() {
   const societalModelContext = useSocietalModel();
+  const [modelResults, setModelResults] = useState<
+    SocietalResults | undefined
+  >();
   // const [societalInputs, setSocietalInputs] = useState<SocietalInputs>(societalModelContext.societalInputs);
 
   const inputGroups: InputGroupType[] = [
@@ -156,7 +161,7 @@ function SocietalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.edcuationalImpact
+              societalModelContext.societalInputs.educationalImpact
             ),
           },
           entries: impactEntries,
@@ -204,7 +209,7 @@ function SocietalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.customerSatifaction
+              societalModelContext.societalInputs.customerSatisfaction
             ),
           },
           entries: impactEntries,
@@ -236,14 +241,23 @@ function SocietalSection() {
       ],
     },
   ];
+
+  const handleModelResult = (): SocietalResults => {
+    const result: SocietalResults = societalModel(
+      societalModelContext.societalInputs
+    );
+    setModelResults(result);
+    return result;
+  };
   return (
     <SectionContainer contentClasses="fw-model-container">
       <ModelHeader
         title="Societal"
         buttonLabel="Run Submodel"
-        buttonCallback={() => console.log("Run Submodel")}
+        buttonCallback={() => handleModelResult()}
       />
       <InputGrid inputGroups={inputGroups} id={"societal-model"} />
+      {modelResults && <p>{JSON.stringify(modelResults)}</p>}
     </SectionContainer>
   );
 }

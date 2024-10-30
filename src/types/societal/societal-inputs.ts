@@ -4,8 +4,8 @@ export type SocietalInputs = {
   healthAndSafety: number;
   culturalImpact: number;
   publicPerception: number;
-  edcuationalImpact: number;
+  educationalImpact: number;
   qualityOfLife: number;
-  customerSatifaction: number;
+  customerSatisfaction: number;
   employeeSatisfaction: number;
 };
