@@ -3,4 +3,5 @@
   flex-direction: column;
   gap: 5px;
   margin-bottom: 30px;
+  /* color: var(--secondary-color); */
 }

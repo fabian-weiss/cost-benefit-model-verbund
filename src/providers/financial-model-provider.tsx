@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { FinancialInputRangesEnum } from "@/enums/FinancialInputRangesEnum";
 import { FinancialInputRanges } from "@/types/financials/financial-input-ranges";
@@ -16,6 +18,10 @@ interface FinancialModelProviderContextType {
   ) => void;
   modelResults: FinancialResults | undefined;
   setModelResults: (results?: FinancialResults) => void;
+  errors: any;
+  setErrors: (errors: any) => void;
+  clearErrors: () => void;
+  validateInputs: () => boolean;
 }
 
 const FinancialModelProviderContext = createContext<
@@ -45,6 +51,45 @@ function FinancialModelProvider({ children }: { children: React.ReactNode }) {
       riskFactor: [0.02],
       discountRate: [0.0633],
     });
+  const [errors, setErrors] = useState<any>({
+    budget: "",
+    initialInvestment: "",
+    annualOperatingCosts: "",
+    annualOperatingCostsGrowthRate: "",
+    annualMaintenanceCosts: "",
+    annualMaintenanceCostsGrowthRate: "",
+    trainingCosts: "",
+    annualRevenue: "",
+    annualRevenueGrowthRate: "",
+    firstRevenueGeneratingYear: "",
+    annualCostSavings: "",
+    annualCostSavingsGrowthRate: "",
+    firstCostSavingYear: "",
+    projectDuration: "",
+    riskFactor: "",
+    discountRate: "",
+  });
+
+  const clearErrors = () => {
+    setErrors({
+      budget: "",
+      initialInvestment: "",
+      annualOperatingCosts: "",
+      annualOperatingCostsGrowthRate: "",
+      annualMaintenanceCosts: "",
+      annualMaintenanceCostsGrowthRate: "",
+      trainingCosts: "",
+      annualRevenue: "",
+      annualRevenueGrowthRate: "",
+      firstRevenueGeneratingYear: "",
+      annualCostSavings: "",
+      annualCostSavingsGrowthRate: "",
+      firstCostSavingYear: "",
+      projectDuration: "",
+      riskFactor: "",
+      discountRate: "",
+    });
+  };
 
   const addFinancialInput = (
     inputRange: FinancialInputRangesEnum,
@@ -342,6 +387,130 @@ function FinancialModelProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
+  const validateInputs = (): boolean => {
+    clearErrors();
+    let hasErrors = false;
+    if (financialInputRanges.budget.length === 0) {
+      setErrors((prev: any) => ({
+        ...prev,
+        budget: "Set at least one expected budget",
+      }));
+      hasErrors = true;
+    }
+    if (financialInputRanges.initialInvestment.length === 0) {
+      setErrors((prev: any) => ({
+        ...prev,
+        initialInvestment: "Set a least one expected initial investment",
+      }));
+      hasErrors = true;
+    }
+    if (financialInputRanges.annualOperatingCosts.length === 0) {
+      setErrors((prev: any) => ({
+        ...prev,
+        annualOperatingCosts: "Set at least one expected annual operating cost",
+      }));
+      hasErrors = true;
+    }
+    if (financialInputRanges.annualOperatingCostsGrowthRate.length === 0) {
+      setErrors((prev: any) => ({
+        ...prev,
+        annualOperatingCostsGrowthRate:
+          "Set at least one expected annual operating costs growth rate",
+      }));
+      hasErrors = true;
+    }
+    if (financialInputRanges.annualMaintenanceCosts.length === 0) {
+      setErrors((prev: any) => ({
+        ...prev,
+        annualMaintenanceCosts:
+          "Set at least one expected annual maintenance cost",
+      }));
+      hasErrors = true;
+    }
+    if (financialInputRanges.annualMaintenanceCostsGrowthRate.length === 0) {
+      setErrors((prev: any) => ({
+        ...prev,
+        annualMaintenanceCostsGrowthRate:
+          "Set at least one expected annual maintenance cost growth rate",
+      }));
+      hasErrors = true;
+    }
+    if (financialInputRanges.trainingCosts.length === 0) {
+      setErrors((prev: any) => ({
+        ...prev,
+        trainingCosts: "Set at least one expected annual training cost",
+      }));
+      hasErrors = true;
+    }
+    if (financialInputRanges.annualRevenue.length === 0) {
+      setErrors((prev: any) => ({
+        ...prev,
+        annualRevenue: "Set at least one expected annual revenue",
+      }));
+      hasErrors = true;
+    }
+    if (financialInputRanges.annualRevenueGrowthRate.length === 0) {
+      setErrors((prev: any) => ({
+        ...prev,
+        annualRevenueGrowthRate:
+          "Set at least one expected annual revenue growth rate",
+      }));
+      hasErrors = true;
+    }
+    if (financialInputRanges.firstRevenueGeneratingYear.length === 0) {
+      setErrors((prev: any) => ({
+        ...prev,
+        firstRevenueGeneratingYear:
+          "Set at least one first revenue generating year",
+      }));
+      hasErrors = true;
+    }
+    if (financialInputRanges.projectDuration.length === 0) {
+      setErrors((prev: any) => ({
+        ...prev,
+        projectDuration: "Set at least one expected project duration",
+      }));
+      hasErrors = true;
+    }
+    if (financialInputRanges.riskFactor.length === 0) {
+      setErrors((prev: any) => ({
+        ...prev,
+        riskFactor: "Set at least one expected risk factor",
+      }));
+      hasErrors = true;
+    }
+    if (financialInputRanges.discountRate.length === 0) {
+      setErrors((prev: any) => ({
+        ...prev,
+        discountRate: "Set at least one expected discount rate",
+      }));
+      hasErrors = true;
+    }
+    if (financialInputRanges.annualCostSavings.length === 0) {
+      setErrors((prev: any) => ({
+        ...prev,
+        annualCostSavings: "Set at least one expected cost savings value",
+      }));
+      hasErrors = true;
+    }
+    if (financialInputRanges.annualCostSavingsGrowthRate.length === 0) {
+      setErrors((prev: any) => ({
+        ...prev,
+        annualCostSavingsGrowthRate:
+          "Set at least one expected cost savings growth rate",
+      }));
+      hasErrors = true;
+    }
+    if (financialInputRanges.firstCostSavingYear.length === 0) {
+      setErrors((prev: any) => ({
+        ...prev,
+        firstCostSavingYear: "Set at least one first cost saving year",
+      }));
+      hasErrors = true;
+    }
+    return hasErrors;
+  };
+
   // Use useMemo to memoize the context value
   const contextValue = useMemo(
     () => ({
@@ -350,8 +519,12 @@ function FinancialModelProvider({ children }: { children: React.ReactNode }) {
       removeFinancialInput,
       modelResults,
       setModelResults,
+      errors,
+      setErrors,
+      clearErrors,
+      validateInputs,
     }),
-    [financialInputRanges, modelResults] // Only re-compute the memoized value when financialInputRanges changes
+    [financialInputRanges, modelResults, errors] // Only re-compute the memoized value when financialInputRanges changes
   );
 
   return (

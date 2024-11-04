@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { DropdownEntryType } from "@/types/dropdown-entry-type";
 import React, { useEffect, useRef, useState } from "react";
@@ -46,6 +47,7 @@ function Dropdown(props: DropdownInputType) {
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [menuVisible]);
 
   const bgColor = impactToColor(props.selectedEntry.impact).backgroundColor;

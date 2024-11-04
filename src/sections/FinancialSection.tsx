@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import InputGrid from "@/components/InputGrid";
 import ModelHeader from "@/components/ModelHeader";
@@ -10,7 +11,6 @@ import { financialResults } from "@/models/financial-model/financial-results";
 import { useFinancialModel } from "@/providers/financial-model-provider";
 import { useResultDialog } from "@/providers/model-result-provider";
 import "@/styles/model-section.css";
-import { FinancialResults } from "@/types/financials/financial-results";
 import { InputGroupType } from "@/types/input-group-type";
 import { isBetweenOneAndHundred } from "@/utils/is-between-one-and-hundred";
 import { round } from "mathjs";
@@ -44,45 +44,7 @@ function FinancialSection() {
   const [projectDuration, setProjectDuration] = useState<number>();
   const [riskFactor, setRiskFactor] = useState<number>();
   const [discountRate, setDiscountRate] = useState<number>();
-  const [errors, setErrors] = useState<any>({
-    budget: "",
-    initialInvestment: "",
-    annualOperatingCosts: "",
-    annualOperatingCostsGrowthRate: "",
-    annualMaintenanceCosts: "",
-    annualMaintenanceCostsGrowthRate: "",
-    trainingCosts: "",
-    annualRevenue: "",
-    annualRevenueGrowthRate: "",
-    firstRevenueGeneratingYear: "",
-    annualCostSavings: "",
-    annualCostSavingsGrowthRate: "",
-    firstCostSavingYear: "",
-    projectDuration: "",
-    riskFactor: "",
-    discountRate: "",
-  });
-
-  const clearErrors = () => {
-    setErrors({
-      budget: "",
-      initialInvestment: "",
-      annualOperatingCosts: "",
-      annualOperatingCostsGrowthRate: "",
-      annualMaintenanceCosts: "",
-      annualMaintenanceCostsGrowthRate: "",
-      trainingCosts: "",
-      annualRevenue: "",
-      annualRevenueGrowthRate: "",
-      firstRevenueGeneratingYear: "",
-      annualCostSavings: "",
-      annualCostSavingsGrowthRate: "",
-      firstCostSavingYear: "",
-      projectDuration: "",
-      riskFactor: "",
-      discountRate: "",
-    });
-  };
+  const errors = financialModelContext.errors;
 
   const handleAdjustment = (
     adjustment: number,
@@ -975,7 +937,7 @@ function FinancialSection() {
                 financialModelContext.financialInputRanges.riskFactor
               );
             } else if (e.key === "Enter" || e.key === "Tab") {
-              setErrors((prev: any) => ({
+              financialModelContext.setErrors((prev: any) => ({
                 ...prev,
                 riskFactor: "Risk factor must be between 0 and 100",
               }));
@@ -1030,7 +992,7 @@ function FinancialSection() {
                 financialModelContext.financialInputRanges.discountRate
               );
             } else if (e.key === "Enter" || e.key === "Tab") {
-              setErrors((prev: any) => ({
+              financialModelContext.setErrors((prev: any) => ({
                 ...prev,
                 discountRate: "Discount rate must be between 0 and 100",
               }));
@@ -1042,156 +1004,7 @@ function FinancialSection() {
   ];
 
   const handleModelSubmit = () => {
-    clearErrors();
-    let hasErrors = false;
-    if (financialModelContext.financialInputRanges.budget.length === 0) {
-      setErrors((prev: any) => ({
-        ...prev,
-        budget: "Set at least one expected budget",
-      }));
-      hasErrors = true;
-    }
-    if (
-      financialModelContext.financialInputRanges.initialInvestment.length === 0
-    ) {
-      setErrors((prev: any) => ({
-        ...prev,
-        initialInvestment: "Set a least one expected initial investment",
-      }));
-      hasErrors = true;
-    }
-    if (
-      financialModelContext.financialInputRanges.annualOperatingCosts.length ===
-      0
-    ) {
-      setErrors((prev: any) => ({
-        ...prev,
-        annualOperatingCosts: "Set at least one expected annual operating cost",
-      }));
-      hasErrors = true;
-    }
-    if (
-      financialModelContext.financialInputRanges.annualOperatingCostsGrowthRate
-        .length === 0
-    ) {
-      setErrors((prev: any) => ({
-        ...prev,
-        annualOperatingCostsGrowthRate:
-          "Set at least one expected annual operating costs growth rate",
-      }));
-      hasErrors = true;
-    }
-    if (
-      financialModelContext.financialInputRanges.annualMaintenanceCosts
-        .length === 0
-    ) {
-      setErrors((prev: any) => ({
-        ...prev,
-        annualMaintenanceCosts:
-          "Set at least one expected annual maintenance cost",
-      }));
-      hasErrors = true;
-    }
-    if (
-      financialModelContext.financialInputRanges
-        .annualMaintenanceCostsGrowthRate.length === 0
-    ) {
-      setErrors((prev: any) => ({
-        ...prev,
-        annualMaintenanceCostsGrowthRate:
-          "Set at least one expected annual maintenance cost growth rate",
-      }));
-      hasErrors = true;
-    }
-    if (financialModelContext.financialInputRanges.trainingCosts.length === 0) {
-      setErrors((prev: any) => ({
-        ...prev,
-        trainingCosts: "Set at least one expected annual training cost",
-      }));
-      hasErrors = true;
-    }
-    if (financialModelContext.financialInputRanges.annualRevenue.length === 0) {
-      setErrors((prev: any) => ({
-        ...prev,
-        annualRevenue: "Set at least one expected annual revenue",
-      }));
-      hasErrors = true;
-    }
-    if (
-      financialModelContext.financialInputRanges.annualRevenueGrowthRate
-        .length === 0
-    ) {
-      setErrors((prev: any) => ({
-        ...prev,
-        annualRevenueGrowthRate:
-          "Set at least one expected annual revenue growth rate",
-      }));
-      hasErrors = true;
-    }
-    if (
-      financialModelContext.financialInputRanges.firstRevenueGeneratingYear
-        .length === 0
-    ) {
-      setErrors((prev: any) => ({
-        ...prev,
-        firstRevenueGeneratingYear:
-          "Set at least one first revenue generating year",
-      }));
-      hasErrors = true;
-    }
-    if (
-      financialModelContext.financialInputRanges.projectDuration.length === 0
-    ) {
-      setErrors((prev: any) => ({
-        ...prev,
-        projectDuration: "Set at least one expected project duration",
-      }));
-      hasErrors = true;
-    }
-    if (financialModelContext.financialInputRanges.riskFactor.length === 0) {
-      setErrors((prev: any) => ({
-        ...prev,
-        riskFactor: "Set at least one expected risk factor",
-      }));
-      hasErrors = true;
-    }
-    if (financialModelContext.financialInputRanges.discountRate.length === 0) {
-      setErrors((prev: any) => ({
-        ...prev,
-        discountRate: "Set at least one expected discount rate",
-      }));
-      hasErrors = true;
-    }
-    if (
-      financialModelContext.financialInputRanges.annualCostSavings.length === 0
-    ) {
-      setErrors((prev: any) => ({
-        ...prev,
-        annualCostSavings: "Set at least one expected cost savings value",
-      }));
-      hasErrors = true;
-    }
-    if (
-      financialModelContext.financialInputRanges.annualCostSavingsGrowthRate
-        .length === 0
-    ) {
-      setErrors((prev: any) => ({
-        ...prev,
-        annualCostSavingsGrowthRate:
-          "Set at least one expected cost savings growth rate",
-      }));
-      hasErrors = true;
-    }
-    if (
-      financialModelContext.financialInputRanges.firstCostSavingYear.length ===
-      0
-    ) {
-      setErrors((prev: any) => ({
-        ...prev,
-        firstCostSavingYear: "Set at least one first cost saving year",
-      }));
-      hasErrors = true;
-    }
+    const hasErrors = financialModelContext.validateInputs();
     if (!hasErrors) {
       console.log(
         `Fincancial ranges are: ${JSON.stringify(

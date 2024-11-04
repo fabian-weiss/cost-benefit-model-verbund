@@ -1,0 +1,65 @@
+import { RioInputs } from "@/types/rio/rio-inputs";
+import { RioResults } from "@/types/rio/rio-results";
+import { RioWeights } from "@/types/rio/rio-weights";
+import { Score } from "@/types/score";
+import { SocietalInputs } from "@/types/societal/societal-inputs";
+import { SocietalResults } from "@/types/societal/societal-results";
+import { SocietalWeights } from "@/types/societal/societal-weights";
+import { scaleNumber } from "@/utils/scale-number";
+import { round } from "mathjs";
+
+export const rioModel = (inputs: RioInputs): RioResults => {
+  const weights: RioWeights = {
+    privacy: 0.1,
+    marketAdvantage: 0.2,
+    longTermResilience: 0.3,
+    longTermScalability: 0.3,
+    legalRequirements: 0.1,
+  };
+
+  console.log(`inputs are: ${JSON.stringify(inputs)}`);
+
+  // Initialize weighted scores
+  const weightedScores: RioInputs = {
+    privacy: 0,
+    marketAdvantage: 0,
+    longTermResilience: 0,
+    longTermScalability: 0,
+    legalRequirements: 0,
+  };
+
+  // Calculate individual weighted scores
+  (Object.keys(inputs) as Array<keyof RioInputs>).forEach((key) => {
+    const weightedResult: number = inputs[key] * weights[key];
+    weightedScores[key] = weightedResult;
+    //weightedScores.push({ key, value: weightedResult, weight: weights[key] });
+  });
+
+  // Calculate total score
+  const totalScore: number = Object.values(weightedScores).reduce(
+    (acc, value) => acc + value,
+    0
+  );
+
+  const avgScore: number = round(
+    totalScore / Object.entries(weightedScores).length,
+    2
+  );
+
+  const maxScore: number = 2;
+  const minScore: number = -2;
+  //   const maxScore: number = 2 * weightedScores.length;
+  //   const minScore: number = -2 * weightedScores.length;
+
+  const scaledTotalScore: number = scaleNumber(totalScore, minScore, maxScore);
+
+  const result: RioResults = {
+    weightedSingleFactors: weightedScores,
+    avgScore: round(avgScore, 2),
+    totalScore: round(totalScore, 2),
+    scaledTotalScore: round(scaledTotalScore, 2),
+    weights: weights,
+  };
+
+  return result;
+};

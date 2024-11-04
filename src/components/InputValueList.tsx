@@ -2,7 +2,6 @@
 import { ValueType } from "@/enums/ValueType";
 import "@/styles/input-value-list.css";
 import { formatToEuro } from "@/utils/format-to-euro";
-import { get } from "http";
 import { MdOutlineCancel } from "react-icons/md";
 
 function InputValueList(props: {

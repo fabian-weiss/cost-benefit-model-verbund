@@ -9,8 +9,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   z-index: 10;
   cursor: pointer;
+  overflow: scroll;
+}
+
+.fw-dialog-container.fullscreen {
+  background-color: var(--background-color);
+  cursor: auto;
+  max-height: 100vh;
 }
 
 .fw-dialog-wrapper {
@@ -27,6 +35,21 @@
   border-radius: var(--border-radius-l);
   overflow: scroll;
   cursor: auto;
+}
+
+.fw-dialog-wrapper.fullscreen {
+  max-width: 1100px;
+  max-height: none;
+  height: 100%;
+  overflow: hidden;
+  padding: 60px 0;
+}
+
+.fw-dialog-close {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {

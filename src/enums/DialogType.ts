@@ -3,4 +3,5 @@ export enum DialogType {
   FINANCIAL_MODEL = "financialModel",
   ENVIRONMENTAL_MODEL = "environmentalModel",
   SOCIETAL_MODEL = "societalModel",
+  RIO_MODEL = "rioModel",
 }

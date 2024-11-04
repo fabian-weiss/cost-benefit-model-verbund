@@ -4,7 +4,6 @@ import InputGrid from "@/components/InputGrid";
 import ModelHeader from "@/components/ModelHeader";
 import SectionContainer from "@/components/SectionContainer";
 import { DialogType } from "@/enums/DialogType";
-import { Impact } from "@/enums/Impact";
 import { SocietalInputEnum } from "@/enums/SocietalInputEnum";
 import { impactEntries } from "@/lib/impact-categories";
 import { societalModel } from "@/models/societal-model/societal-model";

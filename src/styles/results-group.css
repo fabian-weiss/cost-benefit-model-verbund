@@ -1,0 +1,5 @@
+.fw-results-group {
+  border-radius: var(--border-radius-l);
+  padding: 40px 30px;
+  background-color: var(--secondary-background-color);
+}

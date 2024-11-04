@@ -34,6 +34,11 @@
   gap: 30px;
   margin-bottom: 66px;
 }
+.fw-results-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 
 /** SPACING */
 .fw-max-height {

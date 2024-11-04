@@ -1,6 +1,8 @@
 "use client";
+import CompleteResultsDialog from "@/dialogs/CompleteResultsDialog";
 import EnvironmentalResultsDialog from "@/dialogs/EnvironmentalResultsDialog";
 import FinancialResultsDialog from "@/dialogs/FinancialResultsDialog";
+import RioResultsDialog from "@/dialogs/RioResultsDialog";
 import SocietalResultsDialog from "@/dialogs/SocietalResultsDialog";
 import { DialogType } from "@/enums/DialogType";
 import { handleBodyScroll } from "@/utils/handle-body-scroll";
@@ -27,13 +29,15 @@ function ModelResultProvider(props: { children: React.ReactNode }) {
   const getDialog = (): React.ReactNode => {
     switch (dialogType) {
       case DialogType.COMPLETE_MODEL:
-        return <div>COMPLETE_MODEL</div>;
+        return <CompleteResultsDialog />;
       case DialogType.FINANCIAL_MODEL:
         return <FinancialResultsDialog />;
       case DialogType.ENVIRONMENTAL_MODEL:
         return <EnvironmentalResultsDialog />;
       case DialogType.SOCIETAL_MODEL:
         return <SocietalResultsDialog />;
+      case DialogType.RIO_MODEL:
+        return <RioResultsDialog />;
       default:
         return <p>FFAIILLLL</p>;
     }

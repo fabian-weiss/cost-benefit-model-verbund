@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { useRef, useEffect } from "react";
@@ -6,14 +7,22 @@ function OutsideClickHandler(props: {
   children: React.ReactNode[] | React.ReactNode;
   onOutsideClick: () => void;
   className?: string;
+  disabled?: boolean;
 }) {
   const wrapperRef = useRef<HTMLDivElement>(null);
+
+  // useEffect(() => {
+  //   if (wrapperRef.current) {
+  //     wrapperRef.current.scrollTop = 0;
+  //   }
+  // }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         wrapperRef.current &&
-        !wrapperRef.current.contains(event.target as Node)
+        !wrapperRef.current.contains(event.target as Node) &&
+        !props.disabled
       ) {
         // Click occurred outside the element
         props.onOutsideClick();

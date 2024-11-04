@@ -5,21 +5,15 @@ import ModelHeader from "@/components/ModelHeader";
 import SectionContainer from "@/components/SectionContainer";
 import { DialogType } from "@/enums/DialogType";
 import { EnvironmentalInputEnum } from "@/enums/EnvironmentalInputEnum";
-import { Impact } from "@/enums/Impact";
-import { SocietalInputEnum } from "@/enums/SocietalInputEnum";
 import { impactEntries } from "@/lib/impact-categories";
 import { environmentalModel } from "@/models/environmental-model/environmental-model";
 import { useEnvironmentalModel } from "@/providers/environmental-model-provider";
 import { useResultDialog } from "@/providers/model-result-provider";
-import { useSocietalModel } from "@/providers/societal-model-provider";
 import { DropdownEntryType } from "@/types/dropdown-entry-type";
 import { EnvironmentalResults } from "@/types/environmental/environmental-results";
 import { InputGroupType } from "@/types/input-group-type";
-import { SocietalInputs } from "@/types/societal/societal-inputs";
 import { impactToNumber } from "@/utils/impact-to-number";
 import { numberToImpact } from "@/utils/number-to-impact";
-import { useState } from "react";
-
 function EnvironmentalSection() {
   const environmetalModelContext = useEnvironmentalModel();
   const resultsDialogContext = useResultDialog();

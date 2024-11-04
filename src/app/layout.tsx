@@ -8,6 +8,7 @@ import FinancialModelProvider from "@/providers/financial-model-provider";
 import SocietalModelProvider from "@/providers/societal-model-provider";
 import EnvironmentalModelProvider from "@/providers/environmental-model-provider";
 import ModelResultProvider from "@/providers/model-result-provider";
+import RioModelProvider from "@/providers/rio-model-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -39,7 +40,9 @@ export default function RootLayout({
         <EnvironmentalModelProvider>
           <SocietalModelProvider>
             <FinancialModelProvider>
-              <ModelResultProvider>{children}</ModelResultProvider>
+              <RioModelProvider>
+                <ModelResultProvider>{children}</ModelResultProvider>
+              </RioModelProvider>
             </FinancialModelProvider>
           </SocietalModelProvider>
         </EnvironmentalModelProvider>
