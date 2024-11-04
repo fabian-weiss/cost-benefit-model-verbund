@@ -1,36 +1,18 @@
 import { FinancialFactors } from "@/types/financials/financial-factors";
 import { FinancialInputs } from "@/types/financials/financial-inputs";
-import { adjustForRisk } from "@/utils/adjust-for-risk";
 import { calculateCashflow } from "@/utils/financial-utils/calculate-cashflow";
 import { calculateDiscountedCashflow } from "@/utils/financial-utils/calculate-discounted-cashflow";
 import { calculateEVA } from "@/utils/financial-utils/calculate-eva";
 import { calculateIRR } from "@/utils/financial-utils/calculate-irr";
 import { calculateNPV } from "@/utils/financial-utils/calculate-npv";
 import { calculateROI } from "@/utils/financial-utils/calculate-roi";
-import { scaleNumber } from "@/utils/scale-number";
 import { mean, round } from "mathjs";
 
 export const financialModel = (
   inputs: FinancialInputs
 ): { singleFactors: FinancialFactors; overallScore: number } => {
-  const {
-    budget,
-    initialInvestment,
-    annualOperatingCosts,
-    annualOperatingCostsGrowthRate,
-    annualMaintenanceCosts,
-    annualMaintenanceCostsGrowthRate,
-    trainingCosts,
-    projectDuration,
-    annualRevenue,
-    annualRevenueGrowthRate,
-    firstRevenueGeneratingYear,
-    annualCostSavings,
-    annualCostSavingsGrowthRate,
-    firstCostSavingYear,
-    riskFactor,
-    discountRate,
-  } = inputs;
+  const { initialInvestment, trainingCosts, projectDuration, discountRate } =
+    inputs;
 
   const { totalCashflow, cashflows, paybackPeriod } = calculateCashflow(inputs);
 
@@ -40,11 +22,7 @@ export const financialModel = (
     projectDuration
   );
 
-  const ROI: number = calculateROI(
-    totalCashflow,
-    initialInvestment,
-    riskFactor
-  );
+  const ROI: number = calculateROI(totalCashflow, initialInvestment);
 
   const NPV: number = calculateNPV(initialInvestment, discountedCashflow);
 

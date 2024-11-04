@@ -15,7 +15,7 @@ export const generateCombinations = (
     }
 
     const results: FinancialInputs[] = [];
-    for (let value of ranges[index]) {
+    for (const value of ranges[index]) {
       results.push(
         ...combine(index + 1, { ...currentCombo, [keys[index]]: value })
       );

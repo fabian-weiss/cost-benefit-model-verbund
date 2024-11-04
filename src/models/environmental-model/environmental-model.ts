@@ -1,7 +1,6 @@
 import { EnvironmentalInputs } from "@/types/environmental/environmental-inputs";
 import { EnvironmentalResults } from "@/types/environmental/environmental-results";
 import { EnvironmentalWeights } from "@/types/environmental/environmental-weights";
-import { Score } from "@/types/score";
 import { scaleNumber } from "@/utils/scale-number";
 import { round } from "mathjs";
 

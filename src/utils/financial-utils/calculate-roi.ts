@@ -1,10 +1,6 @@
-import { adjustForRisk } from "../adjust-for-risk";
-import { scaleNumber } from "../scale-number";
-
 export const calculateROI = (
   totalCashflow: number,
-  initialInvestment: number,
-  riskFactor: number
+  initialInvestment: number
 ): number => {
   const ROI = (totalCashflow - initialInvestment) / initialInvestment;
   //const adjustedROI = adjustForRisk(ROI, riskFactor);

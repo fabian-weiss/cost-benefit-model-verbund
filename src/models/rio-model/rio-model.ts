@@ -1,10 +1,6 @@
 import { RioInputs } from "@/types/rio/rio-inputs";
 import { RioResults } from "@/types/rio/rio-results";
 import { RioWeights } from "@/types/rio/rio-weights";
-import { Score } from "@/types/score";
-import { SocietalInputs } from "@/types/societal/societal-inputs";
-import { SocietalResults } from "@/types/societal/societal-results";
-import { SocietalWeights } from "@/types/societal/societal-weights";
 import { scaleNumber } from "@/utils/scale-number";
 import { round } from "mathjs";
 

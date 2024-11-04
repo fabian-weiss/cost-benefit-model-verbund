@@ -1,4 +1,3 @@
-import { Score } from "@/types/score";
 import { SocietalInputs } from "@/types/societal/societal-inputs";
 import { SocietalResults } from "@/types/societal/societal-results";
 import { SocietalWeights } from "@/types/societal/societal-weights";

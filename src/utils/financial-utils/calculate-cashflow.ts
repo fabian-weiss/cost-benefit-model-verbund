@@ -1,13 +1,10 @@
 import { FinancialInputs } from "@/types/financials/financial-inputs";
-import { adjustForRisk } from "../adjust-for-risk";
-import { scaleNumber } from "../scale-number";
 
 export const calculateCashflow = (
   inputs: FinancialInputs
 ): { totalCashflow: number; cashflows: number[]; paybackPeriod: number } => {
   // Calculate Cashflow: Cashflow = (Budget - Costs) over project duration
   const {
-    budget, // budget for the project
     initialInvestment, // initial investment
     annualOperatingCosts,
     annualOperatingCostsGrowthRate,
@@ -15,7 +12,6 @@ export const calculateCashflow = (
     annualMaintenanceCostsGrowthRate,
     trainingCosts, // only in the beginning
     projectDuration,
-    riskFactor,
     annualRevenue,
     annualRevenueGrowthRate,
     firstRevenueGeneratingYear,
@@ -29,10 +25,10 @@ export const calculateCashflow = (
   for (let year = 1; year < projectDuration; year++) {
     let revenue = 0;
     let costSavings = 0;
-    let operatingCosts =
+    const operatingCosts =
       annualOperatingCosts *
       Math.pow(1 + annualOperatingCostsGrowthRate, year - 1);
-    let maintenanceCosts =
+    const maintenanceCosts =
       annualMaintenanceCosts *
       Math.pow(1 + annualMaintenanceCostsGrowthRate, year - 1);
 
