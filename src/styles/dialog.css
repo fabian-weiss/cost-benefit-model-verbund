@@ -12,7 +12,7 @@
   flex-direction: column;
   z-index: 10;
   cursor: pointer;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .fw-dialog-container.fullscreen {
@@ -22,9 +22,10 @@
 }
 
 .fw-dialog-wrapper {
-  max-width: 500px;
+  max-width: 800px;
   max-height: 560px;
-  width: 100vw;
+  width: 100%;
+  position: inline-block;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -42,7 +43,7 @@
   max-height: none;
   height: 100%;
   overflow: hidden;
-  padding: 60px 0;
+  padding: 60px 30px;
 }
 
 .fw-dialog-close {
@@ -55,5 +56,12 @@
 @media (max-width: 768px) {
   .fw-dialog-container {
     padding: 30px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fw-dialog-close {
+    top: 20px;
+    right: 20px;
   }
 }
