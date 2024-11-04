@@ -2,10 +2,8 @@ import { InputGroupType } from "@/types/input-group-type";
 import React from "react";
 import InputField from "./InputField";
 import "@/styles/input-group.css";
-import InputValueList from "./InputValueList";
 import InputHeader from "./InputHeader";
 import Dropdown from "./Dropdown";
-import { DropdownEntryType } from "@/types/dropdown-entry-type";
 
 function InputGroup(props: {
   inputGroup: InputGroupType;

@@ -1,4 +1,3 @@
-import { Score } from "../score";
 import { EnvironmentalInputs } from "./environmental-inputs";
 import { EnvironmentalWeights } from "./environmental-weights";
 

@@ -1,7 +1,6 @@
 import { InputFieldType } from "@/types/input-field-type";
 import "@/styles/input-field.css";
 import InputValueList from "./InputValueList";
-import { InputGroupType } from "@/types/input-group-type";
 
 function InputField(props: { inputField: InputFieldType }) {
   return (

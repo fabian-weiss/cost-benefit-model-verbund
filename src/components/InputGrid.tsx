@@ -3,7 +3,6 @@ import { InputGroupType } from "@/types/input-group-type";
 import React from "react";
 import InputGroup from "./InputGroup";
 import "@/styles/input-grid.css";
-import InputField from "./InputField";
 
 /** @ param id is "financial" | "societal" | "environmental"  */
 

@@ -1,4 +1,3 @@
-import { Score } from "../score";
 import { SocietalInputs } from "./societal-inputs";
 import { SocietalWeights } from "./societal-weights";
 
