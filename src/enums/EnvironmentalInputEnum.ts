@@ -1,9 +1,9 @@
 export enum EnvironmentalInputEnum {
-  UN_SUSTAINABLE_GOALS = "Carbon Footprint",
+  UN_SUSTAINABLE_GOALS = "UN Sustainable Goals",
   WASTE_PRODUCTION = "Waste Production",
   BIODIVERSITY = "Biodiversity",
-  POLLUTION = "Air Pollution",
-  SUSTAINABLE_ENERGY_INTEGRATION = "Adoption of Renewable Energy",
+  POLLUTION = "Pollution",
+  SUSTAINABLE_ENERGY_INTEGRATION = "Sustainable Energy Integration",
   ENERGY_EFFICIENCY = "Energy Efficiency",
-  MEETING_ENVIRONMENTAL_REGULATIONS = "Green Certifications",
+  MEETING_ENVIRONMENTAL_REGULATIONS = "Meeting Environmental Regulations",
 }
