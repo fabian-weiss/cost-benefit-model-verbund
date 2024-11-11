@@ -21,45 +21,37 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
     SocietalResults | undefined
   >();
   const [societalInputs, setSocietalInputs] = useState<SocietalInputs>({
-    jobCreation: 0,
-    jobEquity: 0,
-    healthAndSafety: 0,
+    valueChain: 0,
+    shareholderValue: 0,
+    visionAlignment: 0,
     culturalImpact: 0,
     publicPerception: 0,
-    educationalImpact: 0,
-    qualityOfLife: 0,
     customerSatisfaction: 0,
     employeeSatisfaction: 0,
   });
 
   const setSocietalInput = (inputType: SocietalInputEnum, input: number) => {
     switch (inputType) {
-      case SocietalInputEnum.JOB_CREATION:
-        setSocietalInputs((prev) => ({ ...prev, jobCreation: input }));
-        break;
-      case SocietalInputEnum.JOB_EQUITY:
-        setSocietalInputs((prev) => ({ ...prev, jobEquity: input }));
-        break;
-      case SocietalInputEnum.HEALTH_AND_SAFETY:
-        setSocietalInputs((prev) => ({ ...prev, healthAndSafety: input }));
-        break;
-      case SocietalInputEnum.CULTURAL_IMPACT:
-        setSocietalInputs((prev) => ({ ...prev, culturalImpact: input }));
-        break;
-      case SocietalInputEnum.PUBLIC_PERCEPTION:
-        setSocietalInputs((prev) => ({ ...prev, publicPerception: input }));
-        break;
-      case SocietalInputEnum.EDUCATIONAL_IMPACT:
-        setSocietalInputs((prev) => ({ ...prev, educationalImpact: input }));
-        break;
-      case SocietalInputEnum.QUALITY_OF_LIFE:
-        setSocietalInputs((prev) => ({ ...prev, qualityOfLife: input }));
-        break;
       case SocietalInputEnum.CUSTOMER_SATISFACTION:
         setSocietalInputs((prev) => ({ ...prev, customerSatisfaction: input }));
         break;
       case SocietalInputEnum.EMPLOYEE_SATISFACTION:
         setSocietalInputs((prev) => ({ ...prev, employeeSatisfaction: input }));
+        break;
+      case SocietalInputEnum.CULTURAL_IMPACT:
+        setSocietalInputs((prev) => ({ ...prev, culturalImpact: input }));
+        break;
+      case SocietalInputEnum.VALUE_CHAIN:
+        setSocietalInputs((prev) => ({ ...prev, valueChain: input }));
+        break;
+      case SocietalInputEnum.SHAREHOLDER_VALUE:
+        setSocietalInputs((prev) => ({ ...prev, shareholderValue: input }));
+        break;
+      case SocietalInputEnum.VISION_ALIGNMENT:
+        setSocietalInputs((prev) => ({ ...prev, visionAlignment: input }));
+        break;
+      case SocietalInputEnum.PUBLIC_PERCEPTION:
+        setSocietalInputs((prev) => ({ ...prev, publicPerception: input }));
         break;
     }
   };

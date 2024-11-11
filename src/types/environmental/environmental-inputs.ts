@@ -1,14 +1,9 @@
 export type EnvironmentalInputs = {
-  carbonFootprint: number;
-  resourceConsumption: number;
+  unSustainableGoals: number;
   wasteProduction: number;
   biodiversity: number;
-  airPollution: number;
-  waterPollution: number;
-  landPollution: number;
-  noisePollution: number;
-  adoptionOfRenewableEnergy: number;
+  pollution: number;
+  sustainableEneryIntegration: number;
   energyEfficiency: number;
-  recyclingRate: number;
-  greenCertifications: number;
+  meetingEnvironmentalRegulations: number;
 };

@@ -2,6 +2,7 @@ import { useEnvironmentalModel } from "@/providers/environmental-model-provider"
 import { valueToResultInterpretation } from "@/utils/value-to-result-interpretation";
 import React from "react";
 import ResultEntry from "../ResultEntry";
+import { EnvironmentalInputEnum } from "@/enums/EnvironmentalInputEnum";
 
 function EnvironmentalResultsList() {
   const environmentalModelContext = useEnvironmentalModel();
@@ -12,34 +13,21 @@ function EnvironmentalResultsList() {
           <div>
             <ResultEntry
               isSmall
-              factor="Carbon Footprint"
-              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.carbonFootprint.toFixed(
-                2
-              )} (weight ${
-                environmentalModelContext.modelResults?.weights.carbonFootprint
-              })`}
-              resultInterpretation={valueToResultInterpretation(
-                environmentalModelContext.modelResults?.weightedSingleFactors
-                  .carbonFootprint
-              )}
-            />
-            <ResultEntry
-              isSmall
-              factor="Resource Consumption"
-              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.resourceConsumption.toFixed(
+              factor={EnvironmentalInputEnum.UN_SUSTAINABLE_GOALS}
+              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.unSustainableGoals.toFixed(
                 2
               )} (weight ${
                 environmentalModelContext.modelResults?.weights
-                  .resourceConsumption
+                  .unSustainableGoals
               })`}
               resultInterpretation={valueToResultInterpretation(
                 environmentalModelContext.modelResults?.weightedSingleFactors
-                  .resourceConsumption
+                  .unSustainableGoals
               )}
             />
             <ResultEntry
               isSmall
-              factor="Waste Production"
+              factor={EnvironmentalInputEnum.WASTE_PRODUCTION}
               value={`${environmentalModelContext.modelResults?.weightedSingleFactors.wasteProduction.toFixed(
                 2
               )} (weight ${
@@ -52,7 +40,7 @@ function EnvironmentalResultsList() {
             />
             <ResultEntry
               isSmall
-              factor="Bio Diversity"
+              factor={EnvironmentalInputEnum.BIODIVERSITY}
               value={`${environmentalModelContext.modelResults?.weightedSingleFactors.biodiversity.toFixed(
                 2
               )} (weight ${
@@ -65,73 +53,34 @@ function EnvironmentalResultsList() {
             />
             <ResultEntry
               isSmall
-              factor="Air Pollution"
-              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.airPollution.toFixed(
+              factor={EnvironmentalInputEnum.POLLUTION}
+              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.pollution.toFixed(
                 2
               )} (weight ${
-                environmentalModelContext.modelResults?.weights.airPollution
+                environmentalModelContext.modelResults?.weights.pollution
               })`}
               resultInterpretation={valueToResultInterpretation(
                 environmentalModelContext.modelResults?.weightedSingleFactors
-                  .airPollution
+                  .pollution
               )}
             />
             <ResultEntry
               isSmall
-              factor="Water Pollution"
-              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.waterPollution.toFixed(
-                2
-              )} (weight ${
-                environmentalModelContext.modelResults?.weights.waterPollution
-              })`}
-              resultInterpretation={valueToResultInterpretation(
-                environmentalModelContext.modelResults?.weightedSingleFactors
-                  .waterPollution
-              )}
-            />
-            <ResultEntry
-              isSmall
-              factor="Land Pollution"
-              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.landPollution.toFixed(
-                2
-              )} (weight ${
-                environmentalModelContext.modelResults?.weights.landPollution
-              })`}
-              resultInterpretation={valueToResultInterpretation(
-                environmentalModelContext.modelResults?.weightedSingleFactors
-                  .landPollution
-              )}
-            />
-            <ResultEntry
-              isSmall
-              factor="Noise Pollution"
-              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.noisePollution.toFixed(
-                2
-              )} (weight ${
-                environmentalModelContext.modelResults?.weights.noisePollution
-              })`}
-              resultInterpretation={valueToResultInterpretation(
-                environmentalModelContext.modelResults?.weightedSingleFactors
-                  .noisePollution
-              )}
-            />
-            <ResultEntry
-              isSmall
-              factor="Adoption of Renewable Energy"
-              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.adoptionOfRenewableEnergy.toFixed(
+              factor={EnvironmentalInputEnum.SUSTAINABLE_ENERGY_INTEGRATION}
+              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.sustainableEneryIntegration.toFixed(
                 2
               )} (weight ${
                 environmentalModelContext.modelResults?.weights
-                  .adoptionOfRenewableEnergy
+                  .sustainableEneryIntegration
               })`}
               resultInterpretation={valueToResultInterpretation(
                 environmentalModelContext.modelResults?.weightedSingleFactors
-                  .adoptionOfRenewableEnergy
+                  .sustainableEneryIntegration
               )}
             />
             <ResultEntry
               isSmall
-              factor="Energy Efficiency"
+              factor={EnvironmentalInputEnum.ENERGY_EFFICIENCY}
               value={`${environmentalModelContext.modelResults?.weightedSingleFactors.energyEfficiency.toFixed(
                 2
               )} (weight ${
@@ -144,29 +93,16 @@ function EnvironmentalResultsList() {
             />
             <ResultEntry
               isSmall
-              factor="Recycling Rate"
-              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.recyclingRate.toFixed(
-                2
-              )} (weight ${
-                environmentalModelContext.modelResults?.weights.recyclingRate
-              })`}
-              resultInterpretation={valueToResultInterpretation(
-                environmentalModelContext.modelResults?.weightedSingleFactors
-                  .recyclingRate
-              )}
-            />
-            <ResultEntry
-              isSmall
-              factor="Green Certifications"
-              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.greenCertifications.toFixed(
+              factor={EnvironmentalInputEnum.MEETING_ENVIRONMENTAL_REGULATIONS}
+              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.meetingEnvironmentalRegulations.toFixed(
                 2
               )} (weight ${
                 environmentalModelContext.modelResults?.weights
-                  .greenCertifications
+                  .meetingEnvironmentalRegulations
               })`}
               resultInterpretation={valueToResultInterpretation(
                 environmentalModelContext.modelResults?.weightedSingleFactors
-                  .greenCertifications
+                  .meetingEnvironmentalRegulations
               )}
             />
           </div>

@@ -21,58 +21,36 @@ function EnvironmentalSection() {
 
   const inputGroups: InputGroupType[] = [
     {
-      id: "carbonFootprint",
+      id: "unSustainableGoals",
       inputHeader: {
-        label: "Carbon Footprint",
-        description: "Impact on carbon footprint.",
+        label: EnvironmentalInputEnum.UN_SUSTAINABLE_GOALS,
+        description: "Impact on aligning with the 17 UN Sustainable Goals.",
       },
       dropdownFields: [
         {
-          id: "carbonFootprint",
+          id: "unSustainableGoals",
           onSelect(entry: DropdownEntryType) {
             environmetalModelContext.setEnvironmentalInput(
-              EnvironmentalInputEnum.CARBON_FOOTPRINT,
+              EnvironmentalInputEnum.UN_SUSTAINABLE_GOALS,
               impactToNumber(entry.impact)
             );
           },
           selectedEntry: {
             impact: numberToImpact(
-              environmetalModelContext.environmentalInputs.carbonFootprint
+              environmetalModelContext.environmentalInputs.unSustainableGoals
             ),
           },
           entries: impactEntries,
         },
       ],
     },
-    {
-      id: "resourceConsumption",
-      inputHeader: {
-        label: "Resource Consumption",
-        description: "Impact on resource consumption.",
-      },
-      dropdownFields: [
-        {
-          id: "resourceConsumption",
-          onSelect(entry: DropdownEntryType) {
-            environmetalModelContext.setEnvironmentalInput(
-              EnvironmentalInputEnum.RESOURCE_CONSUMPTION,
-              impactToNumber(entry.impact)
-            );
-          },
-          selectedEntry: {
-            impact: numberToImpact(
-              environmetalModelContext.environmentalInputs.resourceConsumption
-            ),
-          },
-          entries: impactEntries,
-        },
-      ],
-    },
+
     {
       id: "wasteProduction",
       inputHeader: {
-        label: "Waste Production",
-        description: "Impact on waste production.",
+        label: EnvironmentalInputEnum.WASTE_PRODUCTION,
+        description:
+          "Impact on waste production (e.g. old equipment, chemical cleaning agents).",
       },
       dropdownFields: [
         {
@@ -95,8 +73,8 @@ function EnvironmentalSection() {
     {
       id: "biodiversity",
       inputHeader: {
-        label: "Bio Diversity",
-        description: "Impact on bio diversity.",
+        label: EnvironmentalInputEnum.BIODIVERSITY,
+        description: "Impact on bio diversity (Flora & Fauna).",
       },
       dropdownFields: [
         {
@@ -117,23 +95,23 @@ function EnvironmentalSection() {
       ],
     },
     {
-      id: "airPollution",
+      id: "pollution",
       inputHeader: {
-        label: "Air Pollution",
-        description: "Impact on air pollution.",
+        label: EnvironmentalInputEnum.POLLUTION,
+        description: "Impact on pollution (e.g. water, air, noise).",
       },
       dropdownFields: [
         {
-          id: "airPollution",
+          id: "pollution",
           onSelect(entry: DropdownEntryType) {
             environmetalModelContext.setEnvironmentalInput(
-              EnvironmentalInputEnum.AIR_POLLUTION,
+              EnvironmentalInputEnum.POLLUTION,
               impactToNumber(entry.impact)
             );
           },
           selectedEntry: {
             impact: numberToImpact(
-              environmetalModelContext.environmentalInputs.airPollution
+              environmetalModelContext.environmentalInputs.pollution
             ),
           },
           entries: impactEntries,
@@ -141,96 +119,25 @@ function EnvironmentalSection() {
       ],
     },
     {
-      id: "waterPollution",
+      id: "sustainableEnergyIntegration",
       inputHeader: {
-        label: "Water Pollution",
-        description: "Impact on water pollution.",
+        label: EnvironmentalInputEnum.SUSTAINABLE_ENERGY_INTEGRATION,
+        description:
+          "Impact on sustainable energy integration (e.g. net zero greenhouse gas emissions).",
       },
       dropdownFields: [
         {
-          id: "waterPollution",
+          id: "sustainableEnergyIntegration",
           onSelect(entry: DropdownEntryType) {
             environmetalModelContext.setEnvironmentalInput(
-              EnvironmentalInputEnum.WATER_POLLUTION,
-              impactToNumber(entry.impact)
-            );
-          },
-          selectedEntry: {
-            impact: numberToImpact(
-              environmetalModelContext.environmentalInputs.waterPollution
-            ),
-          },
-          entries: impactEntries,
-        },
-      ],
-    },
-    {
-      id: "landPollution",
-      inputHeader: {
-        label: "Land Pollution",
-        description: "Impact on land pollution.",
-      },
-      dropdownFields: [
-        {
-          id: "landPollution",
-          onSelect(entry: DropdownEntryType) {
-            environmetalModelContext.setEnvironmentalInput(
-              EnvironmentalInputEnum.LAND_POLLUTION,
-              impactToNumber(entry.impact)
-            );
-          },
-          selectedEntry: {
-            impact: numberToImpact(
-              environmetalModelContext.environmentalInputs.landPollution
-            ),
-          },
-          entries: impactEntries,
-        },
-      ],
-    },
-    {
-      id: "noisePollution",
-      inputHeader: {
-        label: "Noise Pollution",
-        description: "Impact on noise pollution.",
-      },
-      dropdownFields: [
-        {
-          id: "noisePollution",
-          onSelect(entry: DropdownEntryType) {
-            environmetalModelContext.setEnvironmentalInput(
-              EnvironmentalInputEnum.NOISE_POLLUTION,
-              impactToNumber(entry.impact)
-            );
-          },
-          selectedEntry: {
-            impact: numberToImpact(
-              environmetalModelContext.environmentalInputs.noisePollution
-            ),
-          },
-          entries: impactEntries,
-        },
-      ],
-    },
-    {
-      id: "adoptionOfRenewableEnergy",
-      inputHeader: {
-        label: "Adoption of Renewable Energy",
-        description: "Impact on adoption of renewable energy.",
-      },
-      dropdownFields: [
-        {
-          id: "adoptionOfRenewableEnergy",
-          onSelect(entry: DropdownEntryType) {
-            environmetalModelContext.setEnvironmentalInput(
-              EnvironmentalInputEnum.ADOPTION_OF_RENEWABLE_ENERGY,
+              EnvironmentalInputEnum.SUSTAINABLE_ENERGY_INTEGRATION,
               impactToNumber(entry.impact)
             );
           },
           selectedEntry: {
             impact: numberToImpact(
               environmetalModelContext.environmentalInputs
-                .adoptionOfRenewableEnergy
+                .sustainableEneryIntegration
             ),
           },
           entries: impactEntries,
@@ -240,8 +147,9 @@ function EnvironmentalSection() {
     {
       id: "energyEfficiency",
       inputHeader: {
-        label: "Energy Efficiency",
-        description: "Impact on energy efficiency.",
+        label: EnvironmentalInputEnum.ENERGY_EFFICIENCY,
+        description:
+          "Impact on energy efficiency (e.g. production, distribution, storage).",
       },
       dropdownFields: [
         {
@@ -262,47 +170,24 @@ function EnvironmentalSection() {
       ],
     },
     {
-      id: "recyclingRate",
+      id: "meetingEnvironmentalRegulations",
       inputHeader: {
-        label: "Recycling Rate",
-        description: "Impact on recycling rate.",
+        label: EnvironmentalInputEnum.MEETING_ENVIRONMENTAL_REGULATIONS,
+        description: "Impact on meeting environmental regulations.",
       },
       dropdownFields: [
         {
-          id: "recyclingRate",
+          id: "meetingEnvironmentalRegulations",
           onSelect(entry: DropdownEntryType) {
             environmetalModelContext.setEnvironmentalInput(
-              EnvironmentalInputEnum.RECYCLING_RATE,
+              EnvironmentalInputEnum.MEETING_ENVIRONMENTAL_REGULATIONS,
               impactToNumber(entry.impact)
             );
           },
           selectedEntry: {
             impact: numberToImpact(
-              environmetalModelContext.environmentalInputs.recyclingRate
-            ),
-          },
-          entries: impactEntries,
-        },
-      ],
-    },
-    {
-      id: "greenCertificiations",
-      inputHeader: {
-        label: "Green Certifications",
-        description: "Impact on green certifications.",
-      },
-      dropdownFields: [
-        {
-          id: "greenCertificiations",
-          onSelect(entry: DropdownEntryType) {
-            environmetalModelContext.setEnvironmentalInput(
-              EnvironmentalInputEnum.GREEN_CERTIFICATIONS,
-              impactToNumber(entry.impact)
-            );
-          },
-          selectedEntry: {
-            impact: numberToImpact(
-              environmetalModelContext.environmentalInputs.greenCertifications
+              environmetalModelContext.environmentalInputs
+                .meetingEnvironmentalRegulations
             ),
           },
           entries: impactEntries,

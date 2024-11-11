@@ -21,178 +21,11 @@ function SocietalSection() {
 
   const inputGroups: InputGroupType[] = [
     {
-      id: "jobCreation",
-      inputHeader: {
-        label: "Job Creation",
-        description: "The impact the project has on job creation.",
-      },
-      dropdownFields: [
-        {
-          id: "jobCreation",
-          onSelect(entry: DropdownEntryType) {
-            societalModelContext.setSocietalInput(
-              SocietalInputEnum.JOB_CREATION,
-              impactToNumber(entry.impact)
-            );
-          },
-          selectedEntry: {
-            impact: numberToImpact(
-              societalModelContext.societalInputs.jobCreation
-            ),
-          },
-          entries: impactEntries,
-        },
-      ],
-    },
-    {
-      id: "jobEquity",
-      inputHeader: {
-        label: "Job Equity",
-        description: "Impact on job equity.",
-      },
-      dropdownFields: [
-        {
-          id: "jobEquity",
-          onSelect(entry: DropdownEntryType) {
-            societalModelContext.setSocietalInput(
-              SocietalInputEnum.JOB_EQUITY,
-              impactToNumber(entry.impact)
-            );
-          },
-          selectedEntry: {
-            impact: numberToImpact(
-              societalModelContext.societalInputs.jobEquity
-            ),
-          },
-          entries: impactEntries,
-        },
-      ],
-    },
-    {
-      id: "healthAndSafety",
-      inputHeader: {
-        label: "Health and Safety",
-        description: "The impact the project has on health and safety.",
-      },
-      dropdownFields: [
-        {
-          id: "healthyAndSafety",
-          onSelect(entry: DropdownEntryType) {
-            societalModelContext.setSocietalInput(
-              SocietalInputEnum.HEALTH_AND_SAFETY,
-              impactToNumber(entry.impact)
-            );
-          },
-          selectedEntry: {
-            impact: numberToImpact(
-              societalModelContext.societalInputs.healthAndSafety
-            ),
-          },
-          entries: impactEntries,
-        },
-      ],
-    },
-    {
-      id: "culturalImpact",
-      inputHeader: {
-        label: "Cultural Impact",
-        description: "The impact the project has on culture.",
-      },
-      dropdownFields: [
-        {
-          id: "culturalImpact",
-          onSelect(entry: DropdownEntryType) {
-            societalModelContext.setSocietalInput(
-              SocietalInputEnum.CULTURAL_IMPACT,
-              impactToNumber(entry.impact)
-            );
-          },
-          selectedEntry: {
-            impact: numberToImpact(
-              societalModelContext.societalInputs.culturalImpact
-            ),
-          },
-          entries: impactEntries,
-        },
-      ],
-    },
-    {
-      id: "publicPerception",
-      inputHeader: {
-        label: "Public Perception",
-        description: "Impact on public perception.",
-      },
-      dropdownFields: [
-        {
-          id: "publicPerception",
-          onSelect(entry: DropdownEntryType) {
-            societalModelContext.setSocietalInput(
-              SocietalInputEnum.PUBLIC_PERCEPTION,
-              impactToNumber(entry.impact)
-            );
-          },
-          selectedEntry: {
-            impact: numberToImpact(
-              societalModelContext.societalInputs.publicPerception
-            ),
-          },
-          entries: impactEntries,
-        },
-      ],
-    },
-    {
-      id: "educationalImpact",
-      inputHeader: {
-        label: "Educational Impact",
-        description: "Impact on education.",
-      },
-      dropdownFields: [
-        {
-          id: "educationalImpact",
-          onSelect(entry: DropdownEntryType) {
-            societalModelContext.setSocietalInput(
-              SocietalInputEnum.EDUCATIONAL_IMPACT,
-              impactToNumber(entry.impact)
-            );
-          },
-          selectedEntry: {
-            impact: numberToImpact(
-              societalModelContext.societalInputs.educationalImpact
-            ),
-          },
-          entries: impactEntries,
-        },
-      ],
-    },
-    {
-      id: "qualityOfLife",
-      inputHeader: {
-        label: "Quality of Life",
-        description: "Impact on quality of life.",
-      },
-      dropdownFields: [
-        {
-          id: "qualityOfLife",
-          onSelect(entry: DropdownEntryType) {
-            societalModelContext.setSocietalInput(
-              SocietalInputEnum.QUALITY_OF_LIFE,
-              impactToNumber(entry.impact)
-            );
-          },
-          selectedEntry: {
-            impact: numberToImpact(
-              societalModelContext.societalInputs.qualityOfLife
-            ),
-          },
-          entries: impactEntries,
-        },
-      ],
-    },
-    {
       id: "customerSatisfaction",
       inputHeader: {
         label: "Customer Satisfaction",
-        description: "Impact on customer satisfaction.",
+        description:
+          "Impact on customer satisfaction (e.g. affordability, essentiality).",
       },
       dropdownFields: [
         {
@@ -216,7 +49,8 @@ function SocietalSection() {
       id: "employeeSatisfaction",
       inputHeader: {
         label: "Employee Satisfaction",
-        description: "Impact on employee satisfaction.",
+        description:
+          "Impact on employee satisfaction (e.g. health and safety, team spirit).",
       },
       dropdownFields: [
         {
@@ -230,6 +64,129 @@ function SocietalSection() {
           selectedEntry: {
             impact: numberToImpact(
               societalModelContext.societalInputs.employeeSatisfaction
+            ),
+          },
+          entries: impactEntries,
+        },
+      ],
+    },
+    {
+      id: "shareholderValue",
+      inputHeader: {
+        label: "Shareholder Value",
+        description: "Impact on shareholder value.",
+      },
+      dropdownFields: [
+        {
+          id: "shareholderValue",
+          onSelect(entry: DropdownEntryType) {
+            societalModelContext.setSocietalInput(
+              SocietalInputEnum.SHAREHOLDER_VALUE,
+              impactToNumber(entry.impact)
+            );
+          },
+          selectedEntry: {
+            impact: numberToImpact(
+              societalModelContext.societalInputs.shareholderValue
+            ),
+          },
+          entries: impactEntries,
+        },
+      ],
+    },
+    {
+      id: "publicPerception",
+      inputHeader: {
+        label: "Public Perception",
+        description: "Impact on public perception (e.g. CSR).",
+      },
+      dropdownFields: [
+        {
+          id: "publicPerception",
+          onSelect(entry: DropdownEntryType) {
+            societalModelContext.setSocietalInput(
+              SocietalInputEnum.PUBLIC_PERCEPTION,
+              impactToNumber(entry.impact)
+            );
+          },
+          selectedEntry: {
+            impact: numberToImpact(
+              societalModelContext.societalInputs.publicPerception
+            ),
+          },
+          entries: impactEntries,
+        },
+      ],
+    },
+    {
+      id: "valueChain",
+      inputHeader: {
+        label: "Value Chain",
+        description:
+          "Impact on value chain (e.g. production, transmission, distribution).",
+      },
+      dropdownFields: [
+        {
+          id: "valueChain",
+          onSelect(entry: DropdownEntryType) {
+            societalModelContext.setSocietalInput(
+              SocietalInputEnum.VALUE_CHAIN,
+              impactToNumber(entry.impact)
+            );
+          },
+          selectedEntry: {
+            impact: numberToImpact(
+              societalModelContext.societalInputs.valueChain
+            ),
+          },
+          entries: impactEntries,
+        },
+      ],
+    },
+    {
+      id: "culturalImpact",
+      inputHeader: {
+        label: "Cultural Impact",
+        description: "Impact on culture (e.g. local communities).",
+      },
+      dropdownFields: [
+        {
+          id: "culturalImpact",
+          onSelect(entry: DropdownEntryType) {
+            societalModelContext.setSocietalInput(
+              SocietalInputEnum.CULTURAL_IMPACT,
+              impactToNumber(entry.impact)
+            );
+          },
+          selectedEntry: {
+            impact: numberToImpact(
+              societalModelContext.societalInputs.culturalImpact
+            ),
+          },
+          entries: impactEntries,
+        },
+      ],
+    },
+
+    {
+      id: "visionAlignment",
+      inputHeader: {
+        label: "Vision Alignment",
+        description:
+          "Impact on vision alignment (does it fit to the overall mission?).",
+      },
+      dropdownFields: [
+        {
+          id: "visionAlignment",
+          onSelect(entry: DropdownEntryType) {
+            societalModelContext.setSocietalInput(
+              SocietalInputEnum.VISION_ALIGNMENT,
+              impactToNumber(entry.impact)
+            );
+          },
+          selectedEntry: {
+            impact: numberToImpact(
+              societalModelContext.societalInputs.visionAlignment
             ),
           },
           entries: impactEntries,

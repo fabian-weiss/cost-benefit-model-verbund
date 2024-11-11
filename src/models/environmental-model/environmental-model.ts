@@ -8,33 +8,23 @@ export const environmentalModel = (
   inputs: EnvironmentalInputs
 ): EnvironmentalResults => {
   const weights: EnvironmentalWeights = {
-    carbonFootprint: 0.1,
-    resourceConsumption: 0.1,
+    unSustainableGoals: 0.1,
     wasteProduction: 0.1,
     biodiversity: 0.1,
-    airPollution: 0.1,
-    waterPollution: 0.1,
-    landPollution: 0.1,
-    noisePollution: 0.1,
-    adoptionOfRenewableEnergy: 0.1,
+    pollution: 0.1,
+    sustainableEneryIntegration: 0.1,
     energyEfficiency: 0.1,
-    recyclingRate: 0.05,
-    greenCertifications: 0.05,
+    meetingEnvironmentalRegulations: 0.05,
   };
 
   const weightedScores: EnvironmentalInputs = {
-    carbonFootprint: 0,
-    resourceConsumption: 0,
+    unSustainableGoals: 0,
     wasteProduction: 0,
     biodiversity: 0,
-    airPollution: 0,
-    waterPollution: 0,
-    landPollution: 0,
-    noisePollution: 0,
-    adoptionOfRenewableEnergy: 0,
+    pollution: 0,
+    sustainableEneryIntegration: 0,
     energyEfficiency: 0,
-    recyclingRate: 0,
-    greenCertifications: 0,
+    meetingEnvironmentalRegulations: 0,
   };
 
   // Calculate individual weighted scores

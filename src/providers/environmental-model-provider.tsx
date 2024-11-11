@@ -28,18 +28,13 @@ function EnvironmentalModelProvider({
   >();
   const [environmentalInputs, setEnvironmentalInputs] =
     useState<EnvironmentalInputs>({
-      carbonFootprint: 0,
-      resourceConsumption: 0,
+      unSustainableGoals: 0,
       wasteProduction: 0,
       biodiversity: 0,
-      airPollution: 0,
-      waterPollution: 0,
-      landPollution: 0,
-      noisePollution: 0,
-      adoptionOfRenewableEnergy: 0,
+      pollution: 0,
+      sustainableEneryIntegration: 0,
       energyEfficiency: 0,
-      recyclingRate: 0,
-      greenCertifications: 0,
+      meetingEnvironmentalRegulations: 0,
     });
 
   const setEnvironmentalInput = (
@@ -47,13 +42,10 @@ function EnvironmentalModelProvider({
     input: number
   ) => {
     switch (inputType) {
-      case EnvironmentalInputEnum.CARBON_FOOTPRINT:
-        setEnvironmentalInputs((prev) => ({ ...prev, carbonFootprint: input }));
-        break;
-      case EnvironmentalInputEnum.RESOURCE_CONSUMPTION:
+      case EnvironmentalInputEnum.UN_SUSTAINABLE_GOALS:
         setEnvironmentalInputs((prev) => ({
           ...prev,
-          resourceConsumption: input,
+          unSustainableGoals: input,
         }));
         break;
       case EnvironmentalInputEnum.WASTE_PRODUCTION:
@@ -62,22 +54,13 @@ function EnvironmentalModelProvider({
       case EnvironmentalInputEnum.BIODIVERSITY:
         setEnvironmentalInputs((prev) => ({ ...prev, biodiversity: input }));
         break;
-      case EnvironmentalInputEnum.AIR_POLLUTION:
-        setEnvironmentalInputs((prev) => ({ ...prev, airPollution: input }));
+      case EnvironmentalInputEnum.POLLUTION:
+        setEnvironmentalInputs((prev) => ({ ...prev, pollution: input }));
         break;
-      case EnvironmentalInputEnum.WATER_POLLUTION:
-        setEnvironmentalInputs((prev) => ({ ...prev, waterPollution: input }));
-        break;
-      case EnvironmentalInputEnum.LAND_POLLUTION:
-        setEnvironmentalInputs((prev) => ({ ...prev, landPollution: input }));
-        break;
-      case EnvironmentalInputEnum.NOISE_POLLUTION:
-        setEnvironmentalInputs((prev) => ({ ...prev, noisePollution: input }));
-        break;
-      case EnvironmentalInputEnum.ADOPTION_OF_RENEWABLE_ENERGY:
+      case EnvironmentalInputEnum.SUSTAINABLE_ENERGY_INTEGRATION:
         setEnvironmentalInputs((prev) => ({
           ...prev,
-          adoptionOfRenewableEnergy: input,
+          sustainableEneryIntegration: input,
         }));
         break;
       case EnvironmentalInputEnum.ENERGY_EFFICIENCY:
@@ -86,13 +69,10 @@ function EnvironmentalModelProvider({
           energyEfficiency: input,
         }));
         break;
-      case EnvironmentalInputEnum.RECYCLING_RATE:
-        setEnvironmentalInputs((prev) => ({ ...prev, recyclingRate: input }));
-        break;
-      case EnvironmentalInputEnum.GREEN_CERTIFICATIONS:
+      case EnvironmentalInputEnum.MEETING_ENVIRONMENTAL_REGULATIONS:
         setEnvironmentalInputs((prev) => ({
           ...prev,
-          greenCertifications: input,
+          meetingEnvironmentalRegulations: input,
         }));
         break;
     }

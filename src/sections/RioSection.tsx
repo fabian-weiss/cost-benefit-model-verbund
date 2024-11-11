@@ -24,7 +24,7 @@ function RioSection() {
       id: "privacy",
       inputHeader: {
         label: "Privacy",
-        description: "Impact on privacy.",
+        description: "Impact on privacy (e.g. preventing data breaches).",
       },
       dropdownFields: [
         {
@@ -46,7 +46,8 @@ function RioSection() {
       id: "marketAdvantage",
       inputHeader: {
         label: "Market Advantage",
-        description: "Impact on market advantage.",
+        description:
+          "Impact on market advantage (e.g. new technologies, expected cost reduction).",
       },
       dropdownFields: [
         {
@@ -68,7 +69,8 @@ function RioSection() {
       id: "longTermResilience",
       inputHeader: {
         label: "Long Term Resilience",
-        description: "Impact on long term resilience.",
+        description:
+          "Impact on long term resilience (e.g. employee retention, data access and maintenance).",
       },
       dropdownFields: [
         {
@@ -92,7 +94,8 @@ function RioSection() {
       id: "longTermScalability",
       inputHeader: {
         label: "Long Term Scalability",
-        description: "Impact on long term scalability.",
+        description:
+          "Impact on long term scalability (e.g. contribution in meeting an overall goal).",
       },
       dropdownFields: [
         {
@@ -116,7 +119,8 @@ function RioSection() {
       id: "legalRequirements",
       inputHeader: {
         label: "Legal Requirements",
-        description: "Impact on legal requirements.",
+        description:
+          "Impact on legal requirements (e.g. workforce related, tax related).",
       },
       dropdownFields: [
         {

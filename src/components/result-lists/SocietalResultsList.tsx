@@ -2,6 +2,7 @@ import { useSocietalModel } from "@/providers/societal-model-provider";
 import { valueToResultInterpretation } from "@/utils/value-to-result-interpretation";
 import React from "react";
 import ResultEntry from "../ResultEntry";
+import { SocietalInputEnum } from "@/enums/SocietalInputEnum";
 
 function SocietalResultsList() {
   const societalModelContext = useSocietalModel();
@@ -12,98 +13,7 @@ function SocietalResultsList() {
           <div>
             <ResultEntry
               isSmall
-              factor="Job Creation"
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.jobCreation.toFixed(
-                2
-              )} (weight ${
-                societalModelContext.modelResults?.weights.jobCreation
-              })`}
-              resultInterpretation={valueToResultInterpretation(
-                societalModelContext.modelResults?.weightedSingleFactors
-                  .jobCreation
-              )}
-            />
-            <ResultEntry
-              isSmall
-              factor="Job Equity"
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.jobEquity.toFixed(
-                2
-              )} (weight ${
-                societalModelContext.modelResults?.weights.jobEquity
-              })`}
-              resultInterpretation={valueToResultInterpretation(
-                societalModelContext.modelResults?.weightedSingleFactors
-                  .jobEquity
-              )}
-            />
-            <ResultEntry
-              isSmall
-              factor="Health and Safety"
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.healthAndSafety.toFixed(
-                2
-              )} (weight ${
-                societalModelContext.modelResults?.weights.healthAndSafety
-              })`}
-              resultInterpretation={valueToResultInterpretation(
-                societalModelContext.modelResults?.weightedSingleFactors
-                  .healthAndSafety
-              )}
-            />
-            <ResultEntry
-              isSmall
-              factor="Cultural Impact"
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.culturalImpact.toFixed(
-                2
-              )} (weight ${
-                societalModelContext.modelResults?.weights.culturalImpact
-              })`}
-              resultInterpretation={valueToResultInterpretation(
-                societalModelContext.modelResults?.weightedSingleFactors
-                  .culturalImpact
-              )}
-            />
-            <ResultEntry
-              isSmall
-              factor="Public Perception"
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.publicPerception.toFixed(
-                2
-              )} (weight ${
-                societalModelContext.modelResults?.weights.publicPerception
-              })`}
-              resultInterpretation={valueToResultInterpretation(
-                societalModelContext.modelResults?.weightedSingleFactors
-                  .publicPerception
-              )}
-            />
-            <ResultEntry
-              isSmall
-              factor="Educational Impact"
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.educationalImpact.toFixed(
-                2
-              )} (weight ${
-                societalModelContext.modelResults?.weights.educationalImpact
-              })`}
-              resultInterpretation={valueToResultInterpretation(
-                societalModelContext.modelResults?.weightedSingleFactors
-                  .educationalImpact
-              )}
-            />
-            <ResultEntry
-              isSmall
-              factor="Quality of Life"
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.qualityOfLife.toFixed(
-                2
-              )} (weight ${
-                societalModelContext.modelResults?.weights.qualityOfLife
-              })`}
-              resultInterpretation={valueToResultInterpretation(
-                societalModelContext.modelResults?.weightedSingleFactors
-                  .qualityOfLife
-              )}
-            />
-            <ResultEntry
-              isSmall
-              factor="Customer Satisfaction"
+              factor={SocietalInputEnum.CUSTOMER_SATISFACTION}
               value={`${societalModelContext.modelResults?.weightedSingleFactors.customerSatisfaction.toFixed(
                 2
               )} (weight ${
@@ -116,7 +26,7 @@ function SocietalResultsList() {
             />
             <ResultEntry
               isSmall
-              factor="Employee Satisfaction"
+              factor={SocietalInputEnum.EMPLOYEE_SATISFACTION}
               value={`${societalModelContext.modelResults?.weightedSingleFactors.employeeSatisfaction.toFixed(
                 2
               )} (weight ${
@@ -125,6 +35,72 @@ function SocietalResultsList() {
               resultInterpretation={valueToResultInterpretation(
                 societalModelContext.modelResults?.weightedSingleFactors
                   .employeeSatisfaction
+              )}
+            />
+            <ResultEntry
+              isSmall
+              factor={SocietalInputEnum.SHAREHOLDER_VALUE}
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.shareholderValue.toFixed(
+                2
+              )} (weight ${
+                societalModelContext.modelResults?.weights.shareholderValue
+              })`}
+              resultInterpretation={valueToResultInterpretation(
+                societalModelContext.modelResults?.weightedSingleFactors
+                  .shareholderValue
+              )}
+            />
+            <ResultEntry
+              isSmall
+              factor={SocietalInputEnum.PUBLIC_PERCEPTION}
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.publicPerception.toFixed(
+                2
+              )} (weight ${
+                societalModelContext.modelResults?.weights.publicPerception
+              })`}
+              resultInterpretation={valueToResultInterpretation(
+                societalModelContext.modelResults?.weightedSingleFactors
+                  .publicPerception
+              )}
+            />
+            <ResultEntry
+              isSmall
+              factor={SocietalInputEnum.VALUE_CHAIN}
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.valueChain.toFixed(
+                2
+              )} (weight ${
+                societalModelContext.modelResults?.weights.valueChain
+              })`}
+              resultInterpretation={valueToResultInterpretation(
+                societalModelContext.modelResults?.weightedSingleFactors
+                  .valueChain
+              )}
+            />
+
+            <ResultEntry
+              isSmall
+              factor={SocietalInputEnum.CULTURAL_IMPACT}
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.culturalImpact.toFixed(
+                2
+              )} (weight ${
+                societalModelContext.modelResults?.weights.culturalImpact
+              })`}
+              resultInterpretation={valueToResultInterpretation(
+                societalModelContext.modelResults?.weightedSingleFactors
+                  .culturalImpact
+              )}
+            />
+            <ResultEntry
+              isSmall
+              factor={SocietalInputEnum.VISION_ALIGNMENT}
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.visionAlignment.toFixed(
+                2
+              )} (weight ${
+                societalModelContext.modelResults?.weights.visionAlignment
+              })`}
+              resultInterpretation={valueToResultInterpretation(
+                societalModelContext.modelResults?.weightedSingleFactors
+                  .visionAlignment
               )}
             />
           </div>
