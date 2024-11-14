@@ -23,9 +23,9 @@ function SocietalSection() {
     {
       id: "customerSatisfaction",
       inputHeader: {
-        label: "Customer Satisfaction",
+        label: SocietalInputEnum.CUSTOMER_SATISFACTION,
         description:
-          "Impact on customer satisfaction (e.g. affordability, essentiality).",
+          "Impact on customer satisfaction (e.g. ease of use, essentiality).",
       },
       dropdownFields: [
         {
@@ -46,24 +46,48 @@ function SocietalSection() {
       ],
     },
     {
-      id: "employeeSatisfaction",
+      id: "customerAffordability",
       inputHeader: {
-        label: "Employee Satisfaction",
-        description:
-          "Impact on employee satisfaction (e.g. health and safety, team spirit).",
+        label: SocietalInputEnum.CUSTOMER_AFFORDABILITY,
+        description: "Impact on customer affordability.",
       },
       dropdownFields: [
         {
-          id: "employeeSatisfaction",
+          id: "customerAffordability",
           onSelect(entry: DropdownEntryType) {
             societalModelContext.setSocietalInput(
-              SocietalInputEnum.EMPLOYEE_SATISFACTION,
+              SocietalInputEnum.CUSTOMER_AFFORDABILITY,
               impactToNumber(entry.impact)
             );
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.employeeSatisfaction
+              societalModelContext.societalInputs.customerAffordability
+            ),
+          },
+          entries: impactEntries,
+        },
+      ],
+    },
+    {
+      id: "companyCulture",
+      inputHeader: {
+        label: SocietalInputEnum.COMPANY_CULTURE,
+        description:
+          "Impact on company culture (e.g. health and safety, team spirit).",
+      },
+      dropdownFields: [
+        {
+          id: "companyCulture",
+          onSelect(entry: DropdownEntryType) {
+            societalModelContext.setSocietalInput(
+              SocietalInputEnum.COMPANY_CULTURE,
+              impactToNumber(entry.impact)
+            );
+          },
+          selectedEntry: {
+            impact: numberToImpact(
+              societalModelContext.societalInputs.companyCulture
             ),
           },
           entries: impactEntries,
@@ -144,23 +168,23 @@ function SocietalSection() {
       ],
     },
     {
-      id: "culturalImpact",
+      id: "communityImplications",
       inputHeader: {
-        label: "Cultural Impact",
-        description: "Impact on culture (e.g. local communities).",
+        label: SocietalInputEnum.COMMUNITY_IMPLICATIONS,
+        description: "Impact on community (e.g. loss of workplaces, harm).",
       },
       dropdownFields: [
         {
-          id: "culturalImpact",
+          id: "communityImplications",
           onSelect(entry: DropdownEntryType) {
             societalModelContext.setSocietalInput(
-              SocietalInputEnum.CULTURAL_IMPACT,
+              SocietalInputEnum.COMMUNITY_IMPLICATIONS,
               impactToNumber(entry.impact)
             );
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.culturalImpact
+              societalModelContext.societalInputs.communityImplications
             ),
           },
           entries: impactEntries,
@@ -169,24 +193,23 @@ function SocietalSection() {
     },
 
     {
-      id: "visionAlignment",
+      id: "guidingPrinciplesAlignment",
       inputHeader: {
-        label: "Vision Alignment",
-        description:
-          "Impact on vision alignment (does it fit to the overall mission?).",
+        label: SocietalInputEnum.GUIDING_PRINCIPLES_ALIGNMENT,
+        description: "Impact on company alignment (e.g. mission, vision).",
       },
       dropdownFields: [
         {
-          id: "visionAlignment",
+          id: "guidingPrinciplesAlignment",
           onSelect(entry: DropdownEntryType) {
             societalModelContext.setSocietalInput(
-              SocietalInputEnum.VISION_ALIGNMENT,
+              SocietalInputEnum.GUIDING_PRINCIPLES_ALIGNMENT,
               impactToNumber(entry.impact)
             );
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.visionAlignment
+              societalModelContext.societalInputs.guidingPrinciplesAlignment
             ),
           },
           entries: impactEntries,

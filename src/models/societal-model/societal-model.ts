@@ -6,26 +6,30 @@ import { round } from "mathjs";
 
 export const societalModel = (inputs: SocietalInputs): SocietalResults => {
   const weights: SocietalWeights = {
-    valueChain: 0.2,
+    customerSatisfaction: 0.2,
+    customerAffordability: 0.1,
+    companyCulture: 0.1,
+    communityImplications: 0.1,
+    valueChain: 0.1,
     shareholderValue: 0.1,
-    visionAlignment: 0.1,
-    culturalImpact: 0.1,
+    guidingPrinciplesAlignment: 0.1,
     publicPerception: 0.1,
-    customerSatisfaction: 0.1,
-    employeeSatisfaction: 0.1,
+    workplaceCreation: 0.1,
   };
 
   //console.log(`inputs are: ${JSON.stringify(inputs)}`);
 
   // Initialize weighted scores
   const weightedScores: SocietalInputs = {
+    customerSatisfaction: 0,
+    customerAffordability: 0,
+    companyCulture: 0,
+    communityImplications: 0,
     valueChain: 0,
     shareholderValue: 0,
-    visionAlignment: 0,
-    culturalImpact: 0,
+    guidingPrinciplesAlignment: 0,
     publicPerception: 0,
-    customerSatisfaction: 0,
-    employeeSatisfaction: 0,
+    workplaceCreation: 0,
   };
 
   // Calculate individual weighted scores

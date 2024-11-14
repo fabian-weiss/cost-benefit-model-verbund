@@ -1,0 +1,12 @@
+Todos:
+
+- Adjustable weights for genres (financial, societal, environmental focus)
+- Comments
+- Description Tooltips
+- Save as PDF
+- Set weights
+- Overall project description, budget etc.
+
+Future implementations:
+
+- Chat GPT to set values per default

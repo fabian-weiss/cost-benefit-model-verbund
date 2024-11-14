@@ -1,9 +1,11 @@
 export type SocietalInputs = {
   customerSatisfaction: number;
-  employeeSatisfaction: number;
-  culturalImpact: number;
+  customerAffordability: number;
+  companyCulture: number;
+  communityImplications: number;
   valueChain: number;
   shareholderValue: number;
-  visionAlignment: number;
+  guidingPrinciplesAlignment: number;
   publicPerception: number;
+  workplaceCreation: number;
 };

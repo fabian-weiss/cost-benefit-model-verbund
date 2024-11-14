@@ -26,15 +26,28 @@ function SocietalResultsList() {
             />
             <ResultEntry
               isSmall
-              factor={SocietalInputEnum.EMPLOYEE_SATISFACTION}
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.employeeSatisfaction.toFixed(
+              factor={SocietalInputEnum.CUSTOMER_AFFORDABILITY}
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.customerAffordability.toFixed(
                 2
               )} (weight ${
-                societalModelContext.modelResults?.weights.employeeSatisfaction
+                societalModelContext.modelResults?.weights.customerAffordability
               })`}
               resultInterpretation={valueToResultInterpretation(
                 societalModelContext.modelResults?.weightedSingleFactors
-                  .employeeSatisfaction
+                  .customerAffordability
+              )}
+            />
+            <ResultEntry
+              isSmall
+              factor={SocietalInputEnum.COMPANY_CULTURE}
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.companyCulture.toFixed(
+                2
+              )} (weight ${
+                societalModelContext.modelResults?.weights.companyCulture
+              })`}
+              resultInterpretation={valueToResultInterpretation(
+                societalModelContext.modelResults?.weightedSingleFactors
+                  .companyCulture
               )}
             />
             <ResultEntry
@@ -79,28 +92,42 @@ function SocietalResultsList() {
 
             <ResultEntry
               isSmall
-              factor={SocietalInputEnum.CULTURAL_IMPACT}
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.culturalImpact.toFixed(
+              factor={SocietalInputEnum.COMMUNITY_IMPLICATIONS}
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.communityImplications.toFixed(
                 2
               )} (weight ${
-                societalModelContext.modelResults?.weights.culturalImpact
+                societalModelContext.modelResults?.weights.communityImplications
               })`}
               resultInterpretation={valueToResultInterpretation(
                 societalModelContext.modelResults?.weightedSingleFactors
-                  .culturalImpact
+                  .communityImplications
               )}
             />
             <ResultEntry
               isSmall
-              factor={SocietalInputEnum.VISION_ALIGNMENT}
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.visionAlignment.toFixed(
+              factor={SocietalInputEnum.GUIDING_PRINCIPLES_ALIGNMENT}
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.guidingPrinciplesAlignment.toFixed(
                 2
               )} (weight ${
-                societalModelContext.modelResults?.weights.visionAlignment
+                societalModelContext.modelResults?.weights
+                  .guidingPrinciplesAlignment
               })`}
               resultInterpretation={valueToResultInterpretation(
                 societalModelContext.modelResults?.weightedSingleFactors
-                  .visionAlignment
+                  .guidingPrinciplesAlignment
+              )}
+            />
+            <ResultEntry
+              isSmall
+              factor={SocietalInputEnum.WORKPLACE_CREATION}
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.workplaceCreation.toFixed(
+                2
+              )} (weight ${
+                societalModelContext.modelResults?.weights.workplaceCreation
+              })`}
+              resultInterpretation={valueToResultInterpretation(
+                societalModelContext.modelResults?.weightedSingleFactors
+                  .workplaceCreation
               )}
             />
           </div>

@@ -21,13 +21,15 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
     SocietalResults | undefined
   >();
   const [societalInputs, setSocietalInputs] = useState<SocietalInputs>({
+    customerSatisfaction: 0,
+    customerAffordability: 0,
+    companyCulture: 0,
+    communityImplications: 0,
     valueChain: 0,
     shareholderValue: 0,
-    visionAlignment: 0,
-    culturalImpact: 0,
+    guidingPrinciplesAlignment: 0,
     publicPerception: 0,
-    customerSatisfaction: 0,
-    employeeSatisfaction: 0,
+    workplaceCreation: 0,
   });
 
   const setSocietalInput = (inputType: SocietalInputEnum, input: number) => {
@@ -35,11 +37,20 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
       case SocietalInputEnum.CUSTOMER_SATISFACTION:
         setSocietalInputs((prev) => ({ ...prev, customerSatisfaction: input }));
         break;
-      case SocietalInputEnum.EMPLOYEE_SATISFACTION:
-        setSocietalInputs((prev) => ({ ...prev, employeeSatisfaction: input }));
+      case SocietalInputEnum.CUSTOMER_AFFORDABILITY:
+        setSocietalInputs((prev) => ({
+          ...prev,
+          customerAffordability: input,
+        }));
         break;
-      case SocietalInputEnum.CULTURAL_IMPACT:
-        setSocietalInputs((prev) => ({ ...prev, culturalImpact: input }));
+      case SocietalInputEnum.COMPANY_CULTURE:
+        setSocietalInputs((prev) => ({ ...prev, companyCulture: input }));
+        break;
+      case SocietalInputEnum.COMMUNITY_IMPLICATIONS:
+        setSocietalInputs((prev) => ({
+          ...prev,
+          communityImplications: input,
+        }));
         break;
       case SocietalInputEnum.VALUE_CHAIN:
         setSocietalInputs((prev) => ({ ...prev, valueChain: input }));
@@ -47,11 +58,17 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
       case SocietalInputEnum.SHAREHOLDER_VALUE:
         setSocietalInputs((prev) => ({ ...prev, shareholderValue: input }));
         break;
-      case SocietalInputEnum.VISION_ALIGNMENT:
-        setSocietalInputs((prev) => ({ ...prev, visionAlignment: input }));
+      case SocietalInputEnum.GUIDING_PRINCIPLES_ALIGNMENT:
+        setSocietalInputs((prev) => ({
+          ...prev,
+          guidingPrinciplesAlignment: input,
+        }));
         break;
       case SocietalInputEnum.PUBLIC_PERCEPTION:
         setSocietalInputs((prev) => ({ ...prev, publicPerception: input }));
+        break;
+      case SocietalInputEnum.WORKPLACE_CREATION:
+        setSocietalInputs((prev) => ({ ...prev, workplaceCreation: input }));
         break;
     }
   };
