@@ -5,6 +5,7 @@
   background-color: var(--secondary-background-color);
   border-radius: var(--border-radius-m);
   height: min-content;
+  position: relative;
 }
 
 .fw-input-group-wrapper:not(:last-child) {
@@ -12,4 +13,11 @@
   flex-direction: column;
   gap: 15px;
   margin-bottom: 20px;
+}
+
+.fw-comment-button {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  z-index: 5;
 }

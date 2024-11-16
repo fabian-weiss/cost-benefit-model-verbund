@@ -14,7 +14,7 @@ function EnvironmentalResultsList() {
             <ResultEntry
               isSmall
               factor={EnvironmentalInputEnum.UN_SUSTAINABLE_GOALS}
-              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.unSustainableGoals.toFixed(
+              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.unSustainableGoals.value.toFixed(
                 2
               )} (weight ${
                 environmentalModelContext.modelResults?.weights
@@ -22,52 +22,52 @@ function EnvironmentalResultsList() {
               })`}
               resultInterpretation={valueToResultInterpretation(
                 environmentalModelContext.modelResults?.weightedSingleFactors
-                  .unSustainableGoals
+                  .unSustainableGoals.value
               )}
             />
             <ResultEntry
               isSmall
               factor={EnvironmentalInputEnum.WASTE_PRODUCTION}
-              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.wasteProduction.toFixed(
+              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.wasteProduction.value.toFixed(
                 2
               )} (weight ${
                 environmentalModelContext.modelResults?.weights.wasteProduction
               })`}
               resultInterpretation={valueToResultInterpretation(
                 environmentalModelContext.modelResults?.weightedSingleFactors
-                  .wasteProduction
+                  .wasteProduction.value
               )}
             />
             <ResultEntry
               isSmall
               factor={EnvironmentalInputEnum.BIODIVERSITY}
-              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.biodiversity.toFixed(
+              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.biodiversity.value.toFixed(
                 2
               )} (weight ${
                 environmentalModelContext.modelResults?.weights.biodiversity
               })`}
               resultInterpretation={valueToResultInterpretation(
                 environmentalModelContext.modelResults?.weightedSingleFactors
-                  .biodiversity
+                  .biodiversity.value
               )}
             />
             <ResultEntry
               isSmall
               factor={EnvironmentalInputEnum.POLLUTION}
-              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.pollution.toFixed(
+              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.pollution.value.toFixed(
                 2
               )} (weight ${
                 environmentalModelContext.modelResults?.weights.pollution
               })`}
               resultInterpretation={valueToResultInterpretation(
                 environmentalModelContext.modelResults?.weightedSingleFactors
-                  .pollution
+                  .pollution.value
               )}
             />
             <ResultEntry
               isSmall
               factor={EnvironmentalInputEnum.SUSTAINABLE_ENERGY_INTEGRATION}
-              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.sustainableEneryIntegration.toFixed(
+              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.sustainableEneryIntegration.value.toFixed(
                 2
               )} (weight ${
                 environmentalModelContext.modelResults?.weights
@@ -75,26 +75,26 @@ function EnvironmentalResultsList() {
               })`}
               resultInterpretation={valueToResultInterpretation(
                 environmentalModelContext.modelResults?.weightedSingleFactors
-                  .sustainableEneryIntegration
+                  .sustainableEneryIntegration.value
               )}
             />
             <ResultEntry
               isSmall
               factor={EnvironmentalInputEnum.ENERGY_EFFICIENCY}
-              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.energyEfficiency.toFixed(
+              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.energyEfficiency.value.toFixed(
                 2
               )} (weight ${
                 environmentalModelContext.modelResults?.weights.energyEfficiency
               })`}
               resultInterpretation={valueToResultInterpretation(
                 environmentalModelContext.modelResults?.weightedSingleFactors
-                  .energyEfficiency
+                  .energyEfficiency.value
               )}
             />
             <ResultEntry
               isSmall
               factor={EnvironmentalInputEnum.MEETING_ENVIRONMENTAL_REGULATIONS}
-              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.meetingEnvironmentalRegulations.toFixed(
+              value={`${environmentalModelContext.modelResults?.weightedSingleFactors.meetingEnvironmentalRegulations.value.toFixed(
                 2
               )} (weight ${
                 environmentalModelContext.modelResults?.weights
@@ -102,7 +102,7 @@ function EnvironmentalResultsList() {
               })`}
               resultInterpretation={valueToResultInterpretation(
                 environmentalModelContext.modelResults?.weightedSingleFactors
-                  .meetingEnvironmentalRegulations
+                  .meetingEnvironmentalRegulations.value
               )}
             />
           </div>

@@ -7,6 +7,7 @@ import { DialogType } from "@/enums/DialogType";
 import { SocietalInputEnum } from "@/enums/SocietalInputEnum";
 import { impactEntries } from "@/lib/impact-categories";
 import { societalModel } from "@/models/societal-model/societal-model";
+import { useComment } from "@/providers/comment-provider";
 import { useResultDialog } from "@/providers/model-result-provider";
 import { useSocietalModel } from "@/providers/societal-model-provider";
 import { DropdownEntryType } from "@/types/dropdown-entry-type";
@@ -18,6 +19,7 @@ import { numberToImpact } from "@/utils/number-to-impact";
 function SocietalSection() {
   const societalModelContext = useSocietalModel();
   const resultsDialogContext = useResultDialog();
+  const commentDialogContext = useComment();
 
   const inputGroups: InputGroupType[] = [
     {
@@ -26,6 +28,30 @@ function SocietalSection() {
         label: SocietalInputEnum.CUSTOMER_SATISFACTION,
         description:
           "Impact on customer satisfaction (e.g. ease of use, essentiality).",
+      },
+      detailedDescription: {
+        header:
+          "Measures how the initiative affects customer experiences and their overall satisfaction. Examples include ease of use (e.g., intuitive apps, user-friendly portals), accessibility (e.g., services available for remote or underserved areas), speed of customer support (e.g., faster resolution of inquiries or complaints), and reliability (e.g., fewer outages, accurate billing).",
+        descriptionRows: [
+          "Very Negative: Frequent outages, long wait times for support, or widespread billing errors causing high customer dissatisfaction.",
+          "Negative: Noticeable increase in complaints or delays in resolving issues.",
+          "Neutral: No measurable change in customer experience or satisfaction.",
+          "Positive: Improved support times, clearer billing processes, or enhanced customer tools.",
+          "Very Positive: Significant improvements, such as innovative tools for energy management or a drastic reduction in complaints.",
+        ],
+      },
+      handleShowComments: () => {
+        commentDialogContext.handleShowDialog(
+          true,
+          societalModelContext.societalInputs.customerSatisfaction.comment,
+          (comment) => {
+            societalModelContext.setSocietalInput(
+              SocietalInputEnum.CUSTOMER_SATISFACTION,
+              undefined,
+              comment
+            );
+          }
+        );
       },
       dropdownFields: [
         {
@@ -38,7 +64,7 @@ function SocietalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.customerSatisfaction
+              societalModelContext.societalInputs.customerSatisfaction.value
             ),
           },
           entries: impactEntries,
@@ -51,6 +77,30 @@ function SocietalSection() {
         label: SocietalInputEnum.CUSTOMER_AFFORDABILITY,
         description: "Impact on customer affordability.",
       },
+      detailedDescription: {
+        header:
+          "Evaluates how the initiative influences the affordability of services for customers. Examples include pricing structure (e.g., introducing lower-cost tariffs or dynamic pricing), payment flexibility (e.g., installment plans for bills), cost savings (e.g., energy-efficient solutions), and accessibility (e.g., subsidies for low-income households).",
+        descriptionRows: [
+          "Very Negative: Significant price increases making services unaffordable for 20%+ of customers.",
+          "Negative: Noticeable affordability issues affecting 10-20% of customers.",
+          "Neutral: No changes to pricing or customer affordability.",
+          "Positive: Improved affordability through cost reductions or flexible payment plans benefiting 10-20% of customers.",
+          "Very Positive: Dramatic affordability improvements or better access for underserved groups.",
+        ],
+      },
+      handleShowComments: () => {
+        commentDialogContext.handleShowDialog(
+          true,
+          societalModelContext.societalInputs.customerAffordability.comment,
+          (comment) => {
+            societalModelContext.setSocietalInput(
+              SocietalInputEnum.CUSTOMER_AFFORDABILITY,
+              undefined,
+              comment
+            );
+          }
+        );
+      },
       dropdownFields: [
         {
           id: "customerAffordability",
@@ -62,7 +112,7 @@ function SocietalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.customerAffordability
+              societalModelContext.societalInputs.customerAffordability.value
             ),
           },
           entries: impactEntries,
@@ -76,6 +126,30 @@ function SocietalSection() {
         description:
           "Impact on company culture (e.g. health and safety, team spirit).",
       },
+      detailedDescription: {
+        header:
+          "Reflects how the initiative impacts employee morale, engagement, and alignment with company values. Examples include health and safety (e.g., improved safety measures, fewer incidents), team spirit (e.g., better collaboration, stronger sense of purpose), work-life balance (e.g., flexible scheduling, reduced burnout), and diversity and inclusion (e.g., increased representation and equity).",
+        descriptionRows: [
+          "Very Negative: Increased employee turnover, significant drops in engagement scores, or worsening workplace conditions.",
+          "Negative: Noticeable declines in morale, minor safety concerns, or team dissatisfaction.",
+          "Neutral: No noticeable changes in culture or engagement.",
+          "Positive: Improved morale, better collaboration, or notable safety enhancements.",
+          "Very Positive: Significant boosts in engagement, reduced turnover, or strong alignment with diversity and inclusion goals.",
+        ],
+      },
+      handleShowComments: () => {
+        commentDialogContext.handleShowDialog(
+          true,
+          societalModelContext.societalInputs.companyCulture.comment,
+          (comment) => {
+            societalModelContext.setSocietalInput(
+              SocietalInputEnum.COMPANY_CULTURE,
+              undefined,
+              comment
+            );
+          }
+        );
+      },
       dropdownFields: [
         {
           id: "companyCulture",
@@ -87,7 +161,7 @@ function SocietalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.companyCulture
+              societalModelContext.societalInputs.companyCulture.value
             ),
           },
           entries: impactEntries,
@@ -100,6 +174,30 @@ function SocietalSection() {
         label: "Shareholder Value",
         description: "Impact on shareholder value.",
       },
+      detailedDescription: {
+        header:
+          "Examines how the initiative affects shareholder confidence and the company's market value. Examples include financial performance (e.g., increased revenue, reduced costs), strategic alignment (e.g., alignment with growth objectives), market perception (e.g., stronger brand equity), and risk management (e.g., reducing regulatory or operational risks).",
+        descriptionRows: [
+          "Very Negative: Substantial financial losses, loss of shareholder trust, or decline in market share.",
+          "Negative: Minor financial setbacks or erosion of confidence.",
+          "Neutral: No measurable impact on shareholder value or market perception.",
+          "Positive: Improved financial metrics, better market standing, or reduced risks.",
+          "Very Positive: Significant financial gains, strong shareholder confidence, or enhanced market leadership.",
+        ],
+      },
+      handleShowComments: () => {
+        commentDialogContext.handleShowDialog(
+          true,
+          societalModelContext.societalInputs.shareholderValue.comment,
+          (comment) => {
+            societalModelContext.setSocietalInput(
+              SocietalInputEnum.SHAREHOLDER_VALUE,
+              undefined,
+              comment
+            );
+          }
+        );
+      },
       dropdownFields: [
         {
           id: "shareholderValue",
@@ -111,7 +209,7 @@ function SocietalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.shareholderValue
+              societalModelContext.societalInputs.shareholderValue.value
             ),
           },
           entries: impactEntries,
@@ -124,6 +222,30 @@ function SocietalSection() {
         label: "Public Perception",
         description: "Impact on public perception (e.g. CSR).",
       },
+      detailedDescription: {
+        header:
+          "Evaluates how the initiative affects the company's reputation and its image in the public eye. Examples include environmental stewardship (e.g., visible efforts toward renewable energy), social responsibility (e.g., supporting local causes, ethical operations), transparency (e.g., clear communication on pricing and initiatives), and media coverage (e.g., positive or negative press resulting from actions).",
+        descriptionRows: [
+          "Very Negative: Widespread criticism or negative media coverage leading to reputational damage.",
+          "Negative: Noticeable public disapproval or perception of insensitivity to societal concerns.",
+          "Neutral: No significant change in public opinion or visibility.",
+          "Positive: Positive media coverage, improved public trust, or praise for corporate actions.",
+          "Very Positive: Major boosts in reputation due to impactful actions, such as significant environmental or social contributions.",
+        ],
+      },
+      handleShowComments: () => {
+        commentDialogContext.handleShowDialog(
+          true,
+          societalModelContext.societalInputs.publicPerception.comment,
+          (comment) => {
+            societalModelContext.setSocietalInput(
+              SocietalInputEnum.PUBLIC_PERCEPTION,
+              undefined,
+              comment
+            );
+          }
+        );
+      },
       dropdownFields: [
         {
           id: "publicPerception",
@@ -135,7 +257,7 @@ function SocietalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.publicPerception
+              societalModelContext.societalInputs.publicPerception.value
             ),
           },
           entries: impactEntries,
@@ -149,6 +271,30 @@ function SocietalSection() {
         description:
           "Impact on value chain (e.g. production, transmission, distribution).",
       },
+      detailedDescription: {
+        header:
+          "Measures how the initiative affects the efficiency, reliability, and sustainability of the company’s value chain. Examples include supplier practices (e.g., ethical sourcing, local supplier engagement), distribution efficiency (e.g., faster delivery of services), resource management (e.g., reducing waste in operations), and innovation in processes (e.g., introducing new technology to streamline operations).",
+        descriptionRows: [
+          "Very Negative: Major disruptions to the value chain, increased inefficiencies, or negative supplier practices.",
+          "Negative: Noticeable issues in logistics, sourcing, or operations that impact the value chain.",
+          "Neutral: No measurable impact on the value chain or its performance.",
+          "Positive: Improved operational efficiency, strengthened supplier relationships, or reduced resource usage.",
+          "Very Positive: Transformative improvements such as breakthrough innovations, enhanced sustainability, or global recognition for operational excellence.",
+        ],
+      },
+      handleShowComments: () => {
+        commentDialogContext.handleShowDialog(
+          true,
+          societalModelContext.societalInputs.valueChain.comment,
+          (comment) => {
+            societalModelContext.setSocietalInput(
+              SocietalInputEnum.VALUE_CHAIN,
+              undefined,
+              comment
+            );
+          }
+        );
+      },
       dropdownFields: [
         {
           id: "valueChain",
@@ -160,7 +306,7 @@ function SocietalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.valueChain
+              societalModelContext.societalInputs.valueChain.value
             ),
           },
           entries: impactEntries,
@@ -173,6 +319,30 @@ function SocietalSection() {
         label: SocietalInputEnum.COMMUNITY_IMPLICATIONS,
         description: "Impact on community (e.g. loss of workplaces, harm).",
       },
+      detailedDescription: {
+        header:
+          "Assesses the initiative’s influence on the local and broader communities affected by the company’s operations. Examples include job creation (e.g., hiring in underserved regions), local investments (e.g., supporting infrastructure or education), environmental impact (e.g., reducing pollution in local areas), and engagement programs (e.g., partnerships with community organizations).",
+        descriptionRows: [
+          "Very Negative: Significant harm to communities, such as displacement, pollution, or loss of local jobs.",
+          "Negative: Noticeable community concerns, such as minor environmental or economic disruptions.",
+          "Neutral: No significant changes in community outcomes.",
+          "Positive: Initiatives creating local benefits, such as new jobs, cleaner energy solutions, or educational partnerships.",
+          "Very Positive: Strong contributions to community development, such as large-scale infrastructure improvements or highly impactful social programs.",
+        ],
+      },
+      handleShowComments: () => {
+        commentDialogContext.handleShowDialog(
+          true,
+          societalModelContext.societalInputs.communityImplications.comment,
+          (comment) => {
+            societalModelContext.setSocietalInput(
+              SocietalInputEnum.COMMUNITY_IMPLICATIONS,
+              undefined,
+              comment
+            );
+          }
+        );
+      },
       dropdownFields: [
         {
           id: "communityImplications",
@@ -184,7 +354,7 @@ function SocietalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.communityImplications
+              societalModelContext.societalInputs.communityImplications.value
             ),
           },
           entries: impactEntries,
@@ -198,6 +368,31 @@ function SocietalSection() {
         label: SocietalInputEnum.GUIDING_PRINCIPLES_ALIGNMENT,
         description: "Impact on company alignment (e.g. mission, vision).",
       },
+      detailedDescription: {
+        header:
+          "Examines how the initiative aligns with the company’s mission, vision, and long-term goals. Examples include strategic fit (e.g., advancing renewable energy objectives), brand consistency (e.g., reflecting the company's core values), innovation alignment (e.g., promoting a forward-thinking approach), and employee and stakeholder alignment (e.g., fostering shared understanding of goals).",
+        descriptionRows: [
+          "Very Negative: Direct conflict with the company’s mission, causing confusion or reputational harm.",
+          "Negative: Misalignment with key aspects of the vision or long-term goals.",
+          "Neutral: No significant impact on the alignment with the company’s vision.",
+          "Positive: Reinforces strategic goals, enhances brand identity, or advances the mission.",
+          "Very Positive: Strong alignment, establishing the company as a leader in its vision (e.g., spearheading renewable energy adoption or groundbreaking innovation).",
+        ],
+      },
+      handleShowComments: () => {
+        commentDialogContext.handleShowDialog(
+          true,
+          societalModelContext.societalInputs.guidingPrinciplesAlignment
+            .comment,
+          (comment) => {
+            societalModelContext.setSocietalInput(
+              SocietalInputEnum.GUIDING_PRINCIPLES_ALIGNMENT,
+              undefined,
+              comment
+            );
+          }
+        );
+      },
       dropdownFields: [
         {
           id: "guidingPrinciplesAlignment",
@@ -210,6 +405,7 @@ function SocietalSection() {
           selectedEntry: {
             impact: numberToImpact(
               societalModelContext.societalInputs.guidingPrinciplesAlignment
+                .value
             ),
           },
           entries: impactEntries,

@@ -1,11 +1,13 @@
+import { FactorInputType } from "../factor-input-type";
+
 export type SocietalInputs = {
-  customerSatisfaction: number;
-  customerAffordability: number;
-  companyCulture: number;
-  communityImplications: number;
-  valueChain: number;
-  shareholderValue: number;
-  guidingPrinciplesAlignment: number;
-  publicPerception: number;
-  workplaceCreation: number;
+  customerSatisfaction: FactorInputType;
+  customerAffordability: FactorInputType;
+  companyCulture: FactorInputType;
+  communityImplications: FactorInputType;
+  valueChain: FactorInputType;
+  shareholderValue: FactorInputType;
+  guidingPrinciplesAlignment: FactorInputType;
+  publicPerception: FactorInputType;
+  workplaceCreation: FactorInputType;
 };

@@ -7,7 +7,11 @@ import { createContext, useContext, useMemo, useState } from "react";
 
 interface SocietalModelProviderContextType {
   societalInputs: SocietalInputs;
-  setSocietalInput: (inputType: SocietalInputEnum, input: number) => void;
+  setSocietalInput: (
+    inputType: SocietalInputEnum,
+    input?: number,
+    comment?: string
+  ) => void;
   modelResults?: SocietalResults;
   setModelResults: (results?: SocietalResults) => void;
 }
@@ -21,54 +25,146 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
     SocietalResults | undefined
   >();
   const [societalInputs, setSocietalInputs] = useState<SocietalInputs>({
-    customerSatisfaction: 0,
-    customerAffordability: 0,
-    companyCulture: 0,
-    communityImplications: 0,
-    valueChain: 0,
-    shareholderValue: 0,
-    guidingPrinciplesAlignment: 0,
-    publicPerception: 0,
-    workplaceCreation: 0,
+    customerSatisfaction: {
+      value: 0,
+      comment: undefined,
+    },
+    customerAffordability: {
+      value: 0,
+      comment: undefined,
+    },
+    companyCulture: {
+      value: 0,
+      comment: undefined,
+    },
+    communityImplications: {
+      value: 0,
+      comment: undefined,
+    },
+    valueChain: {
+      value: 0,
+      comment: undefined,
+    },
+    shareholderValue: {
+      value: 0,
+      comment: undefined,
+    },
+    guidingPrinciplesAlignment: {
+      value: 0,
+      comment: undefined,
+    },
+    publicPerception: {
+      value: 0,
+      comment: undefined,
+    },
+    workplaceCreation: {
+      value: 0,
+      comment: undefined,
+    },
   });
 
-  const setSocietalInput = (inputType: SocietalInputEnum, input: number) => {
+  const setSocietalInput = (
+    inputType: SocietalInputEnum,
+    input?: number,
+    comment?: string
+  ) => {
     switch (inputType) {
       case SocietalInputEnum.CUSTOMER_SATISFACTION:
-        setSocietalInputs((prev) => ({ ...prev, customerSatisfaction: input }));
+        setSocietalInputs((prev) => ({
+          ...prev,
+          customerSatisfaction: {
+            value: input ? input : prev.customerSatisfaction.value,
+            comment:
+              comment != undefined
+                ? comment
+                : prev.customerSatisfaction?.comment,
+          },
+        }));
         break;
       case SocietalInputEnum.CUSTOMER_AFFORDABILITY:
         setSocietalInputs((prev) => ({
           ...prev,
-          customerAffordability: input,
+          customerAffordability: {
+            value: input ? input : prev.customerAffordability.value,
+            comment:
+              comment != undefined
+                ? comment
+                : prev.customerAffordability?.comment,
+          },
         }));
         break;
       case SocietalInputEnum.COMPANY_CULTURE:
-        setSocietalInputs((prev) => ({ ...prev, companyCulture: input }));
+        setSocietalInputs((prev) => ({
+          ...prev,
+          companyCulture: {
+            value: input ? input : prev.companyCulture.value,
+            comment:
+              comment != undefined ? comment : prev.companyCulture?.comment,
+          },
+        }));
         break;
       case SocietalInputEnum.COMMUNITY_IMPLICATIONS:
         setSocietalInputs((prev) => ({
           ...prev,
-          communityImplications: input,
+          communityImplications: {
+            value: input ? input : prev.communityImplications.value,
+            comment:
+              comment != undefined
+                ? comment
+                : prev.communityImplications?.comment,
+          },
         }));
         break;
       case SocietalInputEnum.VALUE_CHAIN:
-        setSocietalInputs((prev) => ({ ...prev, valueChain: input }));
+        setSocietalInputs((prev) => ({
+          ...prev,
+          valueChain: {
+            value: input ? input : prev.valueChain.value,
+            comment: comment != undefined ? comment : prev.valueChain?.comment,
+          },
+        }));
         break;
       case SocietalInputEnum.SHAREHOLDER_VALUE:
-        setSocietalInputs((prev) => ({ ...prev, shareholderValue: input }));
+        setSocietalInputs((prev) => ({
+          ...prev,
+          shareholderValue: {
+            value: input ? input : prev.shareholderValue.value,
+            comment:
+              comment != undefined ? comment : prev.shareholderValue?.comment,
+          },
+        }));
         break;
       case SocietalInputEnum.GUIDING_PRINCIPLES_ALIGNMENT:
         setSocietalInputs((prev) => ({
           ...prev,
-          guidingPrinciplesAlignment: input,
+          guidingPrinciplesAlignment: {
+            value: input ? input : prev.guidingPrinciplesAlignment.value,
+            comment:
+              comment != undefined
+                ? comment
+                : prev.guidingPrinciplesAlignment?.comment,
+          },
         }));
         break;
       case SocietalInputEnum.PUBLIC_PERCEPTION:
-        setSocietalInputs((prev) => ({ ...prev, publicPerception: input }));
+        setSocietalInputs((prev) => ({
+          ...prev,
+          publicPerception: {
+            value: input ? input : prev.publicPerception.value,
+            comment:
+              comment != undefined ? comment : prev.publicPerception?.comment,
+          },
+        }));
         break;
       case SocietalInputEnum.WORKPLACE_CREATION:
-        setSocietalInputs((prev) => ({ ...prev, workplaceCreation: input }));
+        setSocietalInputs((prev) => ({
+          ...prev,
+          workplaceCreation: {
+            value: input ? input : prev.workplaceCreation.value,
+            comment:
+              comment != undefined ? comment : prev.workplaceCreation?.comment,
+          },
+        }));
         break;
     }
   };

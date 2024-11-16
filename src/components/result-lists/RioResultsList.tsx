@@ -6,70 +6,71 @@ import ResultEntry from "../ResultEntry";
 function RioResultsList() {
   const rioModelContext = useRioModel();
   return (
-    <div className="fw-results-container">
+    <div className="fw-results-container.value">
       {rioModelContext.modelResults ? (
         <>
           <div>
             <ResultEntry
               isSmall
               factor="Privacy"
-              value={`${rioModelContext.modelResults?.weightedSingleFactors.privacy.toFixed(
+              value={`${rioModelContext.modelResults?.weightedSingleFactors.privacy.value.toFixed(
                 2
               )} (weight ${rioModelContext.modelResults?.weights.privacy})`}
               resultInterpretation={valueToResultInterpretation(
                 rioModelContext.modelResults?.weightedSingleFactors.privacy
+                  .value
               )}
             />
             <ResultEntry
               isSmall
               factor="Market advantage"
-              value={`${rioModelContext.modelResults?.weightedSingleFactors.marketAdvantage.toFixed(
+              value={`${rioModelContext.modelResults?.weightedSingleFactors.marketAdvantage.value.toFixed(
                 2
               )} (weight ${
                 rioModelContext.modelResults?.weights.marketAdvantage
               })`}
               resultInterpretation={valueToResultInterpretation(
                 rioModelContext.modelResults?.weightedSingleFactors
-                  .marketAdvantage
+                  .marketAdvantage.value
               )}
             />
             <ResultEntry
               isSmall
               factor="Long-term Resilience"
-              value={`${rioModelContext.modelResults?.weightedSingleFactors.longTermResilience.toFixed(
+              value={`${rioModelContext.modelResults?.weightedSingleFactors.longTermResilience.value.toFixed(
                 2
               )} (weight ${
                 rioModelContext.modelResults?.weights.longTermResilience
               })`}
               resultInterpretation={valueToResultInterpretation(
                 rioModelContext.modelResults?.weightedSingleFactors
-                  .longTermResilience
+                  .longTermResilience.value
               )}
             />
             <ResultEntry
               isSmall
               factor="Long-term Scalability"
-              value={`${rioModelContext.modelResults?.weightedSingleFactors.longTermScalability.toFixed(
+              value={`${rioModelContext.modelResults?.weightedSingleFactors.longTermScalability.value.toFixed(
                 2
               )} (weight ${
                 rioModelContext.modelResults?.weights.longTermScalability
               })`}
               resultInterpretation={valueToResultInterpretation(
                 rioModelContext.modelResults?.weightedSingleFactors
-                  .longTermScalability
+                  .longTermScalability.value
               )}
             />
             <ResultEntry
               isSmall
               factor="Legal Requirements"
-              value={`${rioModelContext.modelResults?.weightedSingleFactors.legalRequirements.toFixed(
+              value={`${rioModelContext.modelResults?.weightedSingleFactors.legalRequirements.value.toFixed(
                 2
               )} (weight ${
                 rioModelContext.modelResults?.weights.legalRequirements
               })`}
               resultInterpretation={valueToResultInterpretation(
                 rioModelContext.modelResults?.weightedSingleFactors
-                  .legalRequirements
+                  .legalRequirements.value
               )}
             />
           </div>

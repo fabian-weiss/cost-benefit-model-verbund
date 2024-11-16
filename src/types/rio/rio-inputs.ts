@@ -1,7 +1,9 @@
+import { FactorInputType } from "../factor-input-type";
+
 export type RioInputs = {
-  privacy: number;
-  marketAdvantage: number;
-  longTermResilience: number;
-  longTermScalability: number;
-  legalRequirements: number;
+  privacy: FactorInputType;
+  marketAdvantage: FactorInputType;
+  longTermResilience: FactorInputType;
+  longTermScalability: FactorInputType;
+  legalRequirements: FactorInputType;
 };

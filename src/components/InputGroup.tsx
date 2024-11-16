@@ -4,6 +4,8 @@ import InputField from "./InputField";
 import "@/styles/input-group.css";
 import InputHeader from "./InputHeader";
 import Dropdown from "./Dropdown";
+import IconButton from "./IconButton";
+import { PiChatTeardropText } from "react-icons/pi";
 
 function InputGroup(props: {
   inputGroup: InputGroupType;
@@ -11,7 +13,15 @@ function InputGroup(props: {
 }) {
   return (
     <div className="fw-input-group-container">
-      <InputHeader {...props.inputGroup.inputHeader} />
+      {!props.inputGroup.disableComments &&
+        props.inputGroup.handleShowComments != undefined && (
+          <IconButton
+            className="fw-comment-button"
+            onClick={() => props.inputGroup.handleShowComments!()}
+            icon={<PiChatTeardropText size={12} />}
+          />
+        )}
+      <InputHeader {...props.inputGroup} />
       {props.inputGroup.inputFields?.map((inputField) => (
         <div key={inputField.id} className="fw-input-group-wrapper">
           <InputField

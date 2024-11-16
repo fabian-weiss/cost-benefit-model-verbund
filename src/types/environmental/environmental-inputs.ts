@@ -1,9 +1,11 @@
+import { FactorInputType } from "../factor-input-type";
+
 export type EnvironmentalInputs = {
-  unSustainableGoals: number;
-  wasteProduction: number;
-  biodiversity: number;
-  pollution: number;
-  sustainableEneryIntegration: number;
-  energyEfficiency: number;
-  meetingEnvironmentalRegulations: number;
+  unSustainableGoals: FactorInputType;
+  wasteProduction: FactorInputType;
+  biodiversity: FactorInputType;
+  pollution: FactorInputType;
+  sustainableEneryIntegration: FactorInputType;
+  energyEfficiency: FactorInputType;
+  meetingEnvironmentalRegulations: FactorInputType;
 };

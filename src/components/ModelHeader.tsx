@@ -4,17 +4,19 @@ import "@/styles/model-header.css";
 
 function ModelHeader(props: {
   title: string;
-  buttonLabel: string;
-  buttonCallback: () => void;
+  buttonLabel?: string;
+  buttonCallback?: () => void;
 }) {
   return (
     <div className="fw-model-header">
       <h2>{props.title}</h2>
-      <ActionButton
-        label={props.buttonLabel}
-        fillType={"solid"}
-        onClick={() => props.buttonCallback()}
-      />
+      {props.buttonLabel && props.buttonCallback && (
+        <ActionButton
+          label={props.buttonLabel}
+          fillType="solid"
+          onClick={props.buttonCallback}
+        />
+      )}
     </div>
   );
 }

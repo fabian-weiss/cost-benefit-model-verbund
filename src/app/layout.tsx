@@ -9,6 +9,9 @@ import SocietalModelProvider from "@/providers/societal-model-provider";
 import EnvironmentalModelProvider from "@/providers/environmental-model-provider";
 import ModelResultProvider from "@/providers/model-result-provider";
 import RioModelProvider from "@/providers/rio-model-provider";
+import CommentProvider from "@/providers/comment-provider";
+import DescriptionDialogProvider from "@/providers/description-dialog-provider";
+import OverviewProvider from "@/providers/overview-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,15 +40,23 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable}`}
       >
-        <EnvironmentalModelProvider>
-          <SocietalModelProvider>
-            <FinancialModelProvider>
-              <RioModelProvider>
-                <ModelResultProvider>{children}</ModelResultProvider>
-              </RioModelProvider>
-            </FinancialModelProvider>
-          </SocietalModelProvider>
-        </EnvironmentalModelProvider>
+        <OverviewProvider>
+          <EnvironmentalModelProvider>
+            <SocietalModelProvider>
+              <FinancialModelProvider>
+                <RioModelProvider>
+                  <ModelResultProvider>
+                    <CommentProvider>
+                      <DescriptionDialogProvider>
+                        {children}
+                      </DescriptionDialogProvider>
+                    </CommentProvider>
+                  </ModelResultProvider>
+                </RioModelProvider>
+              </FinancialModelProvider>
+            </SocietalModelProvider>
+          </EnvironmentalModelProvider>
+        </OverviewProvider>
       </body>
     </html>
   );

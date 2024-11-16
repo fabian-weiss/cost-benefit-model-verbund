@@ -1,0 +1,18 @@
+.fw-overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.fw-overview-text-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .fw-overview-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}

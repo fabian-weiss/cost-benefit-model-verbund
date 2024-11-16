@@ -8,7 +8,8 @@ interface EnvironmentalModelProviderContextType {
   environmentalInputs: EnvironmentalInputs;
   setEnvironmentalInput: (
     inputType: EnvironmentalInputEnum,
-    input: number
+    input?: number,
+    comment?: string
   ) => void;
   modelResults?: EnvironmentalResults;
   setModelResults: (results?: EnvironmentalResults) => void;
@@ -28,51 +29,113 @@ function EnvironmentalModelProvider({
   >();
   const [environmentalInputs, setEnvironmentalInputs] =
     useState<EnvironmentalInputs>({
-      unSustainableGoals: 0,
-      wasteProduction: 0,
-      biodiversity: 0,
-      pollution: 0,
-      sustainableEneryIntegration: 0,
-      energyEfficiency: 0,
-      meetingEnvironmentalRegulations: 0,
+      unSustainableGoals: {
+        value: 0,
+        comment: undefined,
+      },
+      wasteProduction: {
+        value: 0,
+        comment: undefined,
+      },
+      biodiversity: {
+        value: 0,
+        comment: undefined,
+      },
+      pollution: {
+        value: 0,
+        comment: undefined,
+      },
+      sustainableEneryIntegration: {
+        value: 0,
+        comment: undefined,
+      },
+      energyEfficiency: {
+        value: 0,
+        comment: undefined,
+      },
+      meetingEnvironmentalRegulations: {
+        value: 0,
+        comment: undefined,
+      },
     });
 
   const setEnvironmentalInput = (
     inputType: EnvironmentalInputEnum,
-    input: number
+    input?: number,
+    comment?: string
   ) => {
     switch (inputType) {
       case EnvironmentalInputEnum.UN_SUSTAINABLE_GOALS:
         setEnvironmentalInputs((prev) => ({
           ...prev,
-          unSustainableGoals: input,
+          unSustainableGoals: {
+            value: input ? input : prev.unSustainableGoals.value,
+            comment:
+              comment != undefined ? comment : prev.unSustainableGoals?.comment,
+          },
         }));
         break;
       case EnvironmentalInputEnum.WASTE_PRODUCTION:
-        setEnvironmentalInputs((prev) => ({ ...prev, wasteProduction: input }));
+        setEnvironmentalInputs((prev) => ({
+          ...prev,
+          wasteProduction: {
+            value: input ? input : prev.wasteProduction.value,
+            comment:
+              comment != undefined ? comment : prev.wasteProduction?.comment,
+          },
+        }));
         break;
       case EnvironmentalInputEnum.BIODIVERSITY:
-        setEnvironmentalInputs((prev) => ({ ...prev, biodiversity: input }));
+        setEnvironmentalInputs((prev) => ({
+          ...prev,
+          biodiversity: {
+            value: input ? input : prev.biodiversity.value,
+            comment:
+              comment != undefined ? comment : prev.biodiversity?.comment,
+          },
+        }));
         break;
       case EnvironmentalInputEnum.POLLUTION:
-        setEnvironmentalInputs((prev) => ({ ...prev, pollution: input }));
+        setEnvironmentalInputs((prev) => ({
+          ...prev,
+          pollution: {
+            value: input ? input : prev.pollution.value,
+            comment: comment != undefined ? comment : prev.pollution?.comment,
+          },
+        }));
         break;
       case EnvironmentalInputEnum.SUSTAINABLE_ENERGY_INTEGRATION:
         setEnvironmentalInputs((prev) => ({
           ...prev,
-          sustainableEneryIntegration: input,
+          sustainableEneryIntegration: {
+            value: input ? input : prev.sustainableEneryIntegration.value,
+            comment:
+              comment != undefined
+                ? comment
+                : prev.sustainableEneryIntegration?.comment,
+          },
         }));
         break;
       case EnvironmentalInputEnum.ENERGY_EFFICIENCY:
         setEnvironmentalInputs((prev) => ({
           ...prev,
-          energyEfficiency: input,
+          energyEfficiency: {
+            value: input ? input : prev.energyEfficiency.value,
+            comment:
+              comment != undefined ? comment : prev.energyEfficiency?.comment,
+          },
         }));
         break;
       case EnvironmentalInputEnum.MEETING_ENVIRONMENTAL_REGULATIONS:
         setEnvironmentalInputs((prev) => ({
           ...prev,
-          meetingEnvironmentalRegulations: input,
+          meetingEnvironmentalRegulations: {
+            value: input ? input : prev.meetingEnvironmentalRegulations.value,
+            comment:
+              comment != undefined
+                ? comment
+                : prev.meetingEnvironmentalRegulations?.comment,
+          },
         }));
         break;
     }

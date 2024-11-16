@@ -29,13 +29,23 @@ function ModelResultProvider(props: { children: React.ReactNode }) {
   const getDialog = (): React.ReactNode => {
     switch (dialogType) {
       case DialogType.COMPLETE_MODEL:
-        return <CompleteResultsDialog />;
+        return (
+          <CompleteResultsDialog closeDialog={() => handleShowDialog(false)} />
+        );
       case DialogType.FINANCIAL_MODEL:
-        return <FinancialResultsDialog />;
+        return (
+          <FinancialResultsDialog closeDialog={() => handleShowDialog(false)} />
+        );
       case DialogType.ENVIRONMENTAL_MODEL:
-        return <EnvironmentalResultsDialog />;
+        return (
+          <EnvironmentalResultsDialog
+            closeDialog={() => handleShowDialog(false)}
+          />
+        );
       case DialogType.SOCIETAL_MODEL:
-        return <SocietalResultsDialog />;
+        return (
+          <SocietalResultsDialog closeDialog={() => handleShowDialog(false)} />
+        );
       case DialogType.RIO_MODEL:
         return <RioResultsDialog />;
       default:

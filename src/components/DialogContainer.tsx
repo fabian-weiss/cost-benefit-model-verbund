@@ -1,7 +1,6 @@
 "use client";
 import "@/styles/dialog.css";
 import OutsideClickHandler from "./OutsideClickHandler";
-import { useResultDialog } from "@/providers/model-result-provider";
 import { PiXBold } from "react-icons/pi";
 import { useEffect, useRef } from "react";
 
@@ -10,8 +9,8 @@ function DialogContainer(props: {
   title: string;
   body?: string;
   fullscreen?: boolean;
+  closeDialog: () => void;
 }) {
-  const dialogContext = useResultDialog();
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -19,20 +18,21 @@ function DialogContainer(props: {
       ref.current.scrollBy(0, -10000);
     }
   }, []);
+
   return (
     <div
       ref={ref}
       className={`fw-dialog-container ${props.fullscreen ? "fullscreen" : ""}`}
     >
       <OutsideClickHandler
-        disabled={props.fullscreen}
-        onOutsideClick={() => dialogContext.handleShowDialog(false, undefined)}
+        disabled={props.fullscreen == true}
+        onOutsideClick={() => props.closeDialog()}
       >
         {props.fullscreen && (
           <PiXBold
             size={28}
             className="fw-dialog-close"
-            onClick={() => dialogContext.handleShowDialog(false, undefined)}
+            onClick={() => props.closeDialog()}
           />
         )}
         <div

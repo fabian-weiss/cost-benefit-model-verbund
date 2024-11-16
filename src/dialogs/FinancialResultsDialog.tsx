@@ -4,9 +4,10 @@ import DialogContainer from "@/components/DialogContainer";
 import FinancialResultsList from "@/components/result-lists/FinancialResultsList";
 import React from "react";
 
-function FinancialResultsDialog() {
+function FinancialResultsDialog(props: { closeDialog: () => void }) {
   return (
     <DialogContainer
+      closeDialog={props.closeDialog}
       title="Financial Model Results"
       body="The financial model creates all combinations of the given inputs. These results are the averages across all combinations."
     >

@@ -9,3 +9,9 @@
   display: flex;
   flex-direction: column;
 }
+
+.fw-show-description {
+  cursor: pointer;
+  text-decoration: underline;
+  color: var(--secondary-color);
+}

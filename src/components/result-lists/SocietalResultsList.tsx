@@ -14,99 +14,99 @@ function SocietalResultsList() {
             <ResultEntry
               isSmall
               factor={SocietalInputEnum.CUSTOMER_SATISFACTION}
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.customerSatisfaction.toFixed(
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.customerSatisfaction.value.toFixed(
                 2
               )} (weight ${
                 societalModelContext.modelResults?.weights.customerSatisfaction
               })`}
               resultInterpretation={valueToResultInterpretation(
                 societalModelContext.modelResults?.weightedSingleFactors
-                  .customerSatisfaction
+                  .customerSatisfaction.value
               )}
             />
             <ResultEntry
               isSmall
               factor={SocietalInputEnum.CUSTOMER_AFFORDABILITY}
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.customerAffordability.toFixed(
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.customerAffordability.value.toFixed(
                 2
               )} (weight ${
                 societalModelContext.modelResults?.weights.customerAffordability
               })`}
               resultInterpretation={valueToResultInterpretation(
                 societalModelContext.modelResults?.weightedSingleFactors
-                  .customerAffordability
+                  .customerAffordability.value
               )}
             />
             <ResultEntry
               isSmall
               factor={SocietalInputEnum.COMPANY_CULTURE}
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.companyCulture.toFixed(
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.companyCulture.value.toFixed(
                 2
               )} (weight ${
                 societalModelContext.modelResults?.weights.companyCulture
               })`}
               resultInterpretation={valueToResultInterpretation(
                 societalModelContext.modelResults?.weightedSingleFactors
-                  .companyCulture
+                  .companyCulture.value
               )}
             />
             <ResultEntry
               isSmall
               factor={SocietalInputEnum.SHAREHOLDER_VALUE}
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.shareholderValue.toFixed(
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.shareholderValue.value.toFixed(
                 2
               )} (weight ${
                 societalModelContext.modelResults?.weights.shareholderValue
               })`}
               resultInterpretation={valueToResultInterpretation(
                 societalModelContext.modelResults?.weightedSingleFactors
-                  .shareholderValue
+                  .shareholderValue.value
               )}
             />
             <ResultEntry
               isSmall
               factor={SocietalInputEnum.PUBLIC_PERCEPTION}
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.publicPerception.toFixed(
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.publicPerception.value.toFixed(
                 2
               )} (weight ${
                 societalModelContext.modelResults?.weights.publicPerception
               })`}
               resultInterpretation={valueToResultInterpretation(
                 societalModelContext.modelResults?.weightedSingleFactors
-                  .publicPerception
+                  .publicPerception.value
               )}
             />
             <ResultEntry
               isSmall
               factor={SocietalInputEnum.VALUE_CHAIN}
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.valueChain.toFixed(
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.valueChain.value.toFixed(
                 2
               )} (weight ${
                 societalModelContext.modelResults?.weights.valueChain
               })`}
               resultInterpretation={valueToResultInterpretation(
                 societalModelContext.modelResults?.weightedSingleFactors
-                  .valueChain
+                  .valueChain.value
               )}
             />
 
             <ResultEntry
               isSmall
               factor={SocietalInputEnum.COMMUNITY_IMPLICATIONS}
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.communityImplications.toFixed(
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.communityImplications.value.toFixed(
                 2
               )} (weight ${
                 societalModelContext.modelResults?.weights.communityImplications
               })`}
               resultInterpretation={valueToResultInterpretation(
                 societalModelContext.modelResults?.weightedSingleFactors
-                  .communityImplications
+                  .communityImplications.value
               )}
             />
             <ResultEntry
               isSmall
               factor={SocietalInputEnum.GUIDING_PRINCIPLES_ALIGNMENT}
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.guidingPrinciplesAlignment.toFixed(
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.guidingPrinciplesAlignment.value.toFixed(
                 2
               )} (weight ${
                 societalModelContext.modelResults?.weights
@@ -114,20 +114,20 @@ function SocietalResultsList() {
               })`}
               resultInterpretation={valueToResultInterpretation(
                 societalModelContext.modelResults?.weightedSingleFactors
-                  .guidingPrinciplesAlignment
+                  .guidingPrinciplesAlignment.value
               )}
             />
             <ResultEntry
               isSmall
               factor={SocietalInputEnum.WORKPLACE_CREATION}
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.workplaceCreation.toFixed(
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.workplaceCreation.value.toFixed(
                 2
               )} (weight ${
                 societalModelContext.modelResults?.weights.workplaceCreation
               })`}
               resultInterpretation={valueToResultInterpretation(
                 societalModelContext.modelResults?.weightedSingleFactors
-                  .workplaceCreation
+                  .workplaceCreation.value
               )}
             />
           </div>

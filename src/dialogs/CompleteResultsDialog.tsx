@@ -12,7 +12,7 @@ import { useSocietalModel } from "@/providers/societal-model-provider";
 import { valueToResultInterpretation } from "@/utils/value-to-result-interpretation";
 import React from "react";
 
-function CompleteResultsDialog() {
+function CompleteResultsDialog(props: { closeDialog: () => void }) {
   const rioModelContext = useRioModel();
   const environmentalModelContext = useEnvironmentalModel();
   const societalModelContext = useSocietalModel();
@@ -26,6 +26,7 @@ function CompleteResultsDialog() {
   return (
     <DialogContainer
       fullscreen
+      closeDialog={props.closeDialog}
       title="Overall Model Score"
       body="See the summary of all the submodels below. Download the whole report to see details."
     >

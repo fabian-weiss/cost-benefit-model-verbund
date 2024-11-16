@@ -22,17 +22,28 @@ function InputField(props: { inputField: InputFieldType }) {
             <p className="fw-text-disabled">{props.inputField.prefix}</p>
           </div>
         )}
-        <input
-          spellCheck={false}
-          className={`fw-input`}
-          type={props.inputField.type}
-          id={props.inputField.id}
-          value={props.inputField.value}
-          placeholder={props.inputField.placeholder}
-          onChange={props.inputField.onChange}
-          onKeyDown={props.inputField.onKeyDown}
-          required={props.inputField.required}
-        />
+        {props.inputField.isTextArea ? (
+          <textarea
+            rows={6}
+            className="fw-input"
+            id={props.inputField.id}
+            value={props.inputField.value}
+            placeholder={props.inputField.placeholder}
+            onChange={props.inputField.onTextAreaChange}
+          />
+        ) : (
+          <input
+            spellCheck={false}
+            className={`fw-input`}
+            type={props.inputField.type}
+            id={props.inputField.id}
+            value={props.inputField.value}
+            placeholder={props.inputField.placeholder}
+            onChange={props.inputField.onChange}
+            onKeyDown={props.inputField.onKeyDown}
+            required={props.inputField.required}
+          />
+        )}
         {props.inputField.suffix && (
           <div className="fw-prefix-suffix-wrapper">
             <p className="fw-text-disabled">{props.inputField.suffix}</p>
@@ -42,17 +53,20 @@ function InputField(props: { inputField: InputFieldType }) {
       {props.inputField.error && (
         <p className="fw-fs12 fw-text-error fw-pt5">{props.inputField.error}</p>
       )}
-      {props.inputField.values && props.inputField.values.length > 0 && (
-        <InputValueList
-          values={props.inputField.values}
-          removeCallback={(value: number) =>
-            props.inputField.removeCallback(value)
-          }
-          valueType={props.inputField.valueType}
-          suffix={props.inputField.valueLabelSuffix}
-          prefix={props.inputField.valueLabelPrefix}
-        />
-      )}
+      {props.inputField.values &&
+        props.inputField.values.length > 0 &&
+        props.inputField.valueType && (
+          <InputValueList
+            values={props.inputField.values}
+            removeCallback={(value: number) =>
+              props.inputField.removeCallback &&
+              props.inputField.removeCallback(value)
+            }
+            valueType={props.inputField.valueType}
+            suffix={props.inputField.valueLabelSuffix}
+            prefix={props.inputField.valueLabelPrefix}
+          />
+        )}
     </div>
   );
 }

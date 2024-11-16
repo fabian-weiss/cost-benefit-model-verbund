@@ -5,7 +5,7 @@ export enum SocietalInputEnum {
   COMMUNITY_IMPLICATIONS = "Community Implications", // Former "Cultural Impact" but that could have been misleading due to "Company Culture"
   VALUE_CHAIN = "Value Chain",
   SHAREHOLDER_VALUE = "Shareholder Value",
-  GUIDING_PRINCIPLES_ALIGNMENT = "Vision Alignment",
+  GUIDING_PRINCIPLES_ALIGNMENT = "Guiding Principles Alignment",
   PUBLIC_PERCEPTION = "Public Perception",
   WORKPLACE_CREATION = "Workplace Creation",
 }

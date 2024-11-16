@@ -1,6 +1,7 @@
 import { EnvironmentalInputs } from "@/types/environmental/environmental-inputs";
 import { EnvironmentalResults } from "@/types/environmental/environmental-results";
 import { EnvironmentalWeights } from "@/types/environmental/environmental-weights";
+import { FactorInputType } from "@/types/factor-input-type";
 import { scaleNumber } from "@/utils/scale-number";
 import { round } from "mathjs";
 
@@ -18,25 +19,46 @@ export const environmentalModel = (
   };
 
   const weightedScores: EnvironmentalInputs = {
-    unSustainableGoals: 0,
-    wasteProduction: 0,
-    biodiversity: 0,
-    pollution: 0,
-    sustainableEneryIntegration: 0,
-    energyEfficiency: 0,
-    meetingEnvironmentalRegulations: 0,
+    unSustainableGoals: {
+      value: 0,
+      comment: undefined,
+    },
+    wasteProduction: {
+      value: 0,
+      comment: undefined,
+    },
+    biodiversity: {
+      value: 0,
+      comment: undefined,
+    },
+    pollution: {
+      value: 0,
+      comment: undefined,
+    },
+    sustainableEneryIntegration: {
+      value: 0,
+      comment: undefined,
+    },
+    energyEfficiency: {
+      value: 0,
+      comment: undefined,
+    },
+    meetingEnvironmentalRegulations: {
+      value: 0,
+      comment: undefined,
+    },
   };
 
   // Calculate individual weighted scores
   (Object.keys(inputs) as Array<keyof EnvironmentalInputs>).forEach((key) => {
-    const weightedResult: number = inputs[key] * weights[key];
-    weightedScores[key] = weightedResult;
+    const weightedResult: number = inputs[key].value * weights[key];
+    weightedScores[key].value = weightedResult;
     //weightedScores.push({ key, value: weightedResult, weight: weights[key] });
   });
 
   // Calculate total score
   const totalScore: number = Object.values(weightedScores).reduce(
-    (acc, value: number) => acc + value,
+    (acc, factorInput: FactorInputType) => acc + factorInput.value,
     0
   );
 

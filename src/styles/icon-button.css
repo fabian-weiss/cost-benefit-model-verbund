@@ -1,0 +1,10 @@
+.fw-icon-button {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  background-color: var(--primary-color);
+  color: #fff;
+  cursor: pointer;
+}

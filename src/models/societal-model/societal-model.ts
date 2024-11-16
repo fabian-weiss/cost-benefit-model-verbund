@@ -21,27 +21,54 @@ export const societalModel = (inputs: SocietalInputs): SocietalResults => {
 
   // Initialize weighted scores
   const weightedScores: SocietalInputs = {
-    customerSatisfaction: 0,
-    customerAffordability: 0,
-    companyCulture: 0,
-    communityImplications: 0,
-    valueChain: 0,
-    shareholderValue: 0,
-    guidingPrinciplesAlignment: 0,
-    publicPerception: 0,
-    workplaceCreation: 0,
+    customerSatisfaction: {
+      value: 0,
+      comment: undefined,
+    },
+    customerAffordability: {
+      value: 0,
+      comment: undefined,
+    },
+    companyCulture: {
+      value: 0,
+      comment: undefined,
+    },
+    communityImplications: {
+      value: 0,
+      comment: undefined,
+    },
+    valueChain: {
+      value: 0,
+      comment: undefined,
+    },
+    shareholderValue: {
+      value: 0,
+      comment: undefined,
+    },
+    guidingPrinciplesAlignment: {
+      value: 0,
+      comment: undefined,
+    },
+    publicPerception: {
+      value: 0,
+      comment: undefined,
+    },
+    workplaceCreation: {
+      value: 0,
+      comment: undefined,
+    },
   };
 
   // Calculate individual weighted scores
   (Object.keys(inputs) as Array<keyof SocietalInputs>).forEach((key) => {
-    const weightedResult: number = inputs[key] * weights[key];
-    weightedScores[key] = weightedResult;
+    const weightedResult: number = inputs[key].value * weights[key];
+    weightedScores[key].value = weightedResult;
     //weightedScores.push({ key, value: weightedResult, weight: weights[key] });
   });
 
   // Calculate total score
   const totalScore: number = Object.values(weightedScores).reduce(
-    (acc, value) => acc + value,
+    (acc, factorInput) => acc + factorInput.value,
     0
   );
 

@@ -185,7 +185,7 @@ function FinancialSection() {
   const inputGroups: InputGroupType[] = [
     // Budget
     {
-      category: FinancialCategory.MAIN,
+      financialCategory: FinancialCategory.MAIN,
       id: "budget",
       inputHeader: {
         label: "Budget",
@@ -240,7 +240,7 @@ function FinancialSection() {
     },
     // Initial Investment
     {
-      category: FinancialCategory.MAIN,
+      financialCategory: FinancialCategory.MAIN,
       id: "initial-investment",
       inputHeader: {
         label: "Initial Investment",
@@ -301,7 +301,7 @@ function FinancialSection() {
     },
     // Annual Operating Costs
     {
-      category: FinancialCategory.COSTS,
+      financialCategory: FinancialCategory.COSTS,
       id: "annual-operating-costs",
       inputHeader: {
         label: "Annual Operating Costs",
@@ -401,7 +401,7 @@ function FinancialSection() {
     },
     // Annual Maintenance Costs
     {
-      category: FinancialCategory.COSTS,
+      financialCategory: FinancialCategory.COSTS,
       id: "annual-maintenance-costs",
       inputHeader: {
         label: "Annual Maintenance Costs",
@@ -503,7 +503,7 @@ function FinancialSection() {
     },
     // Annual Training Costs
     {
-      category: FinancialCategory.COSTS,
+      financialCategory: FinancialCategory.COSTS,
       id: "annual-training-costs",
       inputHeader: {
         label: "Training Costs",
@@ -563,7 +563,7 @@ function FinancialSection() {
     },
     // Annual Revenue
     {
-      category: FinancialCategory.REVENUE,
+      financialCategory: FinancialCategory.REVENUE,
       id: "annual-revenue",
       inputHeader: {
         label: "Annual Revenue",
@@ -705,7 +705,7 @@ function FinancialSection() {
     },
     // Annual Cost Savings
     {
-      category: FinancialCategory.REVENUE,
+      financialCategory: FinancialCategory.REVENUE,
       id: "annual-cost-savings",
       inputHeader: {
         label: "Annual Cost Savings",
@@ -846,7 +846,7 @@ function FinancialSection() {
     },
     // Project Duration
     {
-      category: FinancialCategory.MAIN,
+      financialCategory: FinancialCategory.MAIN,
       id: "project-duration",
       inputHeader: {
         label: "Project Duration",
@@ -893,7 +893,7 @@ function FinancialSection() {
     },
     // Risk Factor
     {
-      category: FinancialCategory.MAIN,
+      financialCategory: FinancialCategory.MAIN,
       id: "risk-factor",
       inputHeader: {
         label: "Risk Factor",
@@ -948,7 +948,7 @@ function FinancialSection() {
     },
     // Discount Rate
     {
-      category: FinancialCategory.MAIN,
+      financialCategory: FinancialCategory.MAIN,
       id: "discount-rate",
       inputHeader: {
         label: "Discount Rate",
@@ -1037,15 +1037,18 @@ function FinancialSection() {
     switch (category) {
       case FinancialCategory.MAIN:
         return inputGroups.filter(
-          (inputGroup) => inputGroup.category === FinancialCategory.MAIN
+          (inputGroup) =>
+            inputGroup.financialCategory === FinancialCategory.MAIN
         );
       case FinancialCategory.COSTS:
         return inputGroups.filter(
-          (inputGroup) => inputGroup.category === FinancialCategory.COSTS
+          (inputGroup) =>
+            inputGroup.financialCategory === FinancialCategory.COSTS
         );
       case FinancialCategory.REVENUE:
         return inputGroups.filter(
-          (inputGroup) => inputGroup.category === FinancialCategory.REVENUE
+          (inputGroup) =>
+            inputGroup.financialCategory === FinancialCategory.REVENUE
         );
     }
   };

@@ -17,23 +17,23 @@ export const rioModel = (inputs: RioInputs): RioResults => {
 
   // Initialize weighted scores
   const weightedScores: RioInputs = {
-    privacy: 0,
-    marketAdvantage: 0,
-    longTermResilience: 0,
-    longTermScalability: 0,
-    legalRequirements: 0,
+    privacy: { value: 0, comment: undefined },
+    marketAdvantage: { value: 0, comment: undefined },
+    longTermResilience: { value: 0, comment: undefined },
+    longTermScalability: { value: 0, comment: undefined },
+    legalRequirements: { value: 0, comment: undefined },
   };
 
   // Calculate individual weighted scores
   (Object.keys(inputs) as Array<keyof RioInputs>).forEach((key) => {
-    const weightedResult: number = inputs[key] * weights[key];
-    weightedScores[key] = weightedResult;
+    const weightedResult: number = inputs[key].value * weights[key];
+    weightedScores[key].value = weightedResult;
     //weightedScores.push({ key, value: weightedResult, weight: weights[key] });
   });
 
   // Calculate total score
   const totalScore: number = Object.values(weightedScores).reduce(
-    (acc, value) => acc + value,
+    (acc, factorInput) => acc + factorInput.value,
     0
   );
 
