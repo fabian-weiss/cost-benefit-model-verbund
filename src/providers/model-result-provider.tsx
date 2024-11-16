@@ -47,7 +47,7 @@ function ModelResultProvider(props: { children: React.ReactNode }) {
           <SocietalResultsDialog closeDialog={() => handleShowDialog(false)} />
         );
       case DialogType.RIO_MODEL:
-        return <RioResultsDialog />;
+        return <RioResultsDialog closeDialog={() => handleShowDialog(false)} />;
       default:
         return <p>FFAIILLLL</p>;
     }
