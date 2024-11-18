@@ -78,15 +78,18 @@ function SocietalResultsList() {
             />
             <ResultEntry
               isSmall
-              factor={SocietalInputEnum.VALUE_CHAIN}
-              value={`${societalModelContext.modelResults?.weightedSingleFactors.valueChain.value.toFixed(
+              factor={
+                SocietalInputEnum.KNOWLEDGE_SHARING_ACROSS_THE_SUPPLY_CHAIN
+              }
+              value={`${societalModelContext.modelResults?.weightedSingleFactors.knowledgeSharingAcrossTheSupplyChain.value.toFixed(
                 2
               )} (weight ${
-                societalModelContext.modelResults?.weights.valueChain
+                societalModelContext.modelResults?.weights
+                  .knowledgeSharingAcrossTheSupplyChain
               })`}
               resultInterpretation={valueToResultInterpretation(
                 societalModelContext.modelResults?.weightedSingleFactors
-                  .valueChain.value
+                  .knowledgeSharingAcrossTheSupplyChain.value
               )}
             />
 

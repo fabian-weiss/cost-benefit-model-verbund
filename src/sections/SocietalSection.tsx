@@ -265,30 +265,31 @@ function SocietalSection() {
       ],
     },
     {
-      id: "valueChain",
+      id: "knowledgesharingacrossthesupplychain",
       inputHeader: {
-        label: "Value Chain",
+        label: SocietalInputEnum.KNOWLEDGE_SHARING_ACROSS_THE_SUPPLY_CHAIN,
         description:
-          "Impact on value chain (e.g. production, transmission, distribution).",
+          "Impact on knowledge sharing (e.g. technology, efficiency).",
       },
       detailedDescription: {
         header:
-          "Measures how the initiative affects the efficiency, reliability, and sustainability of the company’s value chain. Examples include supplier practices (e.g., ethical sourcing, local supplier engagement), distribution efficiency (e.g., faster delivery of services), resource management (e.g., reducing waste in operations), and innovation in processes (e.g., introducing new technology to streamline operations).",
+          "Assesses the initiative’s ability to facilitate the exchange of information, expertise, and innovation among stakeholders within the supply chain. Examples include training programs (e.g., providing skill development to suppliers), best practice dissemination (e.g., sharing sustainability practices), collaborative innovation (e.g., co-developing new technologies or methods), data transparency (e.g., open access to key operational metrics), and technical support (e.g., helping partners implement new systems or processes).",
         descriptionRows: [
-          "Very Negative: Major disruptions to the value chain, increased inefficiencies, or negative supplier practices.",
-          "Negative: Noticeable issues in logistics, sourcing, or operations that impact the value chain.",
-          "Neutral: No measurable impact on the value chain or its performance.",
-          "Positive: Improved operational efficiency, strengthened supplier relationships, or reduced resource usage.",
-          "Very Positive: Transformative improvements such as breakthrough innovations, enhanced sustainability, or global recognition for operational excellence.",
+          "Very Negative: Hinders knowledge sharing, creates information silos, or leads to a lack of trust and collaboration within the supply chain.",
+          "Negative: Limited knowledge-sharing efforts, resulting in inefficiencies or missed opportunities for collaboration.",
+          "Neutral: No significant impact on knowledge sharing, maintaining the status quo.",
+          "Positive: Encourages effective knowledge exchange, improves transparency, and fosters collaborative growth among supply chain stakeholders.",
+          "Very Positive: Sets new standards for supply chain collaboration, actively promotes innovation, and enhances knowledge sharing at all levels of the supply chain.",
         ],
       },
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          societalModelContext.societalInputs.valueChain.comment,
+          societalModelContext.societalInputs
+            .knowledgeSharingAcrossTheSupplyChain.comment,
           (comment) => {
             societalModelContext.setSocietalInput(
-              SocietalInputEnum.VALUE_CHAIN,
+              SocietalInputEnum.KNOWLEDGE_SHARING_ACROSS_THE_SUPPLY_CHAIN,
               undefined,
               comment
             );
@@ -300,13 +301,14 @@ function SocietalSection() {
           id: "valueChain",
           onSelect(entry: DropdownEntryType) {
             societalModelContext.setSocietalInput(
-              SocietalInputEnum.VALUE_CHAIN,
+              SocietalInputEnum.KNOWLEDGE_SHARING_ACROSS_THE_SUPPLY_CHAIN,
               impactToNumber(entry.impact)
             );
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.valueChain.value
+              societalModelContext.societalInputs
+                .knowledgeSharingAcrossTheSupplyChain.value
             ),
           },
           entries: impactEntries,

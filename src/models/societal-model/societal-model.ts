@@ -10,7 +10,7 @@ export const societalModel = (inputs: SocietalInputs): SocietalResults => {
     customerAffordability: 0.1,
     companyCulture: 0.1,
     communityImplications: 0.1,
-    valueChain: 0.1,
+    knowledgeSharingAcrossTheSupplyChain: 0.1,
     shareholderValue: 0.1,
     guidingPrinciplesAlignment: 0.1,
     publicPerception: 0.1,
@@ -37,7 +37,7 @@ export const societalModel = (inputs: SocietalInputs): SocietalResults => {
       value: 0,
       comment: undefined,
     },
-    valueChain: {
+    knowledgeSharingAcrossTheSupplyChain: {
       value: 0,
       comment: undefined,
     },

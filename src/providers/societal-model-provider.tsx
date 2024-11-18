@@ -41,7 +41,7 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
       value: 0,
       comment: undefined,
     },
-    valueChain: {
+    knowledgeSharingAcrossTheSupplyChain: {
       value: 0,
       comment: undefined,
     },
@@ -115,12 +115,17 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
           },
         }));
         break;
-      case SocietalInputEnum.VALUE_CHAIN:
+      case SocietalInputEnum.KNOWLEDGE_SHARING_ACROSS_THE_SUPPLY_CHAIN:
         setSocietalInputs((prev) => ({
           ...prev,
-          valueChain: {
-            value: input ? input : prev.valueChain.value,
-            comment: comment != undefined ? comment : prev.valueChain?.comment,
+          knowledgeSharingAcrossTheSupplyChain: {
+            value: input
+              ? input
+              : prev.knowledgeSharingAcrossTheSupplyChain.value,
+            comment:
+              comment != undefined
+                ? comment
+                : prev.knowledgeSharingAcrossTheSupplyChain?.comment,
           },
         }));
         break;

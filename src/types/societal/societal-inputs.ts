@@ -5,7 +5,7 @@ export type SocietalInputs = {
   customerAffordability: FactorInputType;
   companyCulture: FactorInputType;
   communityImplications: FactorInputType;
-  valueChain: FactorInputType;
+  knowledgeSharingAcrossTheSupplyChain: FactorInputType;
   shareholderValue: FactorInputType;
   guidingPrinciplesAlignment: FactorInputType;
   publicPerception: FactorInputType;
