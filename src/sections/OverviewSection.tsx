@@ -5,9 +5,34 @@ import SectionContainer from "@/components/SectionContainer";
 import { useOverview } from "@/providers/overview-provider";
 import React from "react";
 import "@/styles/overview.css";
+import BubbleSelect from "@/components/BubbleSelect";
+import { BubbleType } from "@/types/bubble-type";
+import { ProjectType } from "@/enums/ProjectType";
 
 function OverviewSection() {
   const overviewContext = useOverview();
+
+  const [selectedProjectType, setSelectedProjectType] =
+    React.useState<BubbleType>();
+
+  const bubbles: BubbleType[] = [
+    {
+      label: ProjectType.DEFAULT,
+      id: `project-type-bubble-${ProjectType.DEFAULT}`,
+    },
+    {
+      label: ProjectType.SOCIAL,
+      id: `project-type-bubble-${ProjectType.SOCIAL}`,
+    },
+    {
+      label: ProjectType.INNOVATIVE,
+      id: `project-type-bubble-${ProjectType.INNOVATIVE}`,
+    },
+    {
+      label: ProjectType.SUSTAINABLE,
+      id: `project-type-bubble-${ProjectType.SUSTAINABLE}`,
+    },
+  ];
   return (
     <SectionContainer contentClasses="fw-model-container">
       <ModelHeader title="Project overview" />
@@ -51,6 +76,18 @@ function OverviewSection() {
               type: "number",
               prefix: "€",
               placeholder: "10.000,00",
+            }}
+          />
+          <BubbleSelect
+            header="Project type"
+            description="What type of project are you working on?"
+            bubbles={bubbles}
+            selectedBubble={selectedProjectType ?? bubbles[0]}
+            setSelectedBubble={(bubble: BubbleType) => {
+              setSelectedProjectType(bubble);
+              overviewContext.handleOverviewInput({
+                projectType: bubble.label as ProjectType,
+              });
             }}
           />
         </div>

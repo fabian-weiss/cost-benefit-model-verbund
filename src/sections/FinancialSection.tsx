@@ -20,7 +20,7 @@ import { useState } from "react";
 function FinancialSection() {
   const financialModelContext = useFinancialModel();
   const resultsDialogContext = useResultDialog();
-  const [budget, setBudget] = useState<number>();
+  //const [budget, setBudget] = useState<number>();
   const [initialInvestment, setInitialInvestment] = useState<number>();
   const [annualOperatingCosts, setAnnualOperatingCosts] = useState<number>();
   const [annualOperatingCostsGrowthRate, setAnnualOperatingCostsGrowthRate] =
@@ -42,7 +42,7 @@ function FinancialSection() {
     useState<number>();
   const [firstCostSavingYear, setFirstCostSavingYear] = useState<number>();
   const [projectDuration, setProjectDuration] = useState<number>();
-  const [riskFactor, setRiskFactor] = useState<number>();
+  //const [riskFactor, setRiskFactor] = useState<number>();
   const [discountRate, setDiscountRate] = useState<number>();
   const errors = financialModelContext.errors;
 
@@ -184,60 +184,60 @@ function FinancialSection() {
 
   const inputGroups: InputGroupType[] = [
     // Budget
-    {
-      financialCategory: FinancialCategory.MAIN,
-      id: "budget",
-      inputHeader: {
-        label: "Budget",
-        adjustmentButtonRow: {
-          adjustments: [10, 20, 30],
-          callback: (adjustment: number) =>
-            handleAdjustment(adjustment, FinancialInputRangesEnum.BUDGET),
-          id: "budget",
-          disabled:
-            financialModelContext.financialInputRanges.budget.length === 0,
-        },
-      },
-      inputFields: [
-        {
-          id: "budget",
-          value: budget?.toString() ?? "",
-          description: "At least 1 - Click 'Enter' to add",
-          // label: "Budget",
-          // description: "At least 1 - Click 'Enter' to add",
-          error: errors.budget,
-          type: "number",
-          prefix: "€",
-          values: financialModelContext.financialInputRanges.budget,
-          valueType: ValueType.CURRENCY,
-          rangeAdjustments: [10, 20, 30],
-          removeCallback: (value: number) =>
-            financialModelContext.removeFinancialInput(
-              FinancialInputRangesEnum.BUDGET,
-              value
-            ),
-          onChange: (e) => {
-            setBudget(Number(e.target.value.trim()));
-          },
-          onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
-            addRangeInput(
-              e,
-              budget ?? 0,
-              () => {
-                const b = Number(budget);
-                if (!isNaN(b)) {
-                  financialModelContext.addFinancialInput(
-                    FinancialInputRangesEnum.BUDGET,
-                    [b]
-                  );
-                  setBudget(undefined);
-                }
-              },
-              financialModelContext.financialInputRanges.budget
-            ),
-        },
-      ],
-    },
+    // {
+    //   financialCategory: FinancialCategory.MAIN,
+    //   id: "budget",
+    //   inputHeader: {
+    //     label: "Budget",
+    //     adjustmentButtonRow: {
+    //       adjustments: [10, 20, 30],
+    //       callback: (adjustment: number) =>
+    //         handleAdjustment(adjustment, FinancialInputRangesEnum.BUDGET),
+    //       id: "budget",
+    //       disabled:
+    //         financialModelContext.financialInputRanges.budget.length === 0,
+    //     },
+    //   },
+    //   inputFields: [
+    //     {
+    //       id: "budget",
+    //       value: budget?.toString() ?? "",
+    //       description: "At least 1 - Click 'Enter' to add",
+    //       // label: "Budget",
+    //       // description: "At least 1 - Click 'Enter' to add",
+    //       error: errors.budget,
+    //       type: "number",
+    //       prefix: "€",
+    //       values: financialModelContext.financialInputRanges.budget,
+    //       valueType: ValueType.CURRENCY,
+    //       rangeAdjustments: [10, 20, 30],
+    //       removeCallback: (value: number) =>
+    //         financialModelContext.removeFinancialInput(
+    //           FinancialInputRangesEnum.BUDGET,
+    //           value
+    //         ),
+    //       onChange: (e) => {
+    //         setBudget(Number(e.target.value.trim()));
+    //       },
+    //       onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
+    //         addRangeInput(
+    //           e,
+    //           budget ?? 0,
+    //           () => {
+    //             const b = Number(budget);
+    //             if (!isNaN(b)) {
+    //               financialModelContext.addFinancialInput(
+    //                 FinancialInputRangesEnum.BUDGET,
+    //                 [b]
+    //               );
+    //               setBudget(undefined);
+    //             }
+    //           },
+    //           financialModelContext.financialInputRanges.budget
+    //         ),
+    //     },
+    //   ],
+    // },
     // Initial Investment
     {
       financialCategory: FinancialCategory.MAIN,
@@ -506,7 +506,7 @@ function FinancialSection() {
       financialCategory: FinancialCategory.COSTS,
       id: "annual-training-costs",
       inputHeader: {
-        label: "Training Costs",
+        label: "Annual Training Costs",
         adjustmentButtonRow: {
           adjustments: [10, 20, 30],
           callback: (adjustment: number) =>
@@ -561,6 +561,54 @@ function FinancialSection() {
         },
       ],
     },
+    // Additional one-time costs
+    // {
+    //   financialCategory: FinancialCategory.COSTS,
+    //   id: "one-time-costs",
+    //   inputHeader: {
+    //     label: "One-time Costs",
+    //   },
+    //   inputFields: [
+    //     {
+    //       id: "one-time-costs",
+    //       value: trainingCosts?.toString() ?? "",
+    //       // label: "Training Costs",
+    //       // description: "At least 1 - Click 'Enter' to add",
+    //       description: "At least 1 - Click 'Enter' to add",
+    //       error: errors.trainingCosts,
+    //       type: "number",
+    //       prefix: "€",
+    //       values: financialModelContext.financialInputRanges.trainingCosts,
+    //       rangeAdjustments: [10, 20, 30],
+    //       valueType: ValueType.CURRENCY,
+    //       removeCallback: (value: number) =>
+    //         financialModelContext.removeFinancialInput(
+    //           FinancialInputRangesEnum.TRAINING_COSTS,
+    //           value
+    //         ),
+    //       onChange: (e) => {
+    //         setTrainingCosts(Number(e.target.value.trim()));
+    //       },
+
+    //       onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
+    //         addRangeInput(
+    //           e,
+    //           trainingCosts ?? 0,
+    //           () => {
+    //             const tc = Number(trainingCosts);
+    //             if (!isNaN(tc)) {
+    //               financialModelContext.addFinancialInput(
+    //                 FinancialInputRangesEnum.TRAINING_COSTS,
+    //                 [tc]
+    //               );
+    //               setTrainingCosts(undefined);
+    //             }
+    //           },
+    //           financialModelContext.financialInputRanges.trainingCosts
+    //         ),
+    //     },
+    //   ],
+    // },
     // Annual Revenue
     {
       financialCategory: FinancialCategory.REVENUE,
@@ -891,61 +939,61 @@ function FinancialSection() {
         },
       ],
     },
-    // Risk Factor
-    {
-      financialCategory: FinancialCategory.MAIN,
-      id: "risk-factor",
-      inputHeader: {
-        label: "Risk Factor",
-        description: "At least 1 - between 0 and 100 - 'Enter' to add",
-      },
-      inputFields: [
-        {
-          id: "risk-factor",
-          value: riskFactor?.toString() ?? "",
-          // label: "Risk Factor",
-          suffix: "%",
-          valueLabelSuffix: "%",
-          valueType: ValueType.PERCENTAGE,
-          values: financialModelContext.financialInputRanges.riskFactor,
-          removeCallback: (value: number) =>
-            financialModelContext.removeFinancialInput(
-              FinancialInputRangesEnum.RISK_FACTOR,
-              value
-            ),
-          error: errors.riskFactor,
-          // description: "At least 1 - between 0 and 100 - 'Enter' to add",
-          type: "number",
-          onChange: (e) => {
-            setRiskFactor(Number(e.target.value.trim()));
-          },
-          onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => {
-            if (isBetweenOneAndHundred(riskFactor)) {
-              addRangeInput(
-                e,
-                riskFactor ?? 0,
-                () => {
-                  const rf = Number(riskFactor);
-                  if (!isNaN(rf)) {
-                    financialModelContext.addFinancialInput(
-                      FinancialInputRangesEnum.RISK_FACTOR,
-                      [rf / 100]
-                    );
-                    setRiskFactor(undefined);
-                  }
-                },
-                financialModelContext.financialInputRanges.riskFactor
-              );
-            } else if (e.key === "Enter" || e.key === "Tab") {
-              financialModelContext.setErrors((prev: any) => ({
-                ...prev,
-                riskFactor: "Risk factor must be between 0 and 100",
-              }));
-            }
-          },
-        },
-      ],
-    },
+    // // Risk Factor
+    // {
+    //   financialCategory: FinancialCategory.MAIN,
+    //   id: "risk-factor",
+    //   inputHeader: {
+    //     label: "Risk Factor",
+    //     description: "At least 1 - between 0 and 100 - 'Enter' to add",
+    //   },
+    //   inputFields: [
+    //     {
+    //       id: "risk-factor",
+    //       value: riskFactor?.toString() ?? "",
+    //       // label: "Risk Factor",
+    //       suffix: "%",
+    //       valueLabelSuffix: "%",
+    //       valueType: ValueType.PERCENTAGE,
+    //       values: financialModelContext.financialInputRanges.riskFactor,
+    //       removeCallback: (value: number) =>
+    //         financialModelContext.removeFinancialInput(
+    //           FinancialInputRangesEnum.RISK_FACTOR,
+    //           value
+    //         ),
+    //       error: errors.riskFactor,
+    //       // description: "At least 1 - between 0 and 100 - 'Enter' to add",
+    //       type: "number",
+    //       onChange: (e) => {
+    //         setRiskFactor(Number(e.target.value.trim()));
+    //       },
+    //       onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => {
+    //         if (isBetweenOneAndHundred(riskFactor)) {
+    //           addRangeInput(
+    //             e,
+    //             riskFactor ?? 0,
+    //             () => {
+    //               const rf = Number(riskFactor);
+    //               if (!isNaN(rf)) {
+    //                 financialModelContext.addFinancialInput(
+    //                   FinancialInputRangesEnum.RISK_FACTOR,
+    //                   [rf / 100]
+    //                 );
+    //                 setRiskFactor(undefined);
+    //               }
+    //             },
+    //             financialModelContext.financialInputRanges.riskFactor
+    //           );
+    //         } else if (e.key === "Enter" || e.key === "Tab") {
+    //           financialModelContext.setErrors((prev: any) => ({
+    //             ...prev,
+    //             riskFactor: "Risk factor must be between 0 and 100",
+    //           }));
+    //         }
+    //       },
+    //     },
+    //   ],
+    // },
     // Discount Rate
     {
       financialCategory: FinancialCategory.MAIN,

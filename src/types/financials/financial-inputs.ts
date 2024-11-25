@@ -1,3 +1,5 @@
+import { DynamicFinancialInput } from "./dynamic-financial-input";
+
 export type FinancialInputs = {
   budget: number;
   initialInvestment: number;
@@ -15,4 +17,5 @@ export type FinancialInputs = {
   projectDuration: number; // in years
   riskFactor: number; // in percent
   discountRate: number; // in percent
+  dynamicFinancialInputs: DynamicFinancialInput[];
 };

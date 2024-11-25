@@ -6,21 +6,49 @@ import RioResultsList from "@/components/result-lists/RioResultsList";
 import SocietalResultsList from "@/components/result-lists/SocietalResultsList";
 import ResultEntry from "@/components/ResultEntry";
 import ResultsGroup from "@/components/ResultsGroup";
+import { ProjectType } from "@/enums/ProjectType";
 import { useEnvironmentalModel } from "@/providers/environmental-model-provider";
+import { useOverview } from "@/providers/overview-provider";
 import { useRioModel } from "@/providers/rio-model-provider";
 import { useSocietalModel } from "@/providers/societal-model-provider";
+import { ProjectTypeWeights } from "@/types/project-type-weights";
+import {
+  defaultProjectWeight,
+  environmentalProjectWeight,
+  rioProjectWeight,
+  societalProjectWeight,
+} from "@/utils/model-weights";
 import { valueToResultInterpretation } from "@/utils/value-to-result-interpretation";
 import React from "react";
 
 function CompleteResultsDialog(props: { closeDialog: () => void }) {
+  const overviewContext = useOverview();
   const rioModelContext = useRioModel();
   const environmentalModelContext = useEnvironmentalModel();
   const societalModelContext = useSocietalModel();
 
+  const _getProjectSpecificWeight = (): ProjectTypeWeights => {
+    switch (overviewContext.overviewInputs.projectType) {
+      case ProjectType.DEFAULT:
+        return defaultProjectWeight;
+      case ProjectType.SOCIAL:
+        return societalProjectWeight;
+      case ProjectType.INNOVATIVE:
+        return rioProjectWeight;
+      case ProjectType.SUSTAINABLE:
+        return environmentalProjectWeight;
+      default:
+        return defaultProjectWeight;
+    }
+  };
+
   const meanModelScore: number =
-    ((societalModelContext.modelResults?.scaledTotalScore ?? 0) +
-      (rioModelContext.modelResults?.scaledTotalScore ?? 0) +
-      (environmentalModelContext.modelResults?.scaledTotalScore ?? 0)) /
+    ((societalModelContext.modelResults?.scaledTotalScore ?? 0) *
+      _getProjectSpecificWeight().societalWeights +
+      (rioModelContext.modelResults?.scaledTotalScore ?? 0) *
+        _getProjectSpecificWeight().rioWeights +
+      (environmentalModelContext.modelResults?.scaledTotalScore ?? 0) *
+        _getProjectSpecificWeight().environmentalWeights) /
     3;
 
   return (

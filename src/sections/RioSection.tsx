@@ -30,13 +30,13 @@ function RioSection() {
       },
       detailedDescription: {
         header:
-          "Assesses how the initiative affects data privacy and the protection of user information. Examples include data encryption (e.g., ensuring secure storage of personal data), user consent (e.g., clear opt-in mechanisms), compliance with privacy laws (e.g., GDPR), anonymization (e.g., protecting user identities), and third-party sharing (e.g., limiting data access to external parties).",
+          "Assesses how well the initiative addresses data privacy and protects sensitive information. Factors include safeguarding against internal security threats such as data breaches and cyberattacks. Relevant measures involve ensuring compliance with privacy laws (e.g., GDPR), encrypting sensitive data, implementing secure access controls, and maintaining robust incident response mechanisms.",
         descriptionRows: [
-          "Very Negative: Severe breaches of privacy or failure to protect user data, resulting in legal repercussions.",
-          "Negative: Noticeable lapses in privacy practices or non-compliance with privacy regulations.",
-          "Neutral: No impact on privacy or no major improvements, just standard privacy measures in place.",
-          "Positive: Strong privacy practices that comply with regulations and enhance user trust.",
-          "Very Positive: Leading-edge privacy standards that exceed regulatory requirements and build exceptional user trust.",
+          "Very Negative: Severe security breaches or failure to protect sensitive data, leading to legal repercussions or loss of user trust.",
+          "Negative: Inconsistent security practices or partial non-compliance with privacy laws.",
+          "Neutral: Basic privacy measures in place, with no major improvements or issues identified.",
+          "Positive: Strong and reliable data protection practices that comply with legal requirements and foster trust.",
+          "Very Positive: Cutting-edge privacy safeguards that exceed regulatory standards, demonstrating leadership in privacy protection.",
         ],
       },
       handleShowComments: () => {
@@ -73,17 +73,17 @@ function RioSection() {
       inputHeader: {
         label: "Market Advantage",
         description:
-          "Impact on market advantage (e.g. new technologies, expected cost reduction).",
+          "Ability to gain or sustain a competitive edge in the market through technological adoption, cost savings, and data value.",
       },
       detailedDescription: {
         header:
-          "Evaluates how the initiative impacts the company’s competitive position in the market. Examples include differentiation (e.g., unique product features), customer loyalty (e.g., strong brand following), speed to market (e.g., introducing new offerings faster than competitors), and market share growth (e.g., increasing dominance in key sectors).",
+          "Assesses the project’s ability to create a competitive edge in the market. Factors include adoption potential for future technologies, expected cost reductions/increased efficiency, and the contribution to data as an asset. The evaluation considers whether the initiative aligns with market demands and provides long-term economic benefits.",
         descriptionRows: [
-          "Very Negative: Major loss in market position, reduced customer base, or failure to stay competitive.",
-          "Negative: Noticeable decrease in market position or a failure to capitalize on emerging trends.",
-          "Neutral: No significant impact on market advantage or position.",
-          "Positive: Gaining an edge over competitors, expanding market share, or creating new differentiators.",
-          "Very Positive: Dominating the market, setting trends, and achieving significant competitive advantages over industry peers.",
+          "Very Negative: The initiative undermines market positioning or increases costs without significant returns.",
+          "Negative: Minimal benefits with unclear or negative competitive outcomes.",
+          "Neutral: Moderate improvements but limited contribution to market positioning.",
+          "Positive: Clear economic benefits and competitive positioning with proactive technology adoption.",
+          "Very Positive: Major competitive edge through significant cost savings, innovation, and contribution to strategic data assets.",
         ],
       },
       handleShowComments: () => {
@@ -122,17 +122,18 @@ function RioSection() {
       inputHeader: {
         label: "Long Term Resilience",
         description:
-          "Impact on long term resilience (e.g. employee retention, data access and maintenance).",
+          // "Impact on long term resilience (e.g. employee retention, data access and maintenance).",
+          "Ability to maintain stability and adapt to evolving technologies and market demands, supported by mature adoption levels and reliable resources.",
       },
       detailedDescription: {
         header:
-          "Assesses the ability of the initiative to withstand challenges over time and adapt to changing circumstances. Examples include crisis preparedness (e.g., risk mitigation strategies), resource management (e.g., flexible supply chains), technological adaptation (e.g., ability to integrate new tech), and organizational agility (e.g., quick decision-making processes).",
+          "Evaluates the project’s resilience by assessing technology adoption maturity, resource readiness, and vendor reliability. It reflects the initiative's ability to adapt to technological changes and maintain operational stability.",
         descriptionRows: [
-          "Very Negative: Vulnerable to long-term risks, unable to adapt to future challenges, or high likelihood of failure in a crisis.",
-          "Negative: Some long-term weaknesses that could hinder growth or sustainability, or limited flexibility in adapting to change.",
-          "Neutral: Neutral in terms of long-term resilience, maintaining current performance without significant risks or benefits.",
-          "Positive: Demonstrates resilience through risk mitigation, adaptability, and strong forward planning.",
-          "Very Positive: Highly resilient, with clear strategies for overcoming challenges and consistently adapting to future market and environmental conditions.",
+          "Very Negative: High risks due to immature technologies, unprepared resources, or unreliable vendors.",
+          "Negative: Limited resilience with insufficient preparation or dependencies on weak vendors.",
+          "Neutral: Basic resilience measures with no major issues or improvements.",
+          "Positive: Good resilience with stable vendor relationships and readiness for implementation.",
+          "Very Positive: Exceptional readiness, mature technologies, and strong vendor support, ensuring long-term stability.",
         ],
       },
       handleShowComments: () => {
@@ -171,17 +172,17 @@ function RioSection() {
       inputHeader: {
         label: "Long Term Scalability",
         description:
-          "Impact on long term scalability (e.g. contribution in meeting an overall goal).",
+          "Capacity to expand in size and functionality over time, supported by data infrastructure and skilled workforce.",
       },
       detailedDescription: {
         header:
-          "Measures the ability of the initiative to scale effectively and sustainably over time. Examples include infrastructure readiness (e.g., scalable IT systems), process optimization (e.g., automating repetitive tasks), market expansion (e.g., ability to enter new geographies or segments), and resource availability (e.g., access to talent or capital).",
+          "Assesses the project’s scalability, focusing on its ability to expand in size and functionality over time. Key factors include the quality of data infrastructure, cloud adoption, and workforce skills.",
         descriptionRows: [
-          "Very Negative: Inability to scale due to resource constraints, outdated systems, or inefficient processes.",
-          "Negative: Some scalability challenges, such as difficulty in managing growth or limited expansion opportunities.",
-          "Neutral: Neutral impact, no significant hurdles to scalability but also no clear path for growth.",
-          "Positive: Effective scaling mechanisms, with optimized processes and infrastructure ready to handle growth.",
-          "Very Positive: Clear scalability potential with robust systems, resources, and strategies in place to support massive growth.",
+          "Very negative: Not Scalable, Unable to adapt to larger-scale operations or additional functionalities.",
+          "Negative: Short-term Scalability, Limited capacity for expansion, suitable only for initial stages.",
+          "Neutral: Some Long-term Scalability Potential, Scalable in specific areas but limited in scope.",
+          "Positive: Scalable, Demonstrates clear potential for expansion and functional growth.",
+          "Very positive: Very Scalable, Fully adaptable, supporting broad expansion in size and scope over time.",
         ],
       },
       handleShowComments: () => {
@@ -220,17 +221,17 @@ function RioSection() {
       inputHeader: {
         label: "Legal Requirements",
         description:
-          "Impact on legal requirements (e.g. workforce related, tax related).",
+          "Compliance with current and future legal regulations, including contractual and tax obligations.",
       },
       detailedDescription: {
         header:
-          "Evaluates how well the initiative meets or exceeds legal requirements, both existing and anticipated. Examples include compliance with regulations (e.g., adhering to industry-specific laws), taxation (e.g., ensuring proper tax compliance), contractual obligations (e.g., meeting the terms of agreements), and anticipated future regulations (e.g., preparing for upcoming legal frameworks).",
+          "Evaluates the project’s compliance with legal standards, including existing regulations, taxation, and contractual obligations. It also considers preparedness for future regulatory changes and how these factors impact the initiative.",
         descriptionRows: [
-          "Very Negative: Significant legal violations, exposure to lawsuits, or failure to comply with regulations.",
-          "Negative: Non-compliance with some legal requirements or need for corrective actions.",
-          "Neutral: Fully compliant but not exceeding legal requirements.",
-          "Positive: Meets or exceeds legal requirements with additional proactive legal protections in place.",
-          "Very Positive: Leading in legal compliance, anticipating future regulations and setting industry standards for legal practices.",
+          "Very Negative: Significant non-compliance, legal violations, or risk of lawsuits.",
+          "Negative: Partial compliance requiring corrective actions or posing moderate legal risks",
+          "Neutral: Fully compliant but with no proactive measures for future regulations.",
+          "Positive: Exceeds current legal requirements, incorporating proactive legal safeguards.",
+          "Very Positive: Industry leader in legal compliance, anticipating future regulatory needs and setting benchmarks.",
         ],
       },
       handleShowComments: () => {
@@ -259,6 +260,100 @@ function RioSection() {
             impact: numberToImpact(
               rioModelContext.rioInputs.legalRequirements.value
             ),
+          },
+          entries: impactEntries,
+        },
+      ],
+    },
+    {
+      id: "innovation",
+      inputHeader: {
+        label: "Innovation",
+        description:
+          "Degree of novelty in the project’s technology, processes, or business model.",
+      },
+      detailedDescription: {
+        header:
+          "Assesses the project’s degree of innovation, focusing on whether it drives meaningful changes to products, processes, or business models. Examples include groundbreaking features, real-time condition monitoring, and integration with cutting-edge technologies.",
+        descriptionRows: [
+          "Very Negative: No innovation; fully relies on outdated methods with no added value.",
+          "Negative: Minor updates with minimal impact on products, processes, or business models.",
+          "Neutral: Incremental changes that improve efficiency but lack transformative potential.",
+          "Positive: Introduces noticeable innovations that enhance value and operations.",
+          "Very Positive: Groundbreaking features that redefine products, processes, or business models.",
+        ],
+      },
+      handleShowComments: () => {
+        commentDialogContext.handleShowDialog(
+          true,
+          rioModelContext.rioInputs.innovation.comment,
+          (comment) => {
+            rioModelContext.setRioInput(
+              RioInputEnum.INNOVATION,
+              undefined,
+              comment
+            );
+          }
+        );
+      },
+      dropdownFields: [
+        {
+          id: "innovation",
+          onSelect(entry: DropdownEntryType) {
+            rioModelContext.setRioInput(
+              RioInputEnum.INNOVATION,
+              impactToNumber(entry.impact)
+            );
+          },
+          selectedEntry: {
+            impact: numberToImpact(rioModelContext.rioInputs.innovation.value),
+          },
+          entries: impactEntries,
+        },
+      ],
+    },
+    {
+      id: "otherRisks",
+      inputHeader: {
+        label: "Other Risks",
+        description:
+          "Mitigation of external risks, including reputational damage and environmental impacts.",
+      },
+      detailedDescription: {
+        header:
+          "Addresses risks beyond privacy and legal compliance, such as reputational damage and environmental risk reduction. These factors evaluate how well the project mitigates external risks.",
+        descriptionRows: [
+          "Very Negative: High reputational or environmental risks with insufficient mitigation.",
+          "Negative: Moderate risks with limited controls in place.",
+          "Neutral: Adequate controls that meet but do not exceed risk mitigation expectations.",
+          "Positive: Effective measures to minimize risks and enhance sustainability.",
+          "Very Positive: Demonstrates leadership in reducing environmental impact and safeguarding reputation.",
+        ],
+      },
+      handleShowComments: () => {
+        commentDialogContext.handleShowDialog(
+          true,
+          rioModelContext.rioInputs.innovation.comment,
+          (comment) => {
+            rioModelContext.setRioInput(
+              RioInputEnum.INNOVATION,
+              undefined,
+              comment
+            );
+          }
+        );
+      },
+      dropdownFields: [
+        {
+          id: "innovation",
+          onSelect(entry: DropdownEntryType) {
+            rioModelContext.setRioInput(
+              RioInputEnum.INNOVATION,
+              impactToNumber(entry.impact)
+            );
+          },
+          selectedEntry: {
+            impact: numberToImpact(rioModelContext.rioInputs.innovation.value),
           },
           entries: impactEntries,
         },

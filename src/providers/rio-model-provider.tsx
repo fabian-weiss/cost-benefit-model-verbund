@@ -42,6 +42,14 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
       value: 0,
       comment: undefined,
     },
+    innovation: {
+      value: 0,
+      comment: undefined,
+    },
+    otherRisks: {
+      value: 0,
+      comment: undefined,
+    },
   });
 
   const setRioInput = (
@@ -96,6 +104,24 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
             value: input ? input : prev.legalRequirements.value,
             comment:
               comment != undefined ? comment : prev.legalRequirements.comment,
+          },
+        }));
+        break;
+      case RioInputEnum.INNOVATION:
+        setRioInputs((prev) => ({
+          ...prev,
+          innovation: {
+            value: input ? input : prev.innovation.value,
+            comment: comment != undefined ? comment : prev.innovation.comment,
+          },
+        }));
+        break;
+      case RioInputEnum.OTHER_RISKS:
+        setRioInputs((prev) => ({
+          ...prev,
+          otherRisks: {
+            value: input ? input : prev.otherRisks.value,
+            comment: comment != undefined ? comment : prev.otherRisks.comment,
           },
         }));
         break;

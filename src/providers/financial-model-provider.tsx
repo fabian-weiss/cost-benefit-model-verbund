@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { FinancialInputRangesEnum } from "@/enums/FinancialInputRangesEnum";
+import { DynamicFinancialInput } from "@/types/financials/dynamic-financial-input";
 import { FinancialInputRanges } from "@/types/financials/financial-input-ranges";
 import { FinancialResults } from "@/types/financials/financial-results";
 import { createContext, useContext, useMemo, useState } from "react";
@@ -16,6 +17,9 @@ interface FinancialModelProviderContextType {
     inputRange: FinancialInputRangesEnum,
     input: number
   ) => void;
+  dynamicInputs: DynamicFinancialInput[];
+  addDynamicInput: (input: DynamicFinancialInput) => void;
+  removeDynamicInput: (id: string) => void;
   modelResults: FinancialResults | undefined;
   setModelResults: (results?: FinancialResults) => void;
   errors: any;
@@ -32,6 +36,9 @@ function FinancialModelProvider({ children }: { children: React.ReactNode }) {
   const [modelResults, setModelResults] = useState<
     FinancialResults | undefined
   >();
+  const [dynamicInputs, setDynamicInputs] = useState<DynamicFinancialInput[]>(
+    []
+  );
   const [financialInputRanges, setFinancialInputRanges] =
     useState<FinancialInputRanges>({
       budget: [],
@@ -89,6 +96,14 @@ function FinancialModelProvider({ children }: { children: React.ReactNode }) {
       riskFactor: "",
       discountRate: "",
     });
+  };
+
+  const addDynamicInput = (input: DynamicFinancialInput) => {
+    setDynamicInputs((prev) => [...prev, input]);
+  };
+
+  const removeDynamicInput = (id: string) => {
+    setDynamicInputs((prev) => prev.filter((input) => input.id !== id));
   };
 
   const addFinancialInput = (
@@ -517,6 +532,9 @@ function FinancialModelProvider({ children }: { children: React.ReactNode }) {
       financialInputRanges,
       addFinancialInput,
       removeFinancialInput,
+      dynamicInputs,
+      addDynamicInput,
+      removeDynamicInput,
       modelResults,
       setModelResults,
       errors,

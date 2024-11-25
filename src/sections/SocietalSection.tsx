@@ -128,13 +128,13 @@ function SocietalSection() {
       },
       detailedDescription: {
         header:
-          "Reflects how the initiative impacts employee morale, engagement, and alignment with company values. Examples include health and safety (e.g., improved safety measures, fewer incidents), team spirit (e.g., better collaboration, stronger sense of purpose), work-life balance (e.g., flexible scheduling, reduced burnout), and diversity and inclusion (e.g., increased representation and equity).",
+          "Reflects how the initiative impacts employee established working practices, employee engagement and retention, sense of the community within organization, attitude to work. Examples include team spirit (e.g., better collaboration like virtual teams, stronger sense of purpose), work-life balance (e.g., flexible scheduling, 24/7 work approach), improved working processes (increased productivity and adaptability).",
         descriptionRows: [
-          "Very Negative: Increased employee turnover, significant drops in engagement scores, or worsening workplace conditions.",
-          "Negative: Noticeable declines in morale, minor safety concerns, or team dissatisfaction.",
+          "Very Negative significant disruptions in workplace culture and employee engagement, causing confusion and resistance among employees.",
+          "Negative: minor team dissatisfaction, increased stress or a sense of being overwhelmed.",
           "Neutral: No noticeable changes in culture or engagement.",
-          "Positive: Improved morale, better collaboration, or notable safety enhancements.",
-          "Very Positive: Significant boosts in engagement, reduced turnover, or strong alignment with diversity and inclusion goals.",
+          "Positive: improved team dynamics,  and a more engaged workforce.",
+          "Very Positive: Significant improvements in fostering flexibility, enhanced productivity, reduced turnover.",
         ],
       },
       handleShowComments: () => {
@@ -172,7 +172,7 @@ function SocietalSection() {
       id: "shareholderValue",
       inputHeader: {
         label: "Shareholder Value",
-        description: "Impact on shareholder value.",
+        description: "Possible impact on  employees’ work practices",
       },
       detailedDescription: {
         header:
@@ -220,7 +220,8 @@ function SocietalSection() {
       id: "publicPerception",
       inputHeader: {
         label: "Public Perception",
-        description: "Impact on public perception (e.g. CSR).",
+        description:
+          "Will the company’s reputation at a given point of time be protected from the negative public perception if the product/service underperforms.",
       },
       detailedDescription: {
         header:
@@ -265,11 +266,11 @@ function SocietalSection() {
       ],
     },
     {
-      id: "knowledgesharingacrossthesupplychain",
+      id: "knowledgeSharingAcrossTheSupplyChain",
       inputHeader: {
         label: SocietalInputEnum.KNOWLEDGE_SHARING_ACROSS_THE_SUPPLY_CHAIN,
         description:
-          "Impact on knowledge sharing (e.g. technology, efficiency).",
+          "To what extent will this digitalization project enhance knowledge sharing across our supply chain?",
       },
       detailedDescription: {
         header:
@@ -298,7 +299,7 @@ function SocietalSection() {
       },
       dropdownFields: [
         {
-          id: "valueChain",
+          id: "knowledgeSharingAcrossTheSupplyChain",
           onSelect(entry: DropdownEntryType) {
             societalModelContext.setSocietalInput(
               SocietalInputEnum.KNOWLEDGE_SHARING_ACROSS_THE_SUPPLY_CHAIN,
@@ -319,7 +320,7 @@ function SocietalSection() {
       id: "communityImplications",
       inputHeader: {
         label: SocietalInputEnum.COMMUNITY_IMPLICATIONS,
-        description: "Impact on community (e.g. loss of workplaces, harm).",
+        description: "Negative externalities of production.",
       },
       detailedDescription: {
         header:
@@ -368,7 +369,8 @@ function SocietalSection() {
       id: "guidingPrinciplesAlignment",
       inputHeader: {
         label: SocietalInputEnum.GUIDING_PRINCIPLES_ALIGNMENT,
-        description: "Impact on company alignment (e.g. mission, vision).",
+        description:
+          "Alignment of the product/service with mission, vision and values of Verbund.",
       },
       detailedDescription: {
         header:

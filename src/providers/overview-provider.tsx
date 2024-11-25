@@ -1,4 +1,5 @@
 "use client";
+import { ProjectType } from "@/enums/ProjectType";
 import { OverviewInputs } from "@/types/overview-inputs";
 import { createContext, useContext, useMemo, useState } from "react";
 
@@ -17,6 +18,7 @@ function OverviewProvider({ children }: { children: React.ReactNode }) {
     projectDescription: undefined,
     projectOwner: undefined,
     budget: undefined,
+    projectType: ProjectType.SOCIAL,
   });
 
   const handleOverviewInput = (input: OverviewInputs) => {

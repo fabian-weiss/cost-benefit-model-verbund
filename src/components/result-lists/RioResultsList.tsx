@@ -2,6 +2,7 @@ import { useRioModel } from "@/providers/rio-model-provider";
 import { valueToResultInterpretation } from "@/utils/value-to-result-interpretation";
 import React from "react";
 import ResultEntry from "../ResultEntry";
+import { RioInputEnum } from "@/enums/RioInputEnum";
 
 function RioResultsList() {
   const rioModelContext = useRioModel();
@@ -71,6 +72,28 @@ function RioResultsList() {
               resultInterpretation={valueToResultInterpretation(
                 rioModelContext.modelResults?.weightedSingleFactors
                   .legalRequirements.value
+              )}
+            />
+            <ResultEntry
+              isSmall
+              factor={RioInputEnum.INNOVATION}
+              value={`${rioModelContext.modelResults?.weightedSingleFactors.innovation.value.toFixed(
+                2
+              )} (weight ${rioModelContext.modelResults?.weights.innovation})`}
+              resultInterpretation={valueToResultInterpretation(
+                rioModelContext.modelResults?.weightedSingleFactors.innovation
+                  .value
+              )}
+            />
+            <ResultEntry
+              isSmall
+              factor={RioInputEnum.OTHER_RISKS}
+              value={`${rioModelContext.modelResults?.weightedSingleFactors.otherRisks.value.toFixed(
+                2
+              )} (weight ${rioModelContext.modelResults?.weights.otherRisks})`}
+              resultInterpretation={valueToResultInterpretation(
+                rioModelContext.modelResults?.weightedSingleFactors.otherRisks
+                  .value
               )}
             />
           </div>

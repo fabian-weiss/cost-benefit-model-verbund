@@ -15,4 +15,5 @@ export enum FinancialInputRangesEnum {
   PROJECT_DURATION = "projectDuration",
   RISK_FACTOR = "riskFactor",
   DISCOUNT_RATE = "discountRate",
+  DYNAMIC_INPUT = "dynamicFinancialInputs",
 }

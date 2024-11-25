@@ -1,0 +1,28 @@
+.fw-bubble-select-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.fw-bubble-select-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.fw-bubble-select {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 1000px;
+  background-color: transparent;
+  border: 1px solid var(--secondary-background-color);
+  cursor: pointer;
+}
+
+.fw-bubble-select.selected {
+  background-color: var(--primary-color);
+  color: #fff;
+}

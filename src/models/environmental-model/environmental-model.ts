@@ -9,13 +9,13 @@ export const environmentalModel = (
   inputs: EnvironmentalInputs
 ): EnvironmentalResults => {
   const weights: EnvironmentalWeights = {
-    unSustainableGoals: 0.1,
+    unSustainableGoals: 0.2,
     wasteProduction: 0.1,
     biodiversity: 0.1,
     pollution: 0.1,
     sustainableEneryIntegration: 0.1,
-    energyEfficiency: 0.1,
-    meetingEnvironmentalRegulations: 0.05,
+    energyEfficiency: 0.2,
+    meetingEnvironmentalRegulations: 0.2,
   };
 
   const weightedScores: EnvironmentalInputs = {

@@ -8,12 +8,14 @@ export const rioModel = (inputs: RioInputs): RioResults => {
   const weights: RioWeights = {
     privacy: 0.1,
     marketAdvantage: 0.2,
-    longTermResilience: 0.3,
-    longTermScalability: 0.3,
+    longTermResilience: 0.25,
+    longTermScalability: 0.25,
     legalRequirements: 0.1,
+    otherRisks: 0.05,
+    innovation: 0.05,
   };
 
-  console.log(`inputs are: ${JSON.stringify(inputs)}`);
+  //console.log(`inputs are: ${JSON.stringify(inputs)}`);
 
   // Initialize weighted scores
   const weightedScores: RioInputs = {
@@ -22,6 +24,8 @@ export const rioModel = (inputs: RioInputs): RioResults => {
     longTermResilience: { value: 0, comment: undefined },
     longTermScalability: { value: 0, comment: undefined },
     legalRequirements: { value: 0, comment: undefined },
+    innovation: { value: 0, comment: undefined },
+    otherRisks: { value: 0, comment: undefined },
   };
 
   // Calculate individual weighted scores

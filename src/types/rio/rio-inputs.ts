@@ -6,4 +6,6 @@ export type RioInputs = {
   longTermResilience: FactorInputType;
   longTermScalability: FactorInputType;
   legalRequirements: FactorInputType;
+  innovation: FactorInputType;
+  otherRisks: FactorInputType;
 };
