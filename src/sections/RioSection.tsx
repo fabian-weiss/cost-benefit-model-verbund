@@ -47,6 +47,7 @@ function RioSection() {
             rioModelContext.setRioInput(
               RioInputEnum.PRIVACY,
               undefined,
+              undefined,
               comment
             );
           }
@@ -58,7 +59,8 @@ function RioSection() {
           onSelect(entry: DropdownEntryType) {
             rioModelContext.setRioInput(
               RioInputEnum.PRIVACY,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
@@ -94,6 +96,7 @@ function RioSection() {
             rioModelContext.setRioInput(
               RioInputEnum.MARKET_ADVANTAGE,
               undefined,
+              undefined,
               comment
             );
           }
@@ -105,7 +108,8 @@ function RioSection() {
           onSelect(entry: DropdownEntryType) {
             rioModelContext.setRioInput(
               RioInputEnum.MARKET_ADVANTAGE,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
@@ -144,6 +148,7 @@ function RioSection() {
             rioModelContext.setRioInput(
               RioInputEnum.LONG_TERM_RESILIENCE,
               undefined,
+              undefined,
               comment
             );
           }
@@ -155,7 +160,8 @@ function RioSection() {
           onSelect(entry: DropdownEntryType) {
             rioModelContext.setRioInput(
               RioInputEnum.LONG_TERM_RESILIENCE,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
@@ -193,6 +199,7 @@ function RioSection() {
             rioModelContext.setRioInput(
               RioInputEnum.LONG_TERM_SUSTAINABILITY,
               undefined,
+              undefined,
               comment
             );
           }
@@ -204,7 +211,8 @@ function RioSection() {
           onSelect(entry: DropdownEntryType) {
             rioModelContext.setRioInput(
               RioInputEnum.LONG_TERM_SUSTAINABILITY,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
@@ -242,6 +250,7 @@ function RioSection() {
             rioModelContext.setRioInput(
               RioInputEnum.LEGAL_REQUIREMENTS,
               undefined,
+              undefined,
               comment
             );
           }
@@ -253,7 +262,8 @@ function RioSection() {
           onSelect(entry: DropdownEntryType) {
             rioModelContext.setRioInput(
               RioInputEnum.LEGAL_REQUIREMENTS,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
@@ -291,6 +301,7 @@ function RioSection() {
             rioModelContext.setRioInput(
               RioInputEnum.INNOVATION,
               undefined,
+              undefined,
               comment
             );
           }
@@ -302,7 +313,8 @@ function RioSection() {
           onSelect(entry: DropdownEntryType) {
             rioModelContext.setRioInput(
               RioInputEnum.INNOVATION,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
@@ -333,10 +345,11 @@ function RioSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          rioModelContext.rioInputs.innovation.comment,
+          rioModelContext.rioInputs.otherRisks.comment,
           (comment) => {
             rioModelContext.setRioInput(
-              RioInputEnum.INNOVATION,
+              RioInputEnum.OTHER_RISKS,
+              undefined,
               undefined,
               comment
             );
@@ -345,15 +358,16 @@ function RioSection() {
       },
       dropdownFields: [
         {
-          id: "innovation",
+          id: "otherRisks",
           onSelect(entry: DropdownEntryType) {
             rioModelContext.setRioInput(
-              RioInputEnum.INNOVATION,
-              impactToNumber(entry.impact)
+              RioInputEnum.OTHER_RISKS,
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
-            impact: numberToImpact(rioModelContext.rioInputs.innovation.value),
+            impact: numberToImpact(rioModelContext.rioInputs.otherRisks.value),
           },
           entries: impactEntries,
         },

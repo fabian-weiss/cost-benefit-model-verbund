@@ -34,7 +34,7 @@ function CommentDialog(props: {
       />
       <ActionButton
         fullWidth
-        label="Submit"
+        label="Save"
         fillType="solid"
         onClick={() => props.submitComment(comment)}
       />

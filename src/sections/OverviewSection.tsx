@@ -8,6 +8,7 @@ import "@/styles/overview.css";
 import BubbleSelect from "@/components/BubbleSelect";
 import { BubbleType } from "@/types/bubble-type";
 import { ProjectType } from "@/enums/ProjectType";
+import { ValueType } from "@/enums/ValueType";
 
 function OverviewSection() {
   const overviewContext = useOverview();
@@ -66,16 +67,18 @@ function OverviewSection() {
           />
           <InputField
             inputField={{
-              onChange: (e) =>
+              onChange: (e) => {
                 overviewContext.handleOverviewInput({
                   budget: Number(e.target.value),
-                }),
-              value: overviewContext.overviewInputs.budget?.toFixed(2) ?? "",
+                });
+              },
+              value: overviewContext.overviewInputs.budget?.toString() ?? "",
               label: "Budget",
               id: "project-budget",
               type: "number",
               prefix: "€",
               placeholder: "10.000,00",
+              valueType: ValueType.CURRENCY,
             }}
           />
           <BubbleSelect

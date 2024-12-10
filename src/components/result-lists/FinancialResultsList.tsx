@@ -38,9 +38,17 @@ function FinancialResultsList() {
           />
           <ResultEntry
             factor="Payback Period"
-            value={`${financialModelContext.modelResults?.averages.paybackPeriod.toFixed(
-              0
-            )} years`}
+            value={`${
+              financialModelContext.modelResults?.averages.paybackPeriod > 0
+                ? financialModelContext.modelResults?.averages.paybackPeriod.toFixed(
+                    0
+                  )
+                : "Infinite"
+            } ${
+              financialModelContext.modelResults?.averages.paybackPeriod === 1
+                ? "year"
+                : "years"
+            }`}
             resultInterpretation={
               financialModelContext.modelResults?.averages.paybackPeriod > 0
                 ? ResultInterpretation.POSITIVE

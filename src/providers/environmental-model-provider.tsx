@@ -1,5 +1,6 @@
 "use client";
 import { EnvironmentalInputEnum } from "@/enums/EnvironmentalInputEnum";
+import { Impact } from "@/enums/Impact";
 import { EnvironmentalInputs } from "@/types/environmental/environmental-inputs";
 import { EnvironmentalResults } from "@/types/environmental/environmental-results";
 import { createContext, useContext, useMemo, useState } from "react";
@@ -9,6 +10,7 @@ interface EnvironmentalModelProviderContextType {
   setEnvironmentalInput: (
     inputType: EnvironmentalInputEnum,
     input?: number,
+    impact?: Impact,
     comment?: string
   ) => void;
   modelResults?: EnvironmentalResults;
@@ -31,30 +33,37 @@ function EnvironmentalModelProvider({
     useState<EnvironmentalInputs>({
       unSustainableGoals: {
         value: 0,
+        impact: Impact.NEUTRAL,
         comment: undefined,
       },
       wasteProduction: {
         value: 0,
+        impact: Impact.NEUTRAL,
         comment: undefined,
       },
       biodiversity: {
         value: 0,
+        impact: Impact.NEUTRAL,
         comment: undefined,
       },
       pollution: {
         value: 0,
+        impact: Impact.NEUTRAL,
         comment: undefined,
       },
       sustainableEneryIntegration: {
         value: 0,
+        impact: Impact.NEUTRAL,
         comment: undefined,
       },
       energyEfficiency: {
         value: 0,
+        impact: Impact.NEUTRAL,
         comment: undefined,
       },
       meetingEnvironmentalRegulations: {
         value: 0,
+        impact: Impact.NEUTRAL,
         comment: undefined,
       },
     });
@@ -62,6 +71,7 @@ function EnvironmentalModelProvider({
   const setEnvironmentalInput = (
     inputType: EnvironmentalInputEnum,
     input?: number,
+    impact?: Impact,
     comment?: string
   ) => {
     switch (inputType) {
@@ -72,6 +82,7 @@ function EnvironmentalModelProvider({
             value: input ? input : prev.unSustainableGoals.value,
             comment:
               comment != undefined ? comment : prev.unSustainableGoals?.comment,
+            impact: impact ? impact : prev.unSustainableGoals.impact,
           },
         }));
         break;
@@ -82,6 +93,7 @@ function EnvironmentalModelProvider({
             value: input ? input : prev.wasteProduction.value,
             comment:
               comment != undefined ? comment : prev.wasteProduction?.comment,
+            impact: impact ? impact : prev.wasteProduction.impact,
           },
         }));
         break;
@@ -92,6 +104,7 @@ function EnvironmentalModelProvider({
             value: input ? input : prev.biodiversity.value,
             comment:
               comment != undefined ? comment : prev.biodiversity?.comment,
+            impact: impact ? impact : prev.biodiversity.impact,
           },
         }));
         break;
@@ -101,6 +114,7 @@ function EnvironmentalModelProvider({
           pollution: {
             value: input ? input : prev.pollution.value,
             comment: comment != undefined ? comment : prev.pollution?.comment,
+            impact: impact ? impact : prev.pollution.impact,
           },
         }));
         break;
@@ -113,6 +127,7 @@ function EnvironmentalModelProvider({
               comment != undefined
                 ? comment
                 : prev.sustainableEneryIntegration?.comment,
+            impact: impact ? impact : prev.sustainableEneryIntegration.impact,
           },
         }));
         break;
@@ -123,6 +138,7 @@ function EnvironmentalModelProvider({
             value: input ? input : prev.energyEfficiency.value,
             comment:
               comment != undefined ? comment : prev.energyEfficiency?.comment,
+            impact: impact ? impact : prev.energyEfficiency.impact,
           },
         }));
         break;
@@ -135,6 +151,9 @@ function EnvironmentalModelProvider({
               comment != undefined
                 ? comment
                 : prev.meetingEnvironmentalRegulations?.comment,
+            impact: impact
+              ? impact
+              : prev.meetingEnvironmentalRegulations.impact,
           },
         }));
         break;

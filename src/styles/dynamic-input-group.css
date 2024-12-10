@@ -1,0 +1,43 @@
+.fw-dynamic-input-group-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px;
+  background-color: var(--secondary-background-color);
+  border-radius: var(--border-radius-m);
+  height: min-content;
+  position: relative;
+}
+
+.fw-dynamic-input-group-inputs {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.fw-dynamic-input-group-inputs > div:first-child {
+  flex: 1.5;
+}
+.fw-dynamic-input-group-inputs > div:last-child {
+  flex: 1;
+}
+
+/* .fw-dynamic-input-group-wrapper:not(:last-child) {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+} */
+
+.fw-dynamic-input-group-submit {
+  cursor: pointer;
+  padding: 8px 14px;
+  background-color: var(--secondary-color);
+  color: #ffffff;
+  font-size: 14px;
+  border-radius: var(--border-radius-m);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

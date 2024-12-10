@@ -1,3 +1,4 @@
+import { Impact } from "@/enums/Impact";
 import { SocietalInputs } from "@/types/societal/societal-inputs";
 import { SocietalResults } from "@/types/societal/societal-results";
 import { SocietalWeights } from "@/types/societal/societal-weights";
@@ -9,12 +10,13 @@ export const societalModel = (inputs: SocietalInputs): SocietalResults => {
     customerSatisfaction: 0.1,
     customerAffordability: 0.2,
     companyCulture: 0.1,
-    communityImplications: 0.1,
-    knowledgeSharingAcrossTheSupplyChain: 0.1,
-    shareholderValue: 0.1,
+    communityImplications: 0.05,
+    knowledgeSharingAcrossTheSupplyChain: 0.2,
+    shareholderValue: 0.05,
     guidingPrinciplesAlignment: 0.1,
-    publicPerception: 0.1,
-    workplaceCreation: 0.1,
+    publicPerception: 0.05,
+    workplaceCreation: 0.05,
+    healthAndSafety: 0.1,
   };
 
   //console.log(`inputs are: ${JSON.stringify(inputs)}`);
@@ -23,38 +25,52 @@ export const societalModel = (inputs: SocietalInputs): SocietalResults => {
   const weightedScores: SocietalInputs = {
     customerSatisfaction: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     customerAffordability: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     companyCulture: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     communityImplications: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     knowledgeSharingAcrossTheSupplyChain: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     shareholderValue: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     guidingPrinciplesAlignment: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     publicPerception: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     workplaceCreation: {
       value: 0,
+      impact: Impact.NEUTRAL,
+      comment: undefined,
+    },
+    healthAndSafety: {
+      value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
   };
@@ -63,6 +79,9 @@ export const societalModel = (inputs: SocietalInputs): SocietalResults => {
   (Object.keys(inputs) as Array<keyof SocietalInputs>).forEach((key) => {
     const weightedResult: number = inputs[key].value * weights[key];
     weightedScores[key].value = weightedResult;
+    weightedScores[key].impact = inputs[key].impact;
+    weightedScores[key].comment = inputs[key].comment;
+
     //weightedScores.push({ key, value: weightedResult, weight: weights[key] });
   });
 
@@ -83,6 +102,8 @@ export const societalModel = (inputs: SocietalInputs): SocietalResults => {
   //   const minScore: number = -2 * weightedScores.length;
 
   const scaledTotalScore: number = scaleNumber(totalScore, minScore, maxScore);
+
+  console.log("WEIGHTED SCORES: ", JSON.stringify(weightedScores));
 
   const result: SocietalResults = {
     weightedSingleFactors: weightedScores,

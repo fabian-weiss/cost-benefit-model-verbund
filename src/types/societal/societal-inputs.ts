@@ -10,4 +10,5 @@ export type SocietalInputs = {
   guidingPrinciplesAlignment: FactorInputType;
   publicPerception: FactorInputType;
   workplaceCreation: FactorInputType;
+  healthAndSafety: FactorInputType;
 };

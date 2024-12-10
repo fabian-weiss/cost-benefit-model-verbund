@@ -1,8 +1,21 @@
+"use client";
 import { InputFieldType } from "@/types/input-field-type";
 import "@/styles/input-field.css";
 import InputValueList from "./InputValueList";
 
 function InputField(props: { inputField: InputFieldType }) {
+  const handleWheel = (e: React.WheelEvent<HTMLInputElement>) => {
+    if (
+      document.activeElement === e.target &&
+      props.inputField.type === "number"
+    ) {
+      const activeElement = document.activeElement as HTMLElement;
+      if (activeElement) {
+        activeElement.blur();
+      }
+    }
+  };
+
   return (
     <div className="fw-input-field-container">
       <div className="fw-input-field-header">
@@ -42,6 +55,8 @@ function InputField(props: { inputField: InputFieldType }) {
             onChange={props.inputField.onChange}
             onKeyDown={props.inputField.onKeyDown}
             required={props.inputField.required}
+            onWheel={handleWheel}
+            onBlur={props.inputField.onBlur}
           />
         )}
         {props.inputField.suffix && (

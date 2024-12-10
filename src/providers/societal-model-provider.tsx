@@ -1,4 +1,5 @@
 "use client";
+import { Impact } from "@/enums/Impact";
 import { SocietalInputEnum } from "@/enums/SocietalInputEnum";
 
 import { SocietalInputs } from "@/types/societal/societal-inputs";
@@ -10,6 +11,7 @@ interface SocietalModelProviderContextType {
   setSocietalInput: (
     inputType: SocietalInputEnum,
     input?: number,
+    impact?: Impact,
     comment?: string
   ) => void;
   modelResults?: SocietalResults;
@@ -27,38 +29,52 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
   const [societalInputs, setSocietalInputs] = useState<SocietalInputs>({
     customerSatisfaction: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     customerAffordability: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     companyCulture: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     communityImplications: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     knowledgeSharingAcrossTheSupplyChain: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     shareholderValue: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     guidingPrinciplesAlignment: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     publicPerception: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     workplaceCreation: {
       value: 0,
+      impact: Impact.NEUTRAL,
+      comment: undefined,
+    },
+    healthAndSafety: {
+      value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
   });
@@ -66,6 +82,7 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
   const setSocietalInput = (
     inputType: SocietalInputEnum,
     input?: number,
+    impact?: Impact,
     comment?: string
   ) => {
     switch (inputType) {
@@ -78,6 +95,7 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
               comment != undefined
                 ? comment
                 : prev.customerSatisfaction?.comment,
+            impact: impact ? impact : prev.customerSatisfaction.impact,
           },
         }));
         break;
@@ -90,6 +108,7 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
               comment != undefined
                 ? comment
                 : prev.customerAffordability?.comment,
+            impact: impact ? impact : prev.customerAffordability.impact,
           },
         }));
         break;
@@ -100,6 +119,7 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
             value: input ? input : prev.companyCulture.value,
             comment:
               comment != undefined ? comment : prev.companyCulture?.comment,
+            impact: impact ? impact : prev.companyCulture.impact,
           },
         }));
         break;
@@ -112,6 +132,7 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
               comment != undefined
                 ? comment
                 : prev.communityImplications?.comment,
+            impact: impact ? impact : prev.communityImplications.impact,
           },
         }));
         break;
@@ -126,6 +147,9 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
               comment != undefined
                 ? comment
                 : prev.knowledgeSharingAcrossTheSupplyChain?.comment,
+            impact: impact
+              ? impact
+              : prev.knowledgeSharingAcrossTheSupplyChain.impact,
           },
         }));
         break;
@@ -136,6 +160,7 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
             value: input ? input : prev.shareholderValue.value,
             comment:
               comment != undefined ? comment : prev.shareholderValue?.comment,
+            impact: impact ? impact : prev.shareholderValue.impact,
           },
         }));
         break;
@@ -148,6 +173,7 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
               comment != undefined
                 ? comment
                 : prev.guidingPrinciplesAlignment?.comment,
+            impact: impact ? impact : prev.guidingPrinciplesAlignment.impact,
           },
         }));
         break;
@@ -158,6 +184,7 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
             value: input ? input : prev.publicPerception.value,
             comment:
               comment != undefined ? comment : prev.publicPerception?.comment,
+            impact: impact ? impact : prev.publicPerception.impact,
           },
         }));
         break;
@@ -168,6 +195,18 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
             value: input ? input : prev.workplaceCreation.value,
             comment:
               comment != undefined ? comment : prev.workplaceCreation?.comment,
+            impact: impact ? impact : prev.workplaceCreation.impact,
+          },
+        }));
+        break;
+      case SocietalInputEnum.HEALTH_AND_SAFETY:
+        setSocietalInputs((prev) => ({
+          ...prev,
+          healthAndSafety: {
+            value: input ? input : prev.healthAndSafety.value,
+            comment:
+              comment != undefined ? comment : prev.healthAndSafety?.comment,
+            impact: impact ? impact : prev.healthAndSafety.impact,
           },
         }));
         break;

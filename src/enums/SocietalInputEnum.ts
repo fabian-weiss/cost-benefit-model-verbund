@@ -8,4 +8,5 @@ export enum SocietalInputEnum {
   GUIDING_PRINCIPLES_ALIGNMENT = "Guiding Principles Alignment",
   PUBLIC_PERCEPTION = "Public Perception",
   WORKPLACE_CREATION = "Workplace Creation",
+  HEALTH_AND_SAFETY = "Health and Safety",
 }

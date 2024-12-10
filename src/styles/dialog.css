@@ -1,6 +1,7 @@
 .fw-dialog-container {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
@@ -12,24 +13,22 @@
   flex-direction: column;
   z-index: 10;
   cursor: pointer;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .fw-dialog-container.fullscreen {
   background-color: var(--background-color);
   cursor: auto;
-  max-height: 100vh;
+  /* max-height: 100vh; */
 }
 
 .fw-dialog-wrapper {
   max-width: 800px;
-  max-height: 560px;
+  /* max-height: 560px; */
+  height: max-content;
   width: 100%;
-  position: inline-block;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
   gap: 20px;
   background-color: #fff;
   padding: 30px 40px;
@@ -39,10 +38,9 @@
 }
 
 .fw-dialog-wrapper.fullscreen {
-  max-width: 1100px;
+  max-width: 1400px;
   max-height: none;
-  height: 100%;
-  overflow: hidden;
+  overflow: scroll;
   padding: 60px 30px;
 }
 
@@ -51,6 +49,24 @@
   top: 30px;
   right: 30px;
   cursor: pointer;
+}
+
+.fw-dialog-title {
+  font-size: 18px;
+  padding-top: 10px;
+  text-align: start;
+  font-weight: 700;
+}
+
+.fw-dialog-subtitle {
+  font-size: 12px;
+  text-align: start;
+  font-weight: normal;
+  color: #a3a3a3;
+}
+
+.fw-table-spacer {
+  padding-bottom: 50px;
 }
 
 @media (max-width: 768px) {

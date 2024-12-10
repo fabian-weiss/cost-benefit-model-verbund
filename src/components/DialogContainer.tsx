@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 
 function DialogContainer(props: {
   children: React.ReactNode;
-  title: string;
+  title?: string;
   body?: string;
   fullscreen?: boolean;
   closeDialog: () => void;
@@ -27,6 +27,7 @@ function DialogContainer(props: {
       <OutsideClickHandler
         disabled={props.fullscreen == true}
         onOutsideClick={() => props.closeDialog()}
+        className={`fw-h100`}
       >
         {props.fullscreen && (
           <PiXBold
@@ -41,7 +42,7 @@ function DialogContainer(props: {
           }`}
         >
           <div>
-            <h2>{props.title}</h2>
+            {props.title && <h2 className="fw-dialog-title">{props.title}</h2>}
             {props.body && (
               <p className="fw-text-disabled fw-fs12">{props.body}</p>
             )}

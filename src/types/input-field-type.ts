@@ -15,9 +15,11 @@ export type InputFieldType = {
   onChange?: InputChangeHandler;
   onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
   onTextAreaChange?: ChangeEventHandler<HTMLTextAreaElement>;
+  onBlur?: () => void;
   prefix?: string;
   actionWidget?: React.ReactNode;
   values?: number[];
+  dynamicValues?: DynamicFinancialInput[];
   dynamicFinancialInputs?: DynamicFinancialInput[];
   removeCallback?: (value: number) => void;
   valueType?: ValueType;

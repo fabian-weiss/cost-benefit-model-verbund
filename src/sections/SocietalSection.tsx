@@ -48,6 +48,7 @@ function SocietalSection() {
             societalModelContext.setSocietalInput(
               SocietalInputEnum.CUSTOMER_SATISFACTION,
               undefined,
+              undefined,
               comment
             );
           }
@@ -59,7 +60,8 @@ function SocietalSection() {
           onSelect(entry: DropdownEntryType) {
             societalModelContext.setSocietalInput(
               SocietalInputEnum.CUSTOMER_SATISFACTION,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
@@ -96,6 +98,7 @@ function SocietalSection() {
             societalModelContext.setSocietalInput(
               SocietalInputEnum.CUSTOMER_AFFORDABILITY,
               undefined,
+              undefined,
               comment
             );
           }
@@ -107,7 +110,8 @@ function SocietalSection() {
           onSelect(entry: DropdownEntryType) {
             societalModelContext.setSocietalInput(
               SocietalInputEnum.CUSTOMER_AFFORDABILITY,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
@@ -123,8 +127,7 @@ function SocietalSection() {
       id: "companyCulture",
       inputHeader: {
         label: SocietalInputEnum.COMPANY_CULTURE,
-        description:
-          "Impact on company culture (e.g. health and safety, team spirit).",
+        description: "Impact on company culture (e.g. team spirit).",
       },
       detailedDescription: {
         header:
@@ -145,6 +148,7 @@ function SocietalSection() {
             societalModelContext.setSocietalInput(
               SocietalInputEnum.COMPANY_CULTURE,
               undefined,
+              undefined,
               comment
             );
           }
@@ -156,7 +160,8 @@ function SocietalSection() {
           onSelect(entry: DropdownEntryType) {
             societalModelContext.setSocietalInput(
               SocietalInputEnum.COMPANY_CULTURE,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
@@ -193,6 +198,7 @@ function SocietalSection() {
             societalModelContext.setSocietalInput(
               SocietalInputEnum.SHAREHOLDER_VALUE,
               undefined,
+              undefined,
               comment
             );
           }
@@ -204,7 +210,8 @@ function SocietalSection() {
           onSelect(entry: DropdownEntryType) {
             societalModelContext.setSocietalInput(
               SocietalInputEnum.SHAREHOLDER_VALUE,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
@@ -242,6 +249,7 @@ function SocietalSection() {
             societalModelContext.setSocietalInput(
               SocietalInputEnum.PUBLIC_PERCEPTION,
               undefined,
+              undefined,
               comment
             );
           }
@@ -253,7 +261,8 @@ function SocietalSection() {
           onSelect(entry: DropdownEntryType) {
             societalModelContext.setSocietalInput(
               SocietalInputEnum.PUBLIC_PERCEPTION,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
@@ -292,6 +301,7 @@ function SocietalSection() {
             societalModelContext.setSocietalInput(
               SocietalInputEnum.KNOWLEDGE_SHARING_ACROSS_THE_SUPPLY_CHAIN,
               undefined,
+              undefined,
               comment
             );
           }
@@ -303,7 +313,8 @@ function SocietalSection() {
           onSelect(entry: DropdownEntryType) {
             societalModelContext.setSocietalInput(
               SocietalInputEnum.KNOWLEDGE_SHARING_ACROSS_THE_SUPPLY_CHAIN,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
@@ -341,6 +352,7 @@ function SocietalSection() {
             societalModelContext.setSocietalInput(
               SocietalInputEnum.COMMUNITY_IMPLICATIONS,
               undefined,
+              undefined,
               comment
             );
           }
@@ -352,7 +364,8 @@ function SocietalSection() {
           onSelect(entry: DropdownEntryType) {
             societalModelContext.setSocietalInput(
               SocietalInputEnum.COMMUNITY_IMPLICATIONS,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
@@ -392,6 +405,7 @@ function SocietalSection() {
             societalModelContext.setSocietalInput(
               SocietalInputEnum.GUIDING_PRINCIPLES_ALIGNMENT,
               undefined,
+              undefined,
               comment
             );
           }
@@ -403,13 +417,64 @@ function SocietalSection() {
           onSelect(entry: DropdownEntryType) {
             societalModelContext.setSocietalInput(
               SocietalInputEnum.GUIDING_PRINCIPLES_ALIGNMENT,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
             impact: numberToImpact(
               societalModelContext.societalInputs.guidingPrinciplesAlignment
                 .value
+            ),
+          },
+          entries: impactEntries,
+        },
+      ],
+    },
+    {
+      id: "healthAndSafety",
+      inputHeader: {
+        label: SocietalInputEnum.HEALTH_AND_SAFETY,
+        description: "Impact on health and safety of stakeholders.",
+      },
+      detailedDescription: {
+        header:
+          "Focuses on identifying, mitigating and managing risks to occupational health and safety in both traditional and digital work environments. The cluster also considers the project’s alignment with existing VERBUND’s occupational Health & Safety Policy and regulations. Examples include equipment accidents and pollution-related health damages,  ergonomic and psychosocial challenges posed by digital work.",
+        descriptionRows: [
+          "Very negative: Significant harm to health and safety (frequent injuries, high stress levels); project does not align with VERBUND’s occupational Health & Safety Policy and regulations",
+          "Negative: Noticeable but manageable risks",
+          "Neutral: Project does not affect health & safety",
+          "Positive: Clear positive effects on health and safety (improve workplace ergonomics or reduce stress)",
+          "Very positive: Significant reduction in injuries, time in hazardous environment; significant improvement in well-being",
+        ],
+      },
+      handleShowComments: () => {
+        commentDialogContext.handleShowDialog(
+          true,
+          societalModelContext.societalInputs.healthAndSafety.comment,
+          (comment) => {
+            societalModelContext.setSocietalInput(
+              SocietalInputEnum.HEALTH_AND_SAFETY,
+              undefined,
+              undefined,
+              comment
+            );
+          }
+        );
+      },
+      dropdownFields: [
+        {
+          id: "healthAndSafety",
+          onSelect(entry: DropdownEntryType) {
+            societalModelContext.setSocietalInput(
+              SocietalInputEnum.HEALTH_AND_SAFETY,
+              impactToNumber(entry.impact),
+              entry.impact
+            );
+          },
+          selectedEntry: {
+            impact: numberToImpact(
+              societalModelContext.societalInputs.healthAndSafety.value
             ),
           },
           entries: impactEntries,

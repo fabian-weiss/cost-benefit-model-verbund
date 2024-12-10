@@ -4,11 +4,19 @@ import { generateCombinations } from "@/utils/financial-utils/generate-financial
 import { financialModel } from "./financial-model";
 import { MathNumericType, mean, std } from "mathjs";
 import { FinancialFactors } from "@/types/financials/financial-factors";
+import { FinancialInputs } from "@/types/financials/financial-inputs";
+import { DynamicFinancialInput } from "@/types/financials/dynamic-financial-input";
 
 export const financialResults = (
-  inputRanges: FinancialInputRanges
+  inputRanges: FinancialInputRanges,
+  dynamicInputs: DynamicFinancialInput[]
 ): FinancialResults => {
-  const inputCombinations = generateCombinations(inputRanges);
+  const inputCombinations: FinancialInputs[] =
+    generateCombinations(inputRanges);
+
+  inputCombinations.forEach((input) => {
+    input.dynamicFinancialInputs = dynamicInputs;
+  });
 
   // Run the model for each combination and store results
   const results = inputCombinations.map((inputs) => financialModel(inputs));

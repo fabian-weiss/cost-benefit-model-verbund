@@ -1,3 +1,4 @@
+import { Impact } from "@/enums/Impact";
 import { EnvironmentalInputs } from "@/types/environmental/environmental-inputs";
 import { EnvironmentalResults } from "@/types/environmental/environmental-results";
 import { EnvironmentalWeights } from "@/types/environmental/environmental-weights";
@@ -21,30 +22,37 @@ export const environmentalModel = (
   const weightedScores: EnvironmentalInputs = {
     unSustainableGoals: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     wasteProduction: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     biodiversity: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     pollution: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     sustainableEneryIntegration: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     energyEfficiency: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     meetingEnvironmentalRegulations: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
   };
@@ -53,6 +61,8 @@ export const environmentalModel = (
   (Object.keys(inputs) as Array<keyof EnvironmentalInputs>).forEach((key) => {
     const weightedResult: number = inputs[key].value * weights[key];
     weightedScores[key].value = weightedResult;
+    weightedScores[key].impact = inputs[key].impact;
+    weightedScores[key].comment = inputs[key].comment;
     //weightedScores.push({ key, value: weightedResult, weight: weights[key] });
   });
 

@@ -4,6 +4,7 @@ import InputGrid from "@/components/InputGrid";
 import ModelHeader from "@/components/ModelHeader";
 import SectionContainer from "@/components/SectionContainer";
 import { DialogType } from "@/enums/DialogType";
+import { DynamicInputEnum } from "@/enums/DynamicInputEnum";
 import { FinancialCategory } from "@/enums/FinancialCategory";
 import { FinancialInputRangesEnum } from "@/enums/FinancialInputRangesEnum";
 import { ValueType } from "@/enums/ValueType";
@@ -13,38 +14,82 @@ import { useResultDialog } from "@/providers/model-result-provider";
 import "@/styles/model-section.css";
 import { InputGroupType } from "@/types/input-group-type";
 import { isBetweenOneAndHundred } from "@/utils/is-between-one-and-hundred";
+import { v4 } from "uuid";
 import { round } from "mathjs";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { DynamicFinancialInput } from "@/types/financials/dynamic-financial-input";
 
 function FinancialSection() {
   const financialModelContext = useFinancialModel();
   const resultsDialogContext = useResultDialog();
+
+  const [financialInputs, setFinancialInputs] = useState<{
+    [key: string]: number | undefined;
+  }>({
+    initialInvestment: undefined,
+    projectDuration: undefined,
+    discountRate: undefined,
+    annualOperatingCosts: undefined,
+    annualOperatingCostsGrowthRate: undefined,
+    firstAnnualOperatingCostsYear: undefined,
+    annualMaintenanceCosts: undefined,
+    annualMaintenanceCostsGrowthRate: undefined,
+    firstAnnualMaintenanceCostsYear: undefined,
+    trainingCosts: undefined,
+    dynamicCosts: undefined,
+    dynamicCostsYear: undefined,
+    annualRevenue: undefined,
+    annualRevenueGrowthRate: undefined,
+    firstRevenueGeneratingYear: undefined,
+    annualCostSavings: undefined,
+    annualCostSavingsGrowthRate: undefined,
+    firstCostSavingYear: undefined,
+    dynamicRevenue: undefined,
+    dynamicRevenueYear: undefined,
+  });
+
+  const handleInputChange = (field: string, value?: number) => {
+    setFinancialInputs((prevInputs) => ({
+      ...prevInputs,
+      [field]: value,
+    }));
+  };
+
   //const [budget, setBudget] = useState<number>();
-  const [initialInvestment, setInitialInvestment] = useState<number>();
-  const [annualOperatingCosts, setAnnualOperatingCosts] = useState<number>();
-  const [annualOperatingCostsGrowthRate, setAnnualOperatingCostsGrowthRate] =
-    useState<number>();
-  const [annualMaintenanceCosts, setAnnualMaintenanceCosts] =
-    useState<number>();
-  const [
-    annualMaintenanceCostsGrowthRate,
-    setAnnualMaintenanceCostsGrowthRate,
-  ] = useState<number>();
-  const [trainingCosts, setTrainingCosts] = useState<number>();
-  const [annualRevenue, setAnnualRevenue] = useState<number>();
-  const [annualRevenueGrowthRate, setAnnualRevenueGrowthRate] =
-    useState<number>();
-  const [firstRevenueGeneratingYear, setFirstRevenueGeneratingYear] =
-    useState<number>();
-  const [annualCostSavings, setAnnualCostSavings] = useState<number>();
-  const [annualCostSavingsGrowthRate, setAnnualCostSavingsGrowthRate] =
-    useState<number>();
-  const [firstCostSavingYear, setFirstCostSavingYear] = useState<number>();
-  const [projectDuration, setProjectDuration] = useState<number>();
-  //const [riskFactor, setRiskFactor] = useState<number>();
-  const [discountRate, setDiscountRate] = useState<number>();
+  // const [initialInvestment, setInitialInvestment] = useState<number>();
+  // const [annualOperatingCosts, setAnnualOperatingCosts] = useState<number>();
+  // const [annualOperatingCostsGrowthRate, setAnnualOperatingCostsGrowthRate] =
+  //   useState<number>();
+  // const [firstAnnualOperatingCostsYear, setFirstAnnualOperatingCostsYear] =
+  //   useState<number>();
+  // const [annualMaintenanceCosts, setAnnualMaintenanceCosts] =
+  //   useState<number>();
+  // const [
+  //   annualMaintenanceCostsGrowthRate,
+  //   setAnnualMaintenanceCostsGrowthRate,
+  // ] = useState<number>();
+  // const [firstAnnualMaintenanceCostYear, setFirstAnnualMaintenanceCostYear] =
+  //   useState<number>();
+  // const [trainingCosts, setTrainingCosts] = useState<number>();
+  // const [annualRevenue, setAnnualRevenue] = useState<number>();
+  // const [annualRevenueGrowthRate, setAnnualRevenueGrowthRate] =
+  //   useState<number>();
+  // const [firstRevenueGeneratingYear, setFirstRevenueGeneratingYear] =
+  //   useState<number>();
+  // const [annualCostSavings, setAnnualCostSavings] = useState<number>();
+  // const [annualCostSavingsGrowthRate, setAnnualCostSavingsGrowthRate] =
+  //   useState<number>();
+  // const [firstCostSavingYear, setFirstCostSavingYear] = useState<number>();
+  // const [projectDuration, setProjectDuration] = useState<number>();
+  // //const [riskFactor, setRiskFactor] = useState<number>();
+  // const [discountRate, setDiscountRate] = useState<number>();
+  // const [dynamicCosts, setDynamicCosts] = useState<number>();
+  // const [dynamicCostsYear, setDynamicCostsYear] = useState<number>();
+  // const [dynamicRevenue, setDynamicRevenue] = useState<number>();
+  // const [dynamicRevenueYear, setDynamicRevenueYear] = useState<number>();
   const errors = financialModelContext.errors;
+  const [executeModel, setExecuteModel] = useState<boolean>(false);
 
   const handleAdjustment = (
     adjustment: number,
@@ -53,24 +98,24 @@ function FinancialSection() {
     if (isNaN(adjustment)) return;
     const vs: number[] = [];
     switch (factorType) {
-      case FinancialInputRangesEnum.BUDGET:
-        financialModelContext.financialInputRanges.budget.forEach(
-          (value: number) => {
-            const upper: number = round(value * (1 + adjustment / 100), 2);
-            const lower: number = round(value * (1 - adjustment / 100), 2);
-            if (!vs.includes(upper)) {
-              vs.push(upper);
-            }
-            if (!vs.includes(lower)) {
-              vs.push(lower);
-            }
-          }
-        );
-        financialModelContext.addFinancialInput(
-          FinancialInputRangesEnum.BUDGET,
-          vs
-        );
-        break;
+      // case FinancialInputRangesEnum.BUDGET:
+      //   financialModelContext.financialInputRanges.budget.forEach(
+      //     (value: number) => {
+      //       const upper: number = round(value * (1 + adjustment / 100), 2);
+      //       const lower: number = round(value * (1 - adjustment / 100), 2);
+      //       if (!vs.includes(upper)) {
+      //         vs.push(upper);
+      //       }
+      //       if (!vs.includes(lower)) {
+      //         vs.push(lower);
+      //       }
+      //     }
+      //   );
+      //   financialModelContext.addFinancialInput(
+      //     FinancialInputRangesEnum.BUDGET,
+      //     vs
+      //   );
+      //   break;
       case FinancialInputRangesEnum.INITIAL_INVESTMENT:
         financialModelContext.financialInputRanges.initialInvestment.forEach(
           (value: number) => {
@@ -241,7 +286,7 @@ function FinancialSection() {
     // Initial Investment
     {
       financialCategory: FinancialCategory.MAIN,
-      id: "initial-investment",
+      id: FinancialInputRangesEnum.INITIAL_INVESTMENT,
       inputHeader: {
         label: "Initial Investment",
 
@@ -261,7 +306,7 @@ function FinancialSection() {
       inputFields: [
         {
           id: "initial-investment",
-          value: initialInvestment?.toString() ?? "",
+          value: financialInputs.initialInvestment?.toString() ?? "",
           // label: "Initial Investment",
           // description: "At least 1 - Click 'Enter' to add",
           description: "At least 1 - Click 'Enter' to add",
@@ -277,21 +322,24 @@ function FinancialSection() {
               value
             ),
           onChange: (e) => {
-            setInitialInvestment(Number(e.target.value.trim()));
+            handleInputChange(
+              FinancialInputRangesEnum.INITIAL_INVESTMENT,
+              Number(e.target.value.trim())
+            );
           },
 
           onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
             addRangeInput(
               e,
-              initialInvestment ?? 0,
+              financialInputs.initialInvestment ?? 0,
               () => {
-                const iI = Number(initialInvestment);
+                const iI = Number(financialInputs.initialInvestment);
                 if (!isNaN(iI)) {
                   financialModelContext.addFinancialInput(
                     FinancialInputRangesEnum.INITIAL_INVESTMENT,
                     [iI]
                   );
-                  setInitialInvestment(undefined);
+                  handleInputChange("initialInvestment", undefined);
                 }
               },
               financialModelContext.financialInputRanges.initialInvestment
@@ -302,7 +350,7 @@ function FinancialSection() {
     // Annual Operating Costs
     {
       financialCategory: FinancialCategory.COSTS,
-      id: "annual-operating-costs",
+      id: FinancialInputRangesEnum.ANNUAL_OPERATING_COSTS,
       inputHeader: {
         label: "Annual Operating Costs",
 
@@ -322,7 +370,7 @@ function FinancialSection() {
       inputFields: [
         {
           id: "annual-operating-costs",
-          value: annualOperatingCosts?.toString() ?? "",
+          value: financialInputs.annualOperatingCosts?.toString() ?? "",
           error: errors.annualOperatingCosts,
           description: "At least 1 - Click 'Enter' to add",
           type: "number",
@@ -337,20 +385,23 @@ function FinancialSection() {
               value
             ),
           onChange: (e) => {
-            setAnnualOperatingCosts(Number(e.target.value.trim()));
+            handleInputChange(
+              "annualOperatingCosts",
+              Number(e.target.value.trim())
+            );
           },
           onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
             addRangeInput(
               e,
-              annualOperatingCosts ?? 0,
+              financialInputs.annualOperatingCosts ?? 0,
               () => {
-                const oc = Number(annualOperatingCosts);
+                const oc = Number(financialInputs.annualOperatingCosts);
                 if (!isNaN(oc)) {
                   financialModelContext.addFinancialInput(
                     FinancialInputRangesEnum.ANNUAL_OPERATING_COSTS,
                     [oc]
                   );
-                  setAnnualOperatingCosts(undefined);
+                  handleInputChange("annualOperatingCosts", undefined);
                 }
               },
               financialModelContext.financialInputRanges.annualOperatingCosts
@@ -358,7 +409,8 @@ function FinancialSection() {
         },
         {
           id: "annual-operating-costs-growth-rate",
-          value: annualOperatingCostsGrowthRate?.toString() ?? "",
+          value:
+            financialInputs.annualOperatingCostsGrowthRate?.toString() ?? "",
           //error: errors.annualOperatingCosts,
           // label: "Annual Growth Rate",
           error: errors.annualOperatingCostsGrowthRate,
@@ -377,24 +429,79 @@ function FinancialSection() {
               value
             ),
           onChange: (e) => {
-            setAnnualOperatingCostsGrowthRate(Number(e.target.value.trim()));
+            handleInputChange(
+              "annualOperatingCostsGrowthRate",
+              Number(e.target.value.trim())
+            );
           },
           onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
             addRangeInput(
               e,
-              annualOperatingCostsGrowthRate ?? 0,
+              financialInputs.annualOperatingCostsGrowthRate ?? 0,
               () => {
-                const oc = Number(annualOperatingCostsGrowthRate);
+                const oc = Number(
+                  financialInputs.annualOperatingCostsGrowthRate
+                );
                 if (!isNaN(oc)) {
                   financialModelContext.addFinancialInput(
                     FinancialInputRangesEnum.ANNUAL_OPERATING_COSTS_GROWTH_RATE,
                     [oc / 100]
                   );
-                  setAnnualOperatingCostsGrowthRate(undefined);
+                  handleInputChange(
+                    "annualOperatingCostsGrowthRate",
+                    undefined
+                  );
                 }
               },
               financialModelContext.financialInputRanges
                 .annualOperatingCostsGrowthRate
+            ),
+        },
+        {
+          id: "first-annual-operating-cost-year",
+          value:
+            financialInputs.firstAnnualOperatingCostsYear?.toString() ?? "",
+          // label: "Annual Cost Savings",
+          description: "First year of annual operating costs - default is 1",
+          error: errors.firstAnnualOperatingCostsYear,
+          type: "number",
+          prefix: "year",
+          valueLabelPrefix: "year",
+          valueType: ValueType.NUMBER,
+          values:
+            financialModelContext.financialInputRanges
+              .firstAnnualOperatingCostsYear,
+          removeCallback: (value: number) =>
+            financialModelContext.removeFinancialInput(
+              FinancialInputRangesEnum.FIRST_ANNUAL_OPERATING_COST_YEAR,
+              value
+            ),
+          onChange: (e) => {
+            handleInputChange(
+              "firstAnnualOperatingCostsYear",
+              Number(e.target.value.trim())
+            );
+          },
+
+          onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
+            addRangeInput(
+              e,
+              financialInputs.firstAnnualOperatingCostsYear ?? 0,
+              () => {
+                const as = Number(
+                  financialInputs.firstAnnualOperatingCostsYear
+                );
+                if (!isNaN(as)) {
+                  financialModelContext.addFinancialInput(
+                    FinancialInputRangesEnum.FIRST_ANNUAL_OPERATING_COST_YEAR,
+                    [as]
+                  );
+                  handleInputChange("firstAnnualOperatingCostsYear", undefined);
+                }
+              },
+
+              financialModelContext.financialInputRanges
+                .firstAnnualOperatingCostsYear
             ),
         },
       ],
@@ -402,7 +509,7 @@ function FinancialSection() {
     // Annual Maintenance Costs
     {
       financialCategory: FinancialCategory.COSTS,
-      id: "annual-maintenance-costs",
+      id: FinancialInputRangesEnum.ANNUAL_MAINTENANCE_COSTS,
       inputHeader: {
         label: "Annual Maintenance Costs",
 
@@ -422,7 +529,7 @@ function FinancialSection() {
       inputFields: [
         {
           id: "annual-maintenance-costs",
-          value: annualMaintenanceCosts?.toString() ?? "",
+          value: financialInputs.annualMaintenanceCosts?.toString() ?? "",
           // label: "Annual Maintenance Costs",
           // description: "At least 1 - Click 'Enter' to add",
           description: "At least 1 - Click 'Enter' to add",
@@ -439,21 +546,24 @@ function FinancialSection() {
               value
             ),
           onChange: (e) => {
-            setAnnualMaintenanceCosts(Number(e.target.value.trim()));
+            handleInputChange(
+              "annualMaintenanceCosts",
+              Number(e.target.value.trim())
+            );
           },
 
           onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
             addRangeInput(
               e,
-              annualMaintenanceCosts ?? 0,
+              financialInputs.annualMaintenanceCosts ?? 0,
               () => {
-                const mc = Number(annualMaintenanceCosts);
+                const mc = Number(financialInputs.annualMaintenanceCosts);
                 if (!isNaN(mc)) {
                   financialModelContext.addFinancialInput(
                     FinancialInputRangesEnum.ANNUAL_MAINTENANCE_COSTS,
                     [mc]
                   );
-                  setAnnualMaintenanceCosts(undefined);
+                  handleInputChange("annualMaintenanceCosts", undefined);
                 }
               },
               financialModelContext.financialInputRanges.annualMaintenanceCosts
@@ -461,7 +571,8 @@ function FinancialSection() {
         },
         {
           id: "annual-maintenance-costs-growth-rate",
-          value: annualMaintenanceCostsGrowthRate?.toString() ?? "",
+          value:
+            financialInputs.annualMaintenanceCostsGrowthRate?.toString() ?? "",
           description:
             "Annual growth rate - negative if decreasing (default is 0%)",
           type: "number",
@@ -478,25 +589,83 @@ function FinancialSection() {
               value
             ),
           onChange: (e) => {
-            setAnnualMaintenanceCostsGrowthRate(Number(e.target.value.trim()));
+            handleInputChange(
+              "annualMaintenanceCostsGrowthRate",
+              Number(e.target.value.trim())
+            );
           },
 
           onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
             addRangeInput(
               e,
-              annualMaintenanceCostsGrowthRate ?? 0,
+              financialInputs.annualMaintenanceCostsGrowthRate ?? 0,
               () => {
-                const mc = Number(annualMaintenanceCostsGrowthRate);
+                const mc = Number(
+                  financialInputs.annualMaintenanceCostsGrowthRate
+                );
                 if (!isNaN(mc)) {
                   financialModelContext.addFinancialInput(
                     FinancialInputRangesEnum.ANNUAL_MAINTENANCE_COSTS_GROWTH_RATE,
                     [mc / 100]
                   );
-                  setAnnualMaintenanceCostsGrowthRate(undefined);
+                  handleInputChange(
+                    "annualMaintenanceCostsGrowthRate",
+                    undefined
+                  );
                 }
               },
               financialModelContext.financialInputRanges
                 .annualMaintenanceCostsGrowthRate
+            ),
+        },
+        {
+          id: "first-maintenance-cost-year",
+          value:
+            financialInputs.firstAnnualMaintenanceCostsYear?.toString() ?? "",
+          // label: "Annual Cost Savings",
+          description: "First year of annual maintenance costs - default is 1",
+          error: errors.firstAnnualMaintenanceCostYear,
+          type: "number",
+          prefix: "year",
+          valueLabelPrefix: "year",
+          valueType: ValueType.NUMBER,
+          values:
+            financialModelContext.financialInputRanges
+              .firstAnnualMaintenanceCostsYear,
+          removeCallback: (value: number) =>
+            financialModelContext.removeFinancialInput(
+              FinancialInputRangesEnum.FIRST_ANNUAL_MAINTENANCE_COST_YEAR,
+              value
+            ),
+          onChange: (e) => {
+            handleInputChange(
+              "firstAnnualMaintenanceCostsYear",
+              Number(e.target.value.trim())
+            );
+          },
+
+          onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
+            addRangeInput(
+              e,
+              financialInputs.firstAnnualMaintenanceCostsYear ?? 0,
+              () => {
+                const as = Number(
+                  financialInputs.firstAnnualMaintenanceCostsYear
+                );
+                if (!isNaN(as)) {
+                  financialModelContext.addFinancialInput(
+                    FinancialInputRangesEnum.FIRST_ANNUAL_MAINTENANCE_COST_YEAR,
+                    [as]
+                  );
+                  handleInputChange(
+                    "firstAnnualMaintenanceCostsYear",
+                    undefined
+                  );
+                }
+              },
+
+              financialModelContext.financialInputRanges
+                .firstAnnualMaintenanceCostsYear
             ),
         },
       ],
@@ -504,7 +673,7 @@ function FinancialSection() {
     // Annual Training Costs
     {
       financialCategory: FinancialCategory.COSTS,
-      id: "annual-training-costs",
+      id: FinancialInputRangesEnum.TRAINING_COSTS,
       inputHeader: {
         label: "Annual Training Costs",
         adjustmentButtonRow: {
@@ -523,7 +692,7 @@ function FinancialSection() {
       inputFields: [
         {
           id: "training-costs",
-          value: trainingCosts?.toString() ?? "",
+          value: financialInputs.trainingCosts?.toString() ?? "",
           // label: "Training Costs",
           // description: "At least 1 - Click 'Enter' to add",
           description: "At least 1 - Click 'Enter' to add",
@@ -539,21 +708,21 @@ function FinancialSection() {
               value
             ),
           onChange: (e) => {
-            setTrainingCosts(Number(e.target.value.trim()));
+            handleInputChange("trainingCosts", Number(e.target.value.trim()));
           },
 
           onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
             addRangeInput(
               e,
-              trainingCosts ?? 0,
+              financialInputs.trainingCosts ?? 0,
               () => {
-                const tc = Number(trainingCosts);
+                const tc = Number(financialInputs.trainingCosts);
                 if (!isNaN(tc)) {
                   financialModelContext.addFinancialInput(
                     FinancialInputRangesEnum.TRAINING_COSTS,
                     [tc]
                   );
-                  setTrainingCosts(undefined);
+                  handleInputChange("trainingCosts", undefined);
                 }
               },
               financialModelContext.financialInputRanges.trainingCosts
@@ -562,57 +731,69 @@ function FinancialSection() {
       ],
     },
     // Additional one-time costs
-    // {
-    //   financialCategory: FinancialCategory.COSTS,
-    //   id: "one-time-costs",
-    //   inputHeader: {
-    //     label: "One-time Costs",
-    //   },
-    //   inputFields: [
-    //     {
-    //       id: "one-time-costs",
-    //       value: trainingCosts?.toString() ?? "",
-    //       // label: "Training Costs",
-    //       // description: "At least 1 - Click 'Enter' to add",
-    //       description: "At least 1 - Click 'Enter' to add",
-    //       error: errors.trainingCosts,
-    //       type: "number",
-    //       prefix: "€",
-    //       values: financialModelContext.financialInputRanges.trainingCosts,
-    //       rangeAdjustments: [10, 20, 30],
-    //       valueType: ValueType.CURRENCY,
-    //       removeCallback: (value: number) =>
-    //         financialModelContext.removeFinancialInput(
-    //           FinancialInputRangesEnum.TRAINING_COSTS,
-    //           value
-    //         ),
-    //       onChange: (e) => {
-    //         setTrainingCosts(Number(e.target.value.trim()));
-    //       },
-
-    //       onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
-    //         addRangeInput(
-    //           e,
-    //           trainingCosts ?? 0,
-    //           () => {
-    //             const tc = Number(trainingCosts);
-    //             if (!isNaN(tc)) {
-    //               financialModelContext.addFinancialInput(
-    //                 FinancialInputRangesEnum.TRAINING_COSTS,
-    //                 [tc]
-    //               );
-    //               setTrainingCosts(undefined);
-    //             }
-    //           },
-    //           financialModelContext.financialInputRanges.trainingCosts
-    //         ),
-    //     },
-    //   ],
-    // },
+    {
+      financialCategory: FinancialCategory.COSTS,
+      submitLabel: "Add",
+      submitCallback: () =>
+        financialModelContext.addDynamicInput({
+          id: v4(),
+          type: DynamicInputEnum.COSTS,
+          year: financialInputs.dynamicCostsYear ?? 1,
+          amount: financialInputs.dynamicCosts ?? 0,
+        }),
+      id: FinancialInputRangesEnum.DYNAMIC_INPUT,
+      inputHeader: {
+        label: "One-time Costs",
+        description: "Enter amount and year affected",
+      },
+      isDynamic: true,
+      dynamicRemoveCallback: (value: DynamicFinancialInput) =>
+        financialModelContext.removeDynamicInput(value.id),
+      dynamicValues: financialModelContext.dynamicInputs.filter(
+        (input) => input.type == DynamicInputEnum.COSTS
+      ),
+      inputFields: [
+        {
+          id: "one-time-costs-amount",
+          value: financialInputs.dynamicCosts?.toString() ?? "",
+          type: "number",
+          prefix: "€",
+          // dynamicValues: financialModelContext.dynamicInputs.filter((input) => input.type == DynamicInputEnum.COSTS),
+          valueType: ValueType.CURRENCY,
+          // removeCallback: (value: number) =>
+          //   financialModelContext.removeFinancialInput(
+          //     FinancialInputRangesEnum.TRAINING_COSTS,
+          //     value
+          //   ),
+          onChange: (e) => {
+            handleInputChange("dynamicCosts", Number(e.target.value.trim()));
+          },
+        },
+        {
+          id: "one-time-costs-year",
+          value: financialInputs.dynamicCostsYear?.toString() ?? "",
+          type: "number",
+          prefix: "year",
+          // dynamicValues: financialModelContext.dynamicInputs.filter((input) => input.type == DynamicInputEnum.COSTS),
+          valueType: ValueType.NUMBER,
+          // removeCallback: (value: number) =>
+          //   financialModelContext.removeFinancialInput(
+          //     FinancialInputRangesEnum.TRAINING_COSTS,
+          //     value
+          //   ),
+          onChange: (e) => {
+            handleInputChange(
+              "dynamicCostsYear",
+              Number(e.target.value.trim())
+            );
+          },
+        },
+      ],
+    },
     // Annual Revenue
     {
       financialCategory: FinancialCategory.REVENUE,
-      id: "annual-revenue",
+      id: FinancialInputRangesEnum.ANNUAL_REVENUE,
       inputHeader: {
         label: "Annual Revenue",
         adjustmentButtonRow: {
@@ -631,7 +812,7 @@ function FinancialSection() {
       inputFields: [
         {
           id: "annual-revenue",
-          value: annualRevenue?.toString() ?? "",
+          value: financialInputs.annualRevenue?.toString() ?? "",
           // label: "Annual Revenue",
           // description: "At least 1 - Click 'Enter' to add",
           description: "At least 1 - Click 'Enter' to add",
@@ -647,21 +828,21 @@ function FinancialSection() {
               value
             ),
           onChange: (e) => {
-            setAnnualRevenue(Number(e.target.value.trim()));
+            handleInputChange("annualRevenue", Number(e.target.value.trim()));
           },
 
           onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
             addRangeInput(
               e,
-              annualRevenue ?? 0,
+              financialInputs.annualRevenue ?? 0,
               () => {
-                const ar = Number(annualRevenue);
+                const ar = Number(financialInputs.annualRevenue);
                 if (!isNaN(ar)) {
                   financialModelContext.addFinancialInput(
                     FinancialInputRangesEnum.ANNUAL_REVENUE,
                     [ar]
                   );
-                  setAnnualRevenue(undefined);
+                  handleInputChange("annualRevenue", undefined);
                 }
               },
 
@@ -670,7 +851,7 @@ function FinancialSection() {
         },
         {
           id: "annual-revenue-growth-rate",
-          value: annualRevenueGrowthRate?.toString() ?? "",
+          value: financialInputs.annualRevenueGrowthRate?.toString() ?? "",
           // label: "Annual Revenue",
           // description: "At least 1 - Click 'Enter' to add",
           description: "Annual growth rate - default is 0%",
@@ -689,20 +870,23 @@ function FinancialSection() {
               value
             ),
           onChange: (e) => {
-            setAnnualRevenueGrowthRate(Number(e.target.value.trim()));
+            handleInputChange(
+              "annualRevenueGrowthRate",
+              Number(e.target.value.trim())
+            );
           },
           onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
             addRangeInput(
               e,
-              annualRevenueGrowthRate ?? 0,
+              financialInputs.annualRevenueGrowthRate ?? 0,
               () => {
-                const ar = Number(annualRevenueGrowthRate);
+                const ar = Number(financialInputs.annualRevenueGrowthRate);
                 if (!isNaN(ar)) {
                   financialModelContext.addFinancialInput(
                     FinancialInputRangesEnum.ANNUAL_REVENUE_GROWTH_RATE,
                     [ar / 100]
                   );
-                  setAnnualRevenueGrowthRate(undefined);
+                  handleInputChange("annualRevenueGrowthRate", undefined);
                 }
               },
               financialModelContext.financialInputRanges.annualRevenueGrowthRate
@@ -710,7 +894,7 @@ function FinancialSection() {
         },
         {
           id: "first-revenue-generating-year",
-          value: firstRevenueGeneratingYear?.toString() ?? "",
+          value: financialInputs.firstRevenueGeneratingYear?.toString() ?? "",
           // label: "Annual Revenue",
           // description: "At least 1 - Click 'Enter' to add",
           description: "First year of revenue generation - default is 1",
@@ -729,20 +913,23 @@ function FinancialSection() {
               value
             ),
           onChange: (e) => {
-            setFirstRevenueGeneratingYear(Number(e.target.value.trim()));
+            handleInputChange(
+              "firstRevenueGeneratingYear",
+              Number(e.target.value.trim())
+            );
           },
           onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
             addRangeInput(
               e,
-              firstRevenueGeneratingYear ?? 0,
+              financialInputs.firstRevenueGeneratingYear ?? 0,
               () => {
-                const ar = Number(firstRevenueGeneratingYear);
+                const ar = Number(financialInputs.firstRevenueGeneratingYear);
                 if (!isNaN(ar)) {
                   financialModelContext.addFinancialInput(
                     FinancialInputRangesEnum.FIRST_REVENUE_GENERATING_YEAR,
                     [ar]
                   );
-                  setFirstRevenueGeneratingYear(undefined);
+                  handleInputChange("firstRevenueGeneratingYear", undefined);
                 }
               },
               financialModelContext.financialInputRanges
@@ -754,7 +941,7 @@ function FinancialSection() {
     // Annual Cost Savings
     {
       financialCategory: FinancialCategory.REVENUE,
-      id: "annual-cost-savings",
+      id: FinancialInputRangesEnum.ANNUAL_COST_SAVINGS,
       inputHeader: {
         label: "Annual Cost Savings",
         description: "At least 1 - Click 'Enter' to add",
@@ -774,7 +961,7 @@ function FinancialSection() {
       inputFields: [
         {
           id: "annual-cost-savings",
-          value: annualCostSavings?.toString() ?? "",
+          value: financialInputs.annualCostSavings?.toString() ?? "",
           // label: "Annual Cost Savings",
           // description: "At least 1 - Click 'Enter' to add",
           error: errors.annualCostSavings,
@@ -789,21 +976,24 @@ function FinancialSection() {
               value
             ),
           onChange: (e) => {
-            setAnnualCostSavings(Number(e.target.value.trim()));
+            handleInputChange(
+              "annualCostSavings",
+              Number(e.target.value.trim())
+            );
           },
 
           onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
             addRangeInput(
               e,
-              annualCostSavings ?? 0,
+              financialInputs.annualCostSavings ?? 0,
               () => {
-                const as = Number(annualCostSavings);
+                const as = Number(financialInputs.annualCostSavings);
                 if (!isNaN(as)) {
                   financialModelContext.addFinancialInput(
                     FinancialInputRangesEnum.ANNUAL_COST_SAVINGS,
                     [as]
                   );
-                  setAnnualCostSavings(undefined);
+                  handleInputChange("annualCostSavings", undefined);
                 }
               },
 
@@ -812,7 +1002,7 @@ function FinancialSection() {
         },
         {
           id: "annual-cost-savings-growth-rate",
-          value: annualCostSavingsGrowthRate?.toString() ?? "",
+          value: financialInputs.annualCostSavingsGrowthRate?.toString() ?? "",
           // label: "Annual Cost Savings",
           // description: "At least 1 - Click 'Enter' to add",
           error: errors.annualCostSavingsGrowthRate,
@@ -830,20 +1020,23 @@ function FinancialSection() {
               value
             ),
           onChange: (e) => {
-            setAnnualCostSavingsGrowthRate(Number(e.target.value.trim()));
+            handleInputChange(
+              "annualCostSavingsGrowthRate",
+              Number(e.target.value.trim())
+            );
           },
           onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
             addRangeInput(
               e,
-              annualCostSavingsGrowthRate ?? 0,
+              financialInputs.annualCostSavingsGrowthRate ?? 0,
               () => {
-                const as = Number(annualCostSavingsGrowthRate);
+                const as = Number(financialInputs.annualCostSavingsGrowthRate);
                 if (!isNaN(as)) {
                   financialModelContext.addFinancialInput(
                     FinancialInputRangesEnum.ANNUAL_COST_SAVINGS_GROWTH_RATE,
                     [as / 100]
                   );
-                  setAnnualCostSavingsGrowthRate(undefined);
+                  handleInputChange("annualCostSavingsGrowthRate", undefined);
                 }
               },
 
@@ -853,7 +1046,7 @@ function FinancialSection() {
         },
         {
           id: "first-cost-saving-year",
-          value: firstCostSavingYear?.toString() ?? "",
+          value: financialInputs.firstCostSavingYear?.toString() ?? "",
           // label: "Annual Cost Savings",
           description: "First year of cost savings - default is 1",
           error: errors.firstCostSavingYear,
@@ -869,21 +1062,24 @@ function FinancialSection() {
               value
             ),
           onChange: (e) => {
-            setAnnualCostSavings(Number(e.target.value.trim()));
+            handleInputChange(
+              "firstCostSavingYear",
+              Number(e.target.value.trim())
+            );
           },
 
           onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
             addRangeInput(
               e,
-              firstCostSavingYear ?? 0,
+              financialInputs.firstCostSavingYear ?? 0,
               () => {
-                const as = Number(firstCostSavingYear);
+                const as = Number(financialInputs.firstCostSavingYear);
                 if (!isNaN(as)) {
                   financialModelContext.addFinancialInput(
                     FinancialInputRangesEnum.FIRST_COST_SAVING_YEAR,
                     [as]
                   );
-                  setFirstCostSavingYear(undefined);
+                  handleInputChange("firstCostSavingYear", undefined);
                 }
               },
 
@@ -892,10 +1088,69 @@ function FinancialSection() {
         },
       ],
     },
+    // Additional one-time revenues
+    {
+      financialCategory: FinancialCategory.REVENUE,
+      id: FinancialInputRangesEnum.DYNAMIC_INPUT,
+      inputHeader: {
+        label: "One-time Revenues",
+        description: "Enter amount and year affected",
+      },
+      submitLabel: "Add",
+      submitCallback: () =>
+        financialModelContext.addDynamicInput({
+          id: v4(),
+          type: DynamicInputEnum.REVENUES,
+          year: financialInputs.dynamicRevenueYear ?? 1,
+          amount: financialInputs.dynamicRevenue ?? 0,
+        }),
+      isDynamic: true,
+      dynamicRemoveCallback: (value: DynamicFinancialInput) =>
+        financialModelContext.removeDynamicInput(value.id),
+      dynamicValues: financialModelContext.dynamicInputs.filter(
+        (input) => input.type == DynamicInputEnum.REVENUES
+      ),
+      inputFields: [
+        {
+          id: "one-time-revenue-amount",
+          value: financialInputs.dynamicRevenue?.toString() ?? "",
+          type: "number",
+          prefix: "€",
+          valueType: ValueType.CURRENCY,
+          // removeCallback: (value: number) =>
+          //   financialModelContext.removeFinancialInput(
+          //     FinancialInputRangesEnum.TRAINING_COSTS,
+          //     value
+          //   ),
+          onChange: (e) => {
+            handleInputChange("dynamicRevenue", Number(e.target.value.trim()));
+          },
+        },
+        {
+          id: "one-time-revenue-year",
+          value: financialInputs.dynamicRevenueYear?.toString() ?? "",
+          type: "number",
+          prefix: "year",
+          // dynamicValues: financialModelContext.dynamicInputs.filter((input) => input.type == DynamicInputEnum.COSTS),
+          valueType: ValueType.NUMBER,
+          // removeCallback: (value: number) =>
+          //   financialModelContext.removeFinancialInput(
+          //     FinancialInputRangesEnum.TRAINING_COSTS,
+          //     value
+          //   ),
+          onChange: (e) => {
+            handleInputChange(
+              "dynamicRevenueYear",
+              Number(e.target.value.trim())
+            );
+          },
+        },
+      ],
+    },
     // Project Duration
     {
       financialCategory: FinancialCategory.MAIN,
-      id: "project-duration",
+      id: FinancialInputRangesEnum.PROJECT_DURATION,
       inputHeader: {
         label: "Project Duration",
         description: "At least 1 - Click 'Enter' to add",
@@ -903,7 +1158,7 @@ function FinancialSection() {
       inputFields: [
         {
           id: "project-duration",
-          value: projectDuration?.toString() ?? "",
+          value: financialInputs.projectDuration?.toString() ?? "",
           // label: "Project Duration",
           // description: "At least 1 - Click 'Enter' to add",
           error: errors.projectDuration,
@@ -918,20 +1173,20 @@ function FinancialSection() {
               value
             ),
           onChange: (e) => {
-            setProjectDuration(Number(e.target.value.trim()));
+            handleInputChange("projectDuration", Number(e.target.value.trim()));
           },
           onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
             addRangeInput(
               e,
-              projectDuration ?? 0,
+              financialInputs.projectDuration ?? 0,
               () => {
-                const pd = Number(projectDuration);
+                const pd = Number(financialInputs.projectDuration);
                 if (!isNaN(pd)) {
                   financialModelContext.addFinancialInput(
                     FinancialInputRangesEnum.PROJECT_DURATION,
                     [pd]
                   );
-                  setProjectDuration(undefined);
+                  handleInputChange("projectDuration", undefined);
                 }
               },
               financialModelContext.financialInputRanges.projectDuration
@@ -997,14 +1252,14 @@ function FinancialSection() {
     // Discount Rate
     {
       financialCategory: FinancialCategory.MAIN,
-      id: "discount-rate",
+      id: FinancialInputRangesEnum.DISCOUNT_RATE,
       inputHeader: {
         label: "Discount Rate",
       },
       inputFields: [
         {
           id: "discount-ratte",
-          value: discountRate?.toString() ?? "",
+          value: financialInputs.discountRate?.toString() ?? "",
           // label: "Risk Factor",
           description: "WACC recommended - 'Enter' to add",
           error: errors.discountRate,
@@ -1020,21 +1275,21 @@ function FinancialSection() {
           // description: "At least 1 - between 0 and 100 - 'Enter' to add",
           type: "number",
           onChange: (e) => {
-            setDiscountRate(Number(e.target.value.trim()));
+            handleInputChange("discountRate", Number(e.target.value.trim()));
           },
           onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => {
-            if (isBetweenOneAndHundred(discountRate)) {
+            if (isBetweenOneAndHundred(financialInputs.discountRate)) {
               addRangeInput(
                 e,
-                discountRate ?? 0,
+                financialInputs.discountRate ?? 0,
                 () => {
-                  const rf = Number(discountRate);
+                  const rf = Number(financialInputs.discountRate);
                   if (!isNaN(rf)) {
                     financialModelContext.addFinancialInput(
                       FinancialInputRangesEnum.DISCOUNT_RATE,
                       [rf / 100]
                     );
-                    setDiscountRate(undefined);
+                    handleInputChange("discountRate", undefined);
                   }
                 },
                 financialModelContext.financialInputRanges.discountRate
@@ -1052,21 +1307,32 @@ function FinancialSection() {
   ];
 
   const handleModelSubmit = () => {
-    const hasErrors = financialModelContext.validateInputs();
-    if (!hasErrors) {
-      console.log(
-        `Fincancial ranges are: ${JSON.stringify(
-          financialModelContext.financialInputRanges
-        )}`
-      );
-      //return;
-      const r = financialResults(financialModelContext.financialInputRanges);
-      financialModelContext.setModelResults(r);
-      resultsDialogContext.handleShowDialog(true, DialogType.FINANCIAL_MODEL);
-    } else if (financialModelContext.modelResults != undefined) {
-      financialModelContext.setModelResults(undefined);
-    }
+    setExecuteModel(true);
   };
+
+  useEffect(() => {
+    if (executeModel) {
+      const hasErrors = financialModelContext.validateInputs();
+      if (!hasErrors) {
+        console.log(
+          `Fincancial ranges are: ${JSON.stringify(
+            financialModelContext.financialInputRanges
+          )}`
+        );
+        //return;
+        const r = financialResults(
+          financialModelContext.financialInputRanges,
+          financialModelContext.dynamicInputs
+        );
+        financialModelContext.setModelResults(r);
+        resultsDialogContext.handleShowDialog(true, DialogType.FINANCIAL_MODEL);
+      } else if (financialModelContext.modelResults != undefined) {
+        console.log("financial model errors");
+        financialModelContext.setModelResults(undefined);
+      }
+      setExecuteModel(false);
+    }
+  }, [executeModel]);
 
   const addRangeInput = (
     event: React.KeyboardEvent<HTMLInputElement>,

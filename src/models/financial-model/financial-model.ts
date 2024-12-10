@@ -22,6 +22,8 @@ export const financialModel = (
     projectDuration
   );
 
+  console.log("totalCashflow", totalCashflow);
+
   const ROI: number = calculateROI(totalCashflow, initialInvestment);
 
   const NPV: number = calculateNPV(initialInvestment, discountedCashflow);

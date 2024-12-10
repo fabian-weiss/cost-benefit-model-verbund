@@ -1,4 +1,5 @@
 "use client";
+import { Impact } from "@/enums/Impact";
 import { RioInputEnum } from "@/enums/RioInputEnum";
 import { RioInputs } from "@/types/rio/rio-inputs";
 import { RioResults } from "@/types/rio/rio-results";
@@ -9,6 +10,7 @@ interface RioModelProviderContextType {
   setRioInput: (
     inputType: RioInputEnum,
     input?: number,
+    impact?: Impact,
     comment?: string
   ) => void;
   modelResults?: RioResults;
@@ -24,30 +26,37 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
   const [rioInputs, setRioInputs] = useState<RioInputs>({
     privacy: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     marketAdvantage: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     longTermResilience: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     longTermScalability: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     legalRequirements: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     innovation: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
     otherRisks: {
       value: 0,
+      impact: Impact.NEUTRAL,
       comment: undefined,
     },
   });
@@ -55,6 +64,7 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
   const setRioInput = (
     inputType: RioInputEnum,
     input?: number,
+    impact?: Impact,
     comment?: string
   ) => {
     switch (inputType) {
@@ -64,6 +74,7 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
           privacy: {
             value: input ? input : prev.privacy.value,
             comment: comment != undefined ? comment : prev.privacy.comment,
+            impact: impact ? impact : prev.privacy.impact,
           },
         }));
         break;
@@ -74,6 +85,7 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
             value: input ? input : prev.marketAdvantage.value,
             comment:
               comment != undefined ? comment : prev.marketAdvantage.comment,
+            impact: impact ? impact : prev.marketAdvantage.impact,
           },
         }));
         break;
@@ -84,6 +96,7 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
             value: input ? input : prev.longTermResilience.value,
             comment:
               comment != undefined ? comment : prev.longTermResilience.comment,
+            impact: impact ? impact : prev.longTermResilience.impact,
           },
         }));
         break;
@@ -94,6 +107,7 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
             value: input ? input : prev.longTermScalability.value,
             comment:
               comment != undefined ? comment : prev.longTermScalability.comment,
+            impact: impact ? impact : prev.longTermScalability.impact,
           },
         }));
         break;
@@ -104,6 +118,7 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
             value: input ? input : prev.legalRequirements.value,
             comment:
               comment != undefined ? comment : prev.legalRequirements.comment,
+            impact: impact ? impact : prev.legalRequirements.impact,
           },
         }));
         break;
@@ -113,6 +128,7 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
           innovation: {
             value: input ? input : prev.innovation.value,
             comment: comment != undefined ? comment : prev.innovation.comment,
+            impact: impact ? impact : prev.innovation.impact,
           },
         }));
         break;
@@ -122,6 +138,7 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
           otherRisks: {
             value: input ? input : prev.otherRisks.value,
             comment: comment != undefined ? comment : prev.otherRisks.comment,
+            impact: impact ? impact : prev.otherRisks.impact,
           },
         }));
         break;

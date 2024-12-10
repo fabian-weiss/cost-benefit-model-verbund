@@ -41,20 +41,21 @@ function FinancialModelProvider({ children }: { children: React.ReactNode }) {
   );
   const [financialInputRanges, setFinancialInputRanges] =
     useState<FinancialInputRanges>({
-      budget: [],
-      initialInvestment: [],
-      annualOperatingCosts: [],
+      initialInvestment: [1000],
+      annualOperatingCosts: [1000],
       annualOperatingCostsGrowthRate: [0],
-      annualMaintenanceCosts: [],
+      firstAnnualOperatingCostsYear: [1],
+      annualMaintenanceCosts: [1000],
       annualMaintenanceCostsGrowthRate: [0],
-      trainingCosts: [],
-      annualRevenue: [],
+      firstAnnualMaintenanceCostsYear: [1],
+      trainingCosts: [0],
+      annualRevenue: [1000],
       annualRevenueGrowthRate: [0],
       firstRevenueGeneratingYear: [1],
-      annualCostSavings: [],
+      annualCostSavings: [1000],
       annualCostSavingsGrowthRate: [0],
       firstCostSavingYear: [1],
-      projectDuration: [],
+      projectDuration: [10],
       riskFactor: [0.02],
       discountRate: [0.0633],
     });
@@ -99,6 +100,7 @@ function FinancialModelProvider({ children }: { children: React.ReactNode }) {
   };
 
   const addDynamicInput = (input: DynamicFinancialInput) => {
+    console.log("Adding dynamic input", input);
     setDynamicInputs((prev) => [...prev, input]);
   };
 
@@ -111,17 +113,17 @@ function FinancialModelProvider({ children }: { children: React.ReactNode }) {
     input: number[]
   ) => {
     switch (inputRange) {
-      case FinancialInputRangesEnum.BUDGET:
-        setFinancialInputRanges({
-          ...financialInputRanges,
-          budget: [
-            ...financialInputRanges.budget,
-            ...input.filter(
-              (value) => !financialInputRanges.budget.includes(value)
-            ),
-          ],
-        });
-        break;
+      // case FinancialInputRangesEnum.BUDGET:
+      //   setFinancialInputRanges({
+      //     ...financialInputRanges,
+      //     budget: [
+      //       ...financialInputRanges.budget,
+      //       ...input.filter(
+      //         (value) => !financialInputRanges.budget.includes(value)
+      //       ),
+      //     ],
+      //   });
+      //   break;
       case FinancialInputRangesEnum.INITIAL_INVESTMENT:
         setFinancialInputRanges({
           ...financialInputRanges,
@@ -159,6 +161,20 @@ function FinancialModelProvider({ children }: { children: React.ReactNode }) {
           ],
         });
         break;
+      case FinancialInputRangesEnum.FIRST_ANNUAL_OPERATING_COST_YEAR:
+        setFinancialInputRanges({
+          ...financialInputRanges,
+          firstAnnualOperatingCostsYear: [
+            ...financialInputRanges.firstAnnualOperatingCostsYear,
+            ...input.filter(
+              (value) =>
+                !financialInputRanges.firstAnnualOperatingCostsYear.includes(
+                  value
+                )
+            ),
+          ],
+        });
+        break;
       case FinancialInputRangesEnum.ANNUAL_MAINTENANCE_COSTS:
         setFinancialInputRanges({
           ...financialInputRanges,
@@ -179,6 +195,20 @@ function FinancialModelProvider({ children }: { children: React.ReactNode }) {
             ...input.filter(
               (value) =>
                 !financialInputRanges.annualMaintenanceCostsGrowthRate.includes(
+                  value
+                )
+            ),
+          ],
+        });
+        break;
+      case FinancialInputRangesEnum.FIRST_ANNUAL_MAINTENANCE_COST_YEAR:
+        setFinancialInputRanges({
+          ...financialInputRanges,
+          firstAnnualMaintenanceCostsYear: [
+            ...financialInputRanges.firstAnnualMaintenanceCostsYear,
+            ...input.filter(
+              (value) =>
+                !financialInputRanges.firstAnnualMaintenanceCostsYear.includes(
                   value
                 )
             ),
@@ -311,11 +341,11 @@ function FinancialModelProvider({ children }: { children: React.ReactNode }) {
     setFinancialInputRanges((prev) => {
       const updatedRanges = { ...prev };
       switch (inputRange) {
-        case FinancialInputRangesEnum.BUDGET:
-          updatedRanges.budget = updatedRanges.budget.filter(
-            (value) => value !== input
-          );
-          break;
+        // case FinancialInputRangesEnum.BUDGET:
+        //   updatedRanges.budget = updatedRanges.budget.filter(
+        //     (value) => value !== input
+        //   );
+        //   break;
         case FinancialInputRangesEnum.INITIAL_INVESTMENT:
           updatedRanges.initialInvestment =
             updatedRanges.initialInvestment.filter((value) => value !== input);
@@ -405,13 +435,13 @@ function FinancialModelProvider({ children }: { children: React.ReactNode }) {
   const validateInputs = (): boolean => {
     clearErrors();
     let hasErrors = false;
-    if (financialInputRanges.budget.length === 0) {
-      setErrors((prev: any) => ({
-        ...prev,
-        budget: "Set at least one expected budget",
-      }));
-      hasErrors = true;
-    }
+    // if (financialInputRanges.budget.length === 0) {
+    //   setErrors((prev: any) => ({
+    //     ...prev,
+    //     budget: "Set at least one expected budget",
+    //   }));
+    //   hasErrors = true;
+    // }
     if (financialInputRanges.initialInvestment.length === 0) {
       setErrors((prev: any) => ({
         ...prev,
@@ -487,13 +517,13 @@ function FinancialModelProvider({ children }: { children: React.ReactNode }) {
       }));
       hasErrors = true;
     }
-    if (financialInputRanges.riskFactor.length === 0) {
-      setErrors((prev: any) => ({
-        ...prev,
-        riskFactor: "Set at least one expected risk factor",
-      }));
-      hasErrors = true;
-    }
+    // if (financialInputRanges.riskFactor.length === 0) {
+    //   setErrors((prev: any) => ({
+    //     ...prev,
+    //     riskFactor: "Set at least one expected risk factor",
+    //   }));
+    //   hasErrors = true;
+    // }
     if (financialInputRanges.discountRate.length === 0) {
       setErrors((prev: any) => ({
         ...prev,
@@ -542,7 +572,7 @@ function FinancialModelProvider({ children }: { children: React.ReactNode }) {
       clearErrors,
       validateInputs,
     }),
-    [financialInputRanges, modelResults, errors] // Only re-compute the memoized value when financialInputRanges changes
+    [financialInputRanges, modelResults, errors, dynamicInputs] // Only re-compute the memoized value when financialInputRanges changes
   );
 
   return (

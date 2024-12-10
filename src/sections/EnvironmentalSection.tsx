@@ -48,6 +48,7 @@ function EnvironmentalSection() {
             environmetalModelContext.setEnvironmentalInput(
               EnvironmentalInputEnum.UN_SUSTAINABLE_GOALS,
               undefined,
+              undefined,
               comment
             );
           }
@@ -59,7 +60,8 @@ function EnvironmentalSection() {
           onSelect(entry: DropdownEntryType) {
             environmetalModelContext.setEnvironmentalInput(
               EnvironmentalInputEnum.UN_SUSTAINABLE_GOALS,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
@@ -99,6 +101,7 @@ function EnvironmentalSection() {
             environmetalModelContext.setEnvironmentalInput(
               EnvironmentalInputEnum.WASTE_PRODUCTION,
               undefined,
+              undefined,
               comment
             );
           }
@@ -110,7 +113,8 @@ function EnvironmentalSection() {
           onSelect(entry: DropdownEntryType) {
             environmetalModelContext.setEnvironmentalInput(
               EnvironmentalInputEnum.WASTE_PRODUCTION,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
@@ -147,6 +151,7 @@ function EnvironmentalSection() {
             environmetalModelContext.setEnvironmentalInput(
               EnvironmentalInputEnum.BIODIVERSITY,
               undefined,
+              undefined,
               comment
             );
           }
@@ -158,7 +163,8 @@ function EnvironmentalSection() {
           onSelect(entry: DropdownEntryType) {
             environmetalModelContext.setEnvironmentalInput(
               EnvironmentalInputEnum.BIODIVERSITY,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
@@ -195,6 +201,7 @@ function EnvironmentalSection() {
             environmetalModelContext.setEnvironmentalInput(
               EnvironmentalInputEnum.POLLUTION,
               undefined,
+              undefined,
               comment
             );
           }
@@ -206,7 +213,8 @@ function EnvironmentalSection() {
           onSelect(entry: DropdownEntryType) {
             environmetalModelContext.setEnvironmentalInput(
               EnvironmentalInputEnum.POLLUTION,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
@@ -245,6 +253,7 @@ function EnvironmentalSection() {
             environmetalModelContext.setEnvironmentalInput(
               EnvironmentalInputEnum.SUSTAINABLE_ENERGY_INTEGRATION,
               undefined,
+              undefined,
               comment
             );
           }
@@ -256,7 +265,8 @@ function EnvironmentalSection() {
           onSelect(entry: DropdownEntryType) {
             environmetalModelContext.setEnvironmentalInput(
               EnvironmentalInputEnum.SUSTAINABLE_ENERGY_INTEGRATION,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
@@ -295,6 +305,7 @@ function EnvironmentalSection() {
             environmetalModelContext.setEnvironmentalInput(
               EnvironmentalInputEnum.ENERGY_EFFICIENCY,
               undefined,
+              undefined,
               comment
             );
           }
@@ -306,7 +317,8 @@ function EnvironmentalSection() {
           onSelect(entry: DropdownEntryType) {
             environmetalModelContext.setEnvironmentalInput(
               EnvironmentalInputEnum.ENERGY_EFFICIENCY,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {
@@ -345,6 +357,7 @@ function EnvironmentalSection() {
             environmetalModelContext.setEnvironmentalInput(
               EnvironmentalInputEnum.MEETING_ENVIRONMENTAL_REGULATIONS,
               undefined,
+              undefined,
               comment
             );
           }
@@ -356,7 +369,8 @@ function EnvironmentalSection() {
           onSelect(entry: DropdownEntryType) {
             environmetalModelContext.setEnvironmentalInput(
               EnvironmentalInputEnum.MEETING_ENVIRONMENTAL_REGULATIONS,
-              impactToNumber(entry.impact)
+              impactToNumber(entry.impact),
+              entry.impact
             );
           },
           selectedEntry: {

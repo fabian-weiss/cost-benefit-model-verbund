@@ -1,10 +1,12 @@
 export type FinancialInputRanges = {
-  budget: number[];
+  // budget: number[];
   initialInvestment: number[];
   annualOperatingCosts: number[];
   annualOperatingCostsGrowthRate: number[];
+  firstAnnualOperatingCostsYear: number[];
   annualMaintenanceCosts: number[];
   annualMaintenanceCostsGrowthRate: number[];
+  firstAnnualMaintenanceCostsYear: number[];
   trainingCosts: number[];
   annualRevenue: number[];
   annualRevenueGrowthRate: number[];

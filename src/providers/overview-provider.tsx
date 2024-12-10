@@ -18,7 +18,7 @@ function OverviewProvider({ children }: { children: React.ReactNode }) {
     projectDescription: undefined,
     projectOwner: undefined,
     budget: undefined,
-    projectType: ProjectType.SOCIAL,
+    projectType: ProjectType.DEFAULT,
   });
 
   const handleOverviewInput = (input: OverviewInputs) => {

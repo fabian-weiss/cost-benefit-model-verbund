@@ -1,3 +1,4 @@
+import { Impact } from "@/enums/Impact";
 import { RioInputs } from "@/types/rio/rio-inputs";
 import { RioResults } from "@/types/rio/rio-results";
 import { RioWeights } from "@/types/rio/rio-weights";
@@ -19,19 +20,29 @@ export const rioModel = (inputs: RioInputs): RioResults => {
 
   // Initialize weighted scores
   const weightedScores: RioInputs = {
-    privacy: { value: 0, comment: undefined },
-    marketAdvantage: { value: 0, comment: undefined },
-    longTermResilience: { value: 0, comment: undefined },
-    longTermScalability: { value: 0, comment: undefined },
-    legalRequirements: { value: 0, comment: undefined },
-    innovation: { value: 0, comment: undefined },
-    otherRisks: { value: 0, comment: undefined },
+    privacy: { value: 0, impact: Impact.NEUTRAL, comment: undefined },
+    marketAdvantage: { value: 0, impact: Impact.NEUTRAL, comment: undefined },
+    longTermResilience: {
+      value: 0,
+      impact: Impact.NEUTRAL,
+      comment: undefined,
+    },
+    longTermScalability: {
+      value: 0,
+      impact: Impact.NEUTRAL,
+      comment: undefined,
+    },
+    legalRequirements: { value: 0, impact: Impact.NEUTRAL, comment: undefined },
+    innovation: { value: 0, impact: Impact.NEUTRAL, comment: undefined },
+    otherRisks: { value: 0, impact: Impact.NEUTRAL, comment: undefined },
   };
 
   // Calculate individual weighted scores
   (Object.keys(inputs) as Array<keyof RioInputs>).forEach((key) => {
     const weightedResult: number = inputs[key].value * weights[key];
     weightedScores[key].value = weightedResult;
+    weightedScores[key].impact = inputs[key].impact;
+    weightedScores[key].comment = inputs[key].comment;
     //weightedScores.push({ key, value: weightedResult, weight: weights[key] });
   });
 

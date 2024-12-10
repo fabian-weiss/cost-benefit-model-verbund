@@ -29,6 +29,7 @@
 
 html,
 body {
+  height: 100%;
   max-width: 100vw;
   overflow-x: hidden;
 }
@@ -48,7 +49,7 @@ body {
 
 body.fw-dialog-open,
 html.fw-dialog-open {
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 input:-webkit-autofill {
@@ -58,6 +59,11 @@ input:-webkit-autofill {
 
 input:-webkit-autofill::first-line {
   color: white !important; /* Ensure the first line of text remains white */
+}
+
+input,
+textarea {
+  font-family: var(--font-geist-sans);
 }
 
 /** OTHERS */
