@@ -432,6 +432,57 @@ function SocietalSection() {
       ],
     },
     {
+      id: "workplaceCreation",
+      inputHeader: {
+        label: SocietalInputEnum.WORKPLACE_CREATION,
+        description: "Impact on workplace creation.",
+      },
+      detailedDescription: {
+        header:
+          "Examines how the project influences workplace creation. Does the project create workplaces or does it lead to job losses?",
+        descriptionRows: [
+          "Very Negative: Significant job losses (more than 1%).",
+          "Negative: Noticeable job losses (0.5% - 1%).",
+          "Neutral: No change in job creation.",
+          "Positive: Job creation (0.5% - 1%).",
+          "Very Positive: Significant job creation (more than 1%).",
+        ],
+      },
+      handleShowComments: () => {
+        commentDialogContext.handleShowDialog(
+          true,
+          societalModelContext.societalInputs.workplaceCreation.comment,
+          (comment) => {
+            societalModelContext.setSocietalInput(
+              SocietalInputEnum.WORKPLACE_CREATION,
+              undefined,
+              undefined,
+              comment
+            );
+          }
+        );
+      },
+      dropdownFields: [
+        {
+          id: "guidingPrinciplesAlignment",
+          onSelect(entry: DropdownEntryType) {
+            societalModelContext.setSocietalInput(
+              SocietalInputEnum.GUIDING_PRINCIPLES_ALIGNMENT,
+              impactToNumber(entry.impact),
+              entry.impact
+            );
+          },
+          selectedEntry: {
+            impact: numberToImpact(
+              societalModelContext.societalInputs.guidingPrinciplesAlignment
+                .value
+            ),
+          },
+          entries: impactEntries,
+        },
+      ],
+    },
+    {
       id: "healthAndSafety",
       inputHeader: {
         label: SocietalInputEnum.HEALTH_AND_SAFETY,

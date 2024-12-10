@@ -362,6 +362,12 @@ function FinancialModelProvider({ children }: { children: React.ReactNode }) {
               (value) => value !== input
             );
           break;
+        case FinancialInputRangesEnum.FIRST_ANNUAL_OPERATING_COST_YEAR:
+          updatedRanges.firstAnnualOperatingCostsYear =
+            updatedRanges.firstAnnualOperatingCostsYear.filter(
+              (value) => value !== input
+            );
+          break;
         case FinancialInputRangesEnum.ANNUAL_MAINTENANCE_COSTS:
           updatedRanges.annualMaintenanceCosts =
             updatedRanges.annualMaintenanceCosts.filter(
@@ -371,6 +377,12 @@ function FinancialModelProvider({ children }: { children: React.ReactNode }) {
         case FinancialInputRangesEnum.ANNUAL_MAINTENANCE_COSTS_GROWTH_RATE:
           updatedRanges.annualMaintenanceCostsGrowthRate =
             updatedRanges.annualMaintenanceCostsGrowthRate.filter(
+              (value) => value !== input
+            );
+          break;
+        case FinancialInputRangesEnum.FIRST_ANNUAL_MAINTENANCE_COST_YEAR:
+          updatedRanges.firstAnnualMaintenanceCostsYear =
+            updatedRanges.firstAnnualMaintenanceCostsYear.filter(
               (value) => value !== input
             );
           break;
