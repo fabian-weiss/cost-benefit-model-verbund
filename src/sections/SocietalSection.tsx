@@ -464,18 +464,17 @@ function SocietalSection() {
       },
       dropdownFields: [
         {
-          id: "guidingPrinciplesAlignment",
+          id: "workplaceCreation",
           onSelect(entry: DropdownEntryType) {
             societalModelContext.setSocietalInput(
-              SocietalInputEnum.GUIDING_PRINCIPLES_ALIGNMENT,
+              SocietalInputEnum.WORKPLACE_CREATION,
               impactToNumber(entry.impact),
               entry.impact
             );
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.guidingPrinciplesAlignment
-                .value
+              societalModelContext.societalInputs.workplaceCreation.value
             ),
           },
           entries: impactEntries,
