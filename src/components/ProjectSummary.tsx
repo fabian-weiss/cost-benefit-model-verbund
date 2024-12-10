@@ -32,7 +32,7 @@ function ProjectSummary() {
             </tr>
           </tbody>
           <tbody>
-            <tr className="fw-results-list-table-row__data">
+            <tr className="fw-results-list-table-row__data fw-table-spacer">
               <td>
                 {overviewContext.overviewInputs.projectTitle ?? "Project X"}
               </td>

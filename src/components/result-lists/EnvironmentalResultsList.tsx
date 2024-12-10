@@ -98,7 +98,7 @@ function EnvironmentalResultsList() {
             <tr>
               <td
                 colSpan={6}
-                className="fw-dialog-subtitle"
+                className="fw-dialog-subtitle fw-table-spacer"
               >{`Description: From -1 to 1, where 1 is the best possible outcome. It's scaled down based on maximum and minimum outcomes.`}</td>
             </tr>
           </tbody>

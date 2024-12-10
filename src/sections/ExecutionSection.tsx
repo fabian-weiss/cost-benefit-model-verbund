@@ -38,7 +38,8 @@ function ExecutionSection() {
     const hasErrors: boolean = financialModelContext.validateInputs();
     if (!hasErrors) {
       const finResults: FinancialResults = financialResults(
-        financialModelContext.financialInputRanges
+        financialModelContext.financialInputRanges,
+        financialModelContext.dynamicInputs
       );
       financialModelContext.setModelResults(finResults);
     } else {
