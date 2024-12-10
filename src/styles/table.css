@@ -1,0 +1,21 @@
+.fw-table-spacer {
+  padding-bottom: 50px;
+}
+
+.fw-table-container {
+  width: 100%;
+  /* table-layout: auto !important; */
+  table-layout: auto !important;
+}
+
+.fw-table-large-col {
+  width: 40%;
+}
+
+.fw-table-small-col {
+  width: 50px;
+}
+
+.fw-table-default-col {
+  width: calc(100% / 6);
+}

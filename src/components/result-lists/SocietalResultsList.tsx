@@ -17,104 +17,94 @@ function SocietalResultsList() {
     <>
       {societalModelContext.modelResults ? (
         <>
-          <tbody>
-            <tr>
-              <th colSpan={6} className="fw-dialog-title">
-                {title}
-              </th>
-            </tr>
-            {/* Subtitle Row */}
-            <tr>
-              <th colSpan={6} className="fw-dialog-subtitle">
-                {body}
-              </th>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr className="fw-results-list-table-row__header">
-              <th>Factor</th>
-              <th>Impact</th>
-              <th>Mapped Impact</th>
-              <th>Weight</th>
-              <th>Score</th>
-              <th>Comment</th>
-            </tr>
-          </tbody>
-          <tbody>
-            {Object.entries(
-              societalModelContext.modelResults.weightedSingleFactors
-            ).map(([factorKey, factor], index) => (
-              <tr
-                key={index}
-                style={{
-                  color: resultToColor(
-                    valueToResultInterpretation(factor.value)
-                  ),
-                }}
-                className="fw-results-list-table-row__data"
-              >
-                <td>{normalizeCamelCase(factorKey)}</td>
-                <td>
-                  {/* {getScoreLabel(
+          <tr>
+            <th colSpan={6} className="fw-dialog-title">
+              {title}
+            </th>
+          </tr>
+          {/* Subtitle Row */}
+          <tr>
+            <th colSpan={6} className="fw-dialog-subtitle">
+              {body}
+            </th>
+          </tr>
+          <tr className="fw-results-list-table-row__header">
+            <th>Factor</th>
+            <th>Impact</th>
+            <th>Mapped Impact</th>
+            <th>Weight</th>
+            <th>Score</th>
+            <th className="fw-table-large-col">Comment</th>
+          </tr>
+          {Object.entries(
+            societalModelContext.modelResults.weightedSingleFactors
+          ).map(([factorKey, factor], index) => (
+            <tr
+              key={index}
+              style={{
+                color: resultToColor(valueToResultInterpretation(factor.value)),
+              }}
+              className="fw-results-list-table-row__data"
+            >
+              <td>{normalizeCamelCase(factorKey)}</td>
+              <td>
+                {/* {getScoreLabel(
                       factor.value,
                       societalModelContext.modelResults?.weights[
                         factorKey as keyof typeof societalModelContext.modelResults.weights
                       ] ?? 1
                     )} */}
-                  {factor.impact}
-                </td>
-                <td>{impactToNumber(factor.impact)}</td>
-                <td>
-                  {
-                    societalModelContext.modelResults?.weights[
-                      factorKey as keyof typeof societalModelContext.modelResults.weights
-                    ]
-                  }
-                </td>
-                <td>
-                  {(
-                    impactToNumber(factor.impact) *
-                    (societalModelContext.modelResults?.weights[
-                      factorKey as keyof typeof societalModelContext.modelResults.weights
-                    ] ?? 1)
-                  ).toFixed(2)}
-                </td>
-                <td>{factor.comment}</td>
-              </tr>
-            ))}
-            <tr>
-              <th
-                colSpan={6}
-                className="fw-dialog-title"
-                style={{
-                  color: resultToColor(
-                    valueToResultInterpretation(
-                      societalModelContext.modelResults.scaledTotalScore
-                    )
-                  ),
-                }}
-              >{`Scaled Total Score: ${societalModelContext.modelResults?.scaledTotalScore.toFixed(
-                2
-              )}`}</th>
+                {factor.impact}
+              </td>
+              <td>{impactToNumber(factor.impact)}</td>
+              <td>
+                {
+                  societalModelContext.modelResults?.weights[
+                    factorKey as keyof typeof societalModelContext.modelResults.weights
+                  ]
+                }
+              </td>
+              <td>
+                {(
+                  impactToNumber(factor.impact) *
+                  (societalModelContext.modelResults?.weights[
+                    factorKey as keyof typeof societalModelContext.modelResults.weights
+                  ] ?? 1)
+                ).toFixed(2)}
+              </td>
+              <td>{factor.comment}</td>
             </tr>
-            <tr>
-              <td
-                colSpan={6}
-                className="fw-dialog-subtitle fw-table-spacer"
-              >{`Description: From -1 to 1, where 1 is the best possible outcome. It's scaled down based on maximum and minimum outcomes.`}</td>
-            </tr>
-          </tbody>
+          ))}
+          <tr>
+            <th
+              colSpan={6}
+              className="fw-dialog-title"
+              style={{
+                color: resultToColor(
+                  valueToResultInterpretation(
+                    societalModelContext.modelResults.scaledTotalScore
+                  )
+                ),
+              }}
+            >{`Scaled Total Score: ${societalModelContext.modelResults?.scaledTotalScore.toFixed(
+              2
+            )}`}</th>
+          </tr>
+          <tr>
+            <td
+              colSpan={6}
+              className="fw-dialog-subtitle fw-table-spacer"
+            >{`Description: From -1 to 1, where 1 is the best possible outcome. It's scaled down based on maximum and minimum outcomes.`}</td>
+          </tr>
         </>
       ) : (
-        <tbody>
-          <tr>
-            <th colSpan={6} className="fw-dialog-title">
-              {
-                "No valid Societal model inputs. Unable to calculate the RIO results"
-              }
-            </th>
-          </tr>
-        </tbody>
+        <tr>
+          <th colSpan={6} className="fw-dialog-title">
+            {
+              "No valid Societal model inputs. Unable to calculate the RIO results"
+            }
+          </th>
+        </tr>
       )}
     </>
   );

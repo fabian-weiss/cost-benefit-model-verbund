@@ -19,6 +19,8 @@ import {
   rioProjectWeight,
   societalProjectWeight,
 } from "@/utils/model-weights";
+import { resultToColor } from "@/utils/result-to-color";
+import { valueToResultInterpretation } from "@/utils/value-to-result-interpretation";
 import React from "react";
 
 function CompleteResultsDialog(props: { closeDialog: () => void }) {
@@ -61,18 +63,22 @@ function CompleteResultsDialog(props: { closeDialog: () => void }) {
         <SocietalResultsList />
         <EnvironmentalResultsList />
         <RioResultsList />
-        <tbody>
-          <tr>
-            <th colSpan={6} className="fw-dialog-title">
-              {`Final Score: ${meanModelScore.toFixed(2)}`}
-            </th>
-          </tr>
-          <tr>
-            <td colSpan={6} className="fw-dialog-subtitle">
-              {`The overall model score is the average of the societal, RIO, and environmental model scores on a -1 to 1 scale. 1 is the best possible score. Every project with a score of 0.5 or higher is considered a very good project based on societal, environmental and rio factors.`}
-            </td>
-          </tr>
-        </tbody>
+        <tr>
+          <th
+            style={{
+              color: resultToColor(valueToResultInterpretation(meanModelScore)),
+            }}
+            colSpan={6}
+            className="fw-dialog-title"
+          >
+            {`Final Score: ${meanModelScore.toFixed(2)}`}
+          </th>
+        </tr>
+        <tr>
+          <td colSpan={6} className="fw-dialog-subtitle">
+            {`The overall model score is the average of the societal, RIO, and environmental model scores on a -1 to 1 scale. 1 is the best possible score. Every project with a score of 0.5 or higher is considered a very good project based on societal, environmental and rio factors. Projects with a score lower than 1 should not be considered for funding.`}
+          </td>
+        </tr>
       </TableContainer>
       {/* <ResultsGroup title="Societal Results">
         <SocietalResultsList />

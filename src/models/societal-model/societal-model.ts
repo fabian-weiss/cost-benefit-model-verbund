@@ -8,7 +8,7 @@ import { round } from "mathjs";
 export const societalModel = (inputs: SocietalInputs): SocietalResults => {
   const weights: SocietalWeights = {
     customerSatisfaction: 0.1,
-    customerAffordability: 0.2,
+    customerAffordability: 0.1,
     companyCulture: 0.1,
     communityImplications: 0.05,
     knowledgeSharingAcrossTheSupplyChain: 0.2,
@@ -16,7 +16,7 @@ export const societalModel = (inputs: SocietalInputs): SocietalResults => {
     guidingPrinciplesAlignment: 0.1,
     publicPerception: 0.05,
     workplaceCreation: 0.05,
-    healthAndSafety: 0.1,
+    healthAndSafety: 0.2,
   };
 
   //console.log(`inputs are: ${JSON.stringify(inputs)}`);

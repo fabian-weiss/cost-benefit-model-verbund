@@ -9,40 +9,58 @@ function ProjectSummary() {
     <>
       {overviewContext.overviewInputs ? (
         <>
-          <tbody>
-            <tr className="fw-x">
-              <th colSpan={6} className="fw-dialog-title">
-                {title}
-              </th>
-            </tr>
-            {/* Subtitle Row */}
-            <tr>
-              <th colSpan={6} className="fw-dialog-subtitle">
-                {body}
-              </th>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr className="fw-results-list-table-row__header">
-              <th>Project Title</th>
-              <th>Budget</th>
-              <th>Project Owner</th>
-              <th colSpan={2}>Project description</th>
-              <th>Project type</th>
-            </tr>
-          </tbody>
-          <tbody>
+          <tr>
+            <th colSpan={6} className="fw-dialog-title">
+              {title}
+            </th>
+          </tr>
+          {/* Subtitle Row */}
+          <tr>
+            <th colSpan={6} className="fw-dialog-subtitle">
+              {body}
+            </th>
+          </tr>
+          <tr className="fw-results-list-table-row__header">
+            <th className="fw-table-default-col" colSpan={1}>
+              Project Title
+            </th>
+            <td className="fw-table-large-col" colSpan={5}>
+              {overviewContext.overviewInputs.projectTitle ?? "Project X"}
+            </td>
+          </tr>
+          <tr className="fw-results-list-table-row__header">
+            <th colSpan={1}>Budget</th>
+            <td colSpan={5}>
+              €{overviewContext.overviewInputs.budget ?? "10.000,00"}
+            </td>
+          </tr>
+          <tr className="fw-results-list-table-row__header">
+            <th colSpan={1}>Project Owner</th>
+            <td colSpan={5}>
+              {overviewContext.overviewInputs.projectOwner ?? "John Doe"}
+            </td>
+          </tr>
+          <tr className="fw-results-list-table-row__header">
+            <th colSpan={1}>Project description</th>
+            <td colSpan={5}>
+              {overviewContext.overviewInputs.projectDescription ??
+                "A project that changes the world"}
+            </td>
+          </tr>
+          <tr className="fw-results-list-table-row__header">
+            <th colSpan={1}>Project type</th>
+            <td colSpan={5}>{overviewContext.overviewInputs.projectType}</td>
+          </tr>
+          <tr>
+            <td className="fw-table-spacer" colSpan={6}></td>
+          </tr>
+          {/* <tbody>
             <tr className="fw-results-list-table-row__data fw-table-spacer">
               <td>
                 {overviewContext.overviewInputs.projectTitle ?? "Project X"}
               </td>
               <td>
-                {/* {getScoreLabel(
-                        factor.value,
-                        societalModelContext.modelResults?.weights[
-                          factorKey as keyof typeof societalModelContext.modelResults.weights
-                        ] ?? 1
-                      )} */}
+               
                 €{overviewContext.overviewInputs.budget ?? "10.000,00"}
               </td>
               <td>
@@ -54,14 +72,12 @@ function ProjectSummary() {
               </td>
               <td>{overviewContext.overviewInputs.projectType}</td>
             </tr>
-          </tbody>
+          </tbody> */}
         </>
       ) : (
-        <tbody>
-          <tr>
-            <td colSpan={6}>{`Nothing found as project overview.`}</td>
-          </tr>
-        </tbody>
+        <tr>
+          <td colSpan={6}>{`Nothing found as project overview.`}</td>
+        </tr>
       )}
     </>
   );

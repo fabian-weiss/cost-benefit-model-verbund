@@ -65,10 +65,6 @@
   color: #a3a3a3;
 }
 
-.fw-table-spacer {
-  padding-bottom: 50px;
-}
-
 @media (max-width: 768px) {
   .fw-dialog-container {
     padding: 30px 20px;

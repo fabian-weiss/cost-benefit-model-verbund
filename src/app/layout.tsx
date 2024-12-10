@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 import "@/styles/texts.css";
 import "@/styles/buttons.css";
 import "@/styles/layout.css";
+import "@/styles/table.css";
 import FinancialModelProvider from "@/providers/financial-model-provider";
 import SocietalModelProvider from "@/providers/societal-model-provider";
 import EnvironmentalModelProvider from "@/providers/environmental-model-provider";

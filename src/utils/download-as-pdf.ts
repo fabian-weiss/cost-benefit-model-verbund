@@ -31,6 +31,23 @@ import autoTable from "jspdf-autotable";
 
 export const downloadAsPdf = async (htmlId: string, fileName: string) => {
   const doc = new jsPDF();
-  autoTable(doc, { html: `#${htmlId}`, useCss: true });
+  autoTable(doc, {
+    html: `#${htmlId}`,
+    useCss: true,
+    tableWidth: "auto",
+    columnStyles: {
+      0: { cellWidth: 30 },
+      1: { cellWidth: 25 },
+      2: { cellWidth: 20 },
+      3: { cellWidth: 20 },
+      4: { cellWidth: 20 },
+      5: { cellWidth: "auto" },
+    },
+    styles: {
+      overflow: "linebreak",
+      cellWidth: "wrap",
+      fontSize: 10,
+    },
+  });
   doc.save(`${fileName}.pdf`);
 };

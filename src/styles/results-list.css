@@ -4,7 +4,8 @@
 }
 
 .fw-results-list-table-row__header th,
-.fw-results-list-table-row__data td {
+.fw-results-list-table-row__data td,
+.fw-results-list-table-row__header td {
   text-align: left;
   padding: 8px;
   border-bottom: 1px solid #ddd;
