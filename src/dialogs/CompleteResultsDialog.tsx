@@ -76,7 +76,7 @@ function CompleteResultsDialog(props: { closeDialog: () => void }) {
         </tr>
         <tr>
           <td colSpan={6} className="fw-dialog-subtitle">
-            {`The overall model score is the average of the societal, RIO, and environmental model scores on a -1 to 1 scale. 1 is the best possible score. Every project with a score of 0.5 or higher is considered a very good project based on societal, environmental and rio factors. Projects with a score lower than 1 should not be considered for funding.`}
+            {`The overall model score is the average of the societal, RIO, and environmental model scores on a -1 to 1 scale. 1 is the best possible score. Every project with a score of 0.5 or higher is considered a very good project based on societal, environmental and RIO factors. Projects with a score lower than 0 should not be considered for funding.`}
           </td>
         </tr>
       </TableContainer>

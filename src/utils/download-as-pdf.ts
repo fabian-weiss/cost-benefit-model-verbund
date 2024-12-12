@@ -36,7 +36,7 @@ export const downloadAsPdf = async (htmlId: string, fileName: string) => {
     useCss: true,
     tableWidth: "auto",
     columnStyles: {
-      0: { cellWidth: 30 },
+      0: { cellWidth: 33 },
       1: { cellWidth: 25 },
       2: { cellWidth: 20 },
       3: { cellWidth: 20 },
