@@ -99,7 +99,14 @@ function CompleteResultsDialog(props: { closeDialog: () => void }) {
         fullWidth
         label={"Download as PDF"}
         fillType={"solid"}
-        onClick={() => downloadAsPdf("complete-model-table", "complete-model")}
+        onClick={() =>
+          downloadAsPdf(
+            "complete-model-table",
+            `${
+              overviewContext.overviewInputs.projectTitle ?? "Project"
+            } - Cost Benefit Analysis`
+          )
+        }
       />
     </DialogContainer>
   );
