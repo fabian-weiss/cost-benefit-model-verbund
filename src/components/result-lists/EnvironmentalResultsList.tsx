@@ -9,7 +9,7 @@ function EnvironmentalResultsList() {
   const environmentalModelContext = useEnvironmentalModel();
   const title: string = "Environmental Model Results";
   const body: string =
-    "The RIO model allows a user to input risk, innovation and opportunity factors on a scale from -2 to 2. These results are then multiplied by their weights.";
+    "The Environmental model allows a user to input risk, innovation and opportunity factors on a scale from -2 to 2. These results are then multiplied by their weights.";
 
   return (
     <>
