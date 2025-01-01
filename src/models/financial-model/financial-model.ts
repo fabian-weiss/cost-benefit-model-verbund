@@ -11,15 +11,18 @@ import { mean, round } from "mathjs";
 export const financialModel = (
   inputs: FinancialInputs
 ): { singleFactors: FinancialFactors; overallScore: number } => {
-  const { initialInvestment, trainingCosts, projectDuration, discountRate } =
-    inputs;
+  const {
+    initialInvestment,
+    trainingCosts,
+    /*projectDuration,*/ discountRate,
+  } = inputs;
 
   const { totalCashflow, cashflows, paybackPeriod } = calculateCashflow(inputs);
 
   const discountedCashflow: number = calculateDiscountedCashflow(
-    totalCashflow,
-    discountRate,
-    projectDuration
+    cashflows,
+    discountRate
+    // projectDuration
   );
 
   console.log("totalCashflow", totalCashflow);
@@ -31,6 +34,7 @@ export const financialModel = (
   const EVA: number = calculateEVA(
     totalCashflow,
     discountRate,
+    23 / 100, // tax rate Austria
     initialInvestment
   );
 

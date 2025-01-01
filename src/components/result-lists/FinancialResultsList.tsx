@@ -5,15 +5,91 @@ import { formatToEuro } from "@/utils/format-to-euro";
 import { formatToPercent } from "@/utils/format-to-percent";
 import { mean } from "mathjs";
 import React from "react";
-import ResultEntry from "../ResultEntry";
+import { resultToColor } from "@/utils/result-to-color";
+import { valueToResultInterpretation } from "@/utils/value-to-result-interpretation";
+import { normalizeCamelCase } from "@/utils/normalize-camel-case";
 
 function FinancialResultsList() {
   const financialModelContext = useFinancialModel();
+
+  const title: string = "Financial Model Results";
+  const body: string =
+    "The Financial Model allows a user to input expected financial outcomes. These results are then calculated and displayed.";
+
+  const getResultInterpretation = (
+    result: number,
+    counterValue?: number
+  ): ResultInterpretation => {
+    if (counterValue) {
+      return valueToResultInterpretation(result - counterValue);
+    } else {
+      return valueToResultInterpretation(result);
+    }
+  };
+
+  const getFormattedResult = (result: number, resultKey: string): string => {
+    switch (resultKey) {
+      case "IRR":
+      case "ROI":
+        return formatToPercent(result);
+      case "paybackPeriod":
+        return `${result} year${result === 1 ? "" : "s"}`;
+      case "IRRToWACC":
+        return `${result.toFixed(2)}`;
+      default:
+        return formatToEuro(result);
+    }
+  };
+
   return (
-    <div className="fw-results-container">
+    <>
       {financialModelContext.modelResults ? (
         <>
-          <ResultEntry
+          <tr>
+            <th colSpan={6} className="fw-dialog-title">
+              {title}
+            </th>
+          </tr>
+          {/* Subtitle Row */}
+          <tr>
+            <th colSpan={6} className="fw-dialog-subtitle">
+              {body}
+            </th>
+          </tr>
+          <tr className="fw-results-list-table-row__header">
+            <th colSpan={3}>KPI</th>
+            <th colSpan={3}>Result</th>
+          </tr>
+          {Object.entries(financialModelContext.modelResults.averages).map(
+            ([resultKey, result], index) => (
+              <tr
+                key={index}
+                style={{
+                  color: resultToColor(
+                    getResultInterpretation(
+                      result ?? 0,
+                      resultKey === "IRRToWACC"
+                        ? mean(
+                            financialModelContext.financialInputRanges
+                              .discountRate
+                          )
+                        : undefined
+                    )
+                  ),
+                }}
+                className="fw-results-list-table-row__data"
+              >
+                <td colSpan={3}>{normalizeCamelCase(resultKey)}</td>
+                <td colSpan={3}>
+                  {getFormattedResult(result ?? 0, resultKey)}
+                </td>
+              </tr>
+            )
+          )}
+          <tr>
+            <td colSpan={6} className="fw-dialog-subtitle fw-table-spacer"></td>
+          </tr>
+          {/* <ResultEntry
             factor="Total Cashflow"
             value={formatToEuro(
               financialModelContext.modelResults?.averages.totalCashflow
@@ -110,14 +186,14 @@ function FinancialResultsList() {
                 ? ResultInterpretation.POSITIVE
                 : ResultInterpretation.NEGATIVE
             }
-          />
+          /> */}
         </>
       ) : (
         <p className="fw-text-error">
           {"Invalid financial inputs. Couldn't calculate financials."}
         </p>
       )}
-    </div>
+    </>
   );
 }
 

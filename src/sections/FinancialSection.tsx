@@ -670,12 +670,12 @@ function FinancialSection() {
         },
       ],
     },
-    // Annual Training Costs
+    // First Year Training Costs
     {
       financialCategory: FinancialCategory.COSTS,
       id: FinancialInputRangesEnum.TRAINING_COSTS,
       inputHeader: {
-        label: "Annual Training Costs",
+        label: "First-Year Training Costs",
         adjustmentButtonRow: {
           adjustments: [10, 20, 30],
           callback: (adjustment: number) =>

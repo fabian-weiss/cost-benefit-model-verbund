@@ -3,6 +3,7 @@ import ActionButton from "@/components/ActionButton";
 import DialogContainer from "@/components/DialogContainer";
 import ProjectSummary from "@/components/ProjectSummary";
 import EnvironmentalResultsList from "@/components/result-lists/EnvironmentalResultsList";
+import FinancialResultsList from "@/components/result-lists/FinancialResultsList";
 import RioResultsList from "@/components/result-lists/RioResultsList";
 import SocietalResultsList from "@/components/result-lists/SocietalResultsList";
 import TableContainer from "@/components/TableContainer";
@@ -60,6 +61,7 @@ function CompleteResultsDialog(props: { closeDialog: () => void }) {
       </ResultsGroup> */}
       <TableContainer id="complete-model-table">
         <ProjectSummary />
+        <FinancialResultsList />
         <SocietalResultsList />
         <EnvironmentalResultsList />
         <RioResultsList />
