@@ -45,14 +45,24 @@ function CompleteResultsDialog(props: { closeDialog: () => void }) {
     }
   };
 
+  const societalModelScore: number =
+    (societalModelContext.modelResults?.scaledTotalScore ?? 0) *
+    _getProjectSpecificWeight().societalWeights;
+  const rioModelScore: number =
+    (rioModelContext.modelResults?.scaledTotalScore ?? 0) *
+    _getProjectSpecificWeight().rioWeights;
+  const environmentalModelScore: number =
+    (environmentalModelContext.modelResults?.scaledTotalScore ?? 0) *
+    _getProjectSpecificWeight().environmentalWeights;
+
+  const submodelScores: { key: string; value: number }[] = [
+    { key: "Societal", value: societalModelScore },
+    { key: "RIO", value: rioModelScore },
+    { key: "Environmental", value: environmentalModelScore },
+  ];
+
   const meanModelScore: number =
-    ((societalModelContext.modelResults?.scaledTotalScore ?? 0) *
-      _getProjectSpecificWeight().societalWeights +
-      (rioModelContext.modelResults?.scaledTotalScore ?? 0) *
-        _getProjectSpecificWeight().rioWeights +
-      (environmentalModelContext.modelResults?.scaledTotalScore ?? 0) *
-        _getProjectSpecificWeight().environmentalWeights) /
-    3;
+    (societalModelScore + rioModelScore + environmentalModelScore) / 3;
 
   return (
     <DialogContainer fullscreen closeDialog={props.closeDialog}>
@@ -65,6 +75,21 @@ function CompleteResultsDialog(props: { closeDialog: () => void }) {
         <SocietalResultsList />
         <EnvironmentalResultsList />
         <RioResultsList />
+        {submodelScores.map((submodelScore) => (
+          <tr key={`submodel-score-${submodelScore.key}`}>
+            <th
+              style={{
+                color: resultToColor(
+                  valueToResultInterpretation(submodelScore.value)
+                ),
+              }}
+              colSpan={6}
+              className="fw-dialog-title"
+            >
+              {`${submodelScore.key} Score: ${submodelScore.value.toFixed(2)}`}
+            </th>
+          </tr>
+        ))}
         <tr>
           <th
             style={{
