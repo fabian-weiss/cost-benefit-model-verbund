@@ -4,7 +4,12 @@ import { FinancialInputs } from "@/types/financials/financial-inputs";
 
 export const calculateCashflow = (
   inputs: FinancialInputs
-): { totalCashflow: number; cashflows: number[]; paybackPeriod: number } => {
+): {
+  totalCashflow: number;
+  cashflows: number[];
+  paybackPeriod: number;
+  cumulativeCosts: number;
+} => {
   // Calculate Cashflow: Cashflow = (Budget - Costs) over project duration
   const {
     initialInvestment, // initial investment
@@ -27,6 +32,7 @@ export const calculateCashflow = (
 
   let dynamicRevenues: DynamicFinancialInput[] = [];
   let dynamicCosts: DynamicFinancialInput[] = [];
+  let cumulativeCosts: number = initialInvestment + trainingCosts;
 
   if (dynamicFinancialInputs) {
     dynamicRevenues = dynamicFinancialInputs?.filter(
@@ -116,6 +122,7 @@ export const calculateCashflow = (
 
     // Calculate the annual cash flow for this year
     const annualCashFlow = annualRevenues - annualCosts;
+    cumulativeCosts += annualCosts;
 
     // console.log(
     //   `annual cashflow in year ${year}: ${annualCashFlow} because revenue is ${revenue}, costSavings is ${costSavings}, dRevenues is ${dRevenues}, dCosts is ${dCosts}, operatingCosts is ${operatingCosts}, maintenanceCosts is ${maintenanceCosts}, tCosts is ${tCosts}`
@@ -146,5 +153,6 @@ export const calculateCashflow = (
     totalCashflow: endcashflow,
     cashflows: cashflows,
     paybackPeriod: paybackPeriod,
+    cumulativeCosts: cumulativeCosts,
   };
 };

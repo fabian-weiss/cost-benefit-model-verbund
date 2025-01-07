@@ -17,7 +17,8 @@ export const financialModel = (
     /*projectDuration,*/ discountRate,
   } = inputs;
 
-  const { totalCashflow, cashflows, paybackPeriod } = calculateCashflow(inputs);
+  const { totalCashflow, cashflows, paybackPeriod, cumulativeCosts } =
+    calculateCashflow(inputs);
 
   const discountedCashflow: number = calculateDiscountedCashflow(
     cashflows,
@@ -27,7 +28,11 @@ export const financialModel = (
 
   console.log("totalCashflow", totalCashflow);
 
-  const ROI: number = calculateROI(totalCashflow, initialInvestment);
+  const ROI: number = calculateROI(
+    totalCashflow,
+    initialInvestment,
+    cumulativeCosts
+  );
 
   const NPV: number = calculateNPV(initialInvestment, discountedCashflow);
 
