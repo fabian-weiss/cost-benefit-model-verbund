@@ -8,7 +8,11 @@ function HeaderSection(props: { title: string; body: string }) {
       <h1>{props.title}</h1>
       <p>
         {`${props.body} View the instructions to use the model `}
-        <Link target="_blank" href={"/instructions.pdf"}>
+        <Link
+          className="fw-underline"
+          target="_blank"
+          href={"/instructions.pdf"}
+        >
           here
         </Link>
         .
