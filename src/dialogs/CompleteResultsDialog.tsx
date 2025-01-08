@@ -2,6 +2,7 @@
 import ActionButton from "@/components/ActionButton";
 import DialogContainer from "@/components/DialogContainer";
 import ProjectSummary from "@/components/ProjectSummary";
+import RadarChart from "@/components/RadarChart";
 import EnvironmentalResultsList from "@/components/result-lists/EnvironmentalResultsList";
 import FinancialResultsList from "@/components/result-lists/FinancialResultsList";
 import RioResultsList from "@/components/result-lists/RioResultsList";
@@ -29,6 +30,15 @@ function CompleteResultsDialog(props: { closeDialog: () => void }) {
   const rioModelContext = useRioModel();
   const environmentalModelContext = useEnvironmentalModel();
   const societalModelContext = useSocietalModel();
+
+  const _downloadFile = () => {
+    downloadAsPdf(
+      "complete-model-table",
+      `${
+        overviewContext.overviewInputs.projectTitle ?? "Project"
+      } - Cost Benefit Analysis`
+    );
+  };
 
   const _getProjectSpecificWeight = (): ProjectTypeWeights => {
     switch (overviewContext.overviewInputs.projectType) {
@@ -75,6 +85,7 @@ function CompleteResultsDialog(props: { closeDialog: () => void }) {
         <SocietalResultsList />
         <EnvironmentalResultsList />
         <RioResultsList />
+
         {submodelScores.map((submodelScore) => (
           <tr key={`submodel-score-${submodelScore.key}`}>
             <th
@@ -122,18 +133,26 @@ function CompleteResultsDialog(props: { closeDialog: () => void }) {
         resultInterpretation={valueToResultInterpretation(meanModelScore)}
         description="The overall model score is the average of the societal, RIO, and environmental model scores on a -1 to 1 scale. 1 is the best possible score. Every project with a score of 0.5 or higher is considered a very good project based on societal, environmental and rio factors."
       /> */}
+      <div
+        id="radar-chart"
+        style={{
+          display: "flex",
+          alignSelf: "center",
+          width: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "400px",
+        }}
+      >
+        <RadarChart
+          data={[societalModelScore, environmentalModelScore, rioModelScore]}
+        />
+      </div>
       <ActionButton
         fullWidth
         label={"Download as PDF"}
         fillType={"solid"}
-        onClick={() =>
-          downloadAsPdf(
-            "complete-model-table",
-            `${
-              overviewContext.overviewInputs.projectTitle ?? "Project"
-            } - Cost Benefit Analysis`
-          )
-        }
+        onClick={() => _downloadFile()}
       />
     </DialogContainer>
   );

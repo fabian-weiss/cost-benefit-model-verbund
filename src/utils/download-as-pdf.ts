@@ -4,6 +4,7 @@
 
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import html2canvas from "html2canvas";
 
 // export const downloadAsPdf = async (
 //   dialogContainerRef: RefObject<HTMLDivElement>,
@@ -49,5 +50,27 @@ export const downloadAsPdf = async (htmlId: string, fileName: string) => {
       fontSize: 10,
     },
   });
+  const radarChartElement = document.querySelector(`#radar-chart`);
+  if (radarChartElement) {
+    const chartCanvas = await html2canvas(radarChartElement as HTMLElement);
+    const chartImgData = chartCanvas.toDataURL("image/png");
+
+    // Add the chart image to the PDF
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const chartWidth = pageWidth - 40; // Add margins
+    const chartHeight = (chartCanvas.height * chartWidth) / chartCanvas.width;
+    const tableHeight = 20; // Position below table
+
+    let yPosition = pageHeight - chartHeight;
+
+    if (tableHeight + chartHeight > doc.internal.pageSize.getHeight()) {
+      doc.addPage();
+      yPosition = 20;
+    }
+
+    doc.addImage(chartImgData, "PNG", 20, yPosition, chartWidth, chartHeight);
+  }
+
   doc.save(`${fileName}.pdf`);
 };
