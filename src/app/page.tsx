@@ -13,7 +13,7 @@ function Home() {
       <HeaderSection
         title={"Beyond Financial Specs"}
         body={
-          "Cost Benefit Model for digital projects by Anya, Elina, Eni, Fabian, Kira, and Melissa. In cooperation with WU and VERBUND"
+          "Cost Benefit Model for digital projects by Anya, Elina, Eni, Fabian, Kira, and Melissa. In cooperation with WU and VERBUND."
         }
       />
       <OverviewSection />
