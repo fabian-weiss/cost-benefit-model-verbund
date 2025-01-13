@@ -2,16 +2,16 @@
 import ActionButton from "@/components/ActionButton";
 import DialogContainer from "@/components/DialogContainer";
 import FinancialResultsList from "@/components/result-lists/FinancialResultsList";
+import TableContainer from "@/components/TableContainer";
+import { downloadAsPdf } from "@/utils/download-as-pdf";
 import React from "react";
 
 function FinancialResultsDialog(props: { closeDialog: () => void }) {
   return (
-    <DialogContainer
-      closeDialog={props.closeDialog}
-      title="Financial Model Results"
-      body="The financial model creates all combinations of the given inputs. These results are the averages across all combinations."
-    >
-      <FinancialResultsList />
+    <DialogContainer fullscreen closeDialog={props.closeDialog}>
+      <TableContainer id="financial-results-table">
+        <FinancialResultsList />
+      </TableContainer>
       {/* <div>
         {financialModelContext.modelResults &&
           Object.keys(financialModelContext.modelResults.averages).map(
@@ -29,7 +29,9 @@ function FinancialResultsDialog(props: { closeDialog: () => void }) {
         fullWidth
         label={"Download as PDF"}
         fillType={"solid"}
-        onClick={() => console.log("Download financial model as pdf")}
+        onClick={() =>
+          downloadAsPdf("financial-results-table", `financial-model`)
+        }
       />
     </DialogContainer>
   );

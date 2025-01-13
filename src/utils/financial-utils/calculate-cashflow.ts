@@ -32,7 +32,7 @@ export const calculateCashflow = (
 
   let dynamicRevenues: DynamicFinancialInput[] = [];
   let dynamicCosts: DynamicFinancialInput[] = [];
-  let cumulativeCosts: number = initialInvestment + trainingCosts;
+  let cumulativeCosts: number = 0;
 
   if (dynamicFinancialInputs) {
     dynamicRevenues = dynamicFinancialInputs?.filter(

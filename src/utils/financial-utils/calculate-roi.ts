@@ -5,6 +5,7 @@ export const calculateROI = (
 ): number => {
   const ROI =
     (totalCashflow - initialInvestment) / (totalInvestment + initialInvestment);
+
   //const adjustedROI = adjustForRisk(ROI, riskFactor);
   //const scaledROI = scaleNumber(adjustedROI, -1, 2);
   return ROI;
