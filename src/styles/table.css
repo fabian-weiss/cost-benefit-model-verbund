@@ -19,3 +19,9 @@
 .fw-table-default-col {
   width: calc(100% / 6);
 }
+
+@media (max-width: 480px) {
+  .fw-table-spacer {
+    padding-bottom: 25px;
+  }
+}
