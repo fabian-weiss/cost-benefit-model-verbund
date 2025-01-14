@@ -80,4 +80,8 @@
     top: 20px;
     right: 20px;
   }
+  .fw-dialog-wrapper {
+    margin-bottom: 50px;
+    gap: 0px;
+  }
 }
