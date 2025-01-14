@@ -12,5 +12,7 @@ export const impactToNumber = (impact: Impact): number => {
       return 1;
     case Impact.VERY_POSITIVE:
       return 2;
+    default:
+      return 0;
   }
 };

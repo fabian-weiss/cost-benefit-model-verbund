@@ -72,7 +72,7 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
         setRioInputs((prev) => ({
           ...prev,
           privacy: {
-            value: input ? input : prev.privacy.value,
+            value: input != undefined ? input : prev.privacy.value,
             comment: comment != undefined ? comment : prev.privacy.comment,
             impact: impact ? impact : prev.privacy.impact,
           },
@@ -82,7 +82,7 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
         setRioInputs((prev) => ({
           ...prev,
           marketAdvantage: {
-            value: input ? input : prev.marketAdvantage.value,
+            value: input != undefined ? input : prev.marketAdvantage.value,
             comment:
               comment != undefined ? comment : prev.marketAdvantage.comment,
             impact: impact ? impact : prev.marketAdvantage.impact,
@@ -93,7 +93,7 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
         setRioInputs((prev) => ({
           ...prev,
           longTermResilience: {
-            value: input ? input : prev.longTermResilience.value,
+            value: input != undefined ? input : prev.longTermResilience.value,
             comment:
               comment != undefined ? comment : prev.longTermResilience.comment,
             impact: impact ? impact : prev.longTermResilience.impact,
@@ -104,7 +104,7 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
         setRioInputs((prev) => ({
           ...prev,
           longTermScalability: {
-            value: input ? input : prev.longTermScalability.value,
+            value: input != undefined ? input : prev.longTermScalability.value,
             comment:
               comment != undefined ? comment : prev.longTermScalability.comment,
             impact: impact ? impact : prev.longTermScalability.impact,
@@ -115,7 +115,7 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
         setRioInputs((prev) => ({
           ...prev,
           legalRequirements: {
-            value: input ? input : prev.legalRequirements.value,
+            value: input != undefined ? input : prev.legalRequirements.value,
             comment:
               comment != undefined ? comment : prev.legalRequirements.comment,
             impact: impact ? impact : prev.legalRequirements.impact,
@@ -126,7 +126,7 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
         setRioInputs((prev) => ({
           ...prev,
           innovation: {
-            value: input ? input : prev.innovation.value,
+            value: input != undefined ? input : prev.innovation.value,
             comment: comment != undefined ? comment : prev.innovation.comment,
             impact: impact ? impact : prev.innovation.impact,
           },
@@ -136,7 +136,7 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
         setRioInputs((prev) => ({
           ...prev,
           otherRisks: {
-            value: input ? input : prev.otherRisks.value,
+            value: input != undefined ? input : prev.otherRisks.value,
             comment: comment != undefined ? comment : prev.otherRisks.comment,
             impact: impact ? impact : prev.otherRisks.impact,
           },

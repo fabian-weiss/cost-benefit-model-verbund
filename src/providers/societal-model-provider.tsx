@@ -90,7 +90,7 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
         setSocietalInputs((prev) => ({
           ...prev,
           customerSatisfaction: {
-            value: input ? input : prev.customerSatisfaction.value,
+            value: input != undefined ? input : prev.customerSatisfaction.value,
             comment:
               comment != undefined
                 ? comment
@@ -103,7 +103,8 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
         setSocietalInputs((prev) => ({
           ...prev,
           customerAffordability: {
-            value: input ? input : prev.customerAffordability.value,
+            value:
+              input != undefined ? input : prev.customerAffordability.value,
             comment:
               comment != undefined
                 ? comment
@@ -116,7 +117,7 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
         setSocietalInputs((prev) => ({
           ...prev,
           companyCulture: {
-            value: input ? input : prev.companyCulture.value,
+            value: input != undefined ? input : prev.companyCulture.value,
             comment:
               comment != undefined ? comment : prev.companyCulture?.comment,
             impact: impact ? impact : prev.companyCulture.impact,
@@ -127,7 +128,8 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
         setSocietalInputs((prev) => ({
           ...prev,
           communityImplications: {
-            value: input ? input : prev.communityImplications.value,
+            value:
+              input != undefined ? input : prev.communityImplications.value,
             comment:
               comment != undefined
                 ? comment
@@ -140,9 +142,10 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
         setSocietalInputs((prev) => ({
           ...prev,
           knowledgeSharingAcrossTheSupplyChain: {
-            value: input
-              ? input
-              : prev.knowledgeSharingAcrossTheSupplyChain.value,
+            value:
+              input != undefined
+                ? input
+                : prev.knowledgeSharingAcrossTheSupplyChain.value,
             comment:
               comment != undefined
                 ? comment
@@ -157,7 +160,7 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
         setSocietalInputs((prev) => ({
           ...prev,
           shareholderValue: {
-            value: input ? input : prev.shareholderValue.value,
+            value: input != undefined ? input : prev.shareholderValue.value,
             comment:
               comment != undefined ? comment : prev.shareholderValue?.comment,
             impact: impact ? impact : prev.shareholderValue.impact,
@@ -168,7 +171,10 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
         setSocietalInputs((prev) => ({
           ...prev,
           guidingPrinciplesAlignment: {
-            value: input ? input : prev.guidingPrinciplesAlignment.value,
+            value:
+              input != undefined
+                ? input
+                : prev.guidingPrinciplesAlignment.value,
             comment:
               comment != undefined
                 ? comment
@@ -181,7 +187,7 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
         setSocietalInputs((prev) => ({
           ...prev,
           publicPerception: {
-            value: input ? input : prev.publicPerception.value,
+            value: input != undefined ? input : prev.publicPerception.value,
             comment:
               comment != undefined ? comment : prev.publicPerception?.comment,
             impact: impact ? impact : prev.publicPerception.impact,
@@ -192,7 +198,7 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
         setSocietalInputs((prev) => ({
           ...prev,
           workplaceCreation: {
-            value: input ? input : prev.workplaceCreation.value,
+            value: input != undefined ? input : prev.workplaceCreation.value,
             comment:
               comment != undefined ? comment : prev.workplaceCreation?.comment,
             impact: impact ? impact : prev.workplaceCreation.impact,
@@ -203,7 +209,7 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
         setSocietalInputs((prev) => ({
           ...prev,
           healthAndSafety: {
-            value: input ? input : prev.healthAndSafety.value,
+            value: input != undefined ? input : prev.healthAndSafety.value,
             comment:
               comment != undefined ? comment : prev.healthAndSafety?.comment,
             impact: impact ? impact : prev.healthAndSafety.impact,

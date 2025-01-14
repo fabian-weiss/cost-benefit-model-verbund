@@ -79,7 +79,7 @@ function EnvironmentalModelProvider({
         setEnvironmentalInputs((prev) => ({
           ...prev,
           unSustainableGoals: {
-            value: input ? input : prev.unSustainableGoals.value,
+            value: input != undefined ? input : prev.unSustainableGoals.value,
             comment:
               comment != undefined ? comment : prev.unSustainableGoals?.comment,
             impact: impact ? impact : prev.unSustainableGoals.impact,
@@ -90,7 +90,7 @@ function EnvironmentalModelProvider({
         setEnvironmentalInputs((prev) => ({
           ...prev,
           wasteProduction: {
-            value: input ? input : prev.wasteProduction.value,
+            value: input != undefined ? input : prev.wasteProduction.value,
             comment:
               comment != undefined ? comment : prev.wasteProduction?.comment,
             impact: impact ? impact : prev.wasteProduction.impact,
@@ -101,7 +101,7 @@ function EnvironmentalModelProvider({
         setEnvironmentalInputs((prev) => ({
           ...prev,
           biodiversity: {
-            value: input ? input : prev.biodiversity.value,
+            value: input != undefined ? input : prev.biodiversity.value,
             comment:
               comment != undefined ? comment : prev.biodiversity?.comment,
             impact: impact ? impact : prev.biodiversity.impact,
@@ -112,7 +112,7 @@ function EnvironmentalModelProvider({
         setEnvironmentalInputs((prev) => ({
           ...prev,
           pollution: {
-            value: input ? input : prev.pollution.value,
+            value: input != undefined ? input : prev.pollution.value,
             comment: comment != undefined ? comment : prev.pollution?.comment,
             impact: impact ? impact : prev.pollution.impact,
           },
@@ -122,7 +122,10 @@ function EnvironmentalModelProvider({
         setEnvironmentalInputs((prev) => ({
           ...prev,
           sustainableEneryIntegration: {
-            value: input ? input : prev.sustainableEneryIntegration.value,
+            value:
+              input != undefined
+                ? input
+                : prev.sustainableEneryIntegration.value,
             comment:
               comment != undefined
                 ? comment
@@ -135,7 +138,7 @@ function EnvironmentalModelProvider({
         setEnvironmentalInputs((prev) => ({
           ...prev,
           energyEfficiency: {
-            value: input ? input : prev.energyEfficiency.value,
+            value: input != undefined ? input : prev.energyEfficiency.value,
             comment:
               comment != undefined ? comment : prev.energyEfficiency?.comment,
             impact: impact ? impact : prev.energyEfficiency.impact,
@@ -146,7 +149,10 @@ function EnvironmentalModelProvider({
         setEnvironmentalInputs((prev) => ({
           ...prev,
           meetingEnvironmentalRegulations: {
-            value: input ? input : prev.meetingEnvironmentalRegulations.value,
+            value:
+              input != undefined
+                ? input
+                : prev.meetingEnvironmentalRegulations.value,
             comment:
               comment != undefined
                 ? comment

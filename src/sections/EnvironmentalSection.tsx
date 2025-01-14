@@ -58,6 +58,11 @@ function EnvironmentalSection() {
         {
           id: "unSustainableGoals",
           onSelect(entry: DropdownEntryType) {
+            console.log(
+              `impact: ${entry.impact} so we set it to ${impactToNumber(
+                entry.impact
+              )}`
+            );
             environmetalModelContext.setEnvironmentalInput(
               EnvironmentalInputEnum.UN_SUSTAINABLE_GOALS,
               impactToNumber(entry.impact),
