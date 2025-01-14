@@ -120,4 +120,11 @@ button:disabled {
   .fw-button__huge {
     font-size: 48px;
   }
+  .fw-button__filled {
+    padding: 12px 24px;
+  }
+
+  .fw-button {
+    font-size: 14px;
+  }
 }

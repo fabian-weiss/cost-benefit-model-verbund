@@ -5,8 +5,7 @@
 }
 
 @media (max-width: 480px) {
-  .fw-model-header {
-    flex-direction: column;
-    align-items: flex-start;
+  .fw-model-header h2 {
+    font-size: 18px;
   }
 }
