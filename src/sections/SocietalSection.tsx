@@ -177,7 +177,7 @@ function SocietalSection() {
       id: "shareholderValue",
       inputHeader: {
         label: "Shareholder Value",
-        description: "Possible impact on  employees’ work practices",
+        description: "Possible impact on shareholder value.",
       },
       detailedDescription: {
         header:
