@@ -83,5 +83,6 @@
   .fw-dialog-wrapper {
     margin-bottom: 50px;
     gap: 0px;
+    padding: 20px;
   }
 }
