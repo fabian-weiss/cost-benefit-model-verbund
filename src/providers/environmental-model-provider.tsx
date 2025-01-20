@@ -7,6 +7,7 @@ import { createContext, useContext, useMemo, useState } from "react";
 
 interface EnvironmentalModelProviderContextType {
   environmentalInputs: EnvironmentalInputs;
+  setDefaultValues: (inputs: EnvironmentalInputs) => void;
   setEnvironmentalInput: (
     inputType: EnvironmentalInputEnum,
     input?: number,
@@ -166,10 +167,15 @@ function EnvironmentalModelProvider({
     }
   };
 
+  const setDefaultValues = (inputs: EnvironmentalInputs) => {
+    setEnvironmentalInputs(inputs);
+  };
+
   // Use useMemo to memoize the context value
   const contextValue = useMemo(
     () => ({
       environmentalInputs,
+      setDefaultValues,
       setEnvironmentalInput,
       modelResults,
       setModelResults,

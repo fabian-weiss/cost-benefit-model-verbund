@@ -8,6 +8,7 @@ import { createContext, useContext, useMemo, useState } from "react";
 
 interface SocietalModelProviderContextType {
   societalInputs: SocietalInputs;
+  setDefaultValues: (inputs: SocietalInputs) => void;
   setSocietalInput: (
     inputType: SocietalInputEnum,
     input?: number,
@@ -219,10 +220,15 @@ function SocietalModelProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const setDefaultValues = (inputs: SocietalInputs) => {
+    setSocietalInputs(inputs);
+  };
+
   // Use useMemo to memoize the context value
   const contextValue = useMemo(
     () => ({
       societalInputs,
+      setDefaultValues,
       setSocietalInput,
       modelResults,
       setModelResults,

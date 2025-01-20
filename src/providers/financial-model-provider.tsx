@@ -9,6 +9,7 @@ import { createContext, useContext, useMemo, useState } from "react";
 
 interface FinancialModelProviderContextType {
   financialInputRanges: FinancialInputRanges;
+  setDefaultValues: (inputs: FinancialInputRanges) => void;
   addFinancialInput: (
     inputRange: FinancialInputRangesEnum,
     input: number[]
@@ -568,10 +569,15 @@ function FinancialModelProvider({ children }: { children: React.ReactNode }) {
     return hasErrors;
   };
 
+  const setDefaultValues = (inputs: FinancialInputRanges) => {
+    setFinancialInputRanges(inputs);
+  };
+
   // Use useMemo to memoize the context value
   const contextValue = useMemo(
     () => ({
       financialInputRanges,
+      setDefaultValues,
       addFinancialInput,
       removeFinancialInput,
       dynamicInputs,

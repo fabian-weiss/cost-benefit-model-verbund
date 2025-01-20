@@ -7,6 +7,7 @@ import { createContext, useContext, useMemo, useState } from "react";
 
 interface RioModelProviderContextType {
   rioInputs: RioInputs;
+  setDefaultValues: (inputs: RioInputs) => void;
   setRioInput: (
     inputType: RioInputEnum,
     input?: number,
@@ -145,10 +146,15 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const setDefaultValues = (inputs: RioInputs) => {
+    setRioInputs(inputs);
+  };
+
   // Use useMemo to memoize the context value
   const contextValue = useMemo(
     () => ({
       rioInputs,
+      setDefaultValues,
       setRioInput,
       modelResults,
       setModelResults,
