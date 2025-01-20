@@ -31,7 +31,7 @@ export const useSetDefaultValues = () => {
       companyCulture: {
         value: 1,
         impact: Impact.POSITIVE,
-        comment: "Employees work more effecient",
+        comment: "Employees work more efficient",
       },
       shareholderValue: {
         value: 1,
@@ -49,9 +49,9 @@ export const useSetDefaultValues = () => {
         comment: "Does not affect contractors",
       },
       communityImplications: {
-        value: 1,
-        impact: Impact.POSITIVE,
-        comment: "Does not affect communty",
+        value: 0,
+        impact: Impact.NEUTRAL,
+        comment: "Does not affect community",
       },
 
       guidingPrinciplesAlignment: {
@@ -59,7 +59,6 @@ export const useSetDefaultValues = () => {
         impact: Impact.POSITIVE,
         comment: "Improves work conditions of employees",
       },
-
       workplaceCreation: {
         value: 0,
         impact: Impact.NEUTRAL,
