@@ -1,6 +1,6 @@
 export enum ProjectType {
   DEFAULT = "Default",
-  SUSTAINABLE = "Sustainable",
+  SUSTAINABLE = "Environmental",
   INNOVATIVE = "Innovative",
-  SOCIAL = "Social",
+  SOCIAL = "Societal",
 }

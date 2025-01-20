@@ -26,12 +26,12 @@ function OverviewSection() {
       id: `project-type-bubble-${ProjectType.SOCIAL}`,
     },
     {
-      label: ProjectType.INNOVATIVE,
-      id: `project-type-bubble-${ProjectType.INNOVATIVE}`,
-    },
-    {
       label: ProjectType.SUSTAINABLE,
       id: `project-type-bubble-${ProjectType.SUSTAINABLE}`,
+    },
+    {
+      label: ProjectType.INNOVATIVE,
+      id: `project-type-bubble-${ProjectType.INNOVATIVE}`,
     },
   ];
   return (
