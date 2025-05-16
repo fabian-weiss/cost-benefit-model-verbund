@@ -5,11 +5,7 @@ import "@/styles/texts.css";
 import "@/styles/buttons.css";
 import "@/styles/layout.css";
 import "@/styles/table.css";
-import FinancialModelProvider from "@/providers/financial-model-provider";
-import SocietalModelProvider from "@/providers/societal-model-provider";
-import EnvironmentalModelProvider from "@/providers/environmental-model-provider";
 import ModelResultProvider from "@/providers/model-result-provider";
-import RioModelProvider from "@/providers/rio-model-provider";
 import CommentProvider from "@/providers/comment-provider";
 import DescriptionDialogProvider from "@/providers/description-dialog-provider";
 import OverviewProvider from "@/providers/overview-provider";
@@ -42,21 +38,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable}`}
       >
         <OverviewProvider>
-          <EnvironmentalModelProvider>
-            <SocietalModelProvider>
-              <FinancialModelProvider>
-                <RioModelProvider>
-                  <ModelResultProvider>
-                    <CommentProvider>
-                      <DescriptionDialogProvider>
-                        {children}
-                      </DescriptionDialogProvider>
-                    </CommentProvider>
-                  </ModelResultProvider>
-                </RioModelProvider>
-              </FinancialModelProvider>
-            </SocietalModelProvider>
-          </EnvironmentalModelProvider>
+          <ModelResultProvider>
+            <CommentProvider>
+              <DescriptionDialogProvider>{children}</DescriptionDialogProvider>
+            </CommentProvider>
+          </ModelResultProvider>
         </OverviewProvider>
       </body>
     </html>

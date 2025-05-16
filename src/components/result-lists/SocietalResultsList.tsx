@@ -1,13 +1,13 @@
-import { useSocietalModel } from "@/providers/societal-model-provider";
 import { valueToResultInterpretation } from "@/utils/value-to-result-interpretation";
 import React from "react";
 import "@/styles/results-list.css";
 import { resultToColor } from "@/utils/result-to-color";
 import { impactToNumber } from "@/utils/impact-to-number";
 import { normalizeCamelCase } from "@/utils/normalize-camel-case";
+import { useSocietalStore } from "@/stores/useSocietalStore";
 
 function SocietalResultsList() {
-  const societalModelContext = useSocietalModel();
+  const societalModelContext = useSocietalStore();
 
   const title: string = "Societal Model Results";
   const body: string =

@@ -78,7 +78,7 @@ export const societalModel = (inputs: SocietalInputs): SocietalResults => {
   // Calculate individual weighted scores
   (Object.keys(inputs) as Array<keyof SocietalInputs>).forEach((key) => {
     const weightedResult: number = inputs[key].value * weights[key];
-    weightedScores[key].value = weightedResult;
+    (weightedScores[key].value as number) = weightedResult;
     weightedScores[key].impact = inputs[key].impact;
     weightedScores[key].comment = inputs[key].comment;
 

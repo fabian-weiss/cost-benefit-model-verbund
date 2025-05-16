@@ -5,6 +5,12 @@
   gap: 40px;
 }
 
+.fw-project-description-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .fw-overview-text-fields {
   width: 100%;
   display: flex;

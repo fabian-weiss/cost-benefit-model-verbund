@@ -9,7 +9,7 @@ import { impactEntries } from "@/lib/impact-categories";
 import { societalModel } from "@/models/societal-model/societal-model";
 import { useComment } from "@/providers/comment-provider";
 import { useResultDialog } from "@/providers/model-result-provider";
-import { useSocietalModel } from "@/providers/societal-model-provider";
+import { useSocietalStore } from "@/stores/useSocietalStore";
 import { DropdownEntryType } from "@/types/dropdown-entry-type";
 import { InputGroupType } from "@/types/input-group-type";
 import { SocietalResults } from "@/types/societal/societal-results";
@@ -17,7 +17,7 @@ import { impactToNumber } from "@/utils/impact-to-number";
 import { numberToImpact } from "@/utils/number-to-impact";
 
 function SocietalSection() {
-  const societalModelContext = useSocietalModel();
+  const societalModelStore = useSocietalStore();
   const resultsDialogContext = useResultDialog();
   const commentDialogContext = useComment();
 
@@ -43,9 +43,9 @@ function SocietalSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          societalModelContext.societalInputs.customerSatisfaction.comment,
+          societalModelStore.societalInputs.customerSatisfaction.comment,
           (comment) => {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.CUSTOMER_SATISFACTION,
               undefined,
               undefined,
@@ -58,7 +58,7 @@ function SocietalSection() {
         {
           id: "customerSatisfaction",
           onSelect(entry: DropdownEntryType) {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.CUSTOMER_SATISFACTION,
               impactToNumber(entry.impact),
               entry.impact
@@ -66,7 +66,7 @@ function SocietalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.customerSatisfaction.value
+              societalModelStore.societalInputs.customerSatisfaction.value
             ),
           },
           entries: impactEntries,
@@ -93,9 +93,9 @@ function SocietalSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          societalModelContext.societalInputs.customerAffordability.comment,
+          societalModelStore.societalInputs.customerAffordability.comment,
           (comment) => {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.CUSTOMER_AFFORDABILITY,
               undefined,
               undefined,
@@ -108,7 +108,7 @@ function SocietalSection() {
         {
           id: "customerAffordability",
           onSelect(entry: DropdownEntryType) {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.CUSTOMER_AFFORDABILITY,
               impactToNumber(entry.impact),
               entry.impact
@@ -116,7 +116,7 @@ function SocietalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.customerAffordability.value
+              societalModelStore.societalInputs.customerAffordability.value
             ),
           },
           entries: impactEntries,
@@ -143,9 +143,9 @@ function SocietalSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          societalModelContext.societalInputs.companyCulture.comment,
+          societalModelStore.societalInputs.companyCulture.comment,
           (comment) => {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.COMPANY_CULTURE,
               undefined,
               undefined,
@@ -158,7 +158,7 @@ function SocietalSection() {
         {
           id: "companyCulture",
           onSelect(entry: DropdownEntryType) {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.COMPANY_CULTURE,
               impactToNumber(entry.impact),
               entry.impact
@@ -166,7 +166,7 @@ function SocietalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.companyCulture.value
+              societalModelStore.societalInputs.companyCulture.value
             ),
           },
           entries: impactEntries,
@@ -193,9 +193,9 @@ function SocietalSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          societalModelContext.societalInputs.shareholderValue.comment,
+          societalModelStore.societalInputs.shareholderValue.comment,
           (comment) => {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.SHAREHOLDER_VALUE,
               undefined,
               undefined,
@@ -208,7 +208,7 @@ function SocietalSection() {
         {
           id: "shareholderValue",
           onSelect(entry: DropdownEntryType) {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.SHAREHOLDER_VALUE,
               impactToNumber(entry.impact),
               entry.impact
@@ -216,7 +216,7 @@ function SocietalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.shareholderValue.value
+              societalModelStore.societalInputs.shareholderValue.value
             ),
           },
           entries: impactEntries,
@@ -244,9 +244,9 @@ function SocietalSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          societalModelContext.societalInputs.publicPerception.comment,
+          societalModelStore.societalInputs.publicPerception.comment,
           (comment) => {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.PUBLIC_PERCEPTION,
               undefined,
               undefined,
@@ -259,7 +259,7 @@ function SocietalSection() {
         {
           id: "publicPerception",
           onSelect(entry: DropdownEntryType) {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.PUBLIC_PERCEPTION,
               impactToNumber(entry.impact),
               entry.impact
@@ -267,7 +267,7 @@ function SocietalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.publicPerception.value
+              societalModelStore.societalInputs.publicPerception.value
             ),
           },
           entries: impactEntries,
@@ -295,10 +295,10 @@ function SocietalSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          societalModelContext.societalInputs
-            .knowledgeSharingAcrossTheSupplyChain.comment,
+          societalModelStore.societalInputs.knowledgeSharingAcrossTheSupplyChain
+            .comment,
           (comment) => {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.KNOWLEDGE_SHARING_ACROSS_THE_SUPPLY_CHAIN,
               undefined,
               undefined,
@@ -311,7 +311,7 @@ function SocietalSection() {
         {
           id: "knowledgeSharingAcrossTheSupplyChain",
           onSelect(entry: DropdownEntryType) {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.KNOWLEDGE_SHARING_ACROSS_THE_SUPPLY_CHAIN,
               impactToNumber(entry.impact),
               entry.impact
@@ -319,7 +319,7 @@ function SocietalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs
+              societalModelStore.societalInputs
                 .knowledgeSharingAcrossTheSupplyChain.value
             ),
           },
@@ -347,9 +347,9 @@ function SocietalSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          societalModelContext.societalInputs.communityImplications.comment,
+          societalModelStore.societalInputs.communityImplications.comment,
           (comment) => {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.COMMUNITY_IMPLICATIONS,
               undefined,
               undefined,
@@ -362,7 +362,7 @@ function SocietalSection() {
         {
           id: "communityImplications",
           onSelect(entry: DropdownEntryType) {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.COMMUNITY_IMPLICATIONS,
               impactToNumber(entry.impact),
               entry.impact
@@ -370,7 +370,7 @@ function SocietalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.communityImplications.value
+              societalModelStore.societalInputs.communityImplications.value
             ),
           },
           entries: impactEntries,
@@ -399,10 +399,9 @@ function SocietalSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          societalModelContext.societalInputs.guidingPrinciplesAlignment
-            .comment,
+          societalModelStore.societalInputs.guidingPrinciplesAlignment.comment,
           (comment) => {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.GUIDING_PRINCIPLES_ALIGNMENT,
               undefined,
               undefined,
@@ -415,7 +414,7 @@ function SocietalSection() {
         {
           id: "guidingPrinciplesAlignment",
           onSelect(entry: DropdownEntryType) {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.GUIDING_PRINCIPLES_ALIGNMENT,
               impactToNumber(entry.impact),
               entry.impact
@@ -423,8 +422,7 @@ function SocietalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.guidingPrinciplesAlignment
-                .value
+              societalModelStore.societalInputs.guidingPrinciplesAlignment.value
             ),
           },
           entries: impactEntries,
@@ -451,9 +449,9 @@ function SocietalSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          societalModelContext.societalInputs.workplaceCreation.comment,
+          societalModelStore.societalInputs.workplaceCreation.comment,
           (comment) => {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.WORKPLACE_CREATION,
               undefined,
               undefined,
@@ -466,7 +464,7 @@ function SocietalSection() {
         {
           id: "workplaceCreation",
           onSelect(entry: DropdownEntryType) {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.WORKPLACE_CREATION,
               impactToNumber(entry.impact),
               entry.impact
@@ -474,7 +472,7 @@ function SocietalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.workplaceCreation.value
+              societalModelStore.societalInputs.workplaceCreation.value
             ),
           },
           entries: impactEntries,
@@ -501,9 +499,9 @@ function SocietalSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          societalModelContext.societalInputs.healthAndSafety.comment,
+          societalModelStore.societalInputs.healthAndSafety.comment,
           (comment) => {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.HEALTH_AND_SAFETY,
               undefined,
               undefined,
@@ -516,7 +514,7 @@ function SocietalSection() {
         {
           id: "healthAndSafety",
           onSelect(entry: DropdownEntryType) {
-            societalModelContext.setSocietalInput(
+            societalModelStore.setSocietalInput(
               SocietalInputEnum.HEALTH_AND_SAFETY,
               impactToNumber(entry.impact),
               entry.impact
@@ -524,7 +522,7 @@ function SocietalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              societalModelContext.societalInputs.healthAndSafety.value
+              societalModelStore.societalInputs.healthAndSafety.value
             ),
           },
           entries: impactEntries,
@@ -535,12 +533,12 @@ function SocietalSection() {
 
   const handleModelResult = () => {
     const result: SocietalResults = societalModel(
-      societalModelContext.societalInputs
+      societalModelStore.societalInputs
     );
     // const r = financialResults(financialModelContext.financialInputRanges);
     //   financialModelContext.setModelResults(r);
     //   resultsDialogContext.handleShowDialog(true, DialogType.FINANCIAL_MODEL);
-    societalModelContext.setModelResults(result);
+    societalModelStore.setModelResults(result);
     resultsDialogContext.handleShowDialog(true, DialogType.SOCIETAL_MODEL);
     console.log("Societal model results: ", result);
     //return result;

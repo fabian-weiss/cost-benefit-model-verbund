@@ -1,20 +1,20 @@
 "use client";
-import { useEnvironmentalModel } from "@/providers/environmental-model-provider";
-import { useFinancialModel } from "@/providers/financial-model-provider";
-import { useRioModel } from "@/providers/rio-model-provider";
-import { useSocietalModel } from "@/providers/societal-model-provider";
 import { Impact } from "@/enums/Impact";
 import { useOverview } from "@/providers/overview-provider";
 import { ProjectType } from "@/enums/ProjectType";
 import { v4 } from "uuid";
 import { DynamicInputEnum } from "@/enums/DynamicInputEnum";
+import { useSocietalStore } from "@/stores/useSocietalStore";
+import { useEnvironmentalStore } from "@/stores/useEnvironmentalStore";
+import { useRioStore } from "@/stores/useRioStore";
+import { useFinancialStore } from "@/stores/useFinancialStore";
 
 export const useSetDefaultValues = () => {
-  const societalContext = useSocietalModel();
-  const environmentalContext = useEnvironmentalModel();
-  const rioContext = useRioModel();
+  const societalContext = useSocietalStore();
+  const environmentalContext = useEnvironmentalStore();
+  const rioContext = useRioStore();
   const overviewContext = useOverview();
-  const financialContext = useFinancialModel();
+  const financialContext = useFinancialStore();
 
   const setDefaultValues = () => {
     societalContext.setDefaultValues({
@@ -118,37 +118,37 @@ export const useSetDefaultValues = () => {
       privacy: {
         value: 0,
         impact: Impact.NEUTRAL,
-        comment: undefined,
+        comment: "",
       },
       marketAdvantage: {
         value: 1,
         impact: Impact.POSITIVE,
-        comment: undefined,
+        comment: "",
       },
       longTermResilience: {
         value: 0,
         impact: Impact.NEUTRAL,
-        comment: undefined,
+        comment: "",
       },
       longTermScalability: {
         value: 0,
         impact: Impact.NEUTRAL,
-        comment: undefined,
+        comment: "",
       },
       legalRequirements: {
         value: 0,
         impact: Impact.NEUTRAL,
-        comment: undefined,
+        comment: "",
       },
       innovation: {
         value: 2,
         impact: Impact.VERY_POSITIVE,
-        comment: undefined,
+        comment: "",
       },
       otherRisks: {
         value: 0,
         impact: Impact.NEUTRAL,
-        comment: undefined,
+        comment: "",
       },
     });
     overviewContext.handleOverviewInput({

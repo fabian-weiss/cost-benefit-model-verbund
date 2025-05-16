@@ -9,27 +9,30 @@ import RioResultsList from "@/components/result-lists/RioResultsList";
 import SocietalResultsList from "@/components/result-lists/SocietalResultsList";
 import TableContainer from "@/components/TableContainer";
 import { ProjectType } from "@/enums/ProjectType";
-import { useEnvironmentalModel } from "@/providers/environmental-model-provider";
-import { useOverview } from "@/providers/overview-provider";
-import { useRioModel } from "@/providers/rio-model-provider";
-import { useSocietalModel } from "@/providers/societal-model-provider";
+import { useEnvironmentalStore } from "@/stores/useEnvironmentalStore";
+import { useOverviewStore } from "@/stores/useOverviewStore";
+import { useRioStore } from "@/stores/useRioStore";
+import { useSocietalStore } from "@/stores/useSocietalStore";
 import { ProjectTypeWeights } from "@/types/project-type-weights";
 import { downloadAsPdf } from "@/utils/download-as-pdf";
 import {
   defaultProjectWeight,
   environmentalProjectWeight,
+  getMinMaxBasedOnProjectType,
   rioProjectWeight,
   societalProjectWeight,
 } from "@/utils/model-weights";
 import { resultToColor } from "@/utils/result-to-color";
+import { scaleNumber } from "@/utils/scale-number";
+import { toPercent } from "@/utils/to-percent";
 import { valueToResultInterpretation } from "@/utils/value-to-result-interpretation";
 import React from "react";
 
 function CompleteResultsDialog(props: { closeDialog: () => void }) {
-  const overviewContext = useOverview();
-  const rioModelContext = useRioModel();
-  const environmentalModelContext = useEnvironmentalModel();
-  const societalModelContext = useSocietalModel();
+  const overviewContext = useOverviewStore();
+  const rioModelContext = useRioStore();
+  const environmentalModelContext = useEnvironmentalStore();
+  const societalModelContext = useSocietalStore();
 
   const _downloadFile = () => {
     downloadAsPdf(
@@ -55,24 +58,38 @@ function CompleteResultsDialog(props: { closeDialog: () => void }) {
     }
   };
 
+  const societalWeights = _getProjectSpecificWeight().societalWeights;
+  const rioWeights = _getProjectSpecificWeight().rioWeights;
+  const environmentalWeights = _getProjectSpecificWeight().environmentalWeights;
   const societalModelScore: number =
     (societalModelContext.modelResults?.scaledTotalScore ?? 0) *
-    _getProjectSpecificWeight().societalWeights;
+    societalWeights;
   const rioModelScore: number =
-    (rioModelContext.modelResults?.scaledTotalScore ?? 0) *
-    _getProjectSpecificWeight().rioWeights;
+    (rioModelContext.modelResults?.scaledTotalScore ?? 0) * rioWeights;
   const environmentalModelScore: number =
     (environmentalModelContext.modelResults?.scaledTotalScore ?? 0) *
-    _getProjectSpecificWeight().environmentalWeights;
+    environmentalWeights;
 
   const submodelScores: { key: string; value: number }[] = [
-    { key: "Societal", value: societalModelScore },
-    { key: "RIO", value: rioModelScore },
-    { key: "Environmental", value: environmentalModelScore },
+    {
+      key: `(${toPercent(societalWeights)}) Societal`,
+      value: societalModelScore,
+    },
+    {
+      key: `(${toPercent(environmentalWeights)}) Environmental`,
+      value: environmentalModelScore,
+    },
+    { key: `(${toPercent(rioWeights)}) RIO`, value: rioModelScore },
   ];
 
   const meanModelScore: number =
-    (societalModelScore + rioModelScore + environmentalModelScore) / 3;
+    (societalModelScore + environmentalModelScore) / 2 + rioModelScore;
+
+  const scaledMeanModelScore: number = scaleNumber(
+    meanModelScore,
+    getMinMaxBasedOnProjectType(overviewContext.overviewInputs.projectType).min,
+    getMinMaxBasedOnProjectType(overviewContext.overviewInputs.projectType).max
+  );
 
   return (
     <DialogContainer fullscreen closeDialog={props.closeDialog}>
@@ -104,12 +121,14 @@ function CompleteResultsDialog(props: { closeDialog: () => void }) {
         <tr>
           <th
             style={{
-              color: resultToColor(valueToResultInterpretation(meanModelScore)),
+              color: resultToColor(
+                valueToResultInterpretation(scaledMeanModelScore, true)
+              ),
             }}
             colSpan={6}
             className="fw-dialog-title"
           >
-            {`Final Score: ${meanModelScore.toFixed(2)}`}
+            {`Final Score: ${scaledMeanModelScore.toFixed(2)}`}
           </th>
         </tr>
         <tr>

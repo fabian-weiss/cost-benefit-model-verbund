@@ -8,15 +8,17 @@ import { EnvironmentalInputEnum } from "@/enums/EnvironmentalInputEnum";
 import { impactEntries } from "@/lib/impact-categories";
 import { environmentalModel } from "@/models/environmental-model/environmental-model";
 import { useComment } from "@/providers/comment-provider";
-import { useEnvironmentalModel } from "@/providers/environmental-model-provider";
+// import { useEnvironmentalModel } from "@/providers/environmental-model-provider";
 import { useResultDialog } from "@/providers/model-result-provider";
+import { useEnvironmentalStore } from "@/stores/useEnvironmentalStore";
 import { DropdownEntryType } from "@/types/dropdown-entry-type";
 import { EnvironmentalResults } from "@/types/environmental/environmental-results";
 import { InputGroupType } from "@/types/input-group-type";
 import { impactToNumber } from "@/utils/impact-to-number";
 import { numberToImpact } from "@/utils/number-to-impact";
 function EnvironmentalSection() {
-  const environmetalModelContext = useEnvironmentalModel();
+  // const environmetalModelContext = useEnvironmentalModel();
+  const environmetalModelStore = useEnvironmentalStore();
   const resultsDialogContext = useResultDialog();
   const commentDialogContext = useComment();
   // const [societalInputs, setSocietalInputs] = useState<SocietalInputs>(societalModelContext.societalInputs);
@@ -42,10 +44,9 @@ function EnvironmentalSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          environmetalModelContext.environmentalInputs.unSustainableGoals
-            .comment,
+          environmetalModelStore.environmentalInputs.unSustainableGoals.comment,
           (comment) => {
-            environmetalModelContext.setEnvironmentalInput(
+            environmetalModelStore.setEnvironmentalInput(
               EnvironmentalInputEnum.UN_SUSTAINABLE_GOALS,
               undefined,
               undefined,
@@ -63,7 +64,7 @@ function EnvironmentalSection() {
                 entry.impact
               )}`
             );
-            environmetalModelContext.setEnvironmentalInput(
+            environmetalModelStore.setEnvironmentalInput(
               EnvironmentalInputEnum.UN_SUSTAINABLE_GOALS,
               impactToNumber(entry.impact),
               entry.impact
@@ -71,7 +72,7 @@ function EnvironmentalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              environmetalModelContext.environmentalInputs.unSustainableGoals
+              environmetalModelStore.environmentalInputs.unSustainableGoals
                 .value
             ),
           },
@@ -101,9 +102,9 @@ function EnvironmentalSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          environmetalModelContext.environmentalInputs.wasteProduction.comment,
+          environmetalModelStore.environmentalInputs.wasteProduction.comment,
           (comment) => {
-            environmetalModelContext.setEnvironmentalInput(
+            environmetalModelStore.setEnvironmentalInput(
               EnvironmentalInputEnum.WASTE_PRODUCTION,
               undefined,
               undefined,
@@ -116,7 +117,7 @@ function EnvironmentalSection() {
         {
           id: "wasteProduction",
           onSelect(entry: DropdownEntryType) {
-            environmetalModelContext.setEnvironmentalInput(
+            environmetalModelStore.setEnvironmentalInput(
               EnvironmentalInputEnum.WASTE_PRODUCTION,
               impactToNumber(entry.impact),
               entry.impact
@@ -124,7 +125,7 @@ function EnvironmentalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              environmetalModelContext.environmentalInputs.wasteProduction.value
+              environmetalModelStore.environmentalInputs.wasteProduction.value
             ),
           },
           entries: impactEntries,
@@ -151,9 +152,9 @@ function EnvironmentalSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          environmetalModelContext.environmentalInputs.biodiversity.comment,
+          environmetalModelStore.environmentalInputs.biodiversity.comment,
           (comment) => {
-            environmetalModelContext.setEnvironmentalInput(
+            environmetalModelStore.setEnvironmentalInput(
               EnvironmentalInputEnum.BIODIVERSITY,
               undefined,
               undefined,
@@ -166,7 +167,7 @@ function EnvironmentalSection() {
         {
           id: "biodiversity",
           onSelect(entry: DropdownEntryType) {
-            environmetalModelContext.setEnvironmentalInput(
+            environmetalModelStore.setEnvironmentalInput(
               EnvironmentalInputEnum.BIODIVERSITY,
               impactToNumber(entry.impact),
               entry.impact
@@ -174,7 +175,7 @@ function EnvironmentalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              environmetalModelContext.environmentalInputs.biodiversity.value
+              environmetalModelStore.environmentalInputs.biodiversity.value
             ),
           },
           entries: impactEntries,
@@ -201,9 +202,9 @@ function EnvironmentalSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          environmetalModelContext.environmentalInputs.pollution.comment,
+          environmetalModelStore.environmentalInputs.pollution.comment,
           (comment) => {
-            environmetalModelContext.setEnvironmentalInput(
+            environmetalModelStore.setEnvironmentalInput(
               EnvironmentalInputEnum.POLLUTION,
               undefined,
               undefined,
@@ -216,7 +217,7 @@ function EnvironmentalSection() {
         {
           id: "pollution",
           onSelect(entry: DropdownEntryType) {
-            environmetalModelContext.setEnvironmentalInput(
+            environmetalModelStore.setEnvironmentalInput(
               EnvironmentalInputEnum.POLLUTION,
               impactToNumber(entry.impact),
               entry.impact
@@ -224,7 +225,7 @@ function EnvironmentalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              environmetalModelContext.environmentalInputs.pollution.value
+              environmetalModelStore.environmentalInputs.pollution.value
             ),
           },
           entries: impactEntries,
@@ -252,10 +253,10 @@ function EnvironmentalSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          environmetalModelContext.environmentalInputs
-            .sustainableEneryIntegration.comment,
+          environmetalModelStore.environmentalInputs.sustainableEneryIntegration
+            .comment,
           (comment) => {
-            environmetalModelContext.setEnvironmentalInput(
+            environmetalModelStore.setEnvironmentalInput(
               EnvironmentalInputEnum.SUSTAINABLE_ENERGY_INTEGRATION,
               undefined,
               undefined,
@@ -268,7 +269,7 @@ function EnvironmentalSection() {
         {
           id: "sustainableEnergyIntegration",
           onSelect(entry: DropdownEntryType) {
-            environmetalModelContext.setEnvironmentalInput(
+            environmetalModelStore.setEnvironmentalInput(
               EnvironmentalInputEnum.SUSTAINABLE_ENERGY_INTEGRATION,
               impactToNumber(entry.impact),
               entry.impact
@@ -276,7 +277,7 @@ function EnvironmentalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              environmetalModelContext.environmentalInputs
+              environmetalModelStore.environmentalInputs
                 .sustainableEneryIntegration.value
             ),
           },
@@ -305,9 +306,9 @@ function EnvironmentalSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          environmetalModelContext.environmentalInputs.energyEfficiency.comment,
+          environmetalModelStore.environmentalInputs.energyEfficiency.comment,
           (comment) => {
-            environmetalModelContext.setEnvironmentalInput(
+            environmetalModelStore.setEnvironmentalInput(
               EnvironmentalInputEnum.ENERGY_EFFICIENCY,
               undefined,
               undefined,
@@ -320,7 +321,7 @@ function EnvironmentalSection() {
         {
           id: "energyEfficiency",
           onSelect(entry: DropdownEntryType) {
-            environmetalModelContext.setEnvironmentalInput(
+            environmetalModelStore.setEnvironmentalInput(
               EnvironmentalInputEnum.ENERGY_EFFICIENCY,
               impactToNumber(entry.impact),
               entry.impact
@@ -328,8 +329,7 @@ function EnvironmentalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              environmetalModelContext.environmentalInputs.energyEfficiency
-                .value
+              environmetalModelStore.environmentalInputs.energyEfficiency.value
             ),
           },
           entries: impactEntries,
@@ -356,10 +356,10 @@ function EnvironmentalSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          environmetalModelContext.environmentalInputs
+          environmetalModelStore.environmentalInputs
             .meetingEnvironmentalRegulations.comment,
           (comment) => {
-            environmetalModelContext.setEnvironmentalInput(
+            environmetalModelStore.setEnvironmentalInput(
               EnvironmentalInputEnum.MEETING_ENVIRONMENTAL_REGULATIONS,
               undefined,
               undefined,
@@ -372,7 +372,7 @@ function EnvironmentalSection() {
         {
           id: "meetingEnvironmentalRegulations",
           onSelect(entry: DropdownEntryType) {
-            environmetalModelContext.setEnvironmentalInput(
+            environmetalModelStore.setEnvironmentalInput(
               EnvironmentalInputEnum.MEETING_ENVIRONMENTAL_REGULATIONS,
               impactToNumber(entry.impact),
               entry.impact
@@ -380,7 +380,7 @@ function EnvironmentalSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              environmetalModelContext.environmentalInputs
+              environmetalModelStore.environmentalInputs
                 .meetingEnvironmentalRegulations.value
             ),
           },
@@ -392,9 +392,9 @@ function EnvironmentalSection() {
 
   const handleModelResult = (): EnvironmentalResults => {
     const result: EnvironmentalResults = environmentalModel(
-      environmetalModelContext.environmentalInputs
+      environmetalModelStore.environmentalInputs
     );
-    environmetalModelContext.setModelResults(result);
+    environmetalModelStore.setModelResults(result);
     resultsDialogContext.handleShowDialog(true, DialogType.ENVIRONMENTAL_MODEL);
     return result;
   };

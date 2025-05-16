@@ -40,7 +40,7 @@ export const rioModel = (inputs: RioInputs): RioResults => {
   // Calculate individual weighted scores
   (Object.keys(inputs) as Array<keyof RioInputs>).forEach((key) => {
     const weightedResult: number = inputs[key].value * weights[key];
-    weightedScores[key].value = weightedResult;
+    (weightedScores[key].value as number) = weightedResult;
     weightedScores[key].impact = inputs[key].impact;
     weightedScores[key].comment = inputs[key].comment;
     //weightedScores.push({ key, value: weightedResult, weight: weights[key] });

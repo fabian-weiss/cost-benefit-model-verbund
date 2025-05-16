@@ -1,19 +1,19 @@
-import { useEnvironmentalModel } from "@/providers/environmental-model-provider";
 import { valueToResultInterpretation } from "@/utils/value-to-result-interpretation";
 import React from "react";
 import { resultToColor } from "@/utils/result-to-color";
 import { impactToNumber } from "@/utils/impact-to-number";
 import { normalizeCamelCase } from "@/utils/normalize-camel-case";
+import { useEnvironmentalStore } from "@/stores/useEnvironmentalStore";
 
 function EnvironmentalResultsList() {
-  const environmentalModelContext = useEnvironmentalModel();
+  const environmentalStore = useEnvironmentalStore();
   const title: string = "Environmental Model Results";
   const body: string =
     "The Environmental model allows a user to input risk, innovation and opportunity factors on a scale from -2 to 2. These results are then multiplied by their weights.";
 
   return (
     <>
-      {environmentalModelContext.modelResults ? (
+      {environmentalStore.modelResults ? (
         <>
           <tr>
             <th colSpan={6} className="fw-dialog-title">
@@ -35,7 +35,7 @@ function EnvironmentalResultsList() {
             <th className="fw-table-large-col">Comment</th>
           </tr>
           {Object.entries(
-            environmentalModelContext.modelResults.weightedSingleFactors
+            environmentalStore.modelResults.weightedSingleFactors
           ).map(([factorKey, factor], index) => (
             <tr
               key={index}
@@ -57,16 +57,16 @@ function EnvironmentalResultsList() {
               <td>{impactToNumber(factor.impact)}</td>
               <td>
                 {
-                  environmentalModelContext.modelResults?.weights[
-                    factorKey as keyof typeof environmentalModelContext.modelResults.weights
+                  environmentalStore.modelResults?.weights[
+                    factorKey as keyof typeof environmentalStore.modelResults.weights
                   ]
                 }
               </td>
               <td>
                 {(
                   impactToNumber(factor.impact) *
-                  (environmentalModelContext.modelResults?.weights[
-                    factorKey as keyof typeof environmentalModelContext.modelResults.weights
+                  (environmentalStore.modelResults?.weights[
+                    factorKey as keyof typeof environmentalStore.modelResults.weights
                   ] ?? 1)
                 ).toFixed(2)}
               </td>
@@ -80,11 +80,11 @@ function EnvironmentalResultsList() {
               style={{
                 color: resultToColor(
                   valueToResultInterpretation(
-                    environmentalModelContext.modelResults?.scaledTotalScore
+                    environmentalStore.modelResults?.scaledTotalScore
                   )
                 ),
               }}
-            >{`Scaled Total Score: ${environmentalModelContext.modelResults?.scaledTotalScore.toFixed(
+            >{`Scaled Total Score: ${environmentalStore.modelResults?.scaledTotalScore.toFixed(
               2
             )}`}</th>
           </tr>

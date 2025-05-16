@@ -29,7 +29,7 @@ function InputGrid(props: {
               />
             ) : (
               <InputGroup
-                inputGroup={{ ...inputGroup }}
+                inputGroup={inputGroup}
                 // removeCallback={inputGroup.removeCallback}
               />
             )}

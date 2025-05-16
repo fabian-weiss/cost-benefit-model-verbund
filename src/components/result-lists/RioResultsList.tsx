@@ -1,12 +1,12 @@
-import { useRioModel } from "@/providers/rio-model-provider";
 import { valueToResultInterpretation } from "@/utils/value-to-result-interpretation";
 import React from "react";
 import { impactToNumber } from "@/utils/impact-to-number";
 import { resultToColor } from "@/utils/result-to-color";
 import { normalizeCamelCase } from "@/utils/normalize-camel-case";
+import { useRioStore } from "@/stores/useRioStore";
 
 function RioResultsList() {
-  const rioModelContext = useRioModel();
+  const rioModelContext = useRioStore();
 
   const title: string = "RIO Model Results";
   const body: string =

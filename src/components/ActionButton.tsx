@@ -1,4 +1,4 @@
-import Image from "next/image";
+import LoadingDots from "./LoadingDots";
 
 function ActionButton(props: {
   label: string;
@@ -28,17 +28,7 @@ function ActionButton(props: {
         props.className ? props.className : ""
       } ${props.fullWidth ? "fw-button__full-width" : ""}`}
     >
-      {props.loading ? (
-        <Image
-          src="/icons/loader.svg"
-          width={25}
-          height={25}
-          alt="loader"
-          className="fw-button-loader"
-        />
-      ) : (
-        <>{props.label}</>
-      )}
+      {props.loading ? <LoadingDots /> : <>{props.label}</>}
     </button>
   );
 }

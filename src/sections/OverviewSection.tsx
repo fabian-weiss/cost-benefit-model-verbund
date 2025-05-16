@@ -2,16 +2,28 @@
 import InputField from "@/components/InputField";
 import ModelHeader from "@/components/ModelHeader";
 import SectionContainer from "@/components/SectionContainer";
-import { useOverview } from "@/providers/overview-provider";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "@/styles/overview.css";
 import BubbleSelect from "@/components/BubbleSelect";
 import { BubbleType } from "@/types/bubble-type";
 import { ProjectType } from "@/enums/ProjectType";
 import { ValueType } from "@/enums/ValueType";
+import { useOverviewStore } from "@/stores/useOverviewStore";
+import ActionButton from "@/components/ActionButton";
+import { StructuredInputsType } from "@/types/structured-inputs-type";
+import { useEnvironmentalStore } from "@/stores/useEnvironmentalStore";
+import { useRioStore } from "@/stores/useRioStore";
+import { useSocietalStore } from "@/stores/useSocietalStore";
 
 function OverviewSection() {
-  const overviewContext = useOverview();
+  const overviewStore = useOverviewStore();
+  const societalModel = useSocietalStore();
+  const environmentalModel = useEnvironmentalStore();
+  const rioModel = useRioStore();
+  const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [result, setResult] = useState<StructuredInputsType>();
+  const [error, setError] = useState<string | null>(null);
 
   const [selectedProjectType, setSelectedProjectType] =
     React.useState<BubbleType>();
@@ -34,6 +46,51 @@ function OverviewSection() {
       id: `project-type-bubble-${ProjectType.INNOVATIVE}`,
     },
   ];
+
+  const generateInputs = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/openai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          projectDescription: overviewStore.overviewInputs.projectDescription,
+        }),
+      });
+
+      const data = await response.json();
+
+      console.log(`data`, JSON.stringify(data, null, 2));
+
+      if (!response.ok) {
+        throw new Error(data.error || "Unexpected error");
+      }
+
+      console.log(`type of data`, typeof data);
+      setResult(data);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const setDefaults = () => {
+      if (result) {
+        societalModel.setDefaultValues(result.societal);
+        environmentalModel.setDefaultValues(result.environmental);
+        rioModel.setDefaultValues(result.rio);
+      }
+    };
+    setDefaults();
+  }, [result]);
   return (
     <SectionContainer contentClasses="fw-model-container">
       <ModelHeader title="Project overview" />
@@ -42,10 +99,10 @@ function OverviewSection() {
           <InputField
             inputField={{
               onChange: (e) =>
-                overviewContext.handleOverviewInput({
+                overviewStore.handleOverviewInput({
                   projectTitle: e.target.value,
                 }),
-              value: overviewContext.overviewInputs.projectTitle ?? "",
+              value: overviewStore.overviewInputs.projectTitle ?? "",
               label: "Project title",
               id: "project-title",
               type: "text",
@@ -55,10 +112,10 @@ function OverviewSection() {
           <InputField
             inputField={{
               onChange: (e) =>
-                overviewContext.handleOverviewInput({
+                overviewStore.handleOverviewInput({
                   projectOwner: e.target.value,
                 }),
-              value: overviewContext.overviewInputs.projectOwner ?? "",
+              value: overviewStore.overviewInputs.projectOwner ?? "",
               label: "Project owner",
               id: "project-owner",
               type: "text",
@@ -68,11 +125,11 @@ function OverviewSection() {
           <InputField
             inputField={{
               onChange: (e) => {
-                overviewContext.handleOverviewInput({
+                overviewStore.handleOverviewInput({
                   budget: Number(e.target.value),
                 });
               },
-              value: overviewContext.overviewInputs.budget?.toString() ?? "",
+              value: overviewStore.overviewInputs.budget?.toString() ?? "",
               label: "Budget",
               id: "project-budget",
               type: "number",
@@ -88,26 +145,44 @@ function OverviewSection() {
             selectedBubble={selectedProjectType ?? bubbles[0]}
             setSelectedBubble={(bubble: BubbleType) => {
               setSelectedProjectType(bubble);
-              overviewContext.handleOverviewInput({
+              overviewStore.handleOverviewInput({
                 projectType: bubble.label as ProjectType,
               });
             }}
           />
         </div>
-        <InputField
-          inputField={{
-            onTextAreaChange: (e) =>
-              overviewContext.handleOverviewInput({
-                projectDescription: e.target.value,
-              }),
-            isTextArea: true,
-            value: overviewContext.overviewInputs.projectDescription ?? "",
-            label: "Project description",
-            id: "project-description",
-            type: "text",
-            placeholder: "Describe your project...",
-          }}
-        />
+        <div className="fw-project-description-wrapper">
+          <InputField
+            inputField={{
+              onTextAreaChange: (e) =>
+                overviewStore.handleOverviewInput({
+                  projectDescription: e.target.value,
+                }),
+              isTextArea: true,
+              value: overviewStore.overviewInputs.projectDescription ?? "",
+              label: "Project description",
+              id: "project-description",
+              type: "text",
+              placeholder: "Describe your project...",
+            }}
+          />
+          {process.env.NODE_ENV === "development" && (
+            <>
+              <ActionButton
+                onClick={generateInputs}
+                label="Generate Defaults"
+                fillType={"solid"}
+                loading={loading}
+              />
+              {error && <p className="fw-error-message">{error}</p>}
+              {result && (
+                <div className="fw-result-container">
+                  {JSON.stringify(result)}
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </div>
       {/* {societalModelContext.modelResults && (
         <p>{JSON.stringify(societalModelContext.modelResults)}</p>

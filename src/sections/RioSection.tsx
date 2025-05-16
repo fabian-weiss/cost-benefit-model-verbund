@@ -9,7 +9,7 @@ import { impactEntries } from "@/lib/impact-categories";
 import { rioModel } from "@/models/rio-model/rio-model";
 import { useComment } from "@/providers/comment-provider";
 import { useResultDialog } from "@/providers/model-result-provider";
-import { useRioModel } from "@/providers/rio-model-provider";
+import { useRioStore } from "@/stores/useRioStore";
 import { DropdownEntryType } from "@/types/dropdown-entry-type";
 import { InputGroupType } from "@/types/input-group-type";
 import { RioResults } from "@/types/rio/rio-results";
@@ -17,7 +17,7 @@ import { impactToNumber } from "@/utils/impact-to-number";
 import { numberToImpact } from "@/utils/number-to-impact";
 
 function RioSection() {
-  const rioModelContext = useRioModel();
+  const rioModelStore = useRioStore();
   const resultsDialogContext = useResultDialog();
   const commentDialogContext = useComment();
 
@@ -42,9 +42,9 @@ function RioSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          rioModelContext.rioInputs.privacy.comment,
+          rioModelStore.rioInputs.privacy.comment,
           (comment) => {
-            rioModelContext.setRioInput(
+            rioModelStore.setRioInput(
               RioInputEnum.PRIVACY,
               undefined,
               undefined,
@@ -57,14 +57,14 @@ function RioSection() {
         {
           id: "privacy",
           onSelect(entry: DropdownEntryType) {
-            rioModelContext.setRioInput(
+            rioModelStore.setRioInput(
               RioInputEnum.PRIVACY,
               impactToNumber(entry.impact),
               entry.impact
             );
           },
           selectedEntry: {
-            impact: numberToImpact(rioModelContext.rioInputs.privacy.value),
+            impact: numberToImpact(rioModelStore.rioInputs.privacy.value),
           },
           entries: impactEntries,
         },
@@ -91,9 +91,9 @@ function RioSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          rioModelContext.rioInputs.marketAdvantage.comment,
+          rioModelStore.rioInputs.marketAdvantage.comment,
           (comment) => {
-            rioModelContext.setRioInput(
+            rioModelStore.setRioInput(
               RioInputEnum.MARKET_ADVANTAGE,
               undefined,
               undefined,
@@ -106,7 +106,7 @@ function RioSection() {
         {
           id: "marketAdvantage",
           onSelect(entry: DropdownEntryType) {
-            rioModelContext.setRioInput(
+            rioModelStore.setRioInput(
               RioInputEnum.MARKET_ADVANTAGE,
               impactToNumber(entry.impact),
               entry.impact
@@ -114,7 +114,7 @@ function RioSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              rioModelContext.rioInputs.marketAdvantage.value
+              rioModelStore.rioInputs.marketAdvantage.value
             ),
           },
           entries: impactEntries,
@@ -143,9 +143,9 @@ function RioSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          rioModelContext.rioInputs.longTermResilience.comment,
+          rioModelStore.rioInputs.longTermResilience.comment,
           (comment) => {
-            rioModelContext.setRioInput(
+            rioModelStore.setRioInput(
               RioInputEnum.LONG_TERM_RESILIENCE,
               undefined,
               undefined,
@@ -158,7 +158,7 @@ function RioSection() {
         {
           id: "longTermResilience",
           onSelect(entry: DropdownEntryType) {
-            rioModelContext.setRioInput(
+            rioModelStore.setRioInput(
               RioInputEnum.LONG_TERM_RESILIENCE,
               impactToNumber(entry.impact),
               entry.impact
@@ -166,7 +166,7 @@ function RioSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              rioModelContext.rioInputs.longTermResilience.value
+              rioModelStore.rioInputs.longTermResilience.value
             ),
           },
           entries: impactEntries,
@@ -194,9 +194,9 @@ function RioSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          rioModelContext.rioInputs.longTermScalability.comment,
+          rioModelStore.rioInputs.longTermScalability.comment,
           (comment) => {
-            rioModelContext.setRioInput(
+            rioModelStore.setRioInput(
               RioInputEnum.LONG_TERM_SUSTAINABILITY,
               undefined,
               undefined,
@@ -209,7 +209,7 @@ function RioSection() {
         {
           id: "longTermScalability",
           onSelect(entry: DropdownEntryType) {
-            rioModelContext.setRioInput(
+            rioModelStore.setRioInput(
               RioInputEnum.LONG_TERM_SUSTAINABILITY,
               impactToNumber(entry.impact),
               entry.impact
@@ -217,7 +217,7 @@ function RioSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              rioModelContext.rioInputs.longTermScalability.value
+              rioModelStore.rioInputs.longTermScalability.value
             ),
           },
           entries: impactEntries,
@@ -245,9 +245,9 @@ function RioSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          rioModelContext.rioInputs.legalRequirements.comment,
+          rioModelStore.rioInputs.legalRequirements.comment,
           (comment) => {
-            rioModelContext.setRioInput(
+            rioModelStore.setRioInput(
               RioInputEnum.LEGAL_REQUIREMENTS,
               undefined,
               undefined,
@@ -260,7 +260,7 @@ function RioSection() {
         {
           id: "legalRequirements",
           onSelect(entry: DropdownEntryType) {
-            rioModelContext.setRioInput(
+            rioModelStore.setRioInput(
               RioInputEnum.LEGAL_REQUIREMENTS,
               impactToNumber(entry.impact),
               entry.impact
@@ -268,7 +268,7 @@ function RioSection() {
           },
           selectedEntry: {
             impact: numberToImpact(
-              rioModelContext.rioInputs.legalRequirements.value
+              rioModelStore.rioInputs.legalRequirements.value
             ),
           },
           entries: impactEntries,
@@ -296,9 +296,9 @@ function RioSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          rioModelContext.rioInputs.innovation.comment,
+          rioModelStore.rioInputs.innovation.comment,
           (comment) => {
-            rioModelContext.setRioInput(
+            rioModelStore.setRioInput(
               RioInputEnum.INNOVATION,
               undefined,
               undefined,
@@ -311,14 +311,14 @@ function RioSection() {
         {
           id: "innovation",
           onSelect(entry: DropdownEntryType) {
-            rioModelContext.setRioInput(
+            rioModelStore.setRioInput(
               RioInputEnum.INNOVATION,
               impactToNumber(entry.impact),
               entry.impact
             );
           },
           selectedEntry: {
-            impact: numberToImpact(rioModelContext.rioInputs.innovation.value),
+            impact: numberToImpact(rioModelStore.rioInputs.innovation.value),
           },
           entries: impactEntries,
         },
@@ -345,9 +345,9 @@ function RioSection() {
       handleShowComments: () => {
         commentDialogContext.handleShowDialog(
           true,
-          rioModelContext.rioInputs.otherRisks.comment,
+          rioModelStore.rioInputs.otherRisks.comment,
           (comment) => {
-            rioModelContext.setRioInput(
+            rioModelStore.setRioInput(
               RioInputEnum.OTHER_RISKS,
               undefined,
               undefined,
@@ -360,14 +360,14 @@ function RioSection() {
         {
           id: "otherRisks",
           onSelect(entry: DropdownEntryType) {
-            rioModelContext.setRioInput(
+            rioModelStore.setRioInput(
               RioInputEnum.OTHER_RISKS,
               impactToNumber(entry.impact),
               entry.impact
             );
           },
           selectedEntry: {
-            impact: numberToImpact(rioModelContext.rioInputs.otherRisks.value),
+            impact: numberToImpact(rioModelStore.rioInputs.otherRisks.value),
           },
           entries: impactEntries,
         },
@@ -376,11 +376,11 @@ function RioSection() {
   ];
 
   const handleModelResult = () => {
-    const result: RioResults = rioModel(rioModelContext.rioInputs);
+    const result: RioResults = rioModel(rioModelStore.rioInputs);
     // const r = financialResults(financialModelContext.financialInputRanges);
     //   financialModelContext.setModelResults(r);
     //   resultsDialogContext.handleShowDialog(true, DialogType.FINANCIAL_MODEL);
-    rioModelContext.setModelResults(result);
+    rioModelStore.setModelResults(result);
     resultsDialogContext.handleShowDialog(true, DialogType.RIO_MODEL);
     console.log("Rio model results: ", result);
     //return result;

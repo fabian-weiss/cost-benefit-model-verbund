@@ -1,0 +1,128 @@
+{
+  "societal": {
+    "customerSatisfaction": {
+      "value": 2,
+      "impact": "Very Positive",
+      "comment": "Improved vaccine storage and public health outcomes"
+    },
+    "customerAffordability": {
+      "value": 1,
+      "impact": "Positive",
+      "comment": "Lower operational costs for hospitals"
+    },
+    "companyCulture": {
+      "value": 1,
+      "impact": "Positive",
+      "comment": "Promotes a culture of innovation and sustainability"
+    },
+    "communityImplications": {
+      "value": 2,
+      "impact": "Very Positive",
+      "comment": "Engages local communities in maintenance and feedback"
+    },
+    "knowledgeSharingAcrossTheSupplyChain": {
+      "value": 1,
+      "impact": "Positive",
+      "comment": "Training programs for local technicians"
+    },
+    "shareholderValue": {
+      "value": 1,
+      "impact": "Positive",
+      "comment": "Potential for increased shareholder interest in sustainable projects"
+    },
+    "guidingPrinciplesAlignment": {
+      "value": 2,
+      "impact": "Very Positive",
+      "comment": "Aligns with company's sustainability and community engagement principles"
+    },
+    "publicPerception": {
+      "value": 2,
+      "impact": "Very Positive",
+      "comment": "Enhances public perception through community and environmental benefits"
+    },
+    "workplaceCreation": {
+      "value": 1,
+      "impact": "Positive",
+      "comment": "Creates new jobs for local technicians and maintenance staff"
+    },
+    "healthAndSafety": {
+      "value": 2,
+      "impact": "Very Positive",
+      "comment": "Improves public health through better hospital services"
+    }
+  },
+  "environmental": {
+    "unSustainableGoals": {
+      "value": 2,
+      "impact": "Very Positive",
+      "comment": "Supports UN goals for sustainable energy and climate action"
+    },
+    "wasteProduction": {
+      "value": 0,
+      "impact": "Neutral",
+      "comment": "No significant change in waste production expected"
+    },
+    "biodiversity": {
+      "value": 0,
+      "impact": "Neutral",
+      "comment": "No direct impact on biodiversity"
+    },
+    "pollution": {
+      "value": 1,
+      "impact": "Positive",
+      "comment": "Reduces pollution by using low-GWP refrigerants"
+    },
+    "sustainableEneryIntegration": {
+      "value": 2,
+      "impact": "Very Positive",
+      "comment": "Integrates solar panels to reduce grid dependency"
+    },
+    "energyEfficiency": {
+      "value": 2,
+      "impact": "Very Positive",
+      "comment": "Energy-efficient systems reduce energy consumption"
+    },
+    "meetingEnvironmentalRegulations": {
+      "value": 2,
+      "impact": "Very Positive",
+      "comment": "Meets and exceeds local environmental regulations"
+    }
+  },
+  "rio": {
+    "privacy": {
+      "value": 0,
+      "impact": "Neutral",
+      "comment": "No significant impact on privacy"
+    },
+    "marketAdvantage": {
+      "value": 1,
+      "impact": "Positive",
+      "comment": "Provides a competitive edge in sustainable healthcare solutions"
+    },
+    "longTermResilience": {
+      "value": 2,
+      "impact": "Very Positive",
+      "comment": "Enhances resilience of hospital operations against power outages"
+    },
+    "longTermScalability": {
+      "value": 1,
+      "impact": "Positive",
+      "comment": "Project can be scaled to other regions and institutions"
+    },
+    "legalRequirements": {
+      "value": 1,
+      "impact": "Positive",
+      "comment": "Complies with all relevant legal standards for safety and emissions"
+    },
+    "innovation": {
+      "value": 2,
+      "impact": "Very Positive",
+      "comment": "Innovative integration of solar power with cooling systems"
+    },
+    "otherRisks": {
+      "value": -1,
+      "impact": "Negative",
+      "comment": "Potential risks in technology adoption and initial costs"
+    }
+  }
+}

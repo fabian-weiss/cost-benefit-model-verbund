@@ -1,6 +1,7 @@
 "use client";
 import { Impact } from "@/enums/Impact";
 import { RioInputEnum } from "@/enums/RioInputEnum";
+import { InputNumber } from "@/types/InputNumber";
 import { RioInputs } from "@/types/rio/rio-inputs";
 import { RioResults } from "@/types/rio/rio-results";
 import { createContext, useContext, useMemo, useState } from "react";
@@ -10,7 +11,7 @@ interface RioModelProviderContextType {
   setDefaultValues: (inputs: RioInputs) => void;
   setRioInput: (
     inputType: RioInputEnum,
-    input?: number,
+    input?: InputNumber,
     impact?: Impact,
     comment?: string
   ) => void;
@@ -64,7 +65,7 @@ function RioModelProvider({ children }: { children: React.ReactNode }) {
 
   const setRioInput = (
     inputType: RioInputEnum,
-    input?: number,
+    input?: InputNumber,
     impact?: Impact,
     comment?: string
   ) => {

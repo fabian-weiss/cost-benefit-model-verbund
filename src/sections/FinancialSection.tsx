@@ -9,7 +9,6 @@ import { FinancialCategory } from "@/enums/FinancialCategory";
 import { FinancialInputRangesEnum } from "@/enums/FinancialInputRangesEnum";
 import { ValueType } from "@/enums/ValueType";
 import { financialResults } from "@/models/financial-model/financial-results";
-import { useFinancialModel } from "@/providers/financial-model-provider";
 import { useResultDialog } from "@/providers/model-result-provider";
 import "@/styles/model-section.css";
 import { InputGroupType } from "@/types/input-group-type";
@@ -19,9 +18,10 @@ import { round } from "mathjs";
 
 import { useEffect, useState } from "react";
 import { DynamicFinancialInput } from "@/types/financials/dynamic-financial-input";
+import { useFinancialStore } from "@/stores/useFinancialStore";
 
 function FinancialSection() {
-  const financialModelContext = useFinancialModel();
+  const financialModelStore = useFinancialStore();
   const resultsDialogContext = useResultDialog();
 
   const [financialInputs, setFinancialInputs] = useState<{
@@ -88,7 +88,7 @@ function FinancialSection() {
   // const [dynamicCostsYear, setDynamicCostsYear] = useState<number>();
   // const [dynamicRevenue, setDynamicRevenue] = useState<number>();
   // const [dynamicRevenueYear, setDynamicRevenueYear] = useState<number>();
-  const errors = financialModelContext.errors;
+  const errors = financialModelStore.errors;
   const [executeModel, setExecuteModel] = useState<boolean>(false);
 
   const handleAdjustment = (
@@ -117,7 +117,7 @@ function FinancialSection() {
       //   );
       //   break;
       case FinancialInputRangesEnum.INITIAL_INVESTMENT:
-        financialModelContext.financialInputRanges.initialInvestment.forEach(
+        financialModelStore.financialInputRanges.initialInvestment.forEach(
           (value: number) => {
             const upper: number = round(value * (1 + adjustment / 100), 2);
             const lower: number = round(value * (1 - adjustment / 100), 2);
@@ -129,13 +129,13 @@ function FinancialSection() {
             }
           }
         );
-        financialModelContext.addFinancialInput(
+        financialModelStore.addFinancialInput(
           FinancialInputRangesEnum.INITIAL_INVESTMENT,
           vs
         );
         break;
       case FinancialInputRangesEnum.ANNUAL_OPERATING_COSTS:
-        financialModelContext.financialInputRanges.annualOperatingCosts.forEach(
+        financialModelStore.financialInputRanges.annualOperatingCosts.forEach(
           (value: number) => {
             const upper: number = round(value * (1 + adjustment / 100), 2);
             const lower: number = round(value * (1 - adjustment / 100), 2);
@@ -147,13 +147,13 @@ function FinancialSection() {
             }
           }
         );
-        financialModelContext.addFinancialInput(
+        financialModelStore.addFinancialInput(
           FinancialInputRangesEnum.ANNUAL_OPERATING_COSTS,
           vs
         );
         break;
       case FinancialInputRangesEnum.ANNUAL_MAINTENANCE_COSTS:
-        financialModelContext.financialInputRanges.annualMaintenanceCosts.forEach(
+        financialModelStore.financialInputRanges.annualMaintenanceCosts.forEach(
           (value: number) => {
             const upper: number = round(value * (1 + adjustment / 100), 2);
             const lower: number = round(value * (1 - adjustment / 100), 2);
@@ -165,13 +165,13 @@ function FinancialSection() {
             }
           }
         );
-        financialModelContext.addFinancialInput(
+        financialModelStore.addFinancialInput(
           FinancialInputRangesEnum.ANNUAL_MAINTENANCE_COSTS,
           vs
         );
         break;
       case FinancialInputRangesEnum.TRAINING_COSTS:
-        financialModelContext.financialInputRanges.trainingCosts.forEach(
+        financialModelStore.financialInputRanges.trainingCosts.forEach(
           (value: number) => {
             const upper: number = round(value * (1 + adjustment / 100), 2);
             const lower: number = round(value * (1 - adjustment / 100), 2);
@@ -183,13 +183,13 @@ function FinancialSection() {
             }
           }
         );
-        financialModelContext.addFinancialInput(
+        financialModelStore.addFinancialInput(
           FinancialInputRangesEnum.TRAINING_COSTS,
           vs
         );
         break;
       case FinancialInputRangesEnum.ANNUAL_REVENUE:
-        financialModelContext.financialInputRanges.annualRevenue.forEach(
+        financialModelStore.financialInputRanges.annualRevenue.forEach(
           (value: number) => {
             const upper: number = round(value * (1 + adjustment / 100), 2);
             const lower: number = round(value * (1 - adjustment / 100), 2);
@@ -201,13 +201,13 @@ function FinancialSection() {
             }
           }
         );
-        financialModelContext.addFinancialInput(
+        financialModelStore.addFinancialInput(
           FinancialInputRangesEnum.ANNUAL_REVENUE,
           vs
         );
         break;
       case FinancialInputRangesEnum.ANNUAL_COST_SAVINGS:
-        financialModelContext.financialInputRanges.annualCostSavings.forEach(
+        financialModelStore.financialInputRanges.annualCostSavings.forEach(
           (value: number) => {
             const upper: number = round(value * (1 + adjustment / 100), 2);
             const lower: number = round(value * (1 - adjustment / 100), 2);
@@ -219,7 +219,7 @@ function FinancialSection() {
             }
           }
         );
-        financialModelContext.addFinancialInput(
+        financialModelStore.addFinancialInput(
           FinancialInputRangesEnum.ANNUAL_COST_SAVINGS,
           vs
         );
@@ -299,7 +299,7 @@ function FinancialSection() {
             ),
           id: "initial-investment",
           disabled:
-            financialModelContext.financialInputRanges.initialInvestment
+            financialModelStore.financialInputRanges.initialInvestment
               .length === 0,
         },
       },
@@ -313,11 +313,11 @@ function FinancialSection() {
           error: errors.initialInvestment,
           type: "number",
           prefix: "€",
-          values: financialModelContext.financialInputRanges.initialInvestment,
+          values: financialModelStore.financialInputRanges.initialInvestment,
           rangeAdjustments: [10, 20, 30],
           valueType: ValueType.CURRENCY,
           removeCallback: (value: number) =>
-            financialModelContext.removeFinancialInput(
+            financialModelStore.removeFinancialInput(
               FinancialInputRangesEnum.INITIAL_INVESTMENT,
               value
             ),
@@ -335,14 +335,14 @@ function FinancialSection() {
               () => {
                 const iI = Number(financialInputs.initialInvestment);
                 if (!isNaN(iI)) {
-                  financialModelContext.addFinancialInput(
+                  financialModelStore.addFinancialInput(
                     FinancialInputRangesEnum.INITIAL_INVESTMENT,
                     [iI]
                   );
                   handleInputChange("initialInvestment", undefined);
                 }
               },
-              financialModelContext.financialInputRanges.initialInvestment
+              financialModelStore.financialInputRanges.initialInvestment
             ),
         },
       ],
@@ -363,7 +363,7 @@ function FinancialSection() {
             ),
           id: "annual-operating-costs",
           disabled:
-            financialModelContext.financialInputRanges.annualOperatingCosts
+            financialModelStore.financialInputRanges.annualOperatingCosts
               .length === 0,
         },
       },
@@ -375,12 +375,11 @@ function FinancialSection() {
           description: "At least 1 - Click 'Enter' to add",
           type: "number",
           prefix: "€",
-          values:
-            financialModelContext.financialInputRanges.annualOperatingCosts,
+          values: financialModelStore.financialInputRanges.annualOperatingCosts,
           rangeAdjustments: [10, 20, 30],
           valueType: ValueType.CURRENCY,
           removeCallback: (value: number) =>
-            financialModelContext.removeFinancialInput(
+            financialModelStore.removeFinancialInput(
               FinancialInputRangesEnum.ANNUAL_OPERATING_COSTS,
               value
             ),
@@ -397,14 +396,14 @@ function FinancialSection() {
               () => {
                 const oc = Number(financialInputs.annualOperatingCosts);
                 if (!isNaN(oc)) {
-                  financialModelContext.addFinancialInput(
+                  financialModelStore.addFinancialInput(
                     FinancialInputRangesEnum.ANNUAL_OPERATING_COSTS,
                     [oc]
                   );
                   handleInputChange("annualOperatingCosts", undefined);
                 }
               },
-              financialModelContext.financialInputRanges.annualOperatingCosts
+              financialModelStore.financialInputRanges.annualOperatingCosts
             ),
         },
         {
@@ -421,10 +420,10 @@ function FinancialSection() {
           valueLabelSuffix: "%",
           valueType: ValueType.PERCENTAGE,
           values:
-            financialModelContext.financialInputRanges
+            financialModelStore.financialInputRanges
               .annualOperatingCostsGrowthRate,
           removeCallback: (value: number) =>
-            financialModelContext.removeFinancialInput(
+            financialModelStore.removeFinancialInput(
               FinancialInputRangesEnum.ANNUAL_OPERATING_COSTS_GROWTH_RATE,
               value
             ),
@@ -443,7 +442,7 @@ function FinancialSection() {
                   financialInputs.annualOperatingCostsGrowthRate
                 );
                 if (!isNaN(oc)) {
-                  financialModelContext.addFinancialInput(
+                  financialModelStore.addFinancialInput(
                     FinancialInputRangesEnum.ANNUAL_OPERATING_COSTS_GROWTH_RATE,
                     [oc / 100]
                   );
@@ -453,7 +452,7 @@ function FinancialSection() {
                   );
                 }
               },
-              financialModelContext.financialInputRanges
+              financialModelStore.financialInputRanges
                 .annualOperatingCostsGrowthRate
             ),
         },
@@ -469,10 +468,10 @@ function FinancialSection() {
           valueLabelPrefix: "year",
           valueType: ValueType.NUMBER,
           values:
-            financialModelContext.financialInputRanges
+            financialModelStore.financialInputRanges
               .firstAnnualOperatingCostsYear,
           removeCallback: (value: number) =>
-            financialModelContext.removeFinancialInput(
+            financialModelStore.removeFinancialInput(
               FinancialInputRangesEnum.FIRST_ANNUAL_OPERATING_COST_YEAR,
               value
             ),
@@ -492,7 +491,7 @@ function FinancialSection() {
                   financialInputs.firstAnnualOperatingCostsYear
                 );
                 if (!isNaN(as)) {
-                  financialModelContext.addFinancialInput(
+                  financialModelStore.addFinancialInput(
                     FinancialInputRangesEnum.FIRST_ANNUAL_OPERATING_COST_YEAR,
                     [as]
                   );
@@ -500,7 +499,7 @@ function FinancialSection() {
                 }
               },
 
-              financialModelContext.financialInputRanges
+              financialModelStore.financialInputRanges
                 .firstAnnualOperatingCostsYear
             ),
         },
@@ -522,7 +521,7 @@ function FinancialSection() {
             ),
           id: "annual-maintenance-costs",
           disabled:
-            financialModelContext.financialInputRanges.annualMaintenanceCosts
+            financialModelStore.financialInputRanges.annualMaintenanceCosts
               .length === 0,
         },
       },
@@ -537,11 +536,11 @@ function FinancialSection() {
           type: "number",
           prefix: "€",
           values:
-            financialModelContext.financialInputRanges.annualMaintenanceCosts,
+            financialModelStore.financialInputRanges.annualMaintenanceCosts,
           rangeAdjustments: [10, 20, 30],
           valueType: ValueType.CURRENCY,
           removeCallback: (value: number) =>
-            financialModelContext.removeFinancialInput(
+            financialModelStore.removeFinancialInput(
               FinancialInputRangesEnum.ANNUAL_MAINTENANCE_COSTS,
               value
             ),
@@ -559,14 +558,14 @@ function FinancialSection() {
               () => {
                 const mc = Number(financialInputs.annualMaintenanceCosts);
                 if (!isNaN(mc)) {
-                  financialModelContext.addFinancialInput(
+                  financialModelStore.addFinancialInput(
                     FinancialInputRangesEnum.ANNUAL_MAINTENANCE_COSTS,
                     [mc]
                   );
                   handleInputChange("annualMaintenanceCosts", undefined);
                 }
               },
-              financialModelContext.financialInputRanges.annualMaintenanceCosts
+              financialModelStore.financialInputRanges.annualMaintenanceCosts
             ),
         },
         {
@@ -581,10 +580,10 @@ function FinancialSection() {
           valueType: ValueType.PERCENTAGE,
           error: errors.annualMaintenanceCostsGrowthRate,
           values:
-            financialModelContext.financialInputRanges
+            financialModelStore.financialInputRanges
               .annualMaintenanceCostsGrowthRate,
           removeCallback: (value: number) =>
-            financialModelContext.removeFinancialInput(
+            financialModelStore.removeFinancialInput(
               FinancialInputRangesEnum.ANNUAL_MAINTENANCE_COSTS_GROWTH_RATE,
               value
             ),
@@ -604,7 +603,7 @@ function FinancialSection() {
                   financialInputs.annualMaintenanceCostsGrowthRate
                 );
                 if (!isNaN(mc)) {
-                  financialModelContext.addFinancialInput(
+                  financialModelStore.addFinancialInput(
                     FinancialInputRangesEnum.ANNUAL_MAINTENANCE_COSTS_GROWTH_RATE,
                     [mc / 100]
                   );
@@ -614,7 +613,7 @@ function FinancialSection() {
                   );
                 }
               },
-              financialModelContext.financialInputRanges
+              financialModelStore.financialInputRanges
                 .annualMaintenanceCostsGrowthRate
             ),
         },
@@ -624,16 +623,16 @@ function FinancialSection() {
             financialInputs.firstAnnualMaintenanceCostsYear?.toString() ?? "",
           // label: "Annual Cost Savings",
           description: "First year of annual maintenance costs - default is 1",
-          error: errors.firstAnnualMaintenanceCostYear,
+          error: errors.firstAnnualMaintenanceCostsYear,
           type: "number",
           prefix: "year",
           valueLabelPrefix: "year",
           valueType: ValueType.NUMBER,
           values:
-            financialModelContext.financialInputRanges
+            financialModelStore.financialInputRanges
               .firstAnnualMaintenanceCostsYear,
           removeCallback: (value: number) =>
-            financialModelContext.removeFinancialInput(
+            financialModelStore.removeFinancialInput(
               FinancialInputRangesEnum.FIRST_ANNUAL_MAINTENANCE_COST_YEAR,
               value
             ),
@@ -653,7 +652,7 @@ function FinancialSection() {
                   financialInputs.firstAnnualMaintenanceCostsYear
                 );
                 if (!isNaN(as)) {
-                  financialModelContext.addFinancialInput(
+                  financialModelStore.addFinancialInput(
                     FinancialInputRangesEnum.FIRST_ANNUAL_MAINTENANCE_COST_YEAR,
                     [as]
                   );
@@ -664,7 +663,7 @@ function FinancialSection() {
                 }
               },
 
-              financialModelContext.financialInputRanges
+              financialModelStore.financialInputRanges
                 .firstAnnualMaintenanceCostsYear
             ),
         },
@@ -685,8 +684,7 @@ function FinancialSection() {
             ),
           id: "annual-training-costs",
           disabled:
-            financialModelContext.financialInputRanges.trainingCosts.length ===
-            0,
+            financialModelStore.financialInputRanges.trainingCosts.length === 0,
         },
       },
       inputFields: [
@@ -699,11 +697,11 @@ function FinancialSection() {
           error: errors.trainingCosts,
           type: "number",
           prefix: "€",
-          values: financialModelContext.financialInputRanges.trainingCosts,
+          values: financialModelStore.financialInputRanges.trainingCosts,
           rangeAdjustments: [10, 20, 30],
           valueType: ValueType.CURRENCY,
           removeCallback: (value: number) =>
-            financialModelContext.removeFinancialInput(
+            financialModelStore.removeFinancialInput(
               FinancialInputRangesEnum.TRAINING_COSTS,
               value
             ),
@@ -718,14 +716,14 @@ function FinancialSection() {
               () => {
                 const tc = Number(financialInputs.trainingCosts);
                 if (!isNaN(tc)) {
-                  financialModelContext.addFinancialInput(
+                  financialModelStore.addFinancialInput(
                     FinancialInputRangesEnum.TRAINING_COSTS,
                     [tc]
                   );
                   handleInputChange("trainingCosts", undefined);
                 }
               },
-              financialModelContext.financialInputRanges.trainingCosts
+              financialModelStore.financialInputRanges.trainingCosts
             ),
         },
       ],
@@ -735,7 +733,7 @@ function FinancialSection() {
       financialCategory: FinancialCategory.COSTS,
       submitLabel: "Add",
       submitCallback: () =>
-        financialModelContext.addDynamicInput({
+        financialModelStore.addDynamicInput({
           id: v4(),
           type: DynamicInputEnum.COSTS,
           year: financialInputs.dynamicCostsYear ?? 1,
@@ -748,8 +746,8 @@ function FinancialSection() {
       },
       isDynamic: true,
       dynamicRemoveCallback: (value: DynamicFinancialInput) =>
-        financialModelContext.removeDynamicInput(value.id),
-      dynamicValues: financialModelContext.dynamicInputs.filter(
+        financialModelStore.removeDynamicInput(value.id),
+      dynamicValues: financialModelStore.dynamicInputs.filter(
         (input) => input.type == DynamicInputEnum.COSTS
       ),
       inputFields: [
@@ -805,8 +803,7 @@ function FinancialSection() {
             ),
           id: "annual-revenue",
           disabled:
-            financialModelContext.financialInputRanges.annualRevenue.length ===
-            0,
+            financialModelStore.financialInputRanges.annualRevenue.length === 0,
         },
       },
       inputFields: [
@@ -819,11 +816,11 @@ function FinancialSection() {
           error: errors.annualRevenue,
           type: "number",
           prefix: "€",
-          values: financialModelContext.financialInputRanges.annualRevenue,
+          values: financialModelStore.financialInputRanges.annualRevenue,
           rangeAdjustments: [10, 20, 30],
           valueType: ValueType.CURRENCY,
           removeCallback: (value: number) =>
-            financialModelContext.removeFinancialInput(
+            financialModelStore.removeFinancialInput(
               FinancialInputRangesEnum.ANNUAL_REVENUE,
               value
             ),
@@ -838,7 +835,7 @@ function FinancialSection() {
               () => {
                 const ar = Number(financialInputs.annualRevenue);
                 if (!isNaN(ar)) {
-                  financialModelContext.addFinancialInput(
+                  financialModelStore.addFinancialInput(
                     FinancialInputRangesEnum.ANNUAL_REVENUE,
                     [ar]
                   );
@@ -846,7 +843,7 @@ function FinancialSection() {
                 }
               },
 
-              financialModelContext.financialInputRanges.annualRevenue
+              financialModelStore.financialInputRanges.annualRevenue
             ),
         },
         {
@@ -862,10 +859,10 @@ function FinancialSection() {
           valueLabelSuffix: "%",
           valueType: ValueType.PERCENTAGE,
           values:
-            financialModelContext.financialInputRanges.annualRevenueGrowthRate,
+            financialModelStore.financialInputRanges.annualRevenueGrowthRate,
 
           removeCallback: (value: number) =>
-            financialModelContext.removeFinancialInput(
+            financialModelStore.removeFinancialInput(
               FinancialInputRangesEnum.ANNUAL_REVENUE_GROWTH_RATE,
               value
             ),
@@ -882,14 +879,14 @@ function FinancialSection() {
               () => {
                 const ar = Number(financialInputs.annualRevenueGrowthRate);
                 if (!isNaN(ar)) {
-                  financialModelContext.addFinancialInput(
+                  financialModelStore.addFinancialInput(
                     FinancialInputRangesEnum.ANNUAL_REVENUE_GROWTH_RATE,
                     [ar / 100]
                   );
                   handleInputChange("annualRevenueGrowthRate", undefined);
                 }
               },
-              financialModelContext.financialInputRanges.annualRevenueGrowthRate
+              financialModelStore.financialInputRanges.annualRevenueGrowthRate
             ),
         },
         {
@@ -904,11 +901,10 @@ function FinancialSection() {
           valueLabelPrefix: "year",
           valueType: ValueType.NUMBER,
           values:
-            financialModelContext.financialInputRanges
-              .firstRevenueGeneratingYear,
+            financialModelStore.financialInputRanges.firstRevenueGeneratingYear,
 
           removeCallback: (value: number) =>
-            financialModelContext.removeFinancialInput(
+            financialModelStore.removeFinancialInput(
               FinancialInputRangesEnum.FIRST_REVENUE_GENERATING_YEAR,
               value
             ),
@@ -925,14 +921,14 @@ function FinancialSection() {
               () => {
                 const ar = Number(financialInputs.firstRevenueGeneratingYear);
                 if (!isNaN(ar)) {
-                  financialModelContext.addFinancialInput(
+                  financialModelStore.addFinancialInput(
                     FinancialInputRangesEnum.FIRST_REVENUE_GENERATING_YEAR,
                     [ar]
                   );
                   handleInputChange("firstRevenueGeneratingYear", undefined);
                 }
               },
-              financialModelContext.financialInputRanges
+              financialModelStore.financialInputRanges
                 .firstRevenueGeneratingYear
             ),
         },
@@ -954,7 +950,7 @@ function FinancialSection() {
             ),
           id: "annual-cost-savings",
           disabled:
-            financialModelContext.financialInputRanges.annualCostSavings
+            financialModelStore.financialInputRanges.annualCostSavings
               .length === 0,
         },
       },
@@ -967,11 +963,11 @@ function FinancialSection() {
           error: errors.annualCostSavings,
           type: "number",
           prefix: "€",
-          values: financialModelContext.financialInputRanges.annualCostSavings,
+          values: financialModelStore.financialInputRanges.annualCostSavings,
           rangeAdjustments: [10, 20, 30],
           valueType: ValueType.CURRENCY,
           removeCallback: (value: number) =>
-            financialModelContext.removeFinancialInput(
+            financialModelStore.removeFinancialInput(
               FinancialInputRangesEnum.ANNUAL_COST_SAVINGS,
               value
             ),
@@ -989,7 +985,7 @@ function FinancialSection() {
               () => {
                 const as = Number(financialInputs.annualCostSavings);
                 if (!isNaN(as)) {
-                  financialModelContext.addFinancialInput(
+                  financialModelStore.addFinancialInput(
                     FinancialInputRangesEnum.ANNUAL_COST_SAVINGS,
                     [as]
                   );
@@ -997,7 +993,7 @@ function FinancialSection() {
                 }
               },
 
-              financialModelContext.financialInputRanges.annualCostSavings
+              financialModelStore.financialInputRanges.annualCostSavings
             ),
         },
         {
@@ -1012,10 +1008,10 @@ function FinancialSection() {
           valueLabelSuffix: "%",
           valueType: ValueType.PERCENTAGE,
           values:
-            financialModelContext.financialInputRanges
+            financialModelStore.financialInputRanges
               .annualCostSavingsGrowthRate,
           removeCallback: (value: number) =>
-            financialModelContext.removeFinancialInput(
+            financialModelStore.removeFinancialInput(
               FinancialInputRangesEnum.ANNUAL_COST_SAVINGS_GROWTH_RATE,
               value
             ),
@@ -1032,7 +1028,7 @@ function FinancialSection() {
               () => {
                 const as = Number(financialInputs.annualCostSavingsGrowthRate);
                 if (!isNaN(as)) {
-                  financialModelContext.addFinancialInput(
+                  financialModelStore.addFinancialInput(
                     FinancialInputRangesEnum.ANNUAL_COST_SAVINGS_GROWTH_RATE,
                     [as / 100]
                   );
@@ -1040,7 +1036,7 @@ function FinancialSection() {
                 }
               },
 
-              financialModelContext.financialInputRanges
+              financialModelStore.financialInputRanges
                 .annualCostSavingsGrowthRate
             ),
         },
@@ -1054,10 +1050,9 @@ function FinancialSection() {
           prefix: "year",
           valueLabelPrefix: "year",
           valueType: ValueType.NUMBER,
-          values:
-            financialModelContext.financialInputRanges.firstCostSavingYear,
+          values: financialModelStore.financialInputRanges.firstCostSavingYear,
           removeCallback: (value: number) =>
-            financialModelContext.removeFinancialInput(
+            financialModelStore.removeFinancialInput(
               FinancialInputRangesEnum.FIRST_COST_SAVING_YEAR,
               value
             ),
@@ -1075,7 +1070,7 @@ function FinancialSection() {
               () => {
                 const as = Number(financialInputs.firstCostSavingYear);
                 if (!isNaN(as)) {
-                  financialModelContext.addFinancialInput(
+                  financialModelStore.addFinancialInput(
                     FinancialInputRangesEnum.FIRST_COST_SAVING_YEAR,
                     [as]
                   );
@@ -1083,7 +1078,7 @@ function FinancialSection() {
                 }
               },
 
-              financialModelContext.financialInputRanges.firstCostSavingYear
+              financialModelStore.financialInputRanges.firstCostSavingYear
             ),
         },
       ],
@@ -1098,7 +1093,7 @@ function FinancialSection() {
       },
       submitLabel: "Add",
       submitCallback: () =>
-        financialModelContext.addDynamicInput({
+        financialModelStore.addDynamicInput({
           id: v4(),
           type: DynamicInputEnum.REVENUES,
           year: financialInputs.dynamicRevenueYear ?? 1,
@@ -1106,8 +1101,8 @@ function FinancialSection() {
         }),
       isDynamic: true,
       dynamicRemoveCallback: (value: DynamicFinancialInput) =>
-        financialModelContext.removeDynamicInput(value.id),
-      dynamicValues: financialModelContext.dynamicInputs.filter(
+        financialModelStore.removeDynamicInput(value.id),
+      dynamicValues: financialModelStore.dynamicInputs.filter(
         (input) => input.type == DynamicInputEnum.REVENUES
       ),
       inputFields: [
@@ -1166,9 +1161,9 @@ function FinancialSection() {
           suffix: "years",
           valueLabelSuffix: "years",
           valueType: ValueType.NUMBER,
-          values: financialModelContext.financialInputRanges.projectDuration,
+          values: financialModelStore.financialInputRanges.projectDuration,
           removeCallback: (value: number) =>
-            financialModelContext.removeFinancialInput(
+            financialModelStore.removeFinancialInput(
               FinancialInputRangesEnum.PROJECT_DURATION,
               value
             ),
@@ -1182,14 +1177,14 @@ function FinancialSection() {
               () => {
                 const pd = Number(financialInputs.projectDuration);
                 if (!isNaN(pd)) {
-                  financialModelContext.addFinancialInput(
+                  financialModelStore.addFinancialInput(
                     FinancialInputRangesEnum.PROJECT_DURATION,
                     [pd]
                   );
                   handleInputChange("projectDuration", undefined);
                 }
               },
-              financialModelContext.financialInputRanges.projectDuration
+              financialModelStore.financialInputRanges.projectDuration
             ),
         },
       ],
@@ -1266,9 +1261,9 @@ function FinancialSection() {
           suffix: "%",
           valueLabelSuffix: "%",
           valueType: ValueType.PERCENTAGE,
-          values: financialModelContext.financialInputRanges.discountRate,
+          values: financialModelStore.financialInputRanges.discountRate,
           removeCallback: (value: number) =>
-            financialModelContext.removeFinancialInput(
+            financialModelStore.removeFinancialInput(
               FinancialInputRangesEnum.DISCOUNT_RATE,
               value
             ),
@@ -1285,20 +1280,20 @@ function FinancialSection() {
                 () => {
                   const rf = Number(financialInputs.discountRate);
                   if (!isNaN(rf)) {
-                    financialModelContext.addFinancialInput(
+                    financialModelStore.addFinancialInput(
                       FinancialInputRangesEnum.DISCOUNT_RATE,
                       [rf / 100]
                     );
                     handleInputChange("discountRate", undefined);
                   }
                 },
-                financialModelContext.financialInputRanges.discountRate
+                financialModelStore.financialInputRanges.discountRate
               );
             } else if (e.key === "Enter" || e.key === "Tab") {
-              financialModelContext.setErrors((prev: any) => ({
-                ...prev,
+              financialModelStore.setErrors({
+                ...financialModelStore.errors,
                 discountRate: "Discount rate must be between 0 and 100",
-              }));
+              });
             }
           },
         },
@@ -1312,23 +1307,23 @@ function FinancialSection() {
 
   useEffect(() => {
     if (executeModel) {
-      const hasErrors = financialModelContext.validateInputs();
+      const hasErrors = financialModelStore.validateInputs();
       if (!hasErrors) {
         console.log(
           `Fincancial ranges are: ${JSON.stringify(
-            financialModelContext.financialInputRanges
+            financialModelStore.financialInputRanges
           )}`
         );
         //return;
         const r = financialResults(
-          financialModelContext.financialInputRanges,
-          financialModelContext.dynamicInputs
+          financialModelStore.financialInputRanges,
+          financialModelStore.dynamicInputs
         );
-        financialModelContext.setModelResults(r);
+        financialModelStore.setModelResults(r);
         resultsDialogContext.handleShowDialog(true, DialogType.FINANCIAL_MODEL);
-      } else if (financialModelContext.modelResults != undefined) {
+      } else if (financialModelStore.modelResults != undefined) {
         console.log("financial model errors");
-        financialModelContext.setModelResults(undefined);
+        financialModelStore.setModelResults(undefined);
       }
       setExecuteModel(false);
     }

@@ -1,6 +1,5 @@
 "use client";
 import { ResultInterpretation } from "@/enums/ResultInterpretation";
-import { useFinancialModel } from "@/providers/financial-model-provider";
 import { formatToEuro } from "@/utils/format-to-euro";
 import { formatToPercent } from "@/utils/format-to-percent";
 import { mean } from "mathjs";
@@ -8,9 +7,10 @@ import React from "react";
 import { resultToColor } from "@/utils/result-to-color";
 import { valueToResultInterpretation } from "@/utils/value-to-result-interpretation";
 import { normalizeCamelCase } from "@/utils/normalize-camel-case";
+import { useFinancialStore } from "@/stores/useFinancialStore";
 
 function FinancialResultsList() {
-  const financialModelContext = useFinancialModel();
+  const financialModelContext = useFinancialStore();
 
   const title: string = "Financial Model Results";
   const body: string =

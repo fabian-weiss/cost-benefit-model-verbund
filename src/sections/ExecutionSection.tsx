@@ -6,21 +6,21 @@ import { environmentalModel } from "@/models/environmental-model/environmental-m
 import { financialResults } from "@/models/financial-model/financial-results";
 import { rioModel } from "@/models/rio-model/rio-model";
 import { societalModel } from "@/models/societal-model/societal-model";
-import { useEnvironmentalModel } from "@/providers/environmental-model-provider";
-import { useFinancialModel } from "@/providers/financial-model-provider";
 import { useResultDialog } from "@/providers/model-result-provider";
-import { useRioModel } from "@/providers/rio-model-provider";
-import { useSocietalModel } from "@/providers/societal-model-provider";
+import { useEnvironmentalStore } from "@/stores/useEnvironmentalStore";
+import { useFinancialStore } from "@/stores/useFinancialStore";
+import { useRioStore } from "@/stores/useRioStore";
+import { useSocietalStore } from "@/stores/useSocietalStore";
 import { EnvironmentalResults } from "@/types/environmental/environmental-results";
 import { FinancialResults } from "@/types/financials/financial-results";
 import { SocietalResults } from "@/types/societal/societal-results";
 import React from "react";
 
 function ExecutionSection() {
-  const rioModelContext = useRioModel();
-  const environmentalModelContext = useEnvironmentalModel();
-  const societalModelContext = useSocietalModel();
-  const financialModelContext = useFinancialModel();
+  const rioModelContext = useRioStore();
+  const environmentalModelContext = useEnvironmentalStore();
+  const societalModelContext = useSocietalStore();
+  const financialModelContext = useFinancialStore();
   const resultDialogContext = useResultDialog();
 
   const handleExecution = () => {
