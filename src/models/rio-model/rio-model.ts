@@ -1,5 +1,5 @@
 import { Impact } from "@/enums/Impact";
-import { RioInputs } from "@/types/rio/rio-inputs";
+import { LooseRioInputs, RioInputs } from "@/types/rio/rio-inputs";
 import { RioResults } from "@/types/rio/rio-results";
 import { RioWeights } from "@/types/rio/rio-weights";
 import { scaleNumber } from "@/utils/scale-number";
@@ -19,28 +19,28 @@ export const rioModel = (inputs: RioInputs): RioResults => {
   //console.log(`inputs are: ${JSON.stringify(inputs)}`);
 
   // Initialize weighted scores
-  const weightedScores: RioInputs = {
-    privacy: { value: 0, impact: Impact.NEUTRAL, comment: undefined },
-    marketAdvantage: { value: 0, impact: Impact.NEUTRAL, comment: undefined },
+  const weightedScores: LooseRioInputs = {
+    privacy: { value: 0, impact: Impact.NEUTRAL, comment: "" },
+    marketAdvantage: { value: 0, impact: Impact.NEUTRAL, comment: "" },
     longTermResilience: {
       value: 0,
       impact: Impact.NEUTRAL,
-      comment: undefined,
+      comment: "",
     },
     longTermScalability: {
       value: 0,
       impact: Impact.NEUTRAL,
-      comment: undefined,
+      comment: "",
     },
-    legalRequirements: { value: 0, impact: Impact.NEUTRAL, comment: undefined },
-    innovation: { value: 0, impact: Impact.NEUTRAL, comment: undefined },
-    otherRisks: { value: 0, impact: Impact.NEUTRAL, comment: undefined },
+    legalRequirements: { value: 0, impact: Impact.NEUTRAL, comment: "" },
+    innovation: { value: 0, impact: Impact.NEUTRAL, comment: "" },
+    otherRisks: { value: 0, impact: Impact.NEUTRAL, comment: "" },
   };
 
   // Calculate individual weighted scores
-  (Object.keys(inputs) as Array<keyof RioInputs>).forEach((key) => {
+  (Object.keys(inputs) as Array<keyof LooseRioInputs>).forEach((key) => {
     const weightedResult: number = inputs[key].value * weights[key];
-    (weightedScores[key].value as number) = weightedResult;
+    weightedScores[key].value = weightedResult;
     weightedScores[key].impact = inputs[key].impact;
     weightedScores[key].comment = inputs[key].comment;
     //weightedScores.push({ key, value: weightedResult, weight: weights[key] });

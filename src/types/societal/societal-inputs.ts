@@ -1,7 +1,8 @@
-import { SocietalSchema } from "@/lib/schemas";
+import { LooseSocietalSchema, SocietalSchema } from "@/lib/schemas";
 import { z } from "zod";
 
 export type SocietalInputs = z.infer<typeof SocietalSchema>;
+export type LooseSocietalInputs = z.infer<typeof LooseSocietalSchema>;
 
 // export type SocietalInputs = {
 //   customerSatisfaction: FactorInputType;

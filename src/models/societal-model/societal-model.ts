@@ -1,5 +1,8 @@
 import { Impact } from "@/enums/Impact";
-import { SocietalInputs } from "@/types/societal/societal-inputs";
+import {
+  LooseSocietalInputs,
+  SocietalInputs,
+} from "@/types/societal/societal-inputs";
 import { SocietalResults } from "@/types/societal/societal-results";
 import { SocietalWeights } from "@/types/societal/societal-weights";
 import { scaleNumber } from "@/utils/scale-number";
@@ -22,63 +25,63 @@ export const societalModel = (inputs: SocietalInputs): SocietalResults => {
   //console.log(`inputs are: ${JSON.stringify(inputs)}`);
 
   // Initialize weighted scores
-  const weightedScores: SocietalInputs = {
+  const weightedScores: LooseSocietalInputs = {
     customerSatisfaction: {
       value: 0,
       impact: Impact.NEUTRAL,
-      comment: undefined,
+      comment: "",
     },
     customerAffordability: {
       value: 0,
       impact: Impact.NEUTRAL,
-      comment: undefined,
+      comment: "",
     },
     companyCulture: {
       value: 0,
       impact: Impact.NEUTRAL,
-      comment: undefined,
+      comment: "",
     },
     communityImplications: {
       value: 0,
       impact: Impact.NEUTRAL,
-      comment: undefined,
+      comment: "",
     },
     knowledgeSharingAcrossTheSupplyChain: {
       value: 0,
       impact: Impact.NEUTRAL,
-      comment: undefined,
+      comment: "",
     },
     shareholderValue: {
       value: 0,
       impact: Impact.NEUTRAL,
-      comment: undefined,
+      comment: "",
     },
     guidingPrinciplesAlignment: {
       value: 0,
       impact: Impact.NEUTRAL,
-      comment: undefined,
+      comment: "",
     },
     publicPerception: {
       value: 0,
       impact: Impact.NEUTRAL,
-      comment: undefined,
+      comment: "",
     },
     workplaceCreation: {
       value: 0,
       impact: Impact.NEUTRAL,
-      comment: undefined,
+      comment: "",
     },
     healthAndSafety: {
       value: 0,
       impact: Impact.NEUTRAL,
-      comment: undefined,
+      comment: "",
     },
   };
 
   // Calculate individual weighted scores
-  (Object.keys(inputs) as Array<keyof SocietalInputs>).forEach((key) => {
+  (Object.keys(inputs) as Array<keyof LooseSocietalInputs>).forEach((key) => {
     const weightedResult: number = inputs[key].value * weights[key];
-    (weightedScores[key].value as number) = weightedResult;
+    weightedScores[key].value = weightedResult;
     weightedScores[key].impact = inputs[key].impact;
     weightedScores[key].comment = inputs[key].comment;
 

@@ -1,8 +1,8 @@
-import { RioInputs } from "./rio-inputs";
+import { LooseRioInputs } from "./rio-inputs";
 import { RioWeights } from "./rio-weights";
 
 export type RioResults = {
-  weightedSingleFactors: RioInputs;
+  weightedSingleFactors: LooseRioInputs;
   avgScore: number;
   totalScore: number;
   scaledTotalScore: number;

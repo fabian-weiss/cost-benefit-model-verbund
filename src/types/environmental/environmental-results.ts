@@ -1,8 +1,8 @@
-import { EnvironmentalInputs } from "./environmental-inputs";
+import { LooseEnvironmentalInputs } from "./environmental-inputs";
 import { EnvironmentalWeights } from "./environmental-weights";
 
 export type EnvironmentalResults = {
-  weightedSingleFactors: EnvironmentalInputs;
+  weightedSingleFactors: LooseEnvironmentalInputs;
   avgScore: number;
   totalScore: number;
   scaledTotalScore: number;

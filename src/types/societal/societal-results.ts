@@ -1,8 +1,8 @@
-import { SocietalInputs } from "./societal-inputs";
+import { LooseSocietalInputs } from "./societal-inputs";
 import { SocietalWeights } from "./societal-weights";
 
 export type SocietalResults = {
-  weightedSingleFactors: SocietalInputs;
+  weightedSingleFactors: LooseSocietalInputs;
   avgScore: number;
   totalScore: number;
   scaledTotalScore: number;

@@ -1,8 +1,10 @@
 import { Impact } from "@/enums/Impact";
-import { EnvironmentalInputs } from "@/types/environmental/environmental-inputs";
+import {
+  EnvironmentalInputs,
+  LooseEnvironmentalInputs,
+} from "@/types/environmental/environmental-inputs";
 import { EnvironmentalResults } from "@/types/environmental/environmental-results";
 import { EnvironmentalWeights } from "@/types/environmental/environmental-weights";
-import { FactorInputType } from "@/types/factor-input-type";
 import { scaleNumber } from "@/utils/scale-number";
 import { round } from "mathjs";
 
@@ -19,56 +21,58 @@ export const environmentalModel = (
     meetingEnvironmentalRegulations: 0.2,
   };
 
-  const weightedScores: EnvironmentalInputs = {
+  const weightedScores: LooseEnvironmentalInputs = {
     unSustainableGoals: {
       value: 0,
       impact: Impact.NEUTRAL,
-      comment: undefined,
+      comment: "",
     },
     wasteProduction: {
       value: 0,
       impact: Impact.NEUTRAL,
-      comment: undefined,
+      comment: "",
     },
     biodiversity: {
       value: 0,
       impact: Impact.NEUTRAL,
-      comment: undefined,
+      comment: "",
     },
     pollution: {
       value: 0,
       impact: Impact.NEUTRAL,
-      comment: undefined,
+      comment: "",
     },
     sustainableEneryIntegration: {
       value: 0,
       impact: Impact.NEUTRAL,
-      comment: undefined,
+      comment: "",
     },
     energyEfficiency: {
       value: 0,
       impact: Impact.NEUTRAL,
-      comment: undefined,
+      comment: "",
     },
     meetingEnvironmentalRegulations: {
       value: 0,
       impact: Impact.NEUTRAL,
-      comment: undefined,
+      comment: "",
     },
   };
 
   // Calculate individual weighted scores
-  (Object.keys(inputs) as Array<keyof EnvironmentalInputs>).forEach((key) => {
-    const weightedResult: number = inputs[key].value * weights[key];
-    weightedScores[key].value = weightedResult;
-    weightedScores[key].impact = inputs[key].impact;
-    weightedScores[key].comment = inputs[key].comment;
-    //weightedScores.push({ key, value: weightedResult, weight: weights[key] });
-  });
+  (Object.keys(inputs) as Array<keyof LooseEnvironmentalInputs>).forEach(
+    (key) => {
+      const weightedResult: number = inputs[key].value * weights[key];
+      weightedScores[key].value = weightedResult;
+      weightedScores[key].impact = inputs[key].impact;
+      weightedScores[key].comment = inputs[key].comment;
+      //weightedScores.push({ key, value: weightedResult, weight: weights[key] });
+    }
+  );
 
   // Calculate total score
   const totalScore: number = Object.values(weightedScores).reduce(
-    (acc, factorInput: FactorInputType) => acc + factorInput.value,
+    (acc, factorInput) => acc + factorInput.value,
     0
   );
 

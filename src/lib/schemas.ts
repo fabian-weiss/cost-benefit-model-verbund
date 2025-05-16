@@ -40,6 +40,14 @@ const FactorInput = z
     // path: ["value", "impact"],
   });
 
+// ✅ Loose version: any number allowed, no value-impact validation
+const LooseFactorInput = z.object({
+  value: z.number(), // any number
+  impact: ImpactEnum,
+  comment: z.string(),
+});
+
+// For chat GPT because we cannot allow it to use other numbers
 const SocietalSchema = z.object({
   customerSatisfaction: FactorInput,
   customerAffordability: FactorInput,
@@ -73,6 +81,40 @@ const RioSchema = z.object({
   otherRisks: FactorInput,
 });
 
+// For calculating the scores, since they are multiplied by weights
+const LooseSocietalSchema = z.object({
+  customerSatisfaction: LooseFactorInput,
+  customerAffordability: LooseFactorInput,
+  companyCulture: LooseFactorInput,
+  communityImplications: LooseFactorInput,
+  knowledgeSharingAcrossTheSupplyChain: LooseFactorInput,
+  shareholderValue: LooseFactorInput,
+  guidingPrinciplesAlignment: LooseFactorInput,
+  publicPerception: LooseFactorInput,
+  workplaceCreation: LooseFactorInput,
+  healthAndSafety: LooseFactorInput,
+});
+
+const LooseEnvironmentalSchema = z.object({
+  unSustainableGoals: LooseFactorInput, // Typo in original schema? Assuming unSustainableGoals -> sustainableGoalsAlignment or similar. Keeping as is for now.
+  wasteProduction: LooseFactorInput,
+  biodiversity: LooseFactorInput,
+  pollution: LooseFactorInput,
+  sustainableEneryIntegration: LooseFactorInput, // Typo: Enery -> Energy
+  energyEfficiency: LooseFactorInput,
+  meetingEnvironmentalRegulations: LooseFactorInput,
+});
+const LooseRioSchema = z.object({
+  // Assuming RIO stands for Risk, Innovation, Opportunity or similar
+  privacy: LooseFactorInput,
+  marketAdvantage: LooseFactorInput,
+  longTermResilience: LooseFactorInput,
+  longTermScalability: LooseFactorInput,
+  legalRequirements: LooseFactorInput,
+  innovation: LooseFactorInput,
+  otherRisks: LooseFactorInput,
+});
+
 const StructuredInputs = z.object({
   societal: SocietalSchema,
   environmental: EnvironmentalSchema,
@@ -86,4 +128,8 @@ export {
   SocietalSchema,
   EnvironmentalSchema,
   RioSchema,
+  LooseFactorInput,
+  LooseSocietalSchema,
+  LooseEnvironmentalSchema,
+  LooseRioSchema,
 }; // Export all needed parts
