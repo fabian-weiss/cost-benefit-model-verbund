@@ -54,7 +54,7 @@ function ExecutionSection() {
   };
 
   return (
-    <SectionContainer>
+    <SectionContainer sectionClasses="fw-section-margin__bottom">
       <ActionButton
         fullWidth
         label="Execute all models"

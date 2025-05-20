@@ -70,9 +70,9 @@
 @media (max-width: 768px) {
   .fw-dialog-container {
     padding: 30px 20px;
-    /* align-items: flex-start;
-    justify-content: flex-start; */
-    overflow-x: auto;
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow-x: scroll;
   }
 }
 
