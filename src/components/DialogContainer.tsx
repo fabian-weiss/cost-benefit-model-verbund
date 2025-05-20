@@ -27,7 +27,8 @@ function DialogContainer(props: {
       <OutsideClickHandler
         disabled={props.fullscreen == true}
         onOutsideClick={() => props.closeDialog()}
-        className={`fw-h100`}
+        // className={`fw-h100`}
+        className="fw-dialog-center"
       >
         {props.fullscreen && (
           <PiXBold
@@ -41,6 +42,13 @@ function DialogContainer(props: {
             props.fullscreen ? "fullscreen" : ""
           }`}
         >
+          {!props.fullscreen && (
+            <PiXBold
+              size={28}
+              className="fw-dialog-close"
+              onClick={() => props.closeDialog()}
+            />
+          )}
           <div>
             {props.title && <h2 className="fw-dialog-title">{props.title}</h2>}
             {props.body && (
