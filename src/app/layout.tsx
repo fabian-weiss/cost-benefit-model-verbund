@@ -8,7 +8,6 @@ import "@/styles/table.css";
 import ModelResultProvider from "@/providers/model-result-provider";
 import CommentProvider from "@/providers/comment-provider";
 import DescriptionDialogProvider from "@/providers/description-dialog-provider";
-import OverviewProvider from "@/providers/overview-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,13 +36,11 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable}`}
       >
-        <OverviewProvider>
-          <ModelResultProvider>
-            <CommentProvider>
-              <DescriptionDialogProvider>{children}</DescriptionDialogProvider>
-            </CommentProvider>
-          </ModelResultProvider>
-        </OverviewProvider>
+        <ModelResultProvider>
+          <CommentProvider>
+            <DescriptionDialogProvider>{children}</DescriptionDialogProvider>
+          </CommentProvider>
+        </ModelResultProvider>
       </body>
     </html>
   );

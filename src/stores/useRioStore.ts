@@ -17,6 +17,8 @@ interface RioState {
     impact?: Impact,
     comment?: string
   ) => void;
+  hasHydrated: boolean;
+  setHasHydrated: (state: boolean) => void;
 }
 
 const defaultInputs: RioInputs = {
@@ -61,9 +63,14 @@ export const useRioStore = create<RioState>()(
             },
           };
         }),
+      hasHydrated: false,
+      setHasHydrated: (hasHydrated) => set({ hasHydrated }),
     }),
     {
       name: "rio-storage", // localStorage key
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true); // mark hydration as done
+      },
     }
   )
 );

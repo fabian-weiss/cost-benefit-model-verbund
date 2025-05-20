@@ -6,4 +6,5 @@ export type OverviewInputs = {
   projectOwner?: string;
   budget?: number;
   projectType?: ProjectType;
+  enableFinancial?: boolean;
 };

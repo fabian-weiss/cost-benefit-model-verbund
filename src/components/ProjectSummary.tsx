@@ -1,7 +1,7 @@
-import { useOverview } from "@/providers/overview-provider";
+import { useOverviewStore } from "@/stores/useOverviewStore";
 
 function ProjectSummary() {
-  const overviewContext = useOverview();
+  const overviewContext = useOverviewStore();
   const title: string = "Project Summary";
   const body: string =
     "See the summary of all the submodels below. Download the whole report to see details.";

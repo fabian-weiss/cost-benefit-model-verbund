@@ -1,6 +1,5 @@
 "use client";
 import { Impact } from "@/enums/Impact";
-import { useOverview } from "@/providers/overview-provider";
 import { ProjectType } from "@/enums/ProjectType";
 import { v4 } from "uuid";
 import { DynamicInputEnum } from "@/enums/DynamicInputEnum";
@@ -8,12 +7,13 @@ import { useSocietalStore } from "@/stores/useSocietalStore";
 import { useEnvironmentalStore } from "@/stores/useEnvironmentalStore";
 import { useRioStore } from "@/stores/useRioStore";
 import { useFinancialStore } from "@/stores/useFinancialStore";
+import { useOverviewStore } from "@/stores/useOverviewStore";
 
 export const useSetDefaultValues = () => {
   const societalContext = useSocietalStore();
   const environmentalContext = useEnvironmentalStore();
   const rioContext = useRioStore();
-  const overviewContext = useOverview();
+  const overviewContext = useOverviewStore();
   const financialContext = useFinancialStore();
 
   const setDefaultValues = () => {

@@ -19,10 +19,12 @@ import { round } from "mathjs";
 import { useEffect, useState } from "react";
 import { DynamicFinancialInput } from "@/types/financials/dynamic-financial-input";
 import { useFinancialStore } from "@/stores/useFinancialStore";
+import { useOverviewStore } from "@/stores/useOverviewStore";
 
 function FinancialSection() {
   const financialModelStore = useFinancialStore();
   const resultsDialogContext = useResultDialog();
+  const overviewStore = useOverviewStore();
 
   const [financialInputs, setFinancialInputs] = useState<{
     [key: string]: number | undefined;
@@ -1361,6 +1363,10 @@ function FinancialSection() {
         );
     }
   };
+
+  if (overviewStore.overviewInputs.enableFinancial == false) {
+    return null;
+  }
 
   return (
     <SectionContainer contentClasses="fw-model-container">

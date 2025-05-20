@@ -14,6 +14,7 @@ import { StructuredInputsType } from "@/types/structured-inputs-type";
 import { useEnvironmentalStore } from "@/stores/useEnvironmentalStore";
 import { useRioStore } from "@/stores/useRioStore";
 import { useSocietalStore } from "@/stores/useSocietalStore";
+import ToggleSwitch from "@/components/ToggleSwitch";
 
 function OverviewSection() {
   const overviewStore = useOverviewStore();
@@ -91,6 +92,7 @@ function OverviewSection() {
     };
     setDefaults();
   }, [result]);
+
   return (
     <SectionContainer contentClasses="fw-model-container">
       <ModelHeader title="Project overview" />
@@ -149,6 +151,14 @@ function OverviewSection() {
                 projectType: bubble.label as ProjectType,
               });
             }}
+          />
+          <ToggleSwitch
+            title="Enable financial model"
+            isChecked={overviewStore.overviewInputs.enableFinancial ?? false}
+            onStateChanged={(isChecked: boolean) =>
+              overviewStore.handleOverviewInput({ enableFinancial: isChecked })
+            }
+            description="Set values for the financial submodel and include it in the results."
           />
         </div>
         <div className="fw-project-description-wrapper">

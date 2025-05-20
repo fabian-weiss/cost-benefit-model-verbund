@@ -27,6 +27,8 @@ interface FinancialState {
   setErrors: (errors: FinancialErrors) => void;
   clearErrors: () => void;
   validateInputs: () => boolean;
+  hasHydrated: boolean;
+  setHasHydrated: (state: boolean) => void;
 }
 
 const defaultInputs: FinancialInputRanges = {
@@ -199,9 +201,14 @@ export const useFinancialStore = create<FinancialState>()(
 
         return hasErrors;
       },
+      hasHydrated: false,
+      setHasHydrated: (hasHydrated) => set({ hasHydrated }),
     }),
     {
       name: "financial-storage", // localStorage key
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true); // mark hydration as done
+      },
     }
   )
 );

@@ -17,6 +17,8 @@ interface SocietalState {
     impact?: Impact,
     comment?: string
   ) => void;
+  hasHydrated: boolean;
+  setHasHydrated: (state: boolean) => void;
 }
 
 const defaultInputs: SocietalInputs = {
@@ -90,9 +92,14 @@ export const useSocietalStore = create<SocietalState>()(
             },
           };
         }),
+      hasHydrated: false,
+      setHasHydrated: (hasHydrated) => set({ hasHydrated }),
     }),
     {
       name: "societal-storage", // key in localStorage
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true); // mark hydration as done
+      },
     }
   )
 );

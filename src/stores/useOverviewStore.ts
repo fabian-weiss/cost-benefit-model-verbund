@@ -7,6 +7,8 @@ import { OverviewInputs } from "@/types/overview-inputs";
 interface OverviewState {
   overviewInputs: OverviewInputs;
   handleOverviewInput: (input: OverviewInputs) => void;
+  hasHydrated: boolean;
+  setHasHydrated: (state: boolean) => void;
 }
 
 const defaultInputs: OverviewInputs = {
@@ -15,6 +17,7 @@ const defaultInputs: OverviewInputs = {
   projectOwner: undefined,
   budget: undefined,
   projectType: ProjectType.DEFAULT,
+  enableFinancial: false,
 };
 
 export const useOverviewStore = create<OverviewState>()(
@@ -28,9 +31,14 @@ export const useOverviewStore = create<OverviewState>()(
             ...input,
           },
         })),
+      hasHydrated: false,
+      setHasHydrated: (hasHydrated) => set({ hasHydrated }),
     }),
     {
       name: "overview-storage", // Key for localStorage
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true); // mark hydration as done
+      },
     }
   )
 );

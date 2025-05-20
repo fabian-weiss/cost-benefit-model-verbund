@@ -17,6 +17,8 @@ interface EnvironmentalState {
     comment?: string
   ) => void;
   setModelResults: (results?: EnvironmentalResults) => void;
+  hasHydrated: boolean;
+  setHasHydrated: (state: boolean) => void;
 }
 
 const defaultInputs: EnvironmentalInputs = {
@@ -71,9 +73,14 @@ export const useEnvironmentalStore = create<EnvironmentalState>()(
             },
           };
         }),
+      hasHydrated: false,
+      setHasHydrated: (hasHydrated) => set({ hasHydrated }),
     }),
     {
       name: "environmental-storage", // localStorage key
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true); // mark hydration as done
+      },
     }
   )
 );

@@ -1,0 +1,30 @@
+.fw-bar-loader-container {
+  height: 4px;
+  width: 25%;
+  max-width: 125px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  background-color: var(--hover-color-light);
+  overflow-x: hidden;
+}
+
+.fw-loading-bar {
+  height: 4px;
+  width: 100%;
+  background-color: var(--text-color-grey);
+  animation: move 1s linear infinite;
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

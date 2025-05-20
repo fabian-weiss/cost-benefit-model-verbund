@@ -98,7 +98,9 @@ function CompleteResultsDialog(props: { closeDialog: () => void }) {
       </ResultsGroup> */}
       <TableContainer id="complete-model-table">
         <ProjectSummary />
-        <FinancialResultsList />
+        {overviewContext.overviewInputs.enableFinancial && (
+          <FinancialResultsList />
+        )}
         <SocietalResultsList />
         <EnvironmentalResultsList />
         <RioResultsList />
