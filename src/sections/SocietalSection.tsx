@@ -383,7 +383,7 @@ function SocietalSection() {
       inputHeader: {
         label: SocietalInputEnum.GUIDING_PRINCIPLES_ALIGNMENT,
         description:
-          "Alignment of the product/service with mission, vision and values of Verbund.",
+          "Alignment of the product/service with mission, vision and values of the company.",
       },
       detailedDescription: {
         header:

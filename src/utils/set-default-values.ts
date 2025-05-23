@@ -99,7 +99,7 @@ export const useSetDefaultValues = () => {
         value: 1,
         impact: Impact.POSITIVE,
         comment:
-          "Predictive maintenance facilitated by constant monitoring may help optimize energy usage in the plant and for the charging Verbund uses renewable energy.",
+          "Predictive maintenance facilitated by constant monitoring may help optimize energy usage in the company's processes.",
       },
       energyEfficiency: {
         value: 1,
