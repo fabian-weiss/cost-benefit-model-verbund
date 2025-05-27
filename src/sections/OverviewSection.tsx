@@ -15,6 +15,7 @@ import { useEnvironmentalStore } from "@/stores/useEnvironmentalStore";
 import { useRioStore } from "@/stores/useRioStore";
 import { useSocietalStore } from "@/stores/useSocietalStore";
 import ToggleSwitch from "@/components/ToggleSwitch";
+import { useSearchParams } from "next/navigation";
 
 function OverviewSection() {
   const overviewStore = useOverviewStore();
@@ -26,6 +27,7 @@ function OverviewSection() {
   const [result, setResult] = useState<StructuredInputsType>();
   const [error, setError] = useState<string | null>(null);
 
+  const ai = useSearchParams().get("ai");
   const [selectedProjectType, setSelectedProjectType] =
     React.useState<BubbleType>();
 
@@ -176,7 +178,7 @@ function OverviewSection() {
               placeholder: "Describe your project...",
             }}
           />
-          {process.env.NODE_ENV === "development" && (
+          {(process.env.NODE_ENV === "development" || ai == "true") && (
             <>
               <ActionButton
                 onClick={generateInputs}
@@ -185,11 +187,11 @@ function OverviewSection() {
                 loading={loading}
               />
               {error && <p className="fw-error-message">{error}</p>}
-              {result && (
+              {/* {result && (
                 <div className="fw-result-container">
                   {JSON.stringify(result)}
                 </div>
-              )}
+              )} */}
             </>
           )}
         </div>

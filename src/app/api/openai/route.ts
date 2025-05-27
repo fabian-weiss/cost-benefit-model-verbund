@@ -73,6 +73,7 @@ Output must remain within the schema structure only.
         format: zodTextFormat(StructuredInputs, "cost_benefit"), // Use zodTextFormat to format the schema
       }, // Enable JSON mode
       //temperature: 0.2, // Lower temperature for more deterministic JSON output
+      temperature: 0.0, // Use 0.0 for deterministic output
     });
 
     console.log("Received response from OpenAI.");

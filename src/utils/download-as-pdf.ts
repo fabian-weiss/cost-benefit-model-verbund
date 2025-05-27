@@ -50,6 +50,9 @@ export const downloadAsPdf = async (htmlId: string, fileName: string) => {
       fontSize: 10,
     },
   });
+  // ✅ Get the last Y position after the table
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const finalY = (doc as any).lastAutoTable?.finalY ?? 0;
   const radarChartElement = document.querySelector(`#radar-chart`);
   if (radarChartElement) {
     const chartCanvas = await html2canvas(radarChartElement as HTMLElement);
@@ -60,11 +63,16 @@ export const downloadAsPdf = async (htmlId: string, fileName: string) => {
     const pageHeight = doc.internal.pageSize.getHeight();
     const chartWidth = pageWidth - 40; // Add margins
     const chartHeight = (chartCanvas.height * chartWidth) / chartCanvas.width;
-    const tableHeight = 20; // Position below table
+    const tablePadding = 20; // Position below table
 
-    let yPosition = pageHeight - chartHeight;
+    let yPosition = pageHeight - chartHeight; // Position chart at the bottom of the page
 
-    if (tableHeight + chartHeight > doc.internal.pageSize.getHeight()) {
+    console.log("Chart height:", chartHeight);
+    console.log("Y-after table", finalY);
+    console.log("Page height:", pageHeight);
+
+    if (finalY + tablePadding + chartHeight > pageHeight) {
+      console.log("Adding new page for chart");
       doc.addPage();
       yPosition = 20;
     }
