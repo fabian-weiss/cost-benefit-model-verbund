@@ -1,3 +1,4 @@
+import { AiModelType } from "@/enums/AiModelType";
 import { ProjectType } from "@/enums/ProjectType";
 
 export type OverviewInputs = {
@@ -7,4 +8,5 @@ export type OverviewInputs = {
   budget?: number;
   projectType?: ProjectType;
   enableFinancial?: boolean;
+  aiModelType?: AiModelType;
 };

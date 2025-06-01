@@ -21,7 +21,7 @@ interface RioState {
   setHasHydrated: (state: boolean) => void;
 }
 
-const defaultInputs: RioInputs = {
+export const rioDefaultInputs: RioInputs = {
   privacy: { value: 0, impact: Impact.NEUTRAL, comment: "" },
   marketAdvantage: { value: 0, impact: Impact.NEUTRAL, comment: "" },
   longTermResilience: { value: 0, impact: Impact.NEUTRAL, comment: "" },
@@ -44,7 +44,7 @@ const inputKeyMap: Record<RioInputEnum, keyof RioInputs> = {
 export const useRioStore = create<RioState>()(
   persist(
     (set) => ({
-      rioInputs: defaultInputs,
+      rioInputs: rioDefaultInputs,
       modelResults: undefined,
       setDefaultValues: (inputs) => set({ rioInputs: inputs }),
       setModelResults: (results) => set({ modelResults: results }),

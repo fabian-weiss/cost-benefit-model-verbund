@@ -21,7 +21,7 @@ interface EnvironmentalState {
   setHasHydrated: (state: boolean) => void;
 }
 
-const defaultInputs: EnvironmentalInputs = {
+export const environmentalDefaultInputs: EnvironmentalInputs = {
   unSustainableGoals: { value: 0, impact: Impact.NEUTRAL, comment: "" },
   wasteProduction: { value: 0, impact: Impact.NEUTRAL, comment: "" },
   biodiversity: { value: 0, impact: Impact.NEUTRAL, comment: "" },
@@ -54,7 +54,7 @@ const inputKeyMap: Record<EnvironmentalInputEnum, keyof EnvironmentalInputs> = {
 export const useEnvironmentalStore = create<EnvironmentalState>()(
   persist(
     (set) => ({
-      environmentalInputs: defaultInputs,
+      environmentalInputs: environmentalDefaultInputs,
       modelResults: undefined,
       setDefaultValues: (inputs) => set({ environmentalInputs: inputs }),
       setModelResults: (results) => set({ modelResults: results }),

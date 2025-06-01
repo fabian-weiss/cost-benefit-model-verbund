@@ -11,11 +11,19 @@ import { ValueType } from "@/enums/ValueType";
 import { useOverviewStore } from "@/stores/useOverviewStore";
 import ActionButton from "@/components/ActionButton";
 import { StructuredInputsType } from "@/types/structured-inputs-type";
-import { useEnvironmentalStore } from "@/stores/useEnvironmentalStore";
-import { useRioStore } from "@/stores/useRioStore";
-import { useSocietalStore } from "@/stores/useSocietalStore";
+import {
+  environmentalDefaultInputs,
+  useEnvironmentalStore,
+} from "@/stores/useEnvironmentalStore";
+import { rioDefaultInputs, useRioStore } from "@/stores/useRioStore";
+import {
+  societalDefaultInputs,
+  useSocietalStore,
+} from "@/stores/useSocietalStore";
 import ToggleSwitch from "@/components/ToggleSwitch";
 import { useSearchParams } from "next/navigation";
+import { AiModelType } from "@/enums/AiModelType";
+import AiModelSelect from "@/components/AiModelSelect";
 
 function OverviewSection() {
   const overviewStore = useOverviewStore();
@@ -53,23 +61,28 @@ function OverviewSection() {
   const generateInputs = async () => {
     setLoading(true);
     setError(null);
-
+    console.log(`ai model`, overviewStore.overviewInputs.aiModelType);
     try {
       const response = await fetch("/api/openai", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           projectDescription: overviewStore.overviewInputs.projectDescription,
+          model: overviewStore.overviewInputs.aiModelType ?? AiModelType.OpenAI,
         }),
       });
 
       const data = await response.json();
 
+      // const data = await evaluateProject(
+      //   overviewStore.overviewInputs.projectDescription ?? ""
+      // );
+
       console.log(`data`, JSON.stringify(data, null, 2));
 
-      if (!response.ok) {
-        throw new Error(data.error || "Unexpected error");
-      }
+      // if (!response.ok) {
+      //   throw new Error(data.error || "Unexpected error");
+      // }
 
       console.log(`type of data`, typeof data);
       setResult(data);
@@ -82,6 +95,12 @@ function OverviewSection() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const resetDefaults = () => {
+    societalModel.setDefaultValues(societalDefaultInputs);
+    environmentalModel.setDefaultValues(environmentalDefaultInputs);
+    rioModel.setDefaultValues(rioDefaultInputs);
   };
 
   useEffect(() => {
@@ -180,11 +199,16 @@ function OverviewSection() {
           />
           {(process.env.NODE_ENV === "development" || ai == "true") && (
             <>
+              <AiModelSelect />
               <ActionButton
                 onClick={generateInputs}
                 label="Generate Defaults"
                 fillType={"solid"}
                 loading={loading}
+                disabled={
+                  overviewStore.overviewInputs.projectDescription?.trim()
+                    .length === 0
+                }
               />
               {error && <p className="fw-error-message">{error}</p>}
               {/* {result && (
@@ -193,6 +217,15 @@ function OverviewSection() {
                 </div>
               )} */}
             </>
+          )}
+          {!loading && (
+            <ActionButton
+              onClick={resetDefaults}
+              label="Reset All Inputs"
+              fillType={"outlined"}
+              loading={loading}
+              disabled={loading}
+            />
           )}
         </div>
       </div>

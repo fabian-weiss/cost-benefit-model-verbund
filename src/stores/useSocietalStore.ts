@@ -21,7 +21,7 @@ interface SocietalState {
   setHasHydrated: (state: boolean) => void;
 }
 
-const defaultInputs: SocietalInputs = {
+export const societalDefaultInputs: SocietalInputs = {
   customerSatisfaction: {
     value: 0,
     impact: Impact.NEUTRAL,
@@ -72,7 +72,7 @@ const inputKeyMap: Record<SocietalInputEnum, keyof SocietalInputs> = {
 export const useSocietalStore = create<SocietalState>()(
   persist(
     (set) => ({
-      societalInputs: defaultInputs,
+      societalInputs: societalDefaultInputs,
       modelResults: undefined,
       setDefaultValues: (inputs) =>
         set({ societalInputs: JSON.parse(JSON.stringify(inputs)) }),
