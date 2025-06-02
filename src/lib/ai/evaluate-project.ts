@@ -1,5 +1,5 @@
 import { StructuredInputsType } from "@/types/structured-inputs-type";
-import { generateText, generateObject } from "ai";
+import { generateObject } from "ai";
 import { StructuredInputs } from "../schemas";
 import { openai } from "@ai-sdk/openai";
 import "dotenv/config";
@@ -47,7 +47,7 @@ Projects that describe only general goals (e.g., “grid stability”, “green 
 When evaluating mixed or uncertain impacts, prioritize near-term or well-supported negative effects over long-term or vague positive projections. A burden or harm (e.g., affordability risk, health compromise) must be reflected in the score.
 
 In the \`comment\` field:
-- Briefly explain your reasoning using causal logic.
+- Briefly explain your reasoning using causal logic (2 sentences min).
 - Identify the most influential project variables.
 - Clearly state any assumptions or uncertainties.
 - Avoid vague, promotional, or overly optimistic language.
